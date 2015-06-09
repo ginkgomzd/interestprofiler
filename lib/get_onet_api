@@ -17,11 +17,11 @@ define('HTTP_AUTH', 'Authorization: Basic Z2lua2dvc3RyZWV0OjY1ODRieHo=');
  * Set action to TRUE or FALSE
  * GET QUESTIONS is the only polished feature atthe moment.
  **/
-define('GET_CAREERS', FALSE); 
+define('GET_CAREERS', FALSE);
 define('GET_QUESTIONS', TRUE);
 
 /***
- * 
+ *
 Service list
 
 https://services.onetcenter.org/ws/
@@ -129,12 +129,13 @@ if (GET_QUESTIONS) {
       $attributes = '@attributes';
       $questions[] = array(
         'id' => $question->$attributes->index,
+        'index' => $question->$attributes->index,
         'area' => $question->area,
         'text' => $question->text
       );
     }
-    echo(json_encode($questions));
   }
+  echo(json_encode($questions));
 }
 
 
@@ -152,7 +153,7 @@ if (GET_CAREERS) {
 	$careers = getAllCareers();
 	foreach ($careers['industry'] as $career) {
 	  if (!array_key_exists('code', $career)) continue;
-	  $code = $career['code']; 
+	  $code = $career['code'];
 	  $url = "$url_careers$code";
 	echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%';
 	  var_dump($url);
@@ -183,7 +184,7 @@ function displayHTML($input) {
     }
     echo '</tr>';
   }
- 
+
   echo '<tr>';
   foreach($input as $key => $child) {
     if($key == '@attributes') continue;
@@ -196,7 +197,7 @@ function displayHTML($input) {
     }
   }
   echo '</tr>';
-  
+
 }
 
 ?>
