@@ -1,0 +1,203 @@
+#!/usr/bin/php
+<?php
+
+/**
+ * Very quick and dirty util for querying the O*NET api.
+ * Configure HTTP authorization and an action.
+ * Writes to STDOUT
+ **/
+
+define('USER', 'ginkgostreet');
+define('PASS', '6584bxz');
+
+define('HTTP_AUTH', 'Authorization: Basic Z2lua2dvc3RyZWV0OjY1ODRieHo=');
+
+/**
+ * PICK AN ACTION FOR THIS SCRIPT TO PERFORM
+ * Set action to TRUE or FALSE
+ * GET QUESTIONS is the only polished feature atthe moment.
+ **/
+define('GET_CAREERS', FALSE); 
+define('GET_QUESTIONS', TRUE);
+
+/***
+ * 
+Service list
+
+https://services.onetcenter.org/ws/
+<resources>
+   <resource href="https://services.onetcenter.org/ws/about/">
+      <title>About O*NET Web Services</title>
+   </resource>
+...
+   </resource>
+</resources>
+
+My Next Move services
+
+https://services.onetcenter.org/ws/mnm/
+<resources>
+   <resource href="https://services.onetcenter.org/ws/mnm/search">
+      <title>Search careers with key words</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/browse/">
+      <title>Browse careers by industry</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/interestprofiler/">
+      <title>O*NET Interest Profiler</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/careers/">
+      <title>See all careers</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/bright_outlook/">
+      <title>Careers with a Bright Outlook</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/green/">
+      <title>Careers in the Green Economy</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/apprenticeship/">
+      <title>Careers with Registered Apprenticeships</title>
+   </resource>
+   <resource href="https://services.onetcenter.org/ws/mnm/job_preparation/">
+      <title>Careers sorted by Job Preparation</title>
+   </resource>
+</resources>
+
+***/
+
+
+function buildRequest($args) {
+  if (!is_array($args)) $args = array($args);
+  $req = 'curl -H "'. HTTP_AUTH .'" ';
+  foreach($args as $arg) {
+    $req .= " $arg";
+  }
+
+  return $req;
+}
+
+function renderedHTTP($request) {
+  return system($request.' | html2text');
+}
+
+function xmlToJson($xml_string) {
+  if (is_array($xml_string)) {
+    $xml_string = join($xml_string);
+  }
+
+  $xml = simplexml_load_string($xml_string);
+  return json_encode($xml, JSON_PRETTY_PRINT);
+}
+
+/***
+array(1) {
+  'industry' =>
+  array(21) {
+...
+  [16] =>
+    array(3) {
+      '@attributes' =>
+      array(1) {
+        'href' =>
+        string(48) "https://services.onetcenter.org/ws/mnm/browse/94"
+      }
+      'code' =>
+      string(2) "94"
+      'title' =>
+      string(13) "Self-Employed"
+    }
+ ***/
+
+function getQuestions($start, $end) {
+  $url = "https://services.onetcenter.org/ws/mnm/interestprofiler/questions?start=$start&end=$end";
+  $response = array();
+  exec(buildRequest($url), $response);
+
+  return json_decode(xmlToJson($response));
+#  return xmlToJson($response);
+#  return join($response);
+}
+
+
+if (GET_QUESTIONS) {
+  $n = 1;
+  $questions = array();
+  while ($n < 60) {
+    $objQuestions = getQuestions($n, $n+11);
+    $n = $n+12;
+    foreach($objQuestions->question as $question) {
+      $attributes = '@attributes';
+      $questions[] = array(
+        'id' => $question->$attributes->index,
+        'area' => $question->area,
+        'text' => $question->text
+      );
+    }
+    echo(json_encode($questions));
+  }
+}
+
+
+function getAllCareers() {
+  $url = 'https://services.onetcenter.org/ws/mnm/browse/';
+  $response = array();
+  exec(buildRequest($url), $response);
+
+  return json_decode(xmlToJson($response), TRUE);
+}
+
+
+if (GET_CAREERS) {
+	$url_careers = 'https://services.onetcenter.org/ws/mnm/browse/';
+	$careers = getAllCareers();
+	foreach ($careers['industry'] as $career) {
+	  if (!array_key_exists('code', $career)) continue;
+	  $code = $career['code']; 
+	  $url = "$url_careers$code";
+	echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%';
+	  var_dump($url);
+	  $response = array();
+	  exec(buildRequest($url), $response);
+
+	  echo '<table border=1>';
+	//  displayHTML(json_decode(xmlToJson($response), TRUE));
+	  echo xmlToJson($response);
+	  echo '</table>';
+	}
+}
+
+function displayHTML($input) {
+  if(!is_array($input)) {
+    echo "<td>$input</td>";
+    return;
+  }
+
+  if (array_key_exists('@attributes', $input)) {
+    echo '<tr class="attributes">';
+    foreach($input['@attributes'] as $attr => $val) {
+      if ($attr == 'link' || $attr == 'href') {
+        displayHTML('<a href="'.$val.'">'.$val.'</a>');
+      } else {
+        displayHTML($val);
+      }
+    }
+    echo '</tr>';
+  }
+ 
+  echo '<tr>';
+  foreach($input as $key => $child) {
+    if($key == '@attributes') continue;
+    if(!is_array($child)) {
+      echo '<td><label>'.$key.'</label>'.$child.'</td>';
+    } else {
+      echo '<td><label>'.$key.'</label>';
+      displayHTML($child);
+      echo '</td>';
+    }
+  }
+  echo '</tr>';
+  
+}
+
+?>
+
