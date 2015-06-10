@@ -1,4 +1,9 @@
+<link rel="stylesheet" href="/css/scores.css" />
 
 <h2>Here are your Results</h2>
 
-{{outlet}}
+<dl>
+  {{#each profileScore in model}}
+    {{view 'profileScore' profileScore}}
+  {{/each}}
+</dl>
