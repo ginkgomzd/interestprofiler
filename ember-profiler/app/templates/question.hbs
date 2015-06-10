@@ -2,7 +2,8 @@
 
 {{#each opt in questionOptions}}
   <div class="answer">
-    <input type="radio" class="answer" value="{{opt.value}}" name="answer">
+
+    {{radio-button value=opt.value checked=selectedAnswer}}
     <label>{{opt.label}}</label>
   </div>
 {{/each}}
