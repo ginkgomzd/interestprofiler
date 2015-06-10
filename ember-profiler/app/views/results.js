@@ -17,7 +17,7 @@ export default Ember.View.extend({
       var scoreWidget = Ember.$(this);
       var score = scoreWidget.data('score');
       var width = (score/40*100) + '%';
-      scoreWidget.append($("<div/>", {
+      scoreWidget.append(Ember.$("<div/>", {
         "class": "fill",
         width: width
       }));
