@@ -18,6 +18,15 @@ export default Ember.Route.extend({
         selection: this.controller.get('selectedAnswer')
       };
       this.store.push('answer', answer);
+      this.send('navigateNextQuestion');
+    },
+    navigateNextQuestion: function() {
+      var next = 1 + parseInt(this.controller.get('model').get('index'));
+      this.send('clearSelections');
+      this.transitionTo('/question/' + next );
+    },
+    clearSelections: function() {
+      this.controller.set('selectedAnswer', 0);
     }
   }
 });
