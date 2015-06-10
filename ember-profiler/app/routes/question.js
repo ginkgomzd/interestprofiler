@@ -21,12 +21,16 @@ export default Ember.Route.extend({
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {
-      var next = 1 + parseInt(this.controller.get('model').get('index'));
       this.send('clearSelections');
-      this.transitionTo('/question/' + next );
+      var next = 1 + parseInt(this.controller.get('model').get('index'));
+      if (next <= 60) {
+        this.transitionTo('/question/' + next );
+      } else {
+        this.transitionTo('/results');
+      }
     },
     clearSelections: function() {
-      this.controller.set('selectedAnswer', 0);
+      this.controller.set('selectedAnswer', '3');
     }
   }
 });
