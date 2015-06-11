@@ -1,6 +1,6 @@
-import DS from 'ember-data';
+import BaseModel from './base-model'
 
-export default DS.Model.extend({
+export default BaseModel.extend({
   title: DS.attr('string'),
   desc: DS.attr('string'),
   img: DS.attr('string'),

@@ -9,19 +9,21 @@ export default Ember.Controller.extend({
      * the user wants to dismiss the item.
      */
     hotOrNot: function (hot) {
-      var id = this.model.get('id');
-      if (hot === 1 || hot === true || hot === '1') {
-        console.log('save ' + id);
-      } else {
-        console.log('dismiss ' + id);
-      }
+      var hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
+      var item = this.model;
+      this.store.push('hotOrNot', {
+        // this needs work... temporarily hardcoding an ID...
+        id: 5,
+        hot: hotFlag,
+        item: item
+      });
       this.send('navigateNext');
     },
 
     navigateNext: function() {
-      var next = 1 + this.model.get('id');
+      var next = 1 + parseInt(this.model.get('id'));
       if (next <= 2) {
-        this.transitionTo('alumni' + next );
+        this.transitionTo('alumni', next);
       } else {
         this.transitionTo('select-clusters');
       }
