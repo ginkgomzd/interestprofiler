@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('question', {path: '/question/:index'});
   this.route('results');
   this.route('alumni', {path: '/alumni/:alumni_id'});
+  this.route('select-clusters');
 });
 
 export default Router;

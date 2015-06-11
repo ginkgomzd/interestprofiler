@@ -1,0 +1,25 @@
+
+<div class="msgtxt">Here are the top three Career Clusters we think might interest you. To change this selection press and hold a Cluster in the list below and drag it to the top of the list.</div>
+
+<div class="selected-clusters">
+  <h3>Selected Clusters</h3>
+  <!-- TODO: loop through collection of Selected Clusters -->
+  <ul>
+    <li>Cluster 1</li>
+    <li>Cluster 2</li>
+    <li>Cluster 3</li>
+  </ul>
+</div>
+
+<div class="solid-bar">
+  <div><!-- TODO: Click/swipe action -->I'm ready to explore &rsaquo;&rsaquo;</div>
+</div>
+
+<div class="cluster-list">
+  <h3>Browse More Clusters</h3>
+  <!-- TODO: loop through collection of clusters -->
+  <ul>{{#each cluster in model}}
+    <li>Cluster 1</li>
+    {{cluster.name}}
+  {{/each}}</ul>
+</div>
