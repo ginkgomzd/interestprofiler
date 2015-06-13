@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('results');
   this.route('alumni', {path: '/alumni/:alumni_id'});
   this.route('select-clusters');
+  this.route('select-pathways');
 });
 
 export default Router;

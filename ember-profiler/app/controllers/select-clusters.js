@@ -19,5 +19,11 @@ export default Ember.Controller.extend({
       selected.push(this.get('store').find('cluster', clusterID));
     }
     return selected;
-  }.property('all.@each.selected')
+  }.property('all.@each.selected'),
+  actions: {
+    saveSelection: function() {
+      console.log('controller::selectClusters::actions::saveSelection');
+      this.transitionTo('select-pathways');
+    }
+  }
 });

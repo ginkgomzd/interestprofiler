@@ -1,0 +1,14 @@
+
+<div class="msgtxt">
+  <h2>Exploring in clusters...</h2>
+  {{#each cluster in selectedClusters }}
+    <li>{{cluster.name}}</li>
+  {{/each}}
+</div>
+
+<div class="pathway-list">
+  <h3>Tap on a pathway to learn more</h3>
+  <ul>{{#each pathway in pathways}}
+    <li>{{pathway.name}}</li>
+  {{/each}}</ul>
+</div>
