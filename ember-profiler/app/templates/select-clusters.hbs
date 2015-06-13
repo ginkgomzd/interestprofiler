@@ -3,12 +3,9 @@
 
 <div class="selected-clusters">
   <h3>Selected Clusters</h3>
-  <!-- TODO: loop through collection of Selected Clusters -->
-  <ul>
-    <li>Cluster 1</li>
-    <li>Cluster 2</li>
-    <li>Cluster 3</li>
-  </ul>
+  <ul>{{#each cluster in selected}}
+    <li>{{cluster.name}}</li>
+  {{/each}}</ul>
 </div>
 
 <div class="solid-bar">
@@ -18,8 +15,7 @@
 <div class="cluster-list">
   <h3>Browse More Clusters</h3>
   <!-- TODO: loop through collection of clusters -->
-  <ul>{{#each cluster in model}}
-    <li>Cluster 1</li>
-    {{cluster.name}}
+  <ul>{{#each cluster in unselected}}
+    <li>{{cluster.name}}</li>
   {{/each}}</ul>
 </div>
