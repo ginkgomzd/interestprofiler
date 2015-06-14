@@ -1,14 +1,20 @@
 
-<div class="msgtxt">
+<div class="msgtxt" style="background-color:#DDD;">
   <h2>Exploring in clusters...</h2>
+</div>
+<div class="selected-clusters">
   {{#each cluster in selectedClusters }}
     <li>{{cluster.name}}</li>
   {{/each}}
 </div>
-
+<br />
+<div class="msgtext" style="background-color:#DDD;">
+  <h3>Tap on a degree to learn more.</h3>
+  <h3>Check-off to bookmark for later.</h3>
+</div>
 <div class="pathway-list">
   <h3>Tap on a pathway to learn more</h3>
   <ul>{{#each pathway in pathways}}
-    <li>{{pathway.name}}</li>
+    <li>{{input type="checkbox"}}{{pathway.name}}</li>
   {{/each}}</ul>
 </div>
