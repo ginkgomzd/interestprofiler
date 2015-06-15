@@ -8,12 +8,12 @@
   {{/each}}
 </div>
 <br />
-<div class="msgtext">
+<div class="msgtxt">
   <h3>Tap on a degree to learn more.</h3>
   <h3>Check-off to bookmark for later.</h3>
 </div>
 <div class="pathway-list">
   <ul>{{#each pathway in pathways}}
-    <li>{{input type="checkbox"}}{{pathway.name}}</li>
+    <li>{{input type="checkbox"}}{{#link-to 'pathway' pathway.id}}{{pathway.name}}{{/link-to}}</li>
   {{/each}}</ul>
 </div>
