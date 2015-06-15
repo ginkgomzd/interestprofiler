@@ -3,6 +3,8 @@
 }
 
 .cluster-list ul,
-.pathway-list ul {
+.pathway-list ul,
+.occupation-list ul
+{
   list-style-type: none;
 }
