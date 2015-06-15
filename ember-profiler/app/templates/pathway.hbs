@@ -1,8 +1,18 @@
 
 <div class="msgtxt">
-  <h2>You are exploring in... [Career Cluster]</h2>
+  <h3>You are exploring in cluster, "{{cluster.name}}"</h3>
 </div>
-<hr />
 
-<div></div>
+<h3>Pathway: {{model.name}}</h3>
+<div class="msgtxt">
+Lorem Ipsum Pathway Details
+</div>
+
+<div class="occupation-list">
+<ul>{{#each occ in occupations}}
+  <li><h4>{{occ.code}} - {{occ.name}}</h4>
+  <div class="msgtxt">Occupation Details</div>
+</li>
+{{/each}}</ul>
+</div>
 {{outlet}}
