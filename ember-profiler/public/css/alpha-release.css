@@ -1,0 +1,8 @@
+.msgtxt {
+  background-color:#DDD;
+}
+
+.cluster-list ul,
+.pathway-list ul {
+  list-style-type: none;
+}

@@ -1,0 +1,23 @@
+// MOCK for Progress Bar:
+
+.main-nav td {
+  width: 33%;
+  text-align: center;
+}
+
+.progress-label {
+    width: 10%;
+  }
+   .progress-bar {
+    width: 7%;
+    border: 1px;
+    border-style: solid;
+   }
+  .progress-behind {
+    background-color: #F22;
+  }
+  .progress-ahead: {
+    background-color: #FFF;
+  }
+
+// END MOCK for Progress Bar
