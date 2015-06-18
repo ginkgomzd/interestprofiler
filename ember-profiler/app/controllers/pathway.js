@@ -9,12 +9,12 @@ export default Ember.Controller.extend({
     var occupations = this.allOccupations();
     var pathwayId = this.get('model').get('id');
     return occupations.filter(function(occup){
-          return (occup.get('pathwayId').get('id') == pathwayId)
+          return (occup.get('pathwayId').get('id') === pathwayId);
         });
   }.property('allOccupations'),
   cluster: function() {
     var clusterId = this.get('model').get('clusterId');
-    var cluster = this.get('store').find('cluster', clusterId.get('id'))
+    var cluster = this.get('store').find('cluster', clusterId.get('id'));
     console.dir(cluster);
     return cluster;
   }.property()
