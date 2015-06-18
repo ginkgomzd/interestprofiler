@@ -1,4 +1,73 @@
+@import url(fonts.css);
+/*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);*/
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+}
+strong,b {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 12pt;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 36pt;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 24pt;
+}
+h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16pt;
+}
+.menuFont {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 21pt;
+}
 
 
 
 
+
+
+
+/* Layout */
+
+.navbar-flat .navbar-brand {
+    color: #fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+}
+.navbar-flat {
+    background-color: #153672;
+    color: #fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+}
+
+
+button,.button {
+    border: 0px;
+    background-color: #153672;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    min-width: 125px;
+}
+
+.redButton {
+    background-color: #f00;
+}
+
+.greenButton {
+    background-color: #2DCE06;
+}

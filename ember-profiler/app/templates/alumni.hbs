@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="css/alumni.css" />
 
 <div class="btn_wrapper">
-  <button {{action 'hotOrNot' 0}}>Dismiss</button>
-  <button {{action 'hotOrNot' 1}}>Save</button>
+  <button {{action 'hotOrNot' 0}} class="redButton">Dismiss</button>
+  <button {{action 'hotOrNot' 1}} class="greenButton">Save</button>
 </div>
-<img src="{{model.getImgPath}}" />
+<img src="{{model.getImgPath}}" class="img-responsive" />
 <h1>{{model.title}}</h1>
 <p>{{model.desc}}</p>
