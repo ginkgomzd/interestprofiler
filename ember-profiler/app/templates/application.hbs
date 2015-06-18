@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="css/progress-bar.css" />
 <link rel="stylesheet" href="css/alpha-release.css" />
 
-<nav class="navbar navbar-flat">
+<nav class="navbar navbar-default navbar-flat" >
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" id="menuButton" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu" aria-expanded="false">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -13,17 +13,18 @@
                 My Career Network
             </span>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="nav navbar-nav">
-                <li>{{#link-to 'question' 1 }}Quiz{{/link-to}}</li>
-                <li>{{#link-to 'results'}}Results{{/link-to}}</li>
-                <li>{{#link-to 'alumni' 1}}Alumni{{/link-to}}</li>
-                <li>{{#link-to 'select-clusters'}}Career Pathways{{/link-to}}</li>
+                <li>{{#link-to 'question' 1 data-toggle="collapse" data-target="#mainMenu"}}Quiz{{/link-to}}</li>
+                <li>{{#link-to 'results' data-toggle="collapse" data-target="#mainMenu"}}Results{{/link-to}}</li>
+                <li>{{#link-to 'alumni' 1 data-toggle="collapse" data-target="#mainMenu"}}Alumni{{/link-to}}</li>
+                <li>{{#link-to 'select-clusters' data-toggle="collapse" data-target="#mainMenu"}}Career Pathways{{/link-to}}</li>
             </ul>
         </div>
     </div>
 </nav>
 
 {{main-progress}}
-
-{{outlet}}
+<div id="mainContent">
+    {{outlet}}
+</div>
