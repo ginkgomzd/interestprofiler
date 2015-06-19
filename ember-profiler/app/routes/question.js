@@ -11,26 +11,23 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    saveSelection: function() {
+    saveSelection: function(selectedAnswer) {
       var answer = {
         id: this.controller.get('model').get('id'),
         question: this.controller.get('model').get('id'),
-        selection: this.controller.get('selectedAnswer')
+        //selection: this.controller.get('selectedAnswer')
+        selection: selectedAnswer
       };
       this.store.push('answer', answer);
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {
-      this.send('clearSelections');
       var next = 1 + parseInt(this.controller.get('model').get('index'));
       if (next <= 60) {
         this.transitionTo('/question/' + next );
       } else {
         this.transitionTo('/results');
       }
-    },
-    clearSelections: function() {
-      this.controller.set('selectedAnswer', '3');
     }
   }
 });

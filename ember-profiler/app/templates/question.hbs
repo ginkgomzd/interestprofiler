@@ -1,13 +1,10 @@
-<h3>{{model.text}}</h3>
+<div class="questions">
+    <h1>{{model.text}}</h1>
 
-{{#each opt in questionOptions}}
-  <div class="answer">
-
-    {{radio-button value=opt.value checked=selectedAnswer}}
-    <label>{{opt.label}}</label>
-  </div>
-{{/each}}
-
-<button {{action 'saveSelection'}}>Next</button>
-
+    <div class="answers">
+        {{#each opt in questionOptions}}
+          <button {{action 'saveSelection' opt.value}} class="button answer{{opt.value}}">{{opt.label}}</button>
+        {{/each}}
+    </div>
+</div>
 {{outlet}}
