@@ -18,5 +18,6 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('bower_components/ember-indexeddb-adapter/dist/ember_indexeddb_adapter.js');
+app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
 
 module.exports = app.toTree();
