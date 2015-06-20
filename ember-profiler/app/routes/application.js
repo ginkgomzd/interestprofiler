@@ -9,7 +9,18 @@ export default Ember.Route.extend({
     this.store.pushMany('pathway', pathwayImportData());
     this.store.pushMany('occupation', occupationImportData());
     this.store.pushMany('alumni', alumniImportData());
-  }
+  },
+    actions: {
+        hideDrawer: function() {
+            this.controller.get('drawer').hideDrawer();
+        },
+        showDrawer: function() {
+            this.controller.get('drawer').showDrawer();
+        },
+        toggleDrawer: function() {
+            this.controller.get('drawer').toggleDrawer();
+        }
+    }
 });
 
 function alumniImportData() {
