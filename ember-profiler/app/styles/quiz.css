@@ -29,3 +29,17 @@ div.answers button.button.answer4 {
 div.answers button.button.answer5 {
     background-color: #f00;
 }
+
+.quizProgress {
+    float: right;
+    background: #5C7FBE;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    font-size: 9pt;
+    font-weight: 300;
+    color: #fff;
+    line-height: 35px;
+    vertical-align: middle;
+    text-align: center;
+}
