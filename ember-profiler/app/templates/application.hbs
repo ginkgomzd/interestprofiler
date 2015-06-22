@@ -1,29 +1,7 @@
 <link rel="stylesheet" href="css/progress-bar.css" />
 <link rel="stylesheet" href="css/alpha-release.css" />
 
-<nav class="navbar navbar-default navbar-flat" >
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" id="menuButton" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu" aria-expanded="false">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <span class="navbar-brand" id="title">
-                My Career Network
-            </span>
-        </div>
-        <div class="collapse navbar-collapse" id="mainMenu">
-            <ul class="nav navbar-nav">
-                <li>{{#link-to 'question' 1 data-toggle="collapse" data-target="#mainMenu"}}Quiz{{/link-to}}</li>
-                <li>{{#link-to 'results' data-toggle="collapse" data-target="#mainMenu"}}Results{{/link-to}}</li>
-                <li>{{#link-to 'alumni' 1 data-toggle="collapse" data-target="#mainMenu"}}Alumni{{/link-to}}</li>
-                <li>{{#link-to 'select-clusters' data-toggle="collapse" data-target="#mainMenu"}}Career Pathways{{/link-to}}</li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+{{view "main-menu"}}
 {{main-progress}}
 <div class="mainContent">
     {{outlet}}
