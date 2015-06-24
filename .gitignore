@@ -3,3 +3,4 @@ plugins/
 libraries/
 platforms/
 /nbproject/private/
+.idea/

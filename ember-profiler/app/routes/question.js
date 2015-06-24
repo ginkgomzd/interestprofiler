@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('model', model);
-    controller.set('progress', (model.id % 20) == 0 ? 20 : model.id % 20);
+    controller.set('progress', (model.id % 20) === 0 ? 20 : model.id % 20);
     controller.set('questionOptions', this.store.all('questionOption'));
   },
 
@@ -15,11 +15,14 @@ export default Ember.Route.extend({
     saveSelection: function(selectedAnswer) {
       var answer = {
         id: this.controller.get('model').get('id'),
-        question: this.controller.get('model').get('id'),
+        question: this.controller.get('model'),
         //selection: this.controller.get('selectedAnswer')
         selection: selectedAnswer
+        //selection: this.store.find("questionOption", selectedAnswer)
       };
-      this.store.push('answer', answer);
+      //console.log(answer);
+      var record = this.store.createRecord("answer", answer);
+      record.save();
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {

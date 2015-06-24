@@ -10,6 +10,7 @@ export default Ember.View.extend({
   // The challenge to putting this code in the profileScore view is that we're
   // setting tagName to '' in order to produce valid HTML, but this takes away
   // our ability to use this.$() to access the view in jQuery.
+
   didInsertElement: function() {
     // render thermometer
     Ember.$('dd .score').each(function() {
