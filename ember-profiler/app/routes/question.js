@@ -20,7 +20,6 @@ export default Ember.Route.extend({
         selection: selectedAnswer
         //selection: this.store.find("questionOption", selectedAnswer)
       };
-      //console.log(answer);
       var record = this.store.createRecord("answer", answer);
       record.save();
       this.send('navigateNextQuestion');

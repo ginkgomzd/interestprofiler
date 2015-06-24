@@ -54,8 +54,6 @@ function answerList(store) {
 
 function getProfileScore(router) {
   var store = router.store;
-  console.log("Getting new scores...");
-
   /*
   var AnswerKeys = store.find("setting", {name: "CalculatedAnswers"});
   if (AnswerKeys.get("length") === 0) {
@@ -80,7 +78,6 @@ function getProfileScore(router) {
         delete jsObj.results.result[i].description;
         jsObj.results.result[i].score = parseInt(jsObj.results.result[i].score);
       }
-      console.log(jsObj.results.result);
       resolve(jsObj.results.result);
     });
 
