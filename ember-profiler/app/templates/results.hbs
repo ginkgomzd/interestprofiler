@@ -1,11 +1,20 @@
-<link rel="stylesheet" href="css/scores.css" />
+<div {{bind-attr class="fetching:fetching"}}>
+    <div class="loading">
+        <div>
+          <p>Calculating</p>
+          <p>Results</p>
+          <img src="img/loading.gif" />
+        </div>
+    </div>
+    <div class="results">
+      <h2>Here are your Results</h2>
 
-<h2>Here are your Results</h2>
+      <dl>
+        {{#each profileScore in model}}
+          {{view 'profileScore' profileScore}}
+        {{/each}}
+      </dl>
 
-<dl>
-  {{#each profileScore in model}}
-    {{view 'profileScore' profileScore}}
-  {{/each}}
-</dl>
-
-{{#link-to 'alumni' 1 tagName='button'}}See My Career Options{{/link-to}}
+      {{#link-to 'alumni' 1 tagName='button'}}See My Career Options{{/link-to}}
+    </div>
+</div>

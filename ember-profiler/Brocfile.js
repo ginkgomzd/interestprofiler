@@ -18,5 +18,7 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
+//Include our O*NET Api Library
+app.import('vendor/onet.js');
 
 module.exports = app.toTree();

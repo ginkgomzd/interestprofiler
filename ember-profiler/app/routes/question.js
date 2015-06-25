@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import onet from 'onet';
 
 export default Ember.Route.extend({
   model: function(params) {
@@ -16,9 +17,7 @@ export default Ember.Route.extend({
       var answer = {
         id: this.controller.get('model').get('id'),
         question: this.controller.get('model'),
-        //selection: this.controller.get('selectedAnswer')
         selection: selectedAnswer
-        //selection: this.store.find("questionOption", selectedAnswer)
       };
       var record = this.store.createRecord("answer", answer);
       record.save();

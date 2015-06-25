@@ -1,5 +1,7 @@
 div.questions h1 {
     font-size: 22pt;
+    margin-top: 20px;
+    clear: both;
 }
 div.answers {
     padding: 15px;
@@ -18,19 +20,19 @@ div.answers .button {
     padding-bottom: 10px;
 }
 
-div.answers button.button.answer1 {
+div.answers button.button.answer5 {
     background-color: #2DCE06;
 }
-div.answers button.button.answer2 {
+div.answers button.button.answer4 {
     background-color: #95e682;
 }
 div.answers button.button.answer3 {
     background-color: #aaa;
 }
-div.answers button.button.answer4 {
+div.answers button.button.answer2 {
     background-color: #ff7f7f;
 }
-div.answers button.button.answer5 {
+div.answers button.button.answer1 {
     background-color: #f00;
 }
 

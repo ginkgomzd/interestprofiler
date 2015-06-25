@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
+  tagName: 'div',
   templateName: 'results',
 
   // TODO: All these selectors are really broad; it would be better to narrow them
@@ -12,25 +13,19 @@ export default Ember.View.extend({
   // our ability to use this.$() to access the view in jQuery.
 
   didInsertElement: function() {
-    // render thermometer
-    Ember.$('dd .score').each(function() {
-      // TODO: this is not a very MVC way to do this... we shouldn't have to rely on data attributes
-      var scoreWidget = Ember.$(this);
-      var score = scoreWidget.data('score');
-      var width = (score/40*100) + '%';
-      scoreWidget.append(Ember.$("<div/>", {
-        "class": "fill",
-        width: width
-      }));
+    Ember.run.scheduleOnce('afterRender', this, function(){
+      this.get("controller").send("updateWidths");
     });
 
     // wire up show/hide
-    Ember.$('dd, dt').click(function() {
+    Ember.$('dd, dt').click(function () {
       var clickedClass = Ember.$(this).attr('class');
       var selector = 'dd.' + clickedClass + ' .desc';
 
       Ember.$('dd .desc').hide();
       Ember.$(selector).show();
     });
+
   }
+
 });
