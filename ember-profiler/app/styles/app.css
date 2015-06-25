@@ -3,6 +3,7 @@
 @import url(quiz.css);
 @import url(drawer.css);
 @import url(results.css);
+@import url(resources.css);
 /*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);*/
 
 
@@ -44,7 +45,7 @@ h3 {
 
 /*  Structure  */
 body {
-    background-color: #ddd;
+    background-color: #fff;
 }
 .mainContent>div {
     margin-left: 15px;
@@ -143,6 +144,18 @@ ul.navbar-nav li a {
     padding-right: 20px;
     font-size: 16pt;
 }
+
+.msgtxt {
+  background-color:#DDD;
+}
+
+.cluster-list ul,
+.pathway-list ul,
+.occupation-list ul
+{
+  list-style-type: none;
+}
+
 
 /* Utility Classes */
 .left {

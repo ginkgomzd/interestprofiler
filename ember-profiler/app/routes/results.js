@@ -31,8 +31,8 @@ function concatAnswerString(store) {
   store.all('answer').forEach(function(item) {
     answerString += item.get('selection');
   });
-  //This padds the answer string with 3's to 60 characters in length
-  return String(answerString + new Array(61).join("3")).slice(0, 60);
+  //This pads the answer string with 3's to 60 characters in length
+  return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
 }
 
 function fetchProfilerResults(answerString, route) {
