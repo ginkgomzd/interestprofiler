@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('select-clusters');
   this.route('select-pathways');
   this.route('pathway', {path: '/pathway/:index'});
+  this.route('resources');
 });
 
 export default Router;
