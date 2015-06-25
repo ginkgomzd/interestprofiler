@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import onet from 'onet';
 
 export default Ember.Route.extend({
   model: function(params) {
@@ -7,7 +8,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('model', model);
-    controller.set('progress', (model.id % 20) == 0 ? 20 : model.id % 20);
+    controller.set('progress', (model.id % 20) === 0 ? 20 : model.id % 20);
     controller.set('questionOptions', this.store.all('questionOption'));
   },
 
@@ -15,11 +16,28 @@ export default Ember.Route.extend({
     saveSelection: function(selectedAnswer) {
       var answer = {
         id: this.controller.get('model').get('id'),
-        question: this.controller.get('model').get('id'),
-        //selection: this.controller.get('selectedAnswer')
+        question: this.controller.get('model'),
         selection: selectedAnswer
       };
-      this.store.push('answer', answer);
+      var record = this.store.getById("answer", answer.id);
+      if (record === null) {
+        record = this.store.createRecord("answer", answer);
+      } else {
+        record.set("question", answer.question);
+        record.set("selection", answer.selection);
+      }
+      record.save();
+      if(answer.id % 20 === 0) {
+        this.send('sectionComplete');
+      } else {
+        this.send('navigateNextQuestion');
+      }
+    },
+    sectionComplete: function() {
+      Ember.$(".sectionComplete").slideDown();
+    },
+    acknowledgeSectionComplete: function() {
+      Ember.$(".sectionComplete").slideUp();
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {

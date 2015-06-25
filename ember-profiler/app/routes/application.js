@@ -3,8 +3,24 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function () {
 
-    this.store.pushMany('question', questionImportData());
-    this.store.pushMany('questionOption', answerOptionImportData());
+    var questions = questionImportData();
+    for (var i in questions) {
+      if (Ember.$.isNumeric(questions[i].id)) {
+        var r = this.store.createRecord('question', questions[i]);
+        r.save();
+      }
+    }
+
+    //this.store.pushMany('question', questionImportData());
+
+    var qoptions = answerOptionImportData();
+    for (var i in qoptions) {
+      if (Ember.$.isNumeric(qoptions[i].id)) {
+        var r = this.store.createRecord('questionOption', qoptions[i]);
+        r.save();
+      }
+    }
+    //this.store.pushMany('questionOption', answerOptionImportData());
     this.store.pushMany('cluster', clusterImportData());
     this.store.pushMany('pathway', pathwayImportData());
     this.store.pushMany('occupation', occupationImportData());

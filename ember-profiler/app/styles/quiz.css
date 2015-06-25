@@ -1,9 +1,15 @@
 div.questions h1 {
     font-size: 22pt;
+    margin-top: 20px;
+    clear: both;
 }
 div.answers {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
+    position:absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+
 }
 
 div.answers .button {
@@ -14,19 +20,19 @@ div.answers .button {
     padding-bottom: 10px;
 }
 
-div.answers button.button.answer1 {
+div.answers button.button.answer5 {
     background-color: #2DCE06;
 }
-div.answers button.button.answer2 {
+div.answers button.button.answer4 {
     background-color: #95e682;
 }
 div.answers button.button.answer3 {
     background-color: #aaa;
 }
-div.answers button.button.answer4 {
+div.answers button.button.answer2 {
     background-color: #ff7f7f;
 }
-div.answers button.button.answer5 {
+div.answers button.button.answer1 {
     background-color: #f00;
 }
 
@@ -42,4 +48,33 @@ div.answers button.button.answer5 {
     line-height: 35px;
     vertical-align: middle;
     text-align: center;
+}
+
+.sectionComplete {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  zindex: 200;
+  background: rgba(1,0,0,0.9);
+  margin: 0px;
+  color: #fff;
+  font-weight: bold;
+  padding-bottom: 15px;
+  display: none;
+}
+.sectionComplete .bravo {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.sectionComplete p {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.sectionComplete button.continue {
+  float: right;
+  margin-right: 15px;
+  border: 3px solid #fff;
+  background: transparent;
 }

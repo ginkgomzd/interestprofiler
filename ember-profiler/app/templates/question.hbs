@@ -8,4 +8,14 @@
         {{/each}}
     </div>
 </div>
+
 {{outlet}}
+<div class="sectionComplete full">
+    <h2 class="bravo">
+        Bravo!
+    </h2>
+    <p>
+        You're done with this part of the interests survey.
+    </p>
+    <p><button {{action 'acknowledgeSectionComplete'}} class="continue">Continue</button></p>
+</div>

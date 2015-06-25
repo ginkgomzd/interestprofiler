@@ -1,0 +1,87 @@
+div.loading {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+
+  -webkit-transition: all 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -moz-transition: all 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -o-transition: all 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 1000ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 0px solid #fff;
+  border-radius: 10%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 100%;
+  padding: 0px;
+
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+div.loading div {
+  font-size: 20pt;
+  margin: 15px;
+}
+
+div.loading img {
+  margin: 0 auto;
+}
+div.fetching div.loading {
+  width: 50%;
+  left: 25%;
+  height: 30%;
+  top: 35%;
+  box-shadow: 0px 0px 10px 10px #222;
+  border-width: 2px;
+}
+
+dd div.score div.fill {
+  width: 0px;
+  -webkit-transition: width 0.9s ease;
+  -moz-transition: width 0.9s ease;
+  -o-transition: width 0.9s ease;
+  transition: width 0.9s ease;
+}
+
+
+dt {
+  display: inline-block;
+  font-size: 125%;
+  font-weight: bold;
+  min-width: 250px;
+}
+
+dd {
+  display: inline;
+  margin: 0;
+  min-height: 10px;
+}
+
+dd:after {
+  display: block;
+  content: '';
+}
+
+.score, .fill {
+  height: 18px;
+  border-radius: 9px;
+}
+
+dd div.score {
+  border: 1px solid #aaa;
+  display: inline-block;
+  width: 75%;
+  background: #fff;
+}
+
+dd div.score div.fill {
+  background: #bae9aa;
+  height: 100%;
+}
+
+dd div.desc {
+  display: none;
+}
