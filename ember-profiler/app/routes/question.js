@@ -47,6 +47,12 @@ export default Ember.Route.extend({
       } else {
         this.transitionTo('/results');
       }
+    },
+    goBack: function() {
+      var prev = parseInt(this.controller.get('model').get('index')) - 1;
+      if (prev > 0) {
+        this.transitionTo('/question/' + prev );
+      }
     }
   }
 });
