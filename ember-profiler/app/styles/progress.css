@@ -57,8 +57,13 @@
   border: 1.5px solid #000;
   margin: 0 auto;
   margin-bottom: -15;
-  background: #fff;
+  background-color: #fff;
   border-radius: 50%;
+
+  -webkit-transition: background-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease;
+  -o-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .progressIndicator.complete, .progressIndicator.completed {
