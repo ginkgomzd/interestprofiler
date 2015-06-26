@@ -18,12 +18,17 @@ export default Ember.View.extend({
     });
 
     // wire up show/hide
-    Ember.$('dd, dt').click(function () {
-      var clickedClass = Ember.$(this).attr('class');
-      var selector = 'dd.' + clickedClass + ' .desc';
+    Ember.$('dd, dt').on("tap", function () {
+      var clickedArea = Ember.$(this).attr('target');
+      var selector = 'dd.' + clickedArea + ' .desc';
 
-      Ember.$('dd .desc').hide();
-      Ember.$(selector).show();
+      //this is to only allow one at a time
+      //I'm leaving it here in case functionality needs to be changed back in future.
+      //Ember.$('dd .desc').removeClass("openDesc");
+      //Ember.$(selector).addClass("openDesc");
+
+      //this is for toggling visibility rater than replacing.
+      Ember.$(selector).toggleClass("openDesc");
     });
 
   }
