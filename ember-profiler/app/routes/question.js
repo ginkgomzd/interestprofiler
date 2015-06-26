@@ -34,6 +34,8 @@ export default Ember.Route.extend({
       }
     },
     sectionComplete: function() {
+      var section = parseInt(this.controller.get('model').get('index')) / 20;
+      this.settings.save("ProgressQuiz" + section, "complete");
       Ember.$(".sectionComplete").slideDown();
     },
     acknowledgeSectionComplete: function() {
