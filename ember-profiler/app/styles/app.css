@@ -86,15 +86,19 @@ body {
 
 
 #menuButton {
-    position: fixed;
-    margin-right: 15px;
-    color: #fff;
-    text-shadow: 0px 0px 2px #fff;
-    font-size: 18pt;
-    top: 0px;
-    left: 0px;
-    z-index: 11000;
-    cursor: pointer;
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  margin-top: 0px;
+  padding: 0px;
+  color: #fff !important;
+  text-shadow: 0px 0px 2px #fff;
+  font-size: 35pt;
+  top: 0px;
+  left: 15px;
+  z-index: 11000;
+  cursor: pointer;
+  line-height: 50px;
 }
 #menuButton:focus {
     outline: 0;
