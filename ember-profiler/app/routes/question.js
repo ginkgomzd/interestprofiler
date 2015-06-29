@@ -3,7 +3,7 @@ import onet from 'onet';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.find('question', params.index);
+    return this.store.find('question', params.id);
   },
 
   setupController: function(controller, model) {
@@ -34,7 +34,7 @@ export default Ember.Route.extend({
       }
     },
     sectionComplete: function() {
-      var section = parseInt(this.controller.get('model').get('index')) / 20;
+      var section = parseInt(this.controller.get('model').get('id')) / 20;
       this.settings.save("ProgressQuiz" + section, "complete");
       Ember.$(".sectionComplete").slideDown();
     },
@@ -43,7 +43,7 @@ export default Ember.Route.extend({
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {
-      var next = 1 + parseInt(this.controller.get('model').get('index'));
+      var next = 1 + parseInt(this.controller.get('model').get('id'));
       if (next <= 60) {
         this.transitionTo('question', next);
       } else {
@@ -51,7 +51,7 @@ export default Ember.Route.extend({
       }
     },
     goBack: function() {
-      var prev = parseInt(this.controller.get('model').get('index')) - 1;
+      var prev = parseInt(this.controller.get('model').get('id')) - 1;
       if (prev > 0) {
         this.transitionTo('question', prev );
       }

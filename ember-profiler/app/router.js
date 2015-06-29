@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('question', {path: '/question/:index'});
+  this.route('question', {path: '/question/:id'});
   this.route('results');
   this.route('alumni', {path: '/alumni/:alumni_id'});
   this.route('select-clusters');
