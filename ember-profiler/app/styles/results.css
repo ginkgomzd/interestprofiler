@@ -83,13 +83,6 @@ dd div.score div.fill {
 }
 
 dd div.desc {
-  max-height: 0px;
-  overflow: hidden;
-  -webkit-transition: max-height 0.9s ease;
-  -moz-transition: max-height 0.9s ease;
-  -o-transition: max-height 0.9s ease;
-  transition: max-height 0.9s ease;
+  display: none;
 }
-dd div.desc.openDesc {
-  max-height: 500px;
-}
+
