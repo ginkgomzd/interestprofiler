@@ -1,5 +1,6 @@
 <div class="questions">
     <div class="quizProgress">{{progress}}/20</div>
+    <div {{action 'goBack'}} class="backButton question{{model.id}}">&larr;</div>
     <h1>{{model.text}}</h1>
 
     <div class="answers">
@@ -11,11 +12,31 @@
 
 {{outlet}}
 <div class="sectionComplete full">
-    <h2 class="bravo">
-        Bravo!
-    </h2>
-    <p>
-        You're done with this part of the interests survey.
-    </p>
-    <p><button {{action 'acknowledgeSectionComplete'}} class="continue">Continue</button></p>
+    <div class="sectionCompleteStars">
+        <div class="starSection star1">
+          <svg version="1.1" viewBox="0 0 210 175" preserveAspectRatio="xMinYMin meet" class="starSvg">
+              <path class="star starComplete" d="M 177.14286,160.93361 128.04433,138.6172 81.825896,166.41187 87.877787,112.82025 47.161201,77.452929 99.999998,66.647898 121.0542,16.99502 l 26.60428,46.913745 53.7288,4.680153 -36.39645,39.799322 z"/>
+          </svg>
+        </div>
+        <div class="starSection star2">
+            <svg version="1.1" viewBox="0 0 210 175" preserveAspectRatio="xMinYMin meet" class="starSvg">
+                <path class="star" d="M 177.14286,160.93361 128.04433,138.6172 81.825896,166.41187 87.877787,112.82025 47.161201,77.452929 99.999998,66.647898 121.0542,16.99502 l 26.60428,46.913745 53.7288,4.680153 -36.39645,39.799322 z"/>
+            </svg>
+        </div>
+        <div class="starSection star3">
+            <svg version="1.1" viewBox="0 0 210 175" preserveAspectRatio="xMinYMin meet" class="starSvg">
+                <path class="star" d="M 177.14286,160.93361 128.04433,138.6172 81.825896,166.41187 87.877787,112.82025 47.161201,77.452929 99.999998,66.647898 121.0542,16.99502 l 26.60428,46.913745 53.7288,4.680153 -36.39645,39.799322 z"/>
+            </svg>
+        </div>
+    </div>
+    <div class="sectionCompleteMessage">
+      <h2 class="bravo">
+          Bravo!
+      </h2>
+      <p>
+          You're done with this part of the interests survey.
+      </p>
+      <p><button {{action 'acknowledgeSectionComplete'}} class="continue">Continue</button></p>
+        <div class="clear"></div>
+    </div>
 </div>
