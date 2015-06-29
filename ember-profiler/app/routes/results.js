@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 
       var oldAnswerString = this.get("CalculatedAnswers");
       var answerString = concatAnswerString(this.store);
-      var scores = this.store.all('profileScore');
+      var scores = this.store.all('scoreArea');
 
       if (scores.get("length") === 0 ||
         !oldAnswerString ||
@@ -22,7 +22,7 @@ export default Ember.Route.extend({
         fetchProfilerResults(answerString, this);
       }
 
-      return this.store.find('profileScore');
+      return this.store.find('scoreArea');
     }
 });
 
@@ -40,9 +40,9 @@ function fetchProfilerResults(answerString, route) {
   onet.interestProfiler.results(answerString).then(function (data) {
     data.forEach(function (item) {
 
-      var r = route.store.getById('profileScore', item.id);
+      var r = route.store.getById('scoreArea', item.id);
       if (r===null) {
-        r = route.store.createRecord('profileScore', item);
+        r = route.store.createRecord('scoreArea', item);
       }
 
       r.set("area", item.area);
