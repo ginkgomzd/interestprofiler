@@ -19,23 +19,23 @@ export function initialize(registry, application) {
       this.set('model', store.find("setting"));
     },
     load: function(name) {
-      var s = this.store.getById("setting", name);
-      if (s === null) {
+      var setting = this.store.getById("setting", name);
+      if (setting === null) {
         this.set(name, null);
         return null;
       } else {
-        this.set(name, s.get("value"));
-        return s.get("value");
+        this.set(name, setting.get("value"));
+        return setting.get("value");
       }
     },
     save: function(name, value) {
-      var s = this.store.getById("setting", name);
-      if (s === null) {
-        s = this.store.createRecord("setting", {id: name, 'value': value});
+      var setting = this.store.getById("setting", name);
+      if (setting === null) {
+        setting = this.store.createRecord("setting", {id: name, 'value': value});
       } else {
-        s.set("value", value);
+        setting.set("value", value);
       }
-      s.save();
+      setting.save();
       this.set(name, value);
     }
   });
