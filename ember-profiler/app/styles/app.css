@@ -48,6 +48,10 @@ h3 {
 body {
     background-color: #fff;
 }
+.mainContent {
+  /*  This makes the various pieces relatively space, start below the fixed header */
+  padding-top: 92px;
+}
 .mainContent>div {
     margin-left: 15px;
     margin-right: 15px;
@@ -77,11 +81,9 @@ body {
     position: fixed;
     left:0px;
     top: 0px;
+    z-index: 9999;
 }
-body {
-    /*  This makes the various pieces relatively space, start below the fixed header */
-    padding-top: 50px;
-}
+
 
 #menuButton {
     position: fixed;
@@ -145,6 +147,27 @@ ul.navbar-nav li a {
     padding-right: 20px;
     font-size: 16pt;
 }
+button.leftArrow {
+  padding-left: 0px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+button.leftArrow:before {
+  font-size: 24px;
+  font-weight: bold;
+  content: '\2190 \00A0 \00A0';
+}
+
+button.rightArrow {
+  padding-right: 0px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+button.rightArrow:after {
+  font-size: 24px;
+  font-weight: bold;
+  content: '\00A0 \00A0 \2192';
+}
 
 .msgtxt {
   background-color:#DDD;
@@ -171,4 +194,10 @@ ul.navbar-nav li a {
 div.full,.mainContent div.full,#mainContent div.full {
     margin-left: 0px;
     margin-right: 0px;
+}
+
+div.gray {
+  margin: 0px 15px 15px 15px;
+  padding: 15px;
+  background: #ddd;
 }

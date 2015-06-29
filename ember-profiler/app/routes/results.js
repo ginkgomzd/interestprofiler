@@ -10,7 +10,7 @@ export default Ember.Route.extend({
       //it should also have a getter and setter for getting and setting
       //settings, that will then be observed and stored in the database.
 
-      var oldAnswerString = this.get("CalculatedAnswers");
+      var oldAnswerString = this.settings.CalculatedAnswers;
       var answerString = concatAnswerString(this.store);
       var scores = this.store.all('scoreArea');
 
@@ -36,7 +36,7 @@ function concatAnswerString(store) {
 }
 
 function fetchProfilerResults(answerString, route) {
-  route.set("CalculatedAnswers", answerString);
+  route.settings.save("CalculatedAnswers", answerString);
   onet.interestProfiler.results(answerString).then(function (data) {
     data.forEach(function (item) {
 

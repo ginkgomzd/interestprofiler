@@ -11,8 +11,6 @@ export default Ember.Route.extend({
       }
     }
 
-    //this.store.pushMany('question', questionImportData());
-
     var qoptions = answerOptionImportData();
     for (var i in qoptions) {
       if (Ember.$.isNumeric(qoptions[i].id)) {
@@ -20,7 +18,7 @@ export default Ember.Route.extend({
         r.save();
       }
     }
-    //this.store.pushMany('questionOption', answerOptionImportData());
+
     this.store.pushMany('cluster', clusterImportData());
     this.store.pushMany('pathway', pathwayImportData());
     this.store.pushMany('occupation', occupationImportData());

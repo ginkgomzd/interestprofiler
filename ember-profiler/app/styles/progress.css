@@ -1,7 +1,72 @@
-.MainProgress {
+.mainProgress {
+  width: 100%;
+  position: fixed;
+  top: 50px;
+  background: #435C89;
+  height: 30px;
+  overflow: visible;
+  padding: 0px;
+  border-bottom: 1px solid #000;
+  z-index: 8000;
 
+  -webkit-transition: top 0.5s ease;
+  -moz-transition: top 0.5s ease;
+  -o-transition: top 0.5s ease;
+  transition: top 0.5s ease;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
-.MainProgress hr {
-  margin-top: 5px;
-  margin-bottom: 5px;
+.mainContent {
+  -webkit-transition: padding 0.5s ease;
+  -moz-transition: padding 0.5s ease;
+  -o-transition: padding 0.5s ease;
+  transition: padding 0.5s ease;
+}
+.mainContent.condensed {
+  padding-top: 74px;
+}
+.mainProgress.condensed {
+  top: 32px;
+}
+
+.progressSection, .progressSubSection {
+  width: 33%;
+  text-align: center;
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+.progressSection .progressLabel {
+  height: 20px;
+  overflow: hidden;
+}
+.progressSection span {
+  margin-top: 3px;
+  font-size: 8pt;
+  clear: both;
+  display: block;
+  color: #000;
+}
+
+.progressIndicator {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #000;
+  margin: 0 auto;
+  margin-bottom: -15;
+  background-color: #fff;
+  border-radius: 50%;
+
+  -webkit-transition: background-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease;
+  -o-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
+}
+
+.progressIndicator.complete, .progressIndicator.completed {
+  background-color: #c2212c;
 }
