@@ -4,5 +4,5 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   pathways: DS.hasMany('pathway'),
   occupations: DS.hasMany('occupation'),
-  is_selected: DS.attr('boolean')
+  is_selected: DS.attr('boolean', {defaultValue: false})
 });

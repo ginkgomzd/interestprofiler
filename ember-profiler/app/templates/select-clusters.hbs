@@ -4,15 +4,7 @@
 <div class="clusters selected-clusters">
   <h3>Selected Clusters</h3>
   <ul>{{#each cluster in selected}}
-    <li>
-        <div class="dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-        {{cluster.name}}
-        <div class="clear"></div>
-    </li>
+    {{view 'cluster' cluster=cluster}}
   {{/each}}</ul>
 </div>
 
@@ -23,14 +15,6 @@
 <div class="clusters cluster-list">
   <h3>Browse More Clusters</h3>
   <ul>{{#each cluster in unselected}}
-      <li>
-          <div class="dots">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-          </div>
-          {{cluster.name}}
-          <div class="clear"></div>
-      </li>
+    {{view 'cluster' cluster=cluster}}
   {{/each}}</ul>
 </div>
