@@ -10,10 +10,18 @@ export default Ember.Controller.extend({
 
   actions: {
     saveSelection: function() {
-      console.log('controller::selectClusters::actions::saveSelection');
-      this.transitionTo('select-pathways');
+      if (this.get("selected").get("length") === 3) {
+        this.transitionTo('select-pathways');
+      } else {
+        if (this.get("selected").get("length") > 3 ) {
+          this.modal.alert("You may only select 3 clusters");
+        } else {
+          this.modal.alert("You must select 3 clusters");
+        }
+      }
     },
     toggleClusterSelection: function(cluster) {
+      console.log("Cluster: " + cluster.get("id"));
       cluster.toggleProperty("is_selected");
       cluster.save();
       this.set("toggling", cluster.get("id"));

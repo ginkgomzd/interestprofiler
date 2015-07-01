@@ -1,20 +1,25 @@
 
-<div class="msgtxt">Here are the top three Career Clusters we think might interest you. To change this selection press and hold a Cluster in the list below and drag it to the top of the list.</div>
-
-<div class="clusters selected-clusters">
-  <h3>Selected Clusters</h3>
-  <ul>{{#each cluster in selected}}
-    {{view 'cluster' cluster=cluster}}
-  {{/each}}</ul>
+<div class="pageMessage">
+  Here are the top three Career Clusters we think might interest you. To change this selection press and hold a Cluster in the list below and drag it to the top of the list.
+</div>
+<div class="full gray">
+  <div class="clusters selected-clusters">
+    <h3>Selected Clusters</h3>
+    <ul>{{#each cluster in selected}}
+      {{view 'cluster' cluster=cluster}}
+    {{/each}}</ul>
+  </div>
 </div>
 
 <div class="solid-bar">
   <div><!-- TODO: Click/swipe action --><button {{action 'saveSelection'}} class="yellowButton">I'm ready to <strong>explore &rsaquo;&rsaquo;</strong></button></div>
 </div>
 
-<div class="clusters cluster-list">
-  <h3>Browse More Clusters</h3>
-  <ul>{{#each cluster in unselected}}
-    {{view 'cluster' cluster=cluster}}
-  {{/each}}</ul>
+<div class="full gray">
+  <div class="clusters cluster-list">
+    <h3>Browse More Clusters</h3>
+    <ul>{{#each cluster in unselected}}
+      {{view 'cluster' cluster=cluster}}
+    {{/each}}</ul>
+  </div>
 </div>

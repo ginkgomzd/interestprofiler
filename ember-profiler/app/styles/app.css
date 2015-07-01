@@ -58,7 +58,7 @@ body {
     margin-right: 15px;
 }
 .mainContent .solid-bar {
-    margin: 5px 0px 5px 0px;
+    margin: 0px;
 }
 
 
@@ -151,6 +151,7 @@ ul.navbar-nav li a {
     text-align: right;
     padding-right: 20px;
     font-size: 16pt;
+    margin: 0px;
 }
 button.leftArrow {
   padding-left: 0px;
@@ -174,10 +175,6 @@ button.rightArrow:after {
   content: '\00A0 \00A0 \2192';
 }
 
-.msgtxt {
-  background-color:#DDD;
-}
-
 .cluster-list ul,
 .pathway-list ul,
 .occupation-list ul
@@ -187,6 +184,14 @@ button.rightArrow:after {
 
 
 /* Utility Classes */
+
+.pageMessage {
+  font-size: 10pt;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
 .left {
     float: left;
 }
@@ -202,7 +207,6 @@ div.full,.mainContent div.full,#mainContent div.full {
 }
 
 div.gray {
-  margin: 0px 15px 15px 15px;
   padding: 15px;
   background: #ddd;
 }

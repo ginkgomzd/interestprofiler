@@ -11,7 +11,10 @@ export default Ember.View.extend({
   press: function() {
     var that = this;
     this.$().slideUp(function() {
-      that.get('controller').send('toggleClusterSelection', that.cluster);
+      Ember.$("body").animate({ scrollTop: 0 }, {complete: function() {
+        console.log(that.cluster.get("id"));
+        that.get('controller').send('toggleClusterSelection', that.cluster);
+      }});
     });
   }
 });
