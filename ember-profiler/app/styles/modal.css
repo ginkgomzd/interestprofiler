@@ -1,0 +1,33 @@
+div.modalWindow {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  zindex: 200;
+  margin: 0px;
+  color: #fff;
+  font-weight: bold;
+  padding: 15px;
+  background: rgba(1,0,0,0.9);
+  display: none;
+}
+
+div.modalWindow button {
+  border: 3px solid #fff;
+  background: transparent;
+  text-align: center;
+  padding: 5px 10px;
+  min-width: 125px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+div.modalWindow button.enabled {
+  display: block;
+}
+div.modalWindow button.disabled {
+  display: none;
+}
+
+div.modalWindow div.clear {
+  margin-top: 25px;
+}
