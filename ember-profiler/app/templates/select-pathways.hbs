@@ -1,19 +1,25 @@
 
-<div class="msgtxt">
-  <h2>Exploring in clusters...</h2>
+
+<div class="full gray pageMessage">
+  You're Exploring...
+  <div class="pathways-selected-clusters">
+    {{#each cluster in model }}
+      <li>{{cluster.name}}</li>
+    {{/each}}
+  </div>
 </div>
-<div class="selected-clusters">
-  {{#each cluster in selectedClusters }}
-    <li>{{cluster.name}}</li>
+<div class="pathway-list full padded">
+  <p class="pageMessage">
+    Tap on a degree to learn more.<br />
+    Check-off to bookmark for later.
+  </p>
+  <ul>
+  {{#each pathway in pathways}}
+    <li>
+      {{view "pathway-checkbox" pathway=pathway}}
+      {{#link-to 'pathway' pathway.id}}{{pathway.name}}{{/link-to}}
+      <div class="clear"></div>
+    </li>
   {{/each}}
-</div>
-<br />
-<div class="msgtxt">
-  <h3>Tap on a degree to learn more.</h3>
-  <h3>Check-off to bookmark for later.</h3>
-</div>
-<div class="pathway-list">
-  <ul>{{#each pathway in pathways}}
-    <li>{{input type="checkbox"}}{{#link-to 'pathway' pathway.id}}{{pathway.name}}{{/link-to}}</li>
-  {{/each}}</ul>
+  </ul>
 </div>
