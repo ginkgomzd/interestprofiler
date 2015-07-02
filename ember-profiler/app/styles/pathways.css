@@ -1,6 +1,6 @@
 .pathways-selected-clusters li {
   background: #fff;
-  border: 1px solid #aaa;
+  border: 2px solid #aaa;
   border-radius: 100px;
   list-style: none;
   font-size: 9pt;
@@ -9,6 +9,7 @@
   vertical-align: middle;
   padding-top: 4px;
   padding-bottom: 4px;
+  margin-bottom: 3px;
 }
 .pathways-selected-clusters li:nth-child(1) {
   border-color: #0071bc;
