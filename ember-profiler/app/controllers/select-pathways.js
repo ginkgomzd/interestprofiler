@@ -2,19 +2,27 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
-  allClusters: function() {
-    return this.get('store').all('cluster');
-  },
-  selectedClusters: function() {
-    var selected = [];
-    var clusterID = 0;
-    while (selected.length !== 3) {
-      clusterID = Math.floor((Math.random() * 15) + 2);
-      selected.push(this.get('store').find('cluster', clusterID));
+  sortingDesc: ['bookmarked:desc', 'name:asc'],
+  pathwaysList: function() {
+    var pathways = Ember.A();
+    this.get('model').forEach(function(item) {
+      pathways.pushObjects(item.get('pathways').toArray());
+    });
+    return pathways;
+  }.property("model.@each"),
+  pathways: Ember.computed.sort('pathwaysList', 'sortingDesc'),
+  colors: function() {
+    var colorList = {};
+    var colorLookup = ["blue", "red", "yellow"];
+    this.get("model").forEach(function (item, index) {
+      colorList[item.get("id")] = colorLookup[index] || null;
+    });
+    return colorList;
+  }.property("model"),
+  actions: {
+    toggleBookmark: function(pathway) {
+      pathway.toggleProperty("bookmarked");
+      pathway.save();
     }
-    return selected;
-  }.property('allClusters.@each.selected'),
-  pathways: function() {
-    return this.get('store').all('pathway');
-  }.property(),
+  }
 });

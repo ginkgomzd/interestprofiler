@@ -5,6 +5,7 @@ export default Ember.View.extend({
   templateName: 'cluster',
   didInsertElement: function() {
     if (this.cluster.get("id") === this.get('controller').toggling) {
+      this.get('controller').set("toggling", false);
       this.$().hide().slideDown();
     }
   },
@@ -12,7 +13,6 @@ export default Ember.View.extend({
     var that = this;
     this.$().slideUp(function() {
       Ember.$("body").animate({ scrollTop: 0 }, {complete: function() {
-        console.log(that.cluster.get("id"));
         that.get('controller').send('toggleClusterSelection', that.cluster);
       }});
     });
