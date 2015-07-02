@@ -7,7 +7,7 @@ export default Ember.View.extend({
   templateName: 'pathway-checkbox',
   didInsertElement: function() {
     if (this.pathway.get("id") === this.get('controller').toggling) {
-      this.get('controller').set("toggling", false);
+      this.get('controller').set("toggling", null);
 
       //figure out if we need to scroll to bring the new position into view
       var parent = this.$().parent();
