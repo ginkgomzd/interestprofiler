@@ -15,11 +15,11 @@
   </p>
   <ul>
   {{#each pathway in pathways}}
-    <li>
+    {{#view "pathway-list" pathway=pathway}}
       {{view "pathway-checkbox" pathway=pathway}}
       {{#link-to 'pathway' pathway.id}}{{pathway.name}}{{/link-to}}
       <div class="clear"></div>
-    </li>
+    {{/view}}
   {{/each}}
   </ul>
 </div>

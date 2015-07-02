@@ -21,7 +21,6 @@ export default Ember.Controller.extend({
       }
     },
     toggleClusterSelection: function(cluster) {
-      console.log("Cluster: " + cluster.get("id"));
       cluster.toggleProperty("is_selected");
       cluster.save();
       this.set("toggling", cluster.get("id"));

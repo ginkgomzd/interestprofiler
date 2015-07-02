@@ -6,6 +6,21 @@
   font-size: 9pt;
   font-weight: bold;
   text-align: center;
+  vertical-align: middle;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.pathways-selected-clusters li:nth-child(1) {
+  border-color: #0071bc;
+  color: #0071bc;
+}
+.pathways-selected-clusters li:nth-child(2) {
+  border-color: #f7931e;
+  color: #f7931e;
+}
+.pathways-selected-clusters li:nth-child(3) {
+  border-color: #c1272d;
+  color: #c1272d;
 }
 
 .pathway-list {
@@ -24,7 +39,10 @@
   vertical-align: middle;
   padding: 0px;
   text-align: left;
-  float: left;
+  color: #000;
+  line-height: 30px;
+  display: block;
+  margin-left: 35px;
 }
 
 label.checkbox {
@@ -39,10 +57,10 @@ label.checkbox {
 }
 
 label.checkmark {
-  font-size: 35px;
+  font-size: 40px;
   line-height: 30px;
-  font-weight: bold;
-  float: left;
+  margin-left: -2px;
+  text-align: center;
   padding: 0px;
   vertical-align: middle;
 }
@@ -57,4 +75,28 @@ label.checkbox.unchecked label.checkmark {
 }
 label.checkbox.checked + label.checkmark {
   color: rgba(0, 0, 0, 1);
+}
+
+
+
+
+.pathway-list li.checked.blue {
+  border-color: #0071bc;
+}
+.pathway-list li.checked.blue label.checkbox {
+  background-color: #0071bc;
+}
+
+.pathway-list li.checked.yellow {
+  border-color: #f7931e;
+}
+.pathway-list li.checked.yellow label.checkbox {
+  background-color: #f7931e;
+}
+
+.pathway-list li.checked.red {
+  border-color: #c1272d;
+}
+.pathway-list li.checked.red label.checkbox {
+  background-color: #c1272d;
 }

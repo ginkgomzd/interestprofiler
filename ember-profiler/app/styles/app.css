@@ -88,7 +88,7 @@ body {
 
 
 #menuButton {
-  position: relative;
+  position: fixed;
   float: left;
   margin-right: 15px;
   margin-top: 0px;
