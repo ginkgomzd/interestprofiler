@@ -5,7 +5,7 @@ export default Ember.View.extend({
   templateName: 'cluster',
   didInsertElement: function() {
     if (this.cluster.get("id") === this.get('controller').toggling) {
-      this.get('controller').set("toggling", false);
+      this.get('controller').set("toggling", null);
       this.$().hide().slideDown();
     }
   },
