@@ -38,7 +38,7 @@
     "ember-disable-proxy-controllers": "^0.7.0",
     "ember-export-application-global": "^1.0.2",
     "ember-localforage-adapter": "0.7.3",
-    "ember-mobiletouch": "2.0.0-beta.1"
+    "ember-mobiletouch": "~1.4.11"
   },
   "dependencies": {
     "ember-radio-buttons": "^4.0.1"
