@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import onet from 'onet';
 
 export default Ember.Route.extend({
   model: function () {
