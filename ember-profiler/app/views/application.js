@@ -5,7 +5,7 @@ export default Ember.View.extend({
   templateName: 'application',
   panRight: function(e) {
     if (e.originalEvent.gesture.deltaX > 100) {
-      if(e.originalEvent.gesture.pointers[0].pageX < 130) {
+      if(e.originalEvent.gesture.pointers[0].pageX < 150) {
         this.get("controller").send("showDrawer");
         return e.preventDefault();
       }
