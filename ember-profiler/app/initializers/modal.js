@@ -13,6 +13,7 @@ export function initialize(registry, application) {
       callback: function() {}
     },
     message: '',
+    modalOpen: false,
     alert: function(msg) {
       this.set("message", msg);
       this.set("rightButton.text", "OK");
@@ -24,7 +25,7 @@ export function initialize(registry, application) {
     confirm: function(msg, options) {
       options = options || {};
       this.set("message", msg);
-      
+
       if (typeof(options.right) !== "undefined") {
         this.set("rightButton.visible", "enabled");
         this.set("rightButton.text", options.right.text || "OK");
@@ -50,10 +51,10 @@ export function initialize(registry, application) {
       this.show();
     },
     hide: function() {
-      Ember.$('.modalWindow').slideUp("fast");
+      this.set("modalOpen", false);
     },
     show: function() {
-      Ember.$('.modalWindow').slideDown("fast");
+      this.set("modalOpen", true);
     },
     leftClick: function() {
       if(typeof this.leftButton.callback === 'function') {
