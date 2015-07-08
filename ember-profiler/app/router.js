@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('resources');
   this.route('login');
   this.route('welcome');
+  this.route('settings');
 });
 
 export default Router;

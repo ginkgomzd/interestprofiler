@@ -1,0 +1,43 @@
+.inputWrapper {
+  width: 90%;
+  height: 30px;
+  border: 1px solid #aaa;
+  padding: 0;
+  display: table;
+  margin: 12px auto;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.inputWrapper p {
+  display: table-cell;
+  width: 30px;
+  background: #435C89;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #333;
+  color: #fff;
+}
+.inputWrapper p i {
+  vertical-align: middle;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.inputWrapper input {
+  border: 0;
+  display: table-cell;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 0 5px;
+  vertical-align: middle;
+  height: 100%;
+}
+
+button.formButton {
+  width: 90%;
+  margin: 20px auto;
+}
+
+hr.formHR {
+  width: 90%;
+  text-align: center;
+}
