@@ -21,5 +21,8 @@ export default Ember.Component.extend({
       this.settings.save("ProgressStyle", "");
       return false;
     }
+  },
+  press: function() {
+    this.send("progressToggle");
   }
 });
