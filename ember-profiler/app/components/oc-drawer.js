@@ -5,11 +5,11 @@ export default Ember.Component.extend({
     classNames: ['oc-drawer'],
     classNameBindings: ['open:oc-drawer-open:oc-drawer-closed'],
     open: false,
-    click: function(e) {
+    tap: function() {
         this.set('open', false);
         return true;
     },
-    panLeft: function(e) {
+    panLeft: function() {
         this.hideDrawer();
     },
     hideDrawer: function () {

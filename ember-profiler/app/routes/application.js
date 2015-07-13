@@ -3,18 +3,19 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function () {
 
+    var i, r;
     var questions = questionImportData();
-    for (var i in questions) {
+    for (i in questions) {
       if (Ember.$.isNumeric(questions[i].id)) {
-        var r = this.store.createRecord('question', questions[i]);
+        r = this.store.createRecord('question', questions[i]);
         r.save();
       }
     }
 
     var qoptions = answerOptionImportData();
-    for (var i in qoptions) {
+    for (i in qoptions) {
       if (Ember.$.isNumeric(qoptions[i].id)) {
-        var r = this.store.createRecord('questionOption', qoptions[i]);
+        r = this.store.createRecord('questionOption', qoptions[i]);
         r.save();
       }
     }
