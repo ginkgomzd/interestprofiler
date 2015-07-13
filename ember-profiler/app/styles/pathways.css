@@ -79,7 +79,60 @@ label.checkbox.checked + label.checkmark {
 }
 
 
+.clusterName {
+  padding: 5px;
+  border-radius: 100px;
+  background-color: #0071bc;
+  text-align: center;
+  color: #fff;
+}
+.pathwayTitle {
+  padding: 7px 10px 7px 10px;
+  background-color: #0071bc;
+  font-weight: bold;
+  color: #fff;
+}
+.pathwayDesc {
+  border: 2px solid #0071bc;
+  border-top: none;
+  padding: 5px 5px 5px 10px;
+  font-size: 11pt;
+}
 
+.occupation-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #0071bc;
+  font-size: 10pt;
+  padding-top: 5px;
+}
+
+.red .clusterName, .red .pathwayTitle {
+  background-color: #c1272d;
+}
+.red .pathwayDesc, .red .occupation-list {
+  border-color: #c1272d;
+}
+
+.yellow .clusterName, .yellow .pathwayTitle {
+  background-color: #f7931e;
+}
+.yellow .pathwayDesc, .yellow .occupation-list {
+  border-color: #f7931e;
+}
+
+.occupation-list ul {
+  padding: 0px;
+  margin: 0px;
+}
+.occupation-list li:nth-child(odd) {
+  background-color: #eee;
+  padding: 5px;
+}
+.occupation-list p {
+  margin-bottom: 3px;
+  padding-left: 5px;
+}
 
 .pathway-list li.checked.blue {
   border-color: #0071bc;

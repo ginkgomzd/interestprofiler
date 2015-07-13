@@ -1,18 +1,27 @@
+<div class="full">
+  <div class="pageMessage gray full">
+    You're Exploring...
+    <div class="clusterName">{{model.cluster.name}}</div>
+  </div>
 
-<div class="msgtxt">
-  <h3>You are exploring in cluster, "{{cluster.name}}"</h3>
-</div>
+  <div class="padded">
+    <div class="pathwayTitle">{{model.name}}</div>
+    <div class="pathwayDesc">
+      Lorem Ipsum Pathway Details
+    </div>
 
-<h3>Pathway: {{model.name}}</h3>
-<div class="msgtxt">
-Lorem Ipsum Pathway Details
+    <div class="occupation-list">
+      <p><strong>Occupations</strong></p>
+      <p class="italic smaller">Tap to learn more about these occupations</p>
+      <ul>
+        {{#each occ in model.occupations}}
+        <li {{action "exploreOccupation" occ.id}}>
+          <strong>{{occ.name}}</strong>
+        </li>
+      {{/each}}
+      </ul>
+    </div>
+    <div class="pathwayTitle smaller" {{action "exploreColleges" model.id}}>Explore Colleges Offering This Degree</div>
+    {{outlet}}
+  </div>
 </div>
-
-<div class="occupation-list">
-<ul>{{#each occ in occupations}}
-  <li><h4>{{occ.code}} - {{occ.name}}</h4>
-  <div class="msgtxt">Occupation Details</div>
-</li>
-{{/each}}</ul>
-</div>
-{{outlet}}
