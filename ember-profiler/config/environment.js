@@ -18,11 +18,12 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'self'",
-      'script-src': "'self' https://services.onetcenter.org http://beaker.ginkgostreet.com connect.facebook.net about:",
+      'script-src': "'self' https://services.onetcenter.org beaker.ginkgostreet.com connect.facebook.net",
+      'frame-src': "'self' *.facebook.com",
       'font-src': "'self'",
-      'connect-src': "'self' https://services.onetcenter.org http://beaker.ginkgostreet.com connect.facebook.net",
+      'connect-src': "'self' https://services.onetcenter.org beaker.ginkgostreet.com connect.facebook.net api.parse.com",
       'img-src': "'self'",
-      'style-src': "'self'",
+      'style-src': "'self' 'sha256-CeRQ3vBPrX7ig74XGeawXtXYviQ7pHKsd-iLl8sckN4='",
       'media-src': "'self'"
     },
     parse: {
