@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  beforeModel: function() {
+    if (this.parseAuth.loggedIn) {
+      this.transitionTo("welcome");
+    }
+  },
   actions: {
     loginWithFacebook: function() {
       var that = this;
