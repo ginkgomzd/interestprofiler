@@ -26,6 +26,10 @@ export default Ember.Route.extend({
     this.store.pushMany('alumni', alumniImportData());
   },
     actions: {
+        logout: function() {
+          this.parseAuth.logout();
+          this.transitionTo("login");
+        },
         hideDrawer: function() {
             this.controller.get('drawer').hideDrawer();
         },
