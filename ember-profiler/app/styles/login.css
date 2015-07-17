@@ -1,0 +1,58 @@
+.login-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #435C89;
+  margin: 0px;
+}
+.logo-header{
+  background: #153672;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+.logo-header .logo {
+  border-radius: 200px;
+  height: 75px;
+  width: 75px;
+  background: #ccc;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 75px;
+}
+
+.login-overlay button.clearButton {
+  background-color: transparent;
+  width: 90%;
+  margin: 10px auto;
+  border: 3px solid #fff;
+  min-height: 32px;
+  vertical-align: middle;
+  line-height: 32px;
+
+}
+
+.login-overlay button span.icon {
+  width: 32px;
+  height: 100%;
+  background-position: 50%, 50%;
+  background-repeat: no-repeat;
+  float: left;
+  overflow: visible;
+}
+
+span.icon.facebook {
+  background-image: url(/img/facebook.png);
+}
+span.icon.twitter {
+  background-image: url(/img/twitter.png);
+}
+span.icon.google {
+  background-image: url(/img/google.png);
+}
+span.icon.linkedin {
+  background-image: url(/img/linkedin.png);
+}
