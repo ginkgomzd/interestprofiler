@@ -87,7 +87,9 @@ body {
     top: 0px;
     z-index: 9999;
 }
-
+div.menu-hidden .navbar-flat {
+  display: none;
+}
 
 #menuButton {
   position: fixed;
@@ -106,6 +108,9 @@ body {
 }
 #menuButton:focus {
     outline: 0;
+}
+div.menu-hidden #menuButton {
+  display: none;
 }
 
 #title {
