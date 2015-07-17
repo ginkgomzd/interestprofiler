@@ -8,4 +8,17 @@
   <button {{action "loginWithTwitter"}} class="clearButton"><span class="icon twitter">&nbsp;</span>Login with Twitter</button>
   <button {{action "loginWithGoogle"}} class="clearButton"><span class="icon google">&nbsp;</span>Login with Google</button>
 
+  <div class="login-footer">
+    <input type="email" id="login-email" placeholder="Email" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <input type="password" id="login-password-confirm" placeholder="Confirm Password" />
+    <div id="login-actions">
+      <button class="left slight" {{action "showSignup"}}>Create an Account</button>
+      <button class="right" {{action "doLogin"}}>Login</button>
+    </div>
+    <div id="signup-actions">
+      <button class="left" {{action "cancelSignup"}}>Cancel</button>
+      <button class="right" {{action "doSignup"}}>Signup</button>
+    </div>
+  </div>
 </div>
