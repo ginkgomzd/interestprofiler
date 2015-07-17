@@ -22,7 +22,7 @@ module.exports = function(environment) {
       'frame-src': "'self' *.facebook.com",
       'font-src': "'self'",
       'connect-src': "'self' https://services.onetcenter.org beaker.ginkgostreet.com connect.facebook.net api.parse.com",
-      'img-src': "'self'",
+      'img-src': "'self' data:",
       'style-src': "'self' 'sha256-CeRQ3vBPrX7ig74XGeawXtXYviQ7pHKsd-iLl8sckN4='",
       'media-src': "'self'"
     },
