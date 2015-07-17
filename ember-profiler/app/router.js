@@ -13,6 +13,8 @@ Router.map(function() {
   this.route('select-pathways');
   this.route('pathway', {path: '/pathway/:index'});
   this.route('resources');
+  this.route('login');
+  this.route('welcome');
 });
 
 export default Router;
