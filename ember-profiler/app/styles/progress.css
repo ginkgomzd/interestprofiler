@@ -1,24 +1,13 @@
 .mainProgress {
   width: 35%;
-/*
-  position: fixed;
-  top: 50px;
-  overflow: visible;
-  z-index: 8000;
-  -webkit-transition: top 0.5s ease;
-  -moz-transition: top 0.5s ease;
-  -o-transition: top 0.5s ease;
-  transition: top 0.5s ease;
-
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  */
   padding: 5px 0 0 0;
   margin: 0px;
   line-height: 0px;
   float: right;
 
+  /*This is 3 gradients layered, the bottom one for the "line" through the
+  middle of the progress indicators and the other two to keep it from sticking
+  out past the ends of the first and last indicator*/
   background-image:
   linear-gradient(
     to left,
@@ -42,21 +31,6 @@
     #000000 7px,
     rgba(255, 255, 255, 0) 7px
   );
-}
-div.menu-hidden .mainProgress {
-  display: none;
-}
-.mainContent {
-  -webkit-transition: padding 0.5s ease;
-  -moz-transition: padding 0.5s ease;
-  -o-transition: padding 0.5s ease;
-  transition: padding 0.5s ease;
-}
-.mainContent.condensed {
-  padding-top: 74px;
-}
-.mainProgress.condensed {
-  top: 32px;
 }
 
 .progressSection, .progressSubSection {
