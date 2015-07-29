@@ -4,12 +4,15 @@ export default Ember.Route.extend({
   model: function(params) {
     return this.store.find('question', params.index);
   },
-
+  /*
   setupController: function(controller, model) {
     controller.set('model', model);
     controller.set('progress', (model.id % 20) === 0 ? 20 : model.id % 20);
-    controller.set('questionOptions', this.store.all('questionOption').reverseObjects());
+    controller.set('allQuestionOptions', this.store.all('questionOption'));
+    controller.set('sortingDesc', ['id:desc']);
+    controller.set('questionOptions', Ember.ArrayController.create({);
   },
+  */
 
   actions: {
     saveSelection: function(selectedAnswer) {
