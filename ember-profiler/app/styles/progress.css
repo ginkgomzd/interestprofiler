@@ -1,23 +1,10 @@
 .mainProgress {
-  width: 100%;
+  width: 35%;
+/*
   position: fixed;
   top: 50px;
   overflow: visible;
-  padding: 0px;
-  margin: 0px;
   z-index: 8000;
-  line-height: 0px;
-
-  background-image:
-  linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0),
-    #ffffff 5px,
-    #ffffff 10px,
-    #000000 10px,
-    #435C89 11px
-  );
-
   -webkit-transition: top 0.5s ease;
   -moz-transition: top 0.5s ease;
   -o-transition: top 0.5s ease;
@@ -26,6 +13,35 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  */
+  padding: 5px 0 0 0;
+  margin: 0px;
+  line-height: 0px;
+  float: right;
+
+  background-image:
+  linear-gradient(
+    to left,
+    #153672,
+    #153672 18%,
+    rgba(255, 255, 255, 0) 19%,
+    rgba(255, 255, 255, 0)
+  ),
+  linear-gradient(
+    to right,
+    #153672,
+    #153672 1%,
+    rgba(255, 255, 255, 0) 1%,
+    rgba(255, 255, 255, 0)
+  ),
+  linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 5px,
+    #000000 5px,
+    #000000 7px,
+    rgba(255, 255, 255, 0) 7px
+  );
 }
 div.menu-hidden .mainProgress {
   display: none;
@@ -62,13 +78,14 @@ div.menu-hidden .mainProgress {
   font-size: 8pt;
   clear: both;
   display: block;
-  color: #000;
+  color: #fff;
+  font-weight: normal;
 }
 
 .progressIndicator {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   border: 1.5px solid #000;
   margin: 0px;
   padding: 0px;
