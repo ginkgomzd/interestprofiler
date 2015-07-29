@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('model', model);
     controller.set('progress', (model.id % 20) === 0 ? 20 : model.id % 20);
-    controller.set('questionOptions', this.store.all('questionOption'));
+    controller.set('questionOptions', this.store.all('questionOption').reverseObjects());
   },
 
   actions: {
