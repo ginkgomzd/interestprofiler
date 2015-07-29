@@ -1,13 +1,9 @@
 div.questions h1 {
-    font-size: 22pt;
-    margin-top: 20px;
+    padding-top: 10px;
     clear: both;
 }
 div.answers {
-    padding: 15px;
-    position:absolute;
-    bottom: 0px;
-    left: 0px;
+    padding: 5px 15px 15px 15px;
     width: 100%;
 }
 
