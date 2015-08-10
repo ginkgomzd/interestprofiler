@@ -124,20 +124,22 @@ export default Ember.View.extend({
   /**
    * This function resets swipe center, and also checks to see if
    * velocity is high enough to call it a completed swipe.
-   * 
+   *
    * @param e
    */
   panEnd: function(e) {
-    var delta = 0 - (this.origin - e.originalEvent.gesture.pointers[0].pageX);
-    if(e.originalEvent.gesture.velocityX < -2) {
-      //velocity is high enough to count as a swipe right
-      this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, true);
-    } else if(e.originalEvent.gesture.velocityX > 2) {
-      //velocity is high enough to count as a swipe left
-      this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, false);
-    } else {
-      //transition back to start.
-      this.returnToStart(delta);
+    if(!this.transitioning) {
+      var delta = 0 - (this.origin - e.originalEvent.gesture.pointers[0].pageX);
+      if (e.originalEvent.gesture.velocityX < -2) {
+        //velocity is high enough to count as a swipe right
+        this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, true);
+      } else if (e.originalEvent.gesture.velocityX > 2) {
+        //velocity is high enough to count as a swipe left
+        this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, false);
+      } else {
+        //transition back to start.
+        this.returnToStart(delta);
+      }
     }
     //Reset swipe origin
     this.origin = null;
