@@ -10,6 +10,10 @@ div.loading {
   border: 0px solid #fff;
   border-radius: 10%;
   background: rgba(0,0,0,0.85);
+  background-image: url(/img/loading.gif);
+  background-repeat: no-repeat;
+  background-position: 50% 95%;
+
   color: #fff;
   vertical-align: middle;
   text-align: center;
@@ -30,28 +34,32 @@ div.loading img {
   margin: 0 auto;
 }
 div.fetching div.loading {
-  width: 50%;
-  left: 25%;
-  height: 30%;
-  top: 35%;
+  width: 70%;
+  left: 15%;
+  height: 40%;
+  top: 30%;
   box-shadow: 0px 0px 10px 10px #222;
   border-width: 2px;
 }
 
 dd div.score div.fill {
   width: 0px;
-  -webkit-transition: width 0.9s ease;
-  -moz-transition: width 0.9s ease;
-  -o-transition: width 0.9s ease;
-  transition: width 0.9s ease;
+  -webkit-transition: width 0.9s ease, background-color 0.9s ease;
+  -moz-transition: width 0.9s ease, background-color 0.9s ease;
+  -o-transition: width 0.9s ease, background-color 0.9s ease;
+  transition: width 0.9s ease, background-color 0.9s ease;
 }
 
 
 dt {
   display: inline-block;
   font-size: 125%;
-  font-weight: bold;
-  min-width: 250px;
+  font-weight: normal;
+  text-align: right;
+  width: 45%;
+  padding-right: 15px;
+  margin-left: 15px;
+  box-sizing: border-box;
 }
 
 dd {
@@ -66,23 +74,35 @@ dd:after {
 }
 
 .score, .fill {
-  height: 18px;
-  border-radius: 9px;
+  height: 24px;
+  border-radius: 12px;
 }
 
 dd div.score {
   border: 1px solid #aaa;
   display: inline-block;
-  width: 75%;
+  width: 45%;
+  float: right;
+  margin-right: 15px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 dd div.score div.fill {
-  background: #bae9aa;
+  background: rgb(202, 233, 180);
   height: 100%;
+  width: 0px;
 }
 
 dd div.desc {
   display: none;
+  padding: 15px;
+  background: #ddd;
 }
 
+div.results h2 {
+  margin-left: 15px;
+}
+div.results p {
+  line-height: 1px;
+}
