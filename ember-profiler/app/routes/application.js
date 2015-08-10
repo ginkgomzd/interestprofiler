@@ -45,6 +45,12 @@ export default Ember.Route.extend({
         },
         toggleDrawer: function() {
             this.controller.get('drawer').toggleDrawer();
+        },
+        disableDrawerSwipe: function() {
+          this.controller.set('drawerSwipeEnabled', false);
+        },
+        enableDrawerSwipe: function() {
+          this.controller.set('drawerSwipeEnabled', true);
         }
     }
 });
