@@ -18,7 +18,7 @@ export default Ember.View.extend({
     var that = this;
     //Now animate it to normal size
     alumniImg.animate({textIndent: 100 }, {
-      step: function(now,fx) {
+      step: function(now) {
         var s = now / 100;
         alumniImg.css('transform','scale('+s+', '+s+')');
       },
@@ -37,7 +37,7 @@ export default Ember.View.extend({
   returnToStart: function(start) {
     var alumniImg = this.$('.img-alumni');
     alumniImg.css({textIndent: start }).animate({textIndent: 0 }, {
-        step: function(now,fx) {
+        step: function(now) {
           alumniImg.css('transform','translateX('+now+'px)');
         }, duration:100});
   },
@@ -65,7 +65,7 @@ export default Ember.View.extend({
       speed = 500;
     }
     alumniImg.css({textIndent: start }).animate({textIndent: target }, {
-      step: function(now,fx) {
+      step: function(now) {
         alumniImg.css('transform','translateX('+now+'px)');
       },
       duration:speed, complete: function() {
@@ -87,17 +87,17 @@ export default Ember.View.extend({
       //var delta = e.originalEvent.gesture.deltaX;
       var delta = 0 - (this.origin - e.originalEvent.gesture.pointers[0].pageX);
       var threshold = this.$().width() / 2;
-
+      var opac;
       if (delta < 0) {
         //Swiping Left
-        var opac = (0 - (delta / threshold)).toFixed(2);
+        opac = (0 - (delta / threshold)).toFixed(2);
         this.$().css("background-color", "rgba(255, 0, 0, " + opac + ")");
         if ((delta + threshold) < 0) {
           this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, false);
         }
       } else if (delta > 0) {
         //Swiping Right
-        var opac = (delta / threshold).toFixed(2);
+        opac = (delta / threshold).toFixed(2);
         this.$().css("background-color", "rgba(45, 206, 6, " + opac + ")");
         if (delta >= threshold) {
           this.slideOffScreen(delta, e.originalEvent.gesture.velocityX, true);
@@ -146,7 +146,7 @@ export default Ember.View.extend({
     //reenable drawer
     this.get("controller").send("enableDrawerSwipe");
   },
-  panCancel: function(e) {
+  panCancel: function() {
     //Reset swipe origin
     this.origin = null;
     //reenable drawer
