@@ -1,0 +1,92 @@
+.login-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #435C89;
+  margin: 0px;
+}
+.logo-header{
+  background: #153672;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+.logo-header .logo {
+  border-radius: 200px;
+  height: 75px;
+  width: 75px;
+  background: #ccc;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 75px;
+}
+
+.login-overlay button.clearButton {
+  background-color: transparent;
+  width: 90%;
+  margin: 10px auto;
+  border: 3px solid #fff;
+  min-height: 32px;
+  vertical-align: middle;
+  line-height: 32px;
+
+}
+
+.login-overlay button span.icon {
+  width: 32px;
+  height: 100%;
+  background-position: 50%, 50%;
+  background-repeat: no-repeat;
+  float: left;
+  overflow: visible;
+}
+
+span.icon.facebook {
+  background-image: url(/img/facebook.png);
+}
+span.icon.twitter {
+  background-image: url(/img/twitter.png);
+}
+span.icon.google {
+  background-image: url(/img/google.png);
+}
+span.icon.linkedin {
+  background-image: url(/img/linkedin.png);
+}
+
+.login-footer {
+  background: #153672;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  padding: 15px 0 15px 0;
+  color: #435C89;
+}
+.login-footer input {
+  width: 90%;
+  display: block;
+  margin: 10px 5%;
+  border: 0px;
+  border-bottom: 1px solid #435C89;
+  background: transparent;
+  color: #fff;
+}
+.login-footer input:active, .login-footer input:focus {
+  border: 0px;
+  border-bottom: 1px solid #FFF;
+}
+.login-overlay .login-footer button {
+  border: 2px solid #fff;
+  margin: 3px 10px 3px 10px;
+}
+.login-footer button.slight {
+  border: 0px;
+  font-weight: 300;
+  font-size: 0.8em;
+}
+#signup-actions, #login-password-confirm {
+  display: none;
+}

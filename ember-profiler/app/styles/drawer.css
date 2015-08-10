@@ -47,3 +47,10 @@
 .oc-drawer li a:active {
     text-shadow: 0px 0px 5px #fff;
 }
+
+.oc-drawer li.logout {
+  position: absolute;
+  bottom: 15px;
+  color: #fff;
+  padding-left: 5px;
+}

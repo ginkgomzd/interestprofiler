@@ -25,7 +25,18 @@ export default Ember.Route.extend({
     this.store.pushMany('occupation', occupationImportData());
     this.store.pushMany('alumni', alumniImportData());
   },
+  //This may need to be updated in the future depending on what we do
+  //in regards to pre-loading data
+  beforeModel: function() {
+    if(!this.parseAuth.loggedIn) {
+      this.transitionTo("login");
+    }
+  },
     actions: {
+        logout: function() {
+          this.parseAuth.logout();
+          this.transitionTo("login");
+        },
         hideDrawer: function() {
             this.controller.get('drawer').hideDrawer();
         },

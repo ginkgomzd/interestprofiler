@@ -17,16 +17,21 @@ module.exports = function(environment) {
       // when it is created
     },
     contentSecurityPolicy: {
-      'default-src': "'none'",
-      'script-src': "'self' https://services.onetcenter.org http://beaker.ginkgostreet.com",
+      'default-src': "'self'",
+      'script-src': "'self' https://services.onetcenter.org beaker.ginkgostreet.com connect.facebook.net",
+      'frame-src': "'self' *.facebook.com",
       'font-src': "'self'",
-      'connect-src': "'self' https://services.onetcenter.org http://beaker.ginkgostreet.com",
-      'img-src': "'self'",
-      'style-src': "'self'",
+      'connect-src': "'self' https://services.onetcenter.org beaker.ginkgostreet.com connect.facebook.net api.parse.com",
+      'img-src': "'self' data:",
+      'style-src': "'self' 'sha256-CeRQ3vBPrX7ig74XGeawXtXYviQ7pHKsd-iLl8sckN4='",
       'media-src': "'self'"
+    },
+    parse: {
+      appId: "Fb0w8YZ8IzTKaNtLT7AYNsBNUlR8fAwWKbIvMKwW",
+      javascriptKey: "7FubtodqX5Ew0UWZ1YvFCNt6GP7DdYeL0dkJiI4a",
+      FacebookAppId: "699449926827946"
     }
   };
-
 
 
   if (environment === 'development') {
