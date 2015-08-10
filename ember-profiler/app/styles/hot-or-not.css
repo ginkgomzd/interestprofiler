@@ -1,17 +1,32 @@
-
 div.hot-or-not {
   padding: 0px;
   margin-top: 15px;
   clear: both;
   overflow-x: hidden;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+div.hotOrNotButtons {
+  margin-top: 8px;
+  margin-bottom: 15px;
 }
 
-img.img-alumni {
-  -webkit-transform: scale(1,1);
-  transform: scale(1,1);
+div.hotOrNotButtons div.swipeIndicator {
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  overflow: hidden;
+  font-size: 18px;
 }
 
-img.img-alumni.bounceIn {
-  -webkit-transform: scale(0,0);
-  transform: scale(0,0);
+div.hotOrNotButtons .Dismiss {
+  color: #f00;
+  background: url(/img/dismiss.png) no-repeat 0% 50%;
+  padding-left: 65px;
+}
+
+div.hotOrNotButtons .Save {
+  color: #2DCE06;
+  background: url(/img/save.png) no-repeat 100% 50%;
+  padding-right: 65px;
 }
