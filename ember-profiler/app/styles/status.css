@@ -23,33 +23,43 @@ div.statusMessages .message .messageIcon {
   width: 50px;
   float: left;
   margin-right: 10px;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+  margin-left: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 30pt;
+  text-shadow: 0px 0px 10px #fff;
 }
+
+
 div.statusMessages .message.success {
   border-color: rgba(0, 128, 0, 0.85);
 }
-div.statusMessages .message.success .messageIcon {
-  background-image: url(/img/success.png);
+div.statusMessages .message.success .messageIcon::before {
+  content: "offline_pin";
+  color: rgb(0, 128, 0);
 }
 
 div.statusMessages .message.info {
   border-color: rgba(0, 113, 188, 0.85);
 }
-div.statusMessages .message.info .messageIcon {
-  background-image: url(/img/info.png);
+div.statusMessages .message.info .messageIcon::before {
+  content: "info";
+  color: rgb(0, 113, 188);
 }
 
 div.statusMessages .message.warn {
   border-color: rgba(255, 69, 0, 0.85);
 }
-div.statusMessages .message.warn .messageIcon {
-  background-image: url(/img/warning.png);
+div.statusMessages .message.warn .messageIcon::before {
+  content: "warning";
+  color: rgb(255, 69, 0);
 }
 
 div.statusMessages .message.error {
   border-color: rgba(193, 39, 45, 0.85);
 }
-div.statusMessages .message.error .messageIcon {
-  background-image: url(/img/error.png);
+div.statusMessages .message.error .messageIcon::before {
+  content: "error";
+  color: rgb(193, 39, 45);
 }
