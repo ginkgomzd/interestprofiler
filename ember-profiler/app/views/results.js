@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.View.extend({
   tagName: 'div',
   templateName: 'results',
-
+  classNames: ["full"],
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this, function(){
       this.get("controller").send("updateWidths");

@@ -1,38 +1,42 @@
 div.questions h1 {
-    font-size: 22pt;
-    margin-top: 20px;
+    padding-top: 10px;
     clear: both;
 }
 div.answers {
-    padding: 15px;
-    position:absolute;
-    bottom: 0px;
-    left: 0px;
+    padding: 5px 15px 15px 15px;
     width: 100%;
 }
 
 div.answers .button {
-    width: 100%;
-    color: #fff;
+    width: 95%;
+    color: #000;
     margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 3px 10px 25px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 4px solid #fff;
+    text-align: left;
+    font-weight: normal;
 }
 
 div.answers button.button.answer5 {
-    background-color: #2DCE06;
+    color: #2DCE06;
+    border-color: #2DCE06;
 }
 div.answers button.button.answer4 {
-    background-color: #95e682;
+    color: #2DCE06;
+    border-color: #95e682;
 }
 div.answers button.button.answer3 {
-    background-color: #aaa;
+    color: #888;
+    border-color: #aaa;
 }
 div.answers button.button.answer2 {
-    background-color: #ff7f7f;
+    color: #f00;
+    border-color: #ff7f7f;
 }
 div.answers button.button.answer1 {
-    background-color: #f00;
+    color: #f00;
+    border-color: #f00;
 }
 
 .quizProgress {
@@ -65,7 +69,7 @@ div.answers button.button.answer1 {
 }
 
 .sectionComplete {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 0px;
   width: 100%;

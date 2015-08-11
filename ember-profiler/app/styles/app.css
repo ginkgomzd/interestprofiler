@@ -54,7 +54,7 @@ body {
 }
 .mainContent {
   /*  This makes the various pieces relatively space, start below the fixed header */
-  padding-top: 92px;
+  padding-top: 74px;
 }
 .mainContent>div {
     margin-left: 15px;
