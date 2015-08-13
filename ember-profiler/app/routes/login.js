@@ -61,6 +61,7 @@ export default Ember.Route.extend({
         this.parseAuth.passwordReset(Ember.$("#login-email").val(), {
           success: function () {
             that.status.success("An email with reset instructions has been sent to '" + Ember.$("#login-email").val() + "'");
+            that.send("cancelReset");
           },
           error: function (error) {
             that.status.error(error.message);
