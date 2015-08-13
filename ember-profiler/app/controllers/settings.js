@@ -1,13 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  attributes: ["email", "firstName", "lastName", "age", "location", "education"],
   user: function() {
-    return this.settings.user;
-  }.property("settings.user"),
+    var user = {};
+    for (var i in this.attributes) {
+      user[this.attributes[i]] = this.parseAuth.user.get(this.attributes[i]);
+    }
+    return user;
+  }.property("parseAuth.user"),
   actions: {
     saveUser: function() {
-      this.settings.save("user", this.get("user"));
-      this.status.success("Changes Saved");
+      var user = this.get("user");
+      for (var i in this.attributes) {
+        this.parseAuth.user.set(this.attributes[i], user[this.attributes[i]]);
+      }
+      var that = this;
+      this.parseAuth.user.save(null, {
+        success: function() {
+          that.status.success("Changes Saved");
+        },
+        error: function(error) {
+          that.status.error(error.message);
+        }
+      });
     }
   }
 });
