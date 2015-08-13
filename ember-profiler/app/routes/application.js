@@ -24,7 +24,6 @@ export default Ember.Route.extend({
     this.store.pushMany('pathway', pathwayImportData());
     this.store.pushMany('occupation', occupationImportData());
     this.store.pushMany('alumni', alumniImportData());
-    this.settings.save("user", {first: "John", last: "Doe", email: "jdoe@ccc-example.edu", age: 22, education: "GDE", location: "San Diego"});
   },
   //This may need to be updated in the future depending on what we do
   //in regards to pre-loading data
