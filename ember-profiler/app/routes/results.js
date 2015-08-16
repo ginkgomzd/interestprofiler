@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         oldAnswerString !== answerString)
       {
         this.controllerFor("results").set("fetching", true);
-        dataUtils().fetchProfilerResults(answerString, this);
+        dataUtils().updateAllResults(answerString, this);
       }
 
       return this.store.find('scoreArea');

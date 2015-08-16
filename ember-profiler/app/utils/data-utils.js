@@ -33,6 +33,38 @@ export default function dateUtil() {
           route.controllerFor("results").set("fetching", false);
         }, 2000);
       });
+    },
+    fetchCareerResults: function(answerString, route) {
+      //This section fetches the career scores.
+      onet.interestProfiler.careers(answerString).then(function (data) {
+        data.forEach(function (item) {
+
+          //todo: verify that item._fit doesn't fall out of scope when the promise is resovled
+          route.store.find('occupation', {code: item.code}).then(function(record) {
+            var score;
+            switch(item._fit) {
+              case 'Good':
+                score = 1;
+                break;
+              case 'Great':
+                score = 2;
+                break;
+              case 'Best':
+                score = 3;
+                break;
+            }
+            console.log(score);
+            record.set("score", score);
+            record.save();
+          });
+
+        });
+      });
+    },
+
+    updateAllResults: function(answerString, route) {
+      this.fetchProfilerResults(answerString, route);
+      this.fetchCareerResults(answerString, route);
     }
   };
 }
