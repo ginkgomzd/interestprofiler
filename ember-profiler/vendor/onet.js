@@ -28,7 +28,23 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
         });
       },
       jobZones: function() {},
-      careers: function() {}
+      /**
+       * Fetch Career match scores from the interest profiler API
+       * See: https://services.onetcenter.org/reference/mnm#ip_careers
+       *
+       * @param answerString
+       * @returns {Promise} - resolves to json obj
+       */
+      careers: function(answerString) {
+        return new Promise(function(resolve, reject) {
+          //https://services.onetcenter.org/ws/mnm/interestprofiler/careers
+          ajax(onetBaseUrl + '/ws/mnm/interestprofiler/careers?answers=' + answerString).then(function(result) {
+            var x2js = new X2JS();
+            var jsObj = x2js.xml_str2json(result);
+            resolve(jsObj.careers.career);
+          });
+        });
+      }
     },
     careers: {
       all: function() {},
