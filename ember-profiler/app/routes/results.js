@@ -15,8 +15,7 @@ export default Ember.Route.extend({
       {
         this.controllerFor("results").set("fetching", true);
         var that = this;
-        this.get("dataUtils").updateAllResults(answerString, this.store).then(function(result) {
-          console.log("All");
+        this.get("dataUtils").updateAllResults(answerString).then(function(result) {
           that.controllerFor("results").set("fetching", false);
         });
       }

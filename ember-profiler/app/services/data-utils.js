@@ -71,13 +71,12 @@ var dataUtils = Ember.Object.extend({
     });
   },
 
-  updateAllResults: function(answerString, store) {
+  updateAllResults: function(answerString) {
     var that = this;
-    console.log(this.store);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
-        results: that.updateProfilerResults(answerString, store),
-        careers: that.updateCareerResults(answerString, store)
+        results: that.updateProfilerResults(answerString),
+        careers: that.updateCareerResults(answerString)
       };
 
       Ember.RSVP.hash(promises).then(function (hash) {
