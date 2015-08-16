@@ -4,5 +4,6 @@ export default DS.Model.extend({
   code: DS.attr('string'),
   pathway: DS.belongsTo('pathway'),
   cluster: DS.belongsTo('cluster'),
-  name: DS.attr('string')
+  name: DS.attr('string'),
+  score: DS.attr('number')
 });
