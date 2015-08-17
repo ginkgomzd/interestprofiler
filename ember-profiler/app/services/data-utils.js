@@ -11,10 +11,10 @@ var dataUtils = Ember.Object.extend({
       answerString += item.get('selection');
     });
     //This pads the answer string with 3's to 60 characters in length
-    //return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
+    return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
 
     //This is left here because it results in better "sample data" for testing
-    return String(answerString + "333421321134342523523523254555312111351145453111211151311411").slice(0, 60);
+    //return String(answerString + "333421321134342523523523254555312111351145453111211151311411").slice(0, 60);
   },
 
   updateProfilerResults: function (answerString) {
@@ -94,9 +94,7 @@ var dataUtils = Ember.Object.extend({
 
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
-    console.log(oldAnswerString);
     var answerString = this.concatAnswerString();
-    console.log(answerString);
     var scores = this.get("store").all('scoreArea');
 
     return (scores.get("length") === 0 ||
