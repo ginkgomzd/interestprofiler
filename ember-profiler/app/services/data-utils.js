@@ -40,35 +40,49 @@ var dataUtils = Ember.Object.extend({
   },
   updateCareerResults: function(answerString) {
     //This section fetches the career scores.
-    var store = this.get("store");
+    var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       onet.interestProfiler.careers(answerString).then(function (data) {
+          var promises = [];
           data.forEach(function (item) {
-
-            //todo: verify that item._fit doesn't fall out of scope when the promise is resovled
-            store.find('occupation', {code: item.code}).then(function (record) {
-              var score;
-              switch (item._fit) {
-                case 'Good':
-                  score = 1;
-                  break;
-                case 'Great':
-                  score = 2;
-                  break;
-                case 'Best':
-                  score = 3;
-                  break;
-              }
-              console.log(score);
-              record.set("score", score);
-              record.save();
-            });
+            //Add each of these lookups to a promise hash so that it
+            // doesn't resolve until all updates are complete
+            promises.push(that.updateCareer(item));
           });
-          resolve();
+          Ember.RSVP.hash(promises).then(function(hash) {
+              resolve();
+            },
+            function(reason) {
+              reject(reason);
+            }
+          );
+
         },
         function(error) {
           reject(error);
         });
+    });
+  },
+  updateCareer: function(item) {
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.find('occupation', {code: item.code}).then(function (record) {
+        var score;
+        switch (item._fit) {
+          case 'Good':
+            score = 1;
+            break;
+          case 'Great':
+            score = 2;
+            break;
+          case 'Best':
+            score = 3;
+            break;
+        }
+        record.set("score", score);
+        record.save();
+        resolve(record);
+      });
     });
   },
 
@@ -82,6 +96,7 @@ var dataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
+        //todo: Move this to the user object so that it is automagically stored in the cloud
         that.get("settings").save("CalculatedAnswers", answerString);
         resolve();
       }, function (reason) {
