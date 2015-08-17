@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import onet from 'onet';
 
-var dataUtils = Ember.Object.extend({
+var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   concatAnswerString: function ()
@@ -104,4 +104,4 @@ var dataUtils = Ember.Object.extend({
 
 });
 
-export default dataUtils;
+export default profilerDataUtils;
