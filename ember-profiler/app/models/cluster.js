@@ -5,8 +5,6 @@ export default DS.Model.extend({
   pathways: DS.hasMany('pathway'),
   occupations: DS.hasMany('occupation'),
   is_selected: DS.attr('boolean', {defaultValue: false}),
-  //todo: Should this be calculated off the pathway or the occupations?
-  //Should the cluster be tied directly to occupations at all?
   score: function() {
     var pathways = this.get("pathways");
     return pathways.reduce(function(previousValue, pathway){
