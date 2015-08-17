@@ -69,7 +69,7 @@ var dataUtils = Ember.Object.extend({
         });
     });
   },
-  
+
   updateAllResults: function() {
     var that = this;
     var answerString = this.concatAnswerString();
@@ -93,8 +93,10 @@ var dataUtils = Ember.Object.extend({
   },
 
   dirtyAnswers: function() {
-    var oldAnswerString = this.settings.CalculatedAnswers;
+    var oldAnswerString = this.get("settings").CalculatedAnswers;
+    console.log(oldAnswerString);
     var answerString = this.concatAnswerString();
+    console.log(answerString);
     var scores = this.get("store").all('scoreArea');
 
     return (scores.get("length") === 0 ||
