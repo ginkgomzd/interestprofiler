@@ -23,9 +23,9 @@ export default Ember.Controller.extend({
     navigateNext: function() {
       var next = 1 + parseInt(this.model.get('id'));
       if (next <= 2) {
-        this.transitionTo('alumni', next);
+        this.transitionToRoute('alumni', next);
       } else {
-        this.transitionTo('select-clusters');
+        this.transitionToRoute('select-clusters');
       }
     },
 

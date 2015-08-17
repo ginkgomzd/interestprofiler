@@ -1,0 +1,32 @@
+div.hot-or-not {
+  padding: 0px;
+  margin-top: 15px;
+  clear: both;
+  overflow-x: hidden;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+div.hotOrNotButtons {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+div.hotOrNotButtons div.swipeIndicator {
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  overflow: hidden;
+  font-size: 18px;
+}
+
+div.hotOrNotButtons .Dismiss {
+  color: #f00;
+  background: url(/img/dismiss.png) no-repeat 0% 50%;
+  padding-left: 65px;
+}
+
+div.hotOrNotButtons .Save {
+  color: #2DCE06;
+  background: url(/img/save.png) no-repeat 100% 50%;
+  padding-right: 65px;
+}
