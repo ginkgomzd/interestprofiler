@@ -4,6 +4,7 @@ import onet from 'onet';
 var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
+  parseAuth: Ember.inject.service('parse-auth'),
   concatAnswerString: function (unpadded)
   {
     var answerString = "";
@@ -91,18 +92,22 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-
         that.get("settings").set("fetchingResults", false);
-
-        //todo: Move this to the user object so that it is automagically stored in the cloud
         that.get("settings").save("CalculatedAnswers", answerString);
-
+        //This saves the current user answer string to Parse
+        that.saveUserAnswers();
         resolve(hash);
       }, function (reason) {
         //Failed to update all
         reject(reason);
       });
     });
+  },
+
+  saveUserAnswers: function() {
+    var answerString = this.concatAnswerString(true);
+    this.get("parseAuth").user.set("answers", answerString);
+    this.get("parseAuth").user.save();
   },
 
   dirtyAnswers: function() {
