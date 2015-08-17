@@ -1,0 +1,55 @@
+.inputWrapper {
+  width: 90%;
+  height: 30px;
+  border: 1px solid #aaa;
+  padding: 0;
+  display: table;
+  margin: 12px auto;
+  border-radius: 50px;
+}
+
+.inputWrapper p {
+  display: table-cell;
+  width: 44px;
+  background: #435C89;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999;
+  color: #fff;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding-left: 4px;
+  padding-top: 2px;
+}
+.inputWrapper p i {
+  vertical-align: middle;
+  line-height: 100%;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.inputWrapper input {
+  border: 0;
+  display: table-cell;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 0 5px;
+  vertical-align: middle;
+  height: 100%;
+  border: 1px solid transparent;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.inputWrapper input:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+button.formButton {
+  width: 90%;
+  margin: 20px auto;
+}
+
+hr.formHR {
+  width: 90%;
+  text-align: center;
+}
