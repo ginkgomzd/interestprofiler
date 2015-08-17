@@ -4,12 +4,17 @@ import onet from 'onet';
 var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
-  concatAnswerString: function ()
+  concatAnswerString: function (unpadded)
   {
     var answerString = "";
     this.get("store").all('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
+
+    if (unpadded === true) {
+      return answerString;
+    }
+
     //This pads the answer string with 3's to 60 characters in length
     return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
 
