@@ -5,11 +5,7 @@ export default Ember.Route.extend({
     model: function() {
 
       if (this.get("profilerDataUtils").dirtyAnswers()) {
-        this.controllerFor("results").set("fetching", true);
-        var that = this;
-        this.get("profilerDataUtils").updateAllResults().then(function(result) {
-          that.controllerFor("results").set("fetching", false);
-        });
+        this.get("profilerDataUtils").updateAllResults();
       }
 
       return this.store.find('scoreArea');
