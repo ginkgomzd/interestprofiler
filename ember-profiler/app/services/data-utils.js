@@ -4,10 +4,10 @@ import onet from 'onet';
 var dataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
-  concatAnswerString: function (store)
+  concatAnswerString: function ()
   {
     var answerString = "";
-    store.all('answer').forEach(function (item) {
+    this.get("store").all('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
     //This pads the answer string with 3's to 60 characters in length
@@ -50,7 +50,7 @@ var dataUtils = Ember.Object.extend({
             promises.push(that.updateCareer(item));
           });
           Ember.RSVP.hash(promises).then(function(hash) {
-              resolve();
+              resolve(hash);
             },
             function(reason) {
               reject(reason);
@@ -80,14 +80,18 @@ var dataUtils = Ember.Object.extend({
             break;
         }
         record.set("score", score);
-        record.save();
-        resolve(record);
+        if (record.save()) {
+          resolve(record);
+        } else {
+          reject(record);
+        }
       });
     });
   },
 
   updateAllResults: function(answerString) {
     var that = this;
+    var answerString = this.concatAnswerString();
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -97,14 +101,26 @@ var dataUtils = Ember.Object.extend({
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
         //todo: Move this to the user object so that it is automagically stored in the cloud
+
         that.get("settings").save("CalculatedAnswers", answerString);
-        resolve();
+        resolve(hash);
       }, function (reason) {
         //Failed to update all
         reject(reason);
       });
     });
+  },
+
+  dirtyAnswers: function() {
+    var oldAnswerString = this.settings.CalculatedAnswers;
+    var answerString = this.concatAnswerString();
+    var scores = this.get("store").all('scoreArea');
+
+    return (scores.get("length") === 0 ||
+      !oldAnswerString ||
+      oldAnswerString !== answerString)
   }
+
 });
 
 export default dataUtils;
