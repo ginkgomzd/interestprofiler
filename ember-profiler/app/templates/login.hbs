@@ -13,12 +13,18 @@
     <input type="password" id="login-password" placeholder="Password" />
     <input type="password" id="login-password-confirm" placeholder="Confirm Password" />
     <div id="login-actions">
-      <button class="left slight" {{action "showSignup"}}>Create an Account</button>
       <button class="right" {{action "doLogin"}}>Login</button>
+      <button class="left slight" {{action "showSignup"}}>Create an Account</button>
+      <br />
+      <button class="left slight" {{action "showReset"}}>Forgot Password</button>
     </div>
     <div id="signup-actions">
       <button class="left" {{action "cancelSignup"}}>Cancel</button>
       <button class="right" {{action "doSignup"}}>Signup</button>
+    </div>
+    <div id="reset-actions">
+      <button class="left" {{action "cancelReset"}}>Cancel</button>
+      <button class="right" {{action "doReset"}}>Reset Password</button>
     </div>
   </div>
 </div>

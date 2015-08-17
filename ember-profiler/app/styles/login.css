@@ -86,7 +86,12 @@ span.icon.linkedin {
   border: 0px;
   font-weight: 300;
   font-size: 0.8em;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
-#signup-actions, #login-password-confirm {
+#login-actions {
+  padding-top: 15px;
+}
+#signup-actions, #login-password-confirm, #reset-actions {
   display: none;
 }
