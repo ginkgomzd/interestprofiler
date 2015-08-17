@@ -11,7 +11,10 @@ var dataUtils = Ember.Object.extend({
       answerString += item.get('selection');
     });
     //This pads the answer string with 3's to 60 characters in length
-    return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
+    //return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
+
+    //This is left here because it results in better "sample data" for testing
+    return String(answerString + "333421321134342523523523254555312111351145453111211151311411").slice(0, 60);
   },
 
   updateProfilerResults: function (answerString) {
@@ -24,14 +27,13 @@ var dataUtils = Ember.Object.extend({
             if (r === null) {
               r = store.createRecord('scoreArea', item);
             }
-
             r.set("area", item.area);
             r.set("score", item.score);
             r.set("desc", item.desc);
             r.save();
 
           });
-          resolve();
+          resolve(data);
         },
         function(error) {
           reject(error);
@@ -40,56 +42,35 @@ var dataUtils = Ember.Object.extend({
   },
   updateCareerResults: function(answerString) {
     //This section fetches the career scores.
-    var that = this;
+    var store = this.get("store");
     return new Ember.RSVP.Promise(function(resolve, reject) {
       onet.interestProfiler.careers(answerString).then(function (data) {
-          var promises = [];
           data.forEach(function (item) {
-            //Add each of these lookups to a promise hash so that it
-            // doesn't resolve until all updates are complete
-            promises.push(that.updateCareer(item));
-          });
-          Ember.RSVP.hash(promises).then(function(hash) {
-              resolve(hash);
-            },
-            function(reason) {
-              reject(reason);
+            var record = store.getById("occupation", item.code);
+            var score;
+            switch (item._fit) {
+              case 'Good':
+                score = 1;
+                break;
+              case 'Great':
+                score = 2;
+                break;
+              case 'Best':
+                score = 3;
+                break;
             }
-          );
-
+            record.set("score", score);
+            record.save();
+          });
+          resolve(data);
         },
         function(error) {
           reject(error);
         });
     });
   },
-  updateCareer: function(item) {
-    var store = this.get("store");
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      store.find('occupation', {code: item.code}).then(function (record) {
-        var score;
-        switch (item._fit) {
-          case 'Good':
-            score = 1;
-            break;
-          case 'Great':
-            score = 2;
-            break;
-          case 'Best':
-            score = 3;
-            break;
-        }
-        record.set("score", score);
-        if (record.save()) {
-          resolve(record);
-        } else {
-          reject(record);
-        }
-      });
-    });
-  },
-
-  updateAllResults: function(answerString) {
+  
+  updateAllResults: function() {
     var that = this;
     var answerString = this.concatAnswerString();
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -118,7 +99,7 @@ var dataUtils = Ember.Object.extend({
 
     return (scores.get("length") === 0 ||
       !oldAnswerString ||
-      oldAnswerString !== answerString)
+      oldAnswerString !== answerString);
   }
 
 });
