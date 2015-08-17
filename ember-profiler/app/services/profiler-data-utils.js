@@ -47,20 +47,24 @@ var profilerDataUtils = Ember.Object.extend({
       onet.interestProfiler.careers(answerString).then(function (data) {
           data.forEach(function (item) {
             var record = store.getById("occupation", item.code);
-            var score;
-            switch (item._fit) {
-              case 'Good':
-                score = 1;
-                break;
-              case 'Great':
-                score = 2;
-                break;
-              case 'Best':
-                score = 3;
-                break;
+            if (record !== null) {
+              var score;
+              switch (item._fit) {
+                case 'Good':
+                  score = 1;
+                  break;
+                case 'Great':
+                  score = 2;
+                  break;
+                case 'Best':
+                  score = 3;
+                  break;
+              }
+              record.set("score", score);
+              record.save();
+            } else {
+              //That Career isn't in the database.
             }
-            record.set("score", score);
-            record.save();
           });
           resolve(data);
         },
