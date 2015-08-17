@@ -40,11 +40,11 @@ export function initialize(registry, application) {
     }
   });
 
-  application.register('settings:main', Settings);
-  application.inject('route', 'settings', 'settings:main');
-  application.inject('controller', 'settings', 'settings:main');
-  application.inject('view', 'settings', 'settings:main');
-  application.inject('component', 'settings', 'settings:main');
+  application.register('service:settings', Settings);
+  application.inject('route', 'settings', 'service:settings');
+  application.inject('controller', 'settings', 'service:settings');
+  application.inject('view', 'settings', 'service:settings');
+  application.inject('component', 'settings', 'service:settings');
 }
 export default {
   name: 'settings',

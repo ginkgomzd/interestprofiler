@@ -3,6 +3,7 @@ import onet from 'onet';
 
 var dataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
+  settings: Ember.inject.service('settings'),
   concatAnswerString: function (store)
   {
     var answerString = "";
@@ -81,7 +82,7 @@ var dataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        //route.settings.save("CalculatedAnswers", answerString);
+        that.get("settings").save("CalculatedAnswers", answerString);
         resolve();
       }, function (reason) {
         //Failed to update all
