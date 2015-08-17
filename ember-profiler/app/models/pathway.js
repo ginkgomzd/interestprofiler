@@ -7,8 +7,16 @@ export default DS.Model.extend({
   bookmarked: DS.attr('boolean', {defaultValue: false}),
   score: function() {
     var occupations = this.get("occupations");
-    return occupations.reduce(function(previousValue, occupation){
-      return previousValue + occupation.get("score");
-    }, 0);
+    var scores =  occupations.reduce(function(previousValues, occupation){
+      var score = occupation.get("score");
+      return {
+        squares: previousValues.squares + (score * score),
+        weights: previousValues.weights + score
+      };
+    }, {squares: 0, weights: 0});
+
+    if (scores.weights === 0) {return 0;}
+
+    return (scores.squares / scores.weights);
   }.property("occupations.@each.score")
 });
