@@ -3,7 +3,7 @@ export default {
   after: 'setup',
   initialize: function(instance) {
     // code
-    var Settings = instance.container.lookup("settings:main");
+    var Settings = instance.container.lookup("service:settings");
     Settings.setStore(instance.container.lookup("store:main"));
   }
 };

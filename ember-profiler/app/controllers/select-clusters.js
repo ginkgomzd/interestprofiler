@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   actions: {
     saveSelection: function() {
       if (this.get("selected").get("length") === 3) {
-        this.transitionTo('select-pathways');
+        this.transitionToRoute('select-pathways');
       } else {
         if (this.get("selected").get("length") > 3 ) {
           this.modal.alert("You may only select 3 clusters");
