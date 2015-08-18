@@ -16,12 +16,12 @@
   color: #0071bc;
 }
 .pathways-selected-clusters li:nth-child(2) {
-  border-color: #f7931e;
-  color: #f7931e;
-}
-.pathways-selected-clusters li:nth-child(3) {
   border-color: #c1272d;
   color: #c1272d;
+}
+.pathways-selected-clusters li:nth-child(3) {
+  border-color: #f7931e;
+  color: #f7931e;
 }
 
 .pathway-list {

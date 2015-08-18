@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
-  sortingDesc: ['bookmarked:desc', 'name:asc'],
+  sortingDesc: ['bookmarked:desc', 'score:desc', 'name:asc'],
   pathwaysList: function() {
     var pathways = Ember.A();
     this.get('model').forEach(function(item) {

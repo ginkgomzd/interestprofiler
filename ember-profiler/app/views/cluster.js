@@ -3,6 +3,11 @@ import Ember from 'ember';
 export default Ember.View.extend({
   tagName: 'li',
   templateName: 'cluster',
+  classNameBindings: ['numberOfDots'],
+  numberOfDots: Ember.computed(function() {
+    var names = ["zero", "one", "two", "three", "four"];
+    return names[ Math.round((this.cluster.get("score") / 3) * 4) ] + "Dots";
+  }),
   didInsertElement: function() {
     if (this.cluster.get("id") === this.get('controller').toggling) {
       this.get('controller').set("toggling", null);

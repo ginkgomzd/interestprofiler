@@ -77,6 +77,7 @@ var profilerDataUtils = Ember.Object.extend({
   updateAllResults: function() {
     var that = this;
     var answerString = this.concatAnswerString();
+    this.get("settings").set("fetchingResults", true);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -85,9 +86,12 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        //todo: Move this to the user object so that it is automagically stored in the cloud
 
+        that.get("settings").set("fetchingResults", false);
+
+        //todo: Move this to the user object so that it is automagically stored in the cloud
         that.get("settings").save("CalculatedAnswers", answerString);
+
         resolve(hash);
       }, function (reason) {
         //Failed to update all

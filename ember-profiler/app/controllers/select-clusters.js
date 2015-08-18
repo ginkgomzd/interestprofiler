@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(Ember.SortableMixin, {
+  sortProperties: ['score'],
+  sortAscending: false,
   selected: function() {
-    return this.get('model').filterProperty('is_selected', true);
-  }.property('model.@each.is_selected'),
+    return this.get('arrangedContent').filterProperty('is_selected', true);
+  }.property('model.@each.is_selected', 'model.@each.score'),
   unselected: function() {
-    return this.get('model').filterProperty('is_selected', false);
-  }.property('model.@each.is_selected'),
+    return this.get('arrangedContent').filterProperty('is_selected', false);
+  }.property('model.@each.is_selected', 'model.@each.score'),
 
   actions: {
     saveSelection: function() {
