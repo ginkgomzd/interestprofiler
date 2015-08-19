@@ -110,6 +110,24 @@ var profilerDataUtils = Ember.Object.extend({
     this.get("parseAuth").user.save();
   },
 
+  backfillUserAnswers: function() {
+    var answers = this.get("parseAuth").user.get("answers");
+    var store = this.get("store");
+    var i = 0;
+    while (i <= answers.length - 1) {
+      var index = i + 1;
+      var record = store.getById("answer", index);
+      if (record === null) {
+        record = store.createRecord("answer", {id: index, question: store.getById("question", index), selection: answers[i]});
+      } else {
+        record.set("question", index);
+        record.set("selection", answers[i]);
+      }
+      record.save();
+      i++;
+    }
+  },
+
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
     var answerString = this.concatAnswerString();
