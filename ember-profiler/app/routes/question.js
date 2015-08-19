@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   model: function(params) {
     return this.store.find('question', params.index);
   },
@@ -19,6 +20,18 @@ export default Ember.Route.extend({
         record.set("selection", answer.selection);
       }
       record.save();
+
+      //Save the selected answer to Parse
+      var answerString = this.parseAuth.user.get("answers");
+      if (answerString.length > answer.id) {
+        answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+      } else if (answerString.length === answer.id - 1) {
+        answerString = answerString + answer.selection;
+      } else {
+        answerString = this.get("profilerDataUtils").concatAnswerString(true);
+      }
+      this.parseAuth.user.set("answers", answerString);
+
       if(answer.id % 20 === 0) {
         this.send('sectionComplete');
       } else {
