@@ -4,6 +4,23 @@ export default Ember.Component.extend({
   tagName: 'ul',
   classNames: ['oc-drawer'],
   classNameBindings: ['open:oc-drawer-open:oc-drawer-closed'],
+  quizPrefix: function() {
+
+    if (this.settings.answers === undefined || this.settings.answers === null) {
+      this.settings.set("answers", this.parseAuth.user.get("answers"));
+    }
+
+    if (this.settings.answers.length === 60) {
+      return "Retake ";
+    }
+
+    if (this.settings.answers.length < 60) {
+      return "Resume ";
+    }
+
+
+    return "Take ";
+  }.property("settings.answers"),
   open: false,
   tap: function() {
     this.set('open', false);
