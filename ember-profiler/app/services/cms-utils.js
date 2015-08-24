@@ -11,14 +11,30 @@ var cmsUtils = Ember.Object.extend({
       return 'http://here2career.beaker.ginkgostreet.com';
     }
   },
+  fetchAlumniImage: function(url, id) {
+
+  },
   updateAlumniContent: function(lastUpdated) {
+    var store = this.get("store");
     var url = this.baseUrl() + "/api/alumni?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      ajax(url).then(function (result) {
-        //This is wrapped in a promise in case we want to insert it directly
-        //before resolving the promise. If we decide we don't care, and want
-        //to insert elsewhere, we can return the ajax promise directly.
-        resolve(result);
+      ajax(url).then(function (results) {
+
+        results.forEach(function(alum) {
+          var r = store.getById("alumni", alum.id);
+          if(typeof r === undefined || r === null) {
+            r = store.createRecord("alumni", alum);
+          } else {
+            r.eachAttribute(function(name, meta) {
+              if (alum.hasOwnProperty(name)) {
+                r.set(name, alum[name]);
+              }
+            });
+          }
+          r.save();
+        });
+
+        resolve(results);
 
       }, function(error) {
         reject(error);
