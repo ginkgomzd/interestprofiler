@@ -28,13 +28,18 @@ function occupationImportData() {
 
 
 var setupService = Ember.Object.extend({
+  staticDate: "2015-08-23",
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  cmsUtils: Ember.inject.service('cmsUtils'),
   checkForUpdates: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      resolve();
-    });
+    //Calculate the last updated date
+    var lastUpdated = this.get("settings").get("lastUpdatedDate");
+    if (!lastUpdated) {
+      lastUpdated = this.get("staticDate");
+    }
+    return this.get("cmsUtils").updateAll(lastUpdated);
   },
   staticQuestions: function() {
     var questions = questionImportData();
@@ -79,6 +84,8 @@ var setupService = Ember.Object.extend({
 
       Ember.RSVP.hash(staticPromises).then(function() {
         setup.checkForUpdates().then(function() {
+          var today = new Date();
+          setup.get("settings").set("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
           setup.get("profilerDataUtils").verifyLocalAnswers();
           resolve();
         });
