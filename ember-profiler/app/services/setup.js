@@ -38,21 +38,19 @@ var setupService = Ember.Object.extend({
   },
   staticQuestions: function() {
     var questions = questionImportData();
-    for (var i in questions) {
-      if (Ember.$.isNumeric(questions[i].id)) {
-        var r = this.get("store").createRecord('question', questions[i]);
-        r.save();
-      }
-    }
+    var store = this.get("store");
+    questions.forEach(function (question) {
+      var r = store.createRecord('question', question);
+      r.save();
+    });
   },
   staticQuestionOptions: function() {
+    var store = this.get("store");
     var qoptions = answerOptionImportData();
-    for (var i in qoptions) {
-      if (Ember.$.isNumeric(qoptions[i].id)) {
-        var r = this.get("store").createRecord('questionOption', qoptions[i]);
-        r.save();
-      }
-    }
+    qoptions.forEach(function (option) {
+      var r = store.createRecord('questionOption', option);
+      r.save();
+    });
   },
   staticClusters: function() {
     this.get("store").pushMany('cluster', clusterImportData());
