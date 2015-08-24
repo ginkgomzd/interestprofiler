@@ -30,6 +30,7 @@ function occupationImportData() {
 var setupService = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
+  profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   checkForUpdates: function() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       resolve();
@@ -80,6 +81,7 @@ var setupService = Ember.Object.extend({
 
       Ember.RSVP.hash(staticPromises).then(function() {
         setup.checkForUpdates().then(function() {
+          setup.get("profilerDataUtils").verifyLocalAnswers();
           resolve();
         });
       });

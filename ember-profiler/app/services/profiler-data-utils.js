@@ -127,6 +127,16 @@ var profilerDataUtils = Ember.Object.extend({
       i++;
     }
   },
+  verifyLocalAnswers: function() {
+    var parseAnswerString = this.get("parseAuth").user.get("answers");
+    var localAnswerString = this.concatAnswerString(true);
+
+    if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
+      this.backfillUserAnswers();
+      return true;
+    }
+    return false;
+  },
 
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;

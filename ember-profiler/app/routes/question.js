@@ -3,19 +3,12 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   model: function(params) {
+
     if (params.index == 0) { // jshint ignore:line
-      var parseAnswerString = this.parseAuth.user.get("answers");
       var localAnswerString = this.get("profilerDataUtils").concatAnswerString(true);
-
-      if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-        this.get("profilerDataUtils").backfillUserAnswers();
-        return this.transitionTo('question', parseAnswerString.length + 1);
-      }
-
       if (localAnswerString.length > 0) {
         return this.transitionTo('question', localAnswerString.length + 1);
       }
-
       return this.transitionTo('question', 1);
     }
 
