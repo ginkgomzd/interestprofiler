@@ -31,35 +31,58 @@ var setupService = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   checkForUpdates: function() {
-
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      resolve();
+    });
+  },
+  staticQuestions: function() {
+    var questions = questionImportData();
+    for (var i in questions) {
+      if (Ember.$.isNumeric(questions[i].id)) {
+        var r = this.get("store").createRecord('question', questions[i]);
+        r.save();
+      }
+    }
+  },
+  staticQuestionOptions: function() {
+    var qoptions = answerOptionImportData();
+    for (var i in qoptions) {
+      if (Ember.$.isNumeric(qoptions[i].id)) {
+        var r = this.get("store").createRecord('questionOption', qoptions[i]);
+        r.save();
+      }
+    }
+  },
+  staticClusters: function() {
+    this.get("store").pushMany('cluster', clusterImportData());
+  },
+  staticPathways: function() {
+    this.get("store").pushMany('pathway', pathwayImportData());
+  },
+  staticOccupations: function() {
+    this.get("store").pushMany('occupation', occupationImportData());
+  },
+  staticAlumni: function() {
+    this.get("store").pushMany('alumni', alumniImportData());
   },
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var store = setup.get("store");
 
-      var i, r;
-      var questions = questionImportData();
-      for (i in questions) {
-        if (Ember.$.isNumeric(questions[i].id)) {
-          r = store.createRecord('question', questions[i]);
-          r.save();
-        }
-      }
+      var staticPromises = {
+        questions: setup.staticQuestions(),
+        questionOptions: setup.staticQuestionOptions(),
+        clusters: setup.staticClusters(),
+        pathways: setup.staticPathways(),
+        occupations: setup.staticOccupations(),
+        alumni: setup.staticAlumni()
+      };
 
-      var qoptions = answerOptionImportData();
-      for (i in qoptions) {
-        if (Ember.$.isNumeric(qoptions[i].id)) {
-          r = store.createRecord('questionOption', qoptions[i]);
-          r.save();
-        }
-      }
-
-      store.pushMany('cluster', clusterImportData());
-      store.pushMany('pathway', pathwayImportData());
-      store.pushMany('occupation', occupationImportData());
-      store.pushMany('alumni', alumniImportData());
-      resolve();
+      Ember.RSVP.hash(staticPromises).then(function() {
+        setup.checkForUpdates().then(function() {
+          resolve();
+        });
+      });
     });
   }
 
