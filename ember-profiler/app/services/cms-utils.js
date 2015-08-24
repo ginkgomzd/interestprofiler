@@ -11,10 +11,11 @@ var cmsUtils = Ember.Object.extend({
       return 'http://here2career.beaker.ginkgostreet.com';
     }
   },
-  fetchAlumniImage: function(url, id) {
+  fetchAlumniImage: function(alum) {
 
   },
   updateAlumniContent: function(lastUpdated) {
+    var setup = this;
     var store = this.get("store");
     var url = this.baseUrl() + "/api/alumni?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -31,6 +32,7 @@ var cmsUtils = Ember.Object.extend({
               }
             });
           }
+          setup.fetchAlumniImage(alum);
           r.save();
         });
 
