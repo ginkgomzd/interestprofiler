@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   model: function () {
-    this.get("setupUtils").appStartup();
+    return this.get("setupUtils").appStartup();
   },
   //This may need to be updated in the future depending on what we do
   //in regards to pre-loading data

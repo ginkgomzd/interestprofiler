@@ -34,29 +34,33 @@ var setupService = Ember.Object.extend({
 
   },
   appStartup: function() {
-    var store = this.get("store");
+    var setup = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var store = setup.get("store");
 
-    var i, r;
-    var questions = questionImportData();
-    for (i in questions) {
-      if (Ember.$.isNumeric(questions[i].id)) {
-        r = store.createRecord('question', questions[i]);
-        r.save();
+      var i, r;
+      var questions = questionImportData();
+      for (i in questions) {
+        if (Ember.$.isNumeric(questions[i].id)) {
+          r = store.createRecord('question', questions[i]);
+          r.save();
+        }
       }
-    }
 
-    var qoptions = answerOptionImportData();
-    for (i in qoptions) {
-      if (Ember.$.isNumeric(qoptions[i].id)) {
-        r = store.createRecord('questionOption', qoptions[i]);
-        r.save();
+      var qoptions = answerOptionImportData();
+      for (i in qoptions) {
+        if (Ember.$.isNumeric(qoptions[i].id)) {
+          r = store.createRecord('questionOption', qoptions[i]);
+          r.save();
+        }
       }
-    }
 
-    store.pushMany('cluster', clusterImportData());
-    store.pushMany('pathway', pathwayImportData());
-    store.pushMany('occupation', occupationImportData());
-    store.pushMany('alumni', alumniImportData());
+      store.pushMany('cluster', clusterImportData());
+      store.pushMany('pathway', pathwayImportData());
+      store.pushMany('occupation', occupationImportData());
+      store.pushMany('alumni', alumniImportData());
+      resolve();
+    });
   }
 
 });
