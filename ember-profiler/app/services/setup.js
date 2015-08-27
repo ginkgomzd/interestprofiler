@@ -90,7 +90,7 @@ var setupService = Ember.Object.extend({
           setup.get("settings").set("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
 
           //This will check for discrepencies and backfill answers stored in the user object
-          setup.get("profilerDataUtils").verifyLocalAnswers();
+          setup.get("profilerDataUtils").marshalSavedAnswers();
 
           //Finally, release the hold we have on loading.
           resolve();

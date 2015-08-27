@@ -109,7 +109,7 @@ var profilerDataUtils = Ember.Object.extend({
     this.get("parseAuth").user.set("answers", answerString);
     this.get("parseAuth").user.save();
   },
-  
+
   populatePreviousAnswers: function() {
     var answers = this.get("parseAuth").user.get("answers");
     var store = this.get("store");
@@ -127,12 +127,12 @@ var profilerDataUtils = Ember.Object.extend({
       i++;
     }
   },
-  verifyLocalAnswers: function() {
+  marshalSavedAnswers: function() {
     var parseAnswerString = this.get("parseAuth").user.get("answers");
     var localAnswerString = this.answerString();
 
     if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-      this.backfillUserAnswers();
+      this.populatePreviousAnswers();
       return true;
     }
     return false;
