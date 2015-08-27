@@ -4,12 +4,18 @@ import onet from 'onet';
 var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
-  concatAnswerString: function ()
-  {
+  parseAuth: Ember.inject.service('parse-auth'),
+  answerString: function () {
     var answerString = "";
     this.get("store").all('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
+
+    return answerString;
+  },
+  onetApiFormattedAnswerString: function () {
+    var answerString = this.answerString();
+
     //This pads the answer string with 3's to 60 characters in length
     return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
 
@@ -76,7 +82,7 @@ var profilerDataUtils = Ember.Object.extend({
 
   updateAllResults: function() {
     var that = this;
-    var answerString = this.concatAnswerString();
+    var answerString = this.onetApiFormattedAnswerString();
     this.get("settings").set("fetchingResults", true);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
@@ -86,12 +92,10 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-
         that.get("settings").set("fetchingResults", false);
-
-        //todo: Move this to the user object so that it is automagically stored in the cloud
         that.get("settings").save("CalculatedAnswers", answerString);
-
+        //This saves the current user answer string to Parse
+        that.saveUserAnswers();
         resolve(hash);
       }, function (reason) {
         //Failed to update all
@@ -100,14 +104,61 @@ var profilerDataUtils = Ember.Object.extend({
     });
   },
 
+  saveUserAnswers: function() {
+    var answerString = this.answerString();
+    this.get("parseAuth").user.set("answers", answerString);
+    this.get("parseAuth").user.save();
+  },
+
+  populatePreviousAnswers: function() {
+    var answers = this.get("parseAuth").user.get("answers");
+    var store = this.get("store");
+    var i = 0;
+    while (i <= answers.length - 1) {
+      var index = i + 1;
+      var record = store.getById("answer", index);
+      if (record === null) {
+        record = store.createRecord("answer", {id: index, question: store.getById("question", index), selection: answers[i]});
+      } else {
+        record.set("question", index);
+        record.set("selection", answers[i]);
+      }
+      record.save();
+      i++;
+    }
+  },
+  marshalSavedAnswers: function() {
+    var parseAnswerString = this.get("parseAuth").user.get("answers");
+    var localAnswerString = this.answerString();
+
+    if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
+      this.populatePreviousAnswers();
+      return true;
+    }
+    return false;
+  },
+
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
-    var answerString = this.concatAnswerString();
+    var answerString = this.onetApiFormattedAnswerString();
     var scores = this.get("store").all('scoreArea');
 
     return (scores.get("length") === 0 ||
       !oldAnswerString ||
       oldAnswerString !== answerString);
+  },
+  saveAnswerToParse: function(answer) {
+    var answerString = this.get("parseAuth").user.get("answers");
+    if (answerString.length > answer.id) {
+      answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+    } else if (answerString.length === answer.id - 1) {
+      answerString = answerString + answer.selection;
+    } else {
+      answerString = this.answerString();
+    }
+    this.get("parseAuth").user.set("answers", answerString);
+    this.get("settings").set("answers", answerString);
+    this.get("parseAuth").user.save();
   }
 
 });
