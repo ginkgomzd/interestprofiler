@@ -109,8 +109,8 @@ var profilerDataUtils = Ember.Object.extend({
     this.get("parseAuth").user.set("answers", answerString);
     this.get("parseAuth").user.save();
   },
-
-  backfillUserAnswers: function() {
+  
+  populatePreviousAnswers: function() {
     var answers = this.get("parseAuth").user.get("answers");
     var store = this.get("store");
     var i = 0;
