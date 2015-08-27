@@ -5,7 +5,7 @@ export default Ember.Route.extend({
   model: function(params) {
 
     if (params.index == 0) { // jshint ignore:line
-      var localAnswerString = this.get("profilerDataUtils").concatAnswerString(true);
+      var localAnswerString = this.get("profilerDataUtils").answerString();
       if (localAnswerString.length > 0) {
         return this.transitionTo('question', localAnswerString.length + 1);
       }
@@ -37,7 +37,7 @@ export default Ember.Route.extend({
       } else if (answerString.length === answer.id - 1) {
         answerString = answerString + answer.selection;
       } else {
-        answerString = this.get("profilerDataUtils").concatAnswerString(true);
+        answerString = this.get("profilerDataUtils").answerString();
       }
       this.parseAuth.user.set("answers", answerString);
       this.settings.set("answers", answerString);

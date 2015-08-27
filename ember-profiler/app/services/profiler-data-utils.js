@@ -5,16 +5,16 @@ var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   parseAuth: Ember.inject.service('parse-auth'),
-  concatAnswerString: function (unpadded)
-  {
+  answerString: function () {
     var answerString = "";
     this.get("store").all('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
 
-    if (unpadded === true) {
-      return answerString;
-    }
+    return answerString;
+  },
+  onetApiFormattedAnswerString: function () {
+    var answerString = this.answerString();
 
     //This pads the answer string with 3's to 60 characters in length
     return String(answerString + "333333333333333333333333333333333333333333333333333333333333").slice(0, 60);
@@ -82,7 +82,7 @@ var profilerDataUtils = Ember.Object.extend({
 
   updateAllResults: function() {
     var that = this;
-    var answerString = this.concatAnswerString();
+    var answerString = this.onetApiFormattedAnswerString();
     this.get("settings").set("fetchingResults", true);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
@@ -105,7 +105,7 @@ var profilerDataUtils = Ember.Object.extend({
   },
 
   saveUserAnswers: function() {
-    var answerString = this.concatAnswerString(true);
+    var answerString = this.answerString();
     this.get("parseAuth").user.set("answers", answerString);
     this.get("parseAuth").user.save();
   },
@@ -129,7 +129,7 @@ var profilerDataUtils = Ember.Object.extend({
   },
   verifyLocalAnswers: function() {
     var parseAnswerString = this.get("parseAuth").user.get("answers");
-    var localAnswerString = this.concatAnswerString(true);
+    var localAnswerString = this.answerString();
 
     if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
       this.backfillUserAnswers();
@@ -140,7 +140,7 @@ var profilerDataUtils = Ember.Object.extend({
 
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
-    var answerString = this.concatAnswerString();
+    var answerString = this.onetApiFormattedAnswerString();
     var scores = this.get("store").all('scoreArea');
 
     return (scores.get("length") === 0 ||
