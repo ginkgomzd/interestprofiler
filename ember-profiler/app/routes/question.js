@@ -30,18 +30,7 @@ export default Ember.Route.extend({
       }
       record.save();
 
-      //Save the selected answer to Parse
-      var answerString = this.parseAuth.user.get("answers");
-      if (answerString.length > answer.id) {
-        answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
-      } else if (answerString.length === answer.id - 1) {
-        answerString = answerString + answer.selection;
-      } else {
-        answerString = this.get("profilerDataUtils").answerString();
-      }
-      this.parseAuth.user.set("answers", answerString);
-      this.settings.set("answers", answerString);
-      this.parseAuth.user.save();
+      this.get("profilerDataUtils").saveAnswerToParse(answer);
 
       if(answer.id % 20 === 0) {
         this.send('sectionComplete');

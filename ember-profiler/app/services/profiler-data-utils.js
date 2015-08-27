@@ -146,6 +146,19 @@ var profilerDataUtils = Ember.Object.extend({
     return (scores.get("length") === 0 ||
       !oldAnswerString ||
       oldAnswerString !== answerString);
+  },
+  saveAnswerToParse: function(answer) {
+    var answerString = this.get("parseAuth").user.get("answers");
+    if (answerString.length > answer.id) {
+      answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+    } else if (answerString.length === answer.id - 1) {
+      answerString = answerString + answer.selection;
+    } else {
+      answerString = this.answerString();
+    }
+    this.get("parseAuth").user.set("answers", answerString);
+    this.get("settings").set("answers", answerString);
+    this.get("parseAuth").user.save();
   }
 
 });
