@@ -85,14 +85,8 @@ var setupService = Ember.Object.extend({
       Ember.RSVP.hash(staticPromises).then(function() {
         setup.checkForUpdates().then(function() {
           var today = new Date();
-
-          //Save the Date so that we don't update again until later.
           setup.get("settings").set("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-
-          //This will check for discrepencies and backfill answers stored in the user object
           setup.get("profilerDataUtils").marshalSavedAnswers();
-
-          //Finally, release the hold we have on loading.
           resolve();
         });
       });
