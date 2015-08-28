@@ -1,0 +1,54 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+API:<br />
+http://here2career.beaker.ginkgostreet.com/api/<input id="api" value="pathways" />
+<br />
+Lookup Field:<br />
+<input id="field" value="pathway" />
+<br />
+JSON Data:
+<br />
+<textarea id="source" style="width: 100%" rows="15"></textarea>
+<br /><br />
+<input type="submit" value="Remap" id="remap" />
+
+<hr />
+Output:
+<br />
+<textarea id="output" style="width: 100%" rows="15"></textarea>
+
+<script type="text/javascript">
+  $("#remap").click(function(e) {
+    var baseUrl = "http://here2career.beaker.ginkgostreet.com/api/";
+    var url = baseUrl + $("#api").val();
+    var source = $.parseJSON( $("#source").val() );
+    var field = $("#field").val();
+    var lookup = {};
+    var output = [];
+    $.getJSON(url, function( data ) {
+      $.each(data, function(index, item) {
+        lookup[item.old_id] = item.id;
+      });
+
+      //console.log(lookup);
+
+      $.each(source, function(index, item){
+        var newItem = item;
+        var oldFieldVal = item[field];
+        newItem[field] = lookup[ oldFieldVal.replace( /.*:/g, '') ] || "missing";
+        if (newItem[field] === "missing") {
+          console.log("missing: " + oldFieldVal);
+        }
+        output.push(newItem);
+      });
+      $("#output").val(JSON.stringify(output));
+    });
+  });
+</script>
+
+</body>
+</html>
