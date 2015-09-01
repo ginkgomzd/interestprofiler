@@ -126,18 +126,26 @@ var profilerDataUtils = Ember.Object.extend({
       record.save();
       i++;
     }
+    this.get("settings").set("answers", answers);
   },
   marshalSavedAnswers: function() {
-    if (this.get("parseAuth").user !== null) {
-      var parseAnswerString = this.get("parseAuth").user.get("answers");
-      var localAnswerString = this.answerString();
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (that.get("parseAuth").user !== null) {
+        that.get("store").findAll("answer").then(function (data) {
+          var parseAnswerString = that.get("parseAuth").user.get("answers");
+          var localAnswerString = that.answerString();
 
-      if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-        this.populatePreviousAnswers();
-        return true;
+          if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
+            that.populatePreviousAnswers();
+            resolve(true);
+          }
+          resolve(false);
+        });
+      } else {
+        resolve(false);
       }
-    }
-    return false;
+    });
   },
 
   dirtyAnswers: function() {
