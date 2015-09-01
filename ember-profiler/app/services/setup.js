@@ -8,6 +8,7 @@ import staticPathwayData from '../data/pathways';
 import staticProgramData from '../data/programs';
 import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
+import staticMasterData from '../data/master';
 
 
 var setupService = Ember.Object.extend({
@@ -26,36 +27,143 @@ var setupService = Ember.Object.extend({
   },
   staticQuestions: function() {
     var store = this.get("store");
-    staticQuestionData.forEach(function (question) {
-      var r = store.createRecord('question', question);
-      r.save();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("question").then(function(data) {
+        if (data.length >= staticMasterData.questions) {
+          staticQuestionData.forEach(function (question) {
+            var r = store.createRecord('question', question);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticQuestionOptions: function() {
     var store = this.get("store");
-    staticQuestionOptionData.forEach(function (option) {
-      var r = store.createRecord('questionOption', option);
-      r.save();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("questionOption").then(function(data) {
+        if (data.length >= staticMasterData.questionOptions) {
+          staticQuestionOptionData.forEach(function (option) {
+            var r = store.createRecord('questionOption', option);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticClusters: function() {
-    this.get("store").pushMany('cluster', staticClusterData);
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("cluster").then(function(data) {
+        if (data.length >= staticMasterData.clusters) {
+          staticClusterData.forEach(function (cluster) {
+            var r = store.createRecord('cluster', cluster);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   },
   staticPathways: function() {
-    this.get("store").pushMany('pathway', staticPathwayData);
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("pathway").then(function(data) {
+        if (data.length >= staticMasterData.pathways) {
+          staticPathwayData.forEach(function (pathway) {
+            pathway.cluster = store.getById("cluster", pathway.cluster);
+            var r = store.createRecord('pathway', pathway);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   },
   staticOccupations: function() {
-    this.get("store").pushMany('occupation', staticOccupationData);
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("occupation").then(function(data) {
+        if (data.length >= staticMasterData.occupations) {
+          staticOccupationData.forEach(function (occupation) {
+            occupation.pathway = store.getById("pathway", occupation.pathway);
+            var r = store.createRecord('occupation', occupation);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   },
   staticOnetCareers: function() {
-    this.get("store").pushMany('onet-career', staticOnetCareerData);
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("onet-career").then(function(data) {
+        if (data.length >= staticMasterData.onetCareers) {
+          staticOnetCareerData.forEach(function (career) {
+            career.pathway = store.getById("pathway", career.pathway);
+            var r = store.createRecord('onet-career', career);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   },
   staticAlumni: function() {
-    this.get("store").pushMany('alumni', staticAlumniData);
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("alumni").then(function(data) {
+        if (data.length >= staticMasterData.alumni) {
+          staticAlumniData.forEach(function (alumni) {
+            var r = store.createRecord('alumni', alumni);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   },
+
   staticPrograms: function() {
+    var store = this.get("store");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      store.findAll("program").then(function(data) {
+        if (data.length >= staticMasterData.programs) {
+          staticProgramData.forEach(function (program) {
+            var occupations = [];
+            program.occupation.forEach(function (item) {
+              occupations.push(store.getById("occupation", item));
+            });
+            program.occupation = occupations;
+            var r = store.createRecord('program', program);
+            r.save();
+          });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
     //this.get("store").pushMany('program', staticProgramData);
   },
+
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
