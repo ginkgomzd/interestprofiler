@@ -4,10 +4,10 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   cluster: DS.belongsTo('cluster'),
   occupations: DS.hasMany('occupation'),
-  onetCareers: DS.hasMany('onet-career'),
+  onetCareers: DS.hasMany('onetCareer'),
   bookmarked: DS.attr('boolean', {defaultValue: false}),
   score: function() {
-    var onetCareers = this.get("onet-career");
+    var onetCareers = this.get("onetCareers");
     var scores =  onetCareers.reduce(function(previousValues, career){
       var score = career.get("score");
       return {
