@@ -6,15 +6,15 @@ export default Ember.Component.extend({
   classNameBindings: ['open:oc-drawer-open:oc-drawer-closed'],
   quizPrefix: function() {
 
-    if (this.settings.answers === undefined || this.settings.answers === null) {
+    if ((this.settings.answers === undefined || this.settings.answers === null) && this.parseAuth.user !== null) {
       this.settings.set("answers", this.parseAuth.user.get("answers"));
     }
 
-    if (this.settings.answers.length === 60) {
+    if (this.settings.answers && this.settings.answers.length === 60) {
       return "Retake ";
     }
 
-    if (this.settings.answers.length < 60) {
+    if (this.settings.answers && this.settings.answers.length < 60) {
       return "Resume ";
     }
 

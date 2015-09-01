@@ -128,12 +128,14 @@ var profilerDataUtils = Ember.Object.extend({
     }
   },
   marshalSavedAnswers: function() {
-    var parseAnswerString = this.get("parseAuth").user.get("answers");
-    var localAnswerString = this.answerString();
+    if (this.get("parseAuth").user !== null) {
+      var parseAnswerString = this.get("parseAuth").user.get("answers");
+      var localAnswerString = this.answerString();
 
-    if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-      this.populatePreviousAnswers();
-      return true;
+      if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
+        this.populatePreviousAnswers();
+        return true;
+      }
     }
     return false;
   },
