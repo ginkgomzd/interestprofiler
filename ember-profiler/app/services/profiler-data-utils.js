@@ -83,7 +83,7 @@ var profilerDataUtils = Ember.Object.extend({
   updateAllResults: function() {
     var that = this;
     var answerString = this.onetApiFormattedAnswerString();
-    this.get("settings").set("fetchingResults", true);
+    this.get("settings").save("fetchingResults", true);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -92,7 +92,7 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        that.get("settings").set("fetchingResults", false);
+        that.get("settings").save("fetchingResults", false);
         that.get("settings").save("CalculatedAnswers", answerString);
         //This saves the current user answer string to Parse
         that.saveUserAnswers();
@@ -126,7 +126,7 @@ var profilerDataUtils = Ember.Object.extend({
       record.save();
       i++;
     }
-    this.get("settings").set("answers", answers);
+    this.get("settings").save("answers", answers);
   },
   marshalSavedAnswers: function() {
     var that = this;
@@ -167,7 +167,7 @@ var profilerDataUtils = Ember.Object.extend({
       answerString = this.answerString();
     }
     this.get("parseAuth").user.set("answers", answerString);
-    this.get("settings").set("answers", answerString);
+    this.get("settings").save("answers", answerString);
     this.get("parseAuth").user.save();
   }
 

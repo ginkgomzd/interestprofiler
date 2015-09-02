@@ -19,7 +19,7 @@ var setupService = Ember.Object.extend({
   cmsUtils: Ember.inject.service('cmsUtils'),
   checkForUpdates: function() {
     //Calculate the last updated date
-    var lastUpdated = this.get("settings").get("lastUpdatedDate");
+    var lastUpdated = this.get("settings").load("lastUpdatedDate");
     if (!lastUpdated) {
       lastUpdated = this.get("staticDate");
     }
@@ -204,7 +204,7 @@ var setupService = Ember.Object.extend({
             localforage.setItem(setup.localForageKey, setup.localForageData);
             setup.checkForUpdates().then(function() {
               var today = new Date();
-              setup.get("settings").set("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
+              setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
               setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
                 resolve();
               });

@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   quizPrefix: function() {
 
     if ((this.settings.answers === undefined || this.settings.answers === null) && this.parseAuth.user !== null) {
-      this.settings.set("answers", this.parseAuth.user.get("answers"));
+      this.settings.save("answers", this.parseAuth.user.get("answers"));
     }
 
     if (this.settings.answers && this.settings.answers.length === 60) {
