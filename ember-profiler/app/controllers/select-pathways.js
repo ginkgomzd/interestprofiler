@@ -5,20 +5,20 @@ export default Ember.Controller.extend({
   sortingDesc: ['bookmarked:desc', 'score:desc', 'name:asc'],
   pathwaysList: function() {
     var pathways = Ember.A();
-    this.get('model').forEach(function(item) {
+    this.get("model").clusters.forEach(function(item) {
       pathways.pushObjects(item.get('pathways').toArray());
     });
     return pathways;
-  }.property("model.@each"),
+  }.property("model.clusters.@each"),
   pathways: Ember.computed.sort('pathwaysList', 'sortingDesc'),
   colors: function() {
     var colorList = {};
     var colorLookup = ["blue", "red", "yellow"];
-    this.get("model").forEach(function (item, index) {
+    this.get("model").clusters.forEach(function (item, index) {
       colorList[item.get("id")] = colorLookup[index] || null;
     });
     return colorList;
-  }.property("model"),
+  }.property("model.clusters"),
   actions: {
     toggleBookmark: function(pathway) {
       pathway.toggleProperty("bookmarked");

@@ -2,9 +2,9 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
-  cluster: DS.belongsTo('cluster'),
-  occupations: DS.hasMany('occupation'),
-  onetCareers: DS.hasMany('onetCareer'),
+  cluster: DS.belongsTo('cluster', { async: true }),
+  occupations: DS.hasMany('occupation', { async: true }),
+  onetCareers: DS.hasMany('onet-career', { async: true }),
   bookmarked: DS.attr('boolean', {defaultValue: false}),
   score: function() {
     var onetCareers = this.get("onetCareers");
