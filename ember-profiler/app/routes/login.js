@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  setupUtils: Ember.inject.service('setup'),
   beforeModel: function() {
     if (this.parseAuth.loggedIn) {
       this.transitionTo("welcome");
@@ -29,7 +30,9 @@ export default Ember.Route.extend({
       this.parseAuth.authenticate(user,
         function() {
           //success
-          that.transitionTo("welcome");
+          that.get("setupUtils").handleLogin().then(function() {
+            that.transitionTo("welcome");
+          });
         },
         function(user, error) {
           that.status.warn(error.message);
@@ -45,7 +48,9 @@ export default Ember.Route.extend({
         this.parseAuth.register(user,
           function() {
             //success
-            that.transitionTo("welcome");
+              that.get("setupUtils").handleLogin().then(function() {
+              that.transitionTo("welcome");
+            });
           },
           function(user, error) {
             that.status.warn(error.message);

@@ -13,7 +13,7 @@ import staticMasterData from '../data/master';
 
 var setupService = Ember.Object.extend({
   staticDate: "2015-08-23",
-  //store: Ember.inject.service('store'),
+  store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   cmsUtils: Ember.inject.service('cmsUtils'),
@@ -34,7 +34,7 @@ var setupService = Ember.Object.extend({
       }
       if (Object.keys(setup.localForageData.question.records).length < staticMasterData.questions) {
         staticQuestionData.forEach(function (question) {
-          if(!setup.localForageData.hasOwnProperty("question") || !setup.localForageData.question.records.hasOwnProperty(question.id)) {
+          if(!setup.localForageData.question.records.hasOwnProperty(question.id)) {
             setup.localForageData.question.records[question.id] = question;
           }
         });
@@ -73,6 +73,7 @@ var setupService = Ember.Object.extend({
       if (Object.keys(setup.localForageData.cluster.records).length < staticMasterData.clusters) {
         staticClusterData.forEach(function (cluster) {
           if(!setup.localForageData.cluster.records.hasOwnProperty(cluster.id)) {
+            cluster.is_selected = false;
             setup.localForageData.cluster.records[cluster.id] = cluster;
           }
         });
@@ -130,6 +131,7 @@ var setupService = Ember.Object.extend({
       if (Object.keys(setup.localForageData['onet-career'].records).length < staticMasterData.onetCareers) {
         staticOnetCareerData.forEach(function (career) {
           if(!setup.localForageData['onet-career'].records.hasOwnProperty(career.id)) {
+            career.score = 0;
             setup.localForageData['onet-career'].records[career.id] = career;
           }
         });
@@ -162,58 +164,78 @@ var setupService = Ember.Object.extend({
   staticPrograms: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("program")) {
-        setup.localForageData.program = {};
-        setup.localForageData.program.records = {};
-      }
-      if (Object.keys(setup.localForageData.program.records).length < staticMasterData.programs) {
-        staticProgramData.forEach(function (program) {
-          if(!setup.localForageData.program.records.hasOwnProperty(program.id)) {
-            setup.localForageData.program.records[program.id] = program;
-          }
-        });
-
-        resolve(true);
-      } else {
-        resolve(false);
-      }
+      localforage.getItem("H2CPrograms", function(err, value) {
+        if (!value) {
+          value = {};
+          value.program = {};
+          value.program.records = {};
+        }
+        if (Object.keys(value.program.records).length < staticMasterData.programs) {
+          staticProgramData.forEach(function (program) {
+            if (!value.program.records.hasOwnProperty(program.id)) {
+              value.program.records[program.id] = program;
+            }
+          });
+          localforage.setItem("H2CPrograms", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
-
+  handleLogin: function() {
+    var setup = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      setup.get("profilerDataUtils").marshalSavedAnswers().then(function (updated) {
+        setup.get("store").findAll("onet-career");
+        setup.get("store").findAll("cluster");
+        setup.get("store").findAll("pathway");
+        resolve();
+      });
+    });
+  },
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
 
-      localforage.keys(function(err, keys) {
-        setup.localForageKey = keys[0];
-        localforage.getItem(setup.localForageKey, function(err, value) {
-          setup.localForageData = value || {};
+      localforage.getItem("H2CMain", function(err, value) {
+        setup.localForageData = value || {};
 
-          var staticPromises = {
-            questions: setup.staticQuestions(),
-            questionOptions: setup.staticQuestionOptions(),
-            clusters: setup.staticClusters(),
-            pathways: setup.staticPathways(),
-            careers: setup.staticOnetCareers(),
-            occupations: setup.staticOccupations(),
-            alumni: setup.staticAlumni(),
-            programs: setup.staticPrograms()
-          };
+        var staticPromises = {
+          questions: setup.staticQuestions(),
+          questionOptions: setup.staticQuestionOptions(),
+          clusters: setup.staticClusters(),
+          pathways: setup.staticPathways(),
+          careers: setup.staticOnetCareers(),
+          occupations: setup.staticOccupations(),
+          alumni: setup.staticAlumni(),
+          programs: setup.staticPrograms()
+        };
 
-          Ember.RSVP.hash(staticPromises).then(function() {
-            localforage.setItem(setup.localForageKey, setup.localForageData);
+        Ember.RSVP.hash(staticPromises).then(function() {
+          localforage.setItem("H2CMain", setup.localForageData).then(function() {
             setup.checkForUpdates().then(function() {
               var today = new Date();
               setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
               setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+                setup.get("store").findAll("onet-career");
+                setup.get("store").findAll("cluster");
+                setup.get("store").findAll("pathway");
+                resolve();
+              });
+            }, function() {
+              setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+                setup.get("store").findAll("onet-career");
+                setup.get("store").findAll("cluster");
+                setup.get("store").findAll("pathway");
                 resolve();
               });
             });
           });
-
         });
       });
-
     });
   }
 
