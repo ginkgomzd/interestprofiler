@@ -52,7 +52,7 @@ var profilerDataUtils = Ember.Object.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       onet.interestProfiler.careers(answerString).then(function (data) {
           data.forEach(function (item) {
-            var record = store.getById("occupation", item.code);
+            var record = store.getById("onet-career", item.code);
             if (record !== null) {
               var score;
               switch (item._fit) {
