@@ -21,12 +21,12 @@ div.hotOrNotButtons div.swipeIndicator {
 
 div.hotOrNotButtons .Dismiss {
   color: #f00;
-  background: url(/img/dismiss.png) no-repeat 0% 50%;
+  background: url(../img/dismiss.png) no-repeat 0% 50%;
   padding-left: 65px;
 }
 
 div.hotOrNotButtons .Save {
   color: #2DCE06;
-  background: url(/img/save.png) no-repeat 100% 50%;
+  background: url(../img/save.png) no-repeat 100% 50%;
   padding-right: 65px;
 }
