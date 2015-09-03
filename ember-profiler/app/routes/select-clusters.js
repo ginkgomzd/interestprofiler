@@ -6,6 +6,6 @@ export default Ember.Route.extend({
     if (this.get("profilerDataUtils").dirtyAnswers()) {
       this.get("profilerDataUtils").updateAllResults();
     }
-    return this.store.find('cluster');
+    return this.store.findAll('cluster');
   },
 });

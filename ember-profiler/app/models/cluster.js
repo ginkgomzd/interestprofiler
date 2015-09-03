@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
-  pathways: DS.hasMany('pathway'),
+  pathways: DS.hasMany('pathway', { async: true }),
   is_selected: DS.attr('boolean', {defaultValue: false}),
   score: function() {
     var pathways = this.get("pathways");

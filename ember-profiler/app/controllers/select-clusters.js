@@ -23,8 +23,10 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
       }
     },
     toggleClusterSelection: function(cluster) {
+      console.log(cluster);
       cluster.toggleProperty("is_selected");
       cluster.save();
+      console.log(cluster);
       this.set("toggling", cluster.get("id"));
     }
   }
