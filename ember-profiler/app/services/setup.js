@@ -103,42 +103,51 @@ var setupService = Ember.Object.extend({
     });
   },
   staticOccupations: function() {
-    var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("occupation")) {
-        setup.localForageData.occupation = {};
-        setup.localForageData.occupation.records = {};
-      }
-      if (Object.keys(setup.localForageData.occupation.records).length < staticMasterData.occupations) {
-        staticOccupationData.forEach(function (occupation) {
-          if(!setup.localForageData.occupation.records.hasOwnProperty(occupation.id)) {
-            setup.localForageData.occupation.records[occupation.id] = occupation;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
+      localforage.getItem("H2COccupation", function(err, value) {
+        if (!value) {
+          value = {}
+          value.occupation = {};
+          value.occupation.records = {};
+        }
+        if (Object.keys(value.occupation.records).length < staticMasterData.occupations) {
+          staticOccupationData.forEach(function (occupation) {
+            if(!value.occupation.records.hasOwnProperty(occupation.id)) {
+              value.occupation.records[occupation.id] = occupation;
+            }
+          });
+          localforage.setItem("H2COccupation", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticOnetCareers: function() {
-    var setup = this;
+    //var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("onet-career")) {
-        setup.localForageData['onet-career'] = {};
-        setup.localForageData['onet-career'].records = {};
-      }
-      if (Object.keys(setup.localForageData['onet-career'].records).length < staticMasterData.onetCareers) {
-        staticOnetCareerData.forEach(function (career) {
-          if(!setup.localForageData['onet-career'].records.hasOwnProperty(career.id)) {
-            career.score = 0;
-            setup.localForageData['onet-career'].records[career.id] = career;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
+      localforage.getItem("H2COnetCareer", function(err, value) {
+        if (!value) {
+          value = {};
+          value['onet-career'] = {};
+          value['onet-career'].records = {};
+        }
+        if (Object.keys(value['onet-career'].records).length < staticMasterData.onetCareers) {
+          staticOnetCareerData.forEach(function (career) {
+            if(!value['onet-career'].records.hasOwnProperty(career.id)) {
+              career.score = 0;
+              value['onet-career'].records[career.id] = career;
+            }
+          });
+          localforage.setItem("H2COnetCareer", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticAlumni: function() {
@@ -176,7 +185,7 @@ var setupService = Ember.Object.extend({
               value.program.records[program.id] = program;
             }
           });
-          localforage.setItem("H2CPrograms", value).then(function() {
+            localforage.setItem("H2CPrograms", value).then(function() {
             resolve(true);
           });
         } else {
