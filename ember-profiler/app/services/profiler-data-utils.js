@@ -52,7 +52,7 @@ var profilerDataUtils = Ember.Object.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       onet.interestProfiler.careers(answerString).then(function (data) {
           data.forEach(function (item) {
-            var record = store.getById("occupation", item.code);
+            var record = store.getById("onet-career", item.code);
             if (record !== null) {
               var score;
               switch (item._fit) {
@@ -83,7 +83,7 @@ var profilerDataUtils = Ember.Object.extend({
   updateAllResults: function() {
     var that = this;
     var answerString = this.onetApiFormattedAnswerString();
-    this.get("settings").set("fetchingResults", true);
+    this.get("settings").save("fetchingResults", true);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -92,7 +92,7 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        that.get("settings").set("fetchingResults", false);
+        that.get("settings").save("fetchingResults", false);
         that.get("settings").save("CalculatedAnswers", answerString);
         //This saves the current user answer string to Parse
         that.saveUserAnswers();
@@ -126,16 +126,26 @@ var profilerDataUtils = Ember.Object.extend({
       record.save();
       i++;
     }
+    this.get("settings").save("answers", answers);
   },
   marshalSavedAnswers: function() {
-    var parseAnswerString = this.get("parseAuth").user.get("answers");
-    var localAnswerString = this.answerString();
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (that.get("parseAuth").user !== null) {
+        that.get("store").findAll("answer").then(function (data) {
+          var parseAnswerString = that.get("parseAuth").user.get("answers");
+          var localAnswerString = that.answerString();
 
-    if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-      this.populatePreviousAnswers();
-      return true;
-    }
-    return false;
+          if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
+            that.populatePreviousAnswers();
+            resolve(true);
+          }
+          resolve(false);
+        });
+      } else {
+        resolve(false);
+      }
+    });
   },
 
   dirtyAnswers: function() {
@@ -157,7 +167,7 @@ var profilerDataUtils = Ember.Object.extend({
       answerString = this.answerString();
     }
     this.get("parseAuth").user.set("answers", answerString);
-    this.get("settings").set("answers", answerString);
+    this.get("settings").save("answers", answerString);
     this.get("parseAuth").user.save();
   }
 

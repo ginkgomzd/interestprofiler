@@ -2,25 +2,25 @@
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 300;
-  src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url(/fonts/b9QBgL0iMZfDSpmcXcE8nMrfajfqx5pse9BUPMmpr-I.woff) format('woff');
+  src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url(../fonts/b9QBgL0iMZfDSpmcXcE8nMrfajfqx5pse9BUPMmpr-I.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'), url(/fonts/Zd2E9abXLFGSr9G3YK2MsNxB8OB85xaNTJvVSB9YUjQ.woff) format('woff');
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'), url(../fonts/Zd2E9abXLFGSr9G3YK2MsNxB8OB85xaNTJvVSB9YUjQ.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
   font-weight: 700;
-  src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold'), url(/fonts/b9QBgL0iMZfDSpmcXcE8nPZRQUbYfRc-1FWT9T9EE8M.woff) format('woff');
+  src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold'), url(../fonts/b9QBgL0iMZfDSpmcXcE8nPZRQUbYfRc-1FWT9T9EE8M.woff) format('woff');
 }
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(/fonts/MaterialIcons-Regular.woff) format('woff');
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.woff) format('woff');
 }
 
 .material-icons {

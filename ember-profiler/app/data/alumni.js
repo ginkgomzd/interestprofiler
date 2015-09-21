@@ -1,0 +1,3 @@
+// jshint ignore: start
+var staticAlumniData = [{"id":"1", "title":"Chef/Head Cook", "desc":"Direct and may participate in the preparation, seasoning, and cooking of salads, soups, fish, meat, vegetables, desserts, or other foods. May plan and price menu items, order supplies, and keep records and accounts.", "img": "chef.png"}, {"id":"2", "title":"Plant Science Professor", "desc":"Teach courses in the agricultural sciences. Includes teachers of agronomy, dairy sciences, fisheries management, horticultural sciences, poultry sciences, range management, and agricultural soil conservation. Includes both teachers primarily engaged in teaching and those who do a combination of teaching and research.", "img": "plant-science-professor.jpg"}];
+export default staticAlumniData;

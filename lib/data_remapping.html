@@ -1,0 +1,120 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+API:<br />
+http://here2career.beaker.ginkgostreet.com/api/<input id="api" value="occupations" />
+<br />
+Lookup Field:<br />
+<input id="field" value="occupation" />
+<br />
+
+JSON Data:
+<br />
+<input type="file" id="fileInput" name="fileInput" />
+<br />
+-- or --
+<br />
+<textarea id="source" style="width: 100%" rows="15"></textarea>
+<br /><br />
+<input type="submit" value="Remap" id="remap" />
+
+<hr />
+Output: <a id="download" href="data:text/plain;charset=UTF-8,Hello%20World!" download="filename.txt">Download</a>
+<br />
+<textarea id="output" style="width: 100%" rows="15"></textarea>
+
+<script type="text/javascript">
+  function RemapData(source) {
+    console.log("Starting Remap");
+    var baseUrl = "http://here2career.beaker.ginkgostreet.com/api/";
+    var url = baseUrl + $("#api").val();
+    var field = $("#field").val();
+    var lookup = {};
+    var output = [];
+    console.log("Fetching data from " + url);
+    $.getJSON(url, function( data ) {
+      console.log("Successfully fetched " + data.length + " rows");
+      $.each(data, function(index, item) {
+        if (lookup.hasOwnProperty(item.old_id)) {
+          if(typeof lookup[item.old_id] === "object") {
+            lookup[item.old_id].push(item.id);
+          } else {
+            lookup[item.old_id] = [lookup[item.old_id], item.id];
+          }
+        } else {
+          lookup[item.old_id] = item.id;
+        }
+      });
+
+      console.log("Lookup map:");
+      console.log(lookup);
+
+      console.log("Remapping " + source.length + " rows");
+      $.each(source, function(index, item){
+        var newItem = item;
+
+        var oldFieldVal = item[field];
+
+        if (typeof oldFieldVal === "string" && oldFieldVal.indexOf(':') !== -1) {
+          oldFieldVal = oldFieldVal.replace( /.*:/g, '');
+        }
+
+        if (oldFieldVal === null || oldFieldVal === undefined) {
+          console.log("Error replacing: " + item.field);
+        }
+
+        newItem[field] = lookup[ oldFieldVal ] || "missing";
+
+        if (newItem[field] === "missing") {
+          console.log("missing: " + oldFieldVal);
+        }
+
+        output.push(newItem);
+      });
+      $("#output").val(JSON.stringify(output));
+      console.log("Complete");
+    });
+  }
+
+  $("#download").click(function() {
+    window.location.href = "data:text/plain;download="+$("#api").val()+"_remapped.json;charset=UTF-8," + encodeURIComponent(JSON.stringify($("#output").val()))
+  });
+
+  $("#remap").click(function(e) {
+
+    if ($("#fileInput").val()) {
+      var file =  $("#fileInput")[0].files[0];
+      console.log(file.name);
+      var reader = new FileReader();
+
+      reader.onloadend = function(evt) {
+        if (evt.target.readyState == FileReader.DONE)
+        {
+          try {
+            var source = eval( evt.target.result );
+            console.log("Loaded source object with " + source.length + " rows.");
+            RemapData(source);
+          } catch (e) {
+            alert("There was an error parsing your json. View the console for more information");
+            console.log(e);
+          }
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      try {
+        var source = $.parseJSON($("#source").val());
+        RemapData(source);
+      } catch (e) {
+        alert("There was an error parsing your json. View the console for more information");
+        console.log(e);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

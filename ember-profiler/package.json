@@ -35,10 +35,10 @@
     "ember-cli-qunit": "0.3.13",
     "ember-cli-uglify": "^1.0.1",
     "ember-cli-x2js": "git://github.com/tobiaslounsbury/ember-cli-x2js.git",
-    "ember-data": "1.0.0-beta.18",
+    "ember-data": "1.0.0-beta.19",
     "ember-disable-proxy-controllers": "^0.7.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-localforage-adapter": "0.7.3",
+    "ember-localforage-adapter": "0.7.4",
     "ember-mobiletouch": "~1.4.11"
   },
   "dependencies": {

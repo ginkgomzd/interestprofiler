@@ -2,6 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function () {
-    return this.get('store').find('cluster', {is_selected: true});
+    return Ember.RSVP.hash({
+      clusters: this.get('store').find('cluster', {is_selected: true}),
+      allPathways: this.get('store').find('pathway')
+    });
   }
 });

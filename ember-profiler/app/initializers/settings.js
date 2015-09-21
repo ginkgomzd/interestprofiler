@@ -16,7 +16,7 @@ export function initialize(registry, application) {
     //it is accessible from our load and save functions.
     setStore: function(store) {
       this.store = store;
-      this.set('model', store.find("setting"));
+      this.set('model', store.findAll("setting"));
     },
     load: function(name) {
       var setting = this.store.getById("setting", name);

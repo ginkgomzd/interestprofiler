@@ -2,8 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
-  pathways: DS.hasMany('pathway'),
-  occupations: DS.hasMany('occupation'),
+  pathways: DS.hasMany('pathway', { async: true }),
   is_selected: DS.attr('boolean', {defaultValue: false}),
   score: function() {
     var pathways = this.get("pathways");
@@ -16,7 +15,7 @@ export default DS.Model.extend({
     }, {squares: 0, weights: 0});
 
     if (scores.weights === 0) {return 0;}
-    
+
     return (scores.squares / scores.weights);
   }.property("pathways.@each.score")
 });
