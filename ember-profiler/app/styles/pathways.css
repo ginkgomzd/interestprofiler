@@ -129,6 +129,9 @@ label.checkbox.checked + label.checkmark {
   background-color: #eee;
   padding: 5px;
 }
+.occupation-list li:nth-child(even) {
+  padding: 5px;
+}
 .occupation-list p {
   margin-bottom: 3px;
   padding-left: 5px;
@@ -153,4 +156,8 @@ label.checkbox.checked + label.checkmark {
 }
 .pathway-list li.checked.red label.checkbox {
   background-color: #c1272d;
+}
+
+li i.exploreOccupation {
+  line-height: 18px;
 }

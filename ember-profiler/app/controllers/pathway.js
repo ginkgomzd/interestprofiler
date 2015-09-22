@@ -8,8 +8,9 @@ export default Ember.Controller.extend({
     exploreColleges: function() {
       this.modal.alert("This has not yet been implemented");
     },
-    exploreOccupation: function() {
-      this.modal.alert("We don't currently know anything more about this occupation. So sorry.");
+    exploreOccupation: function(id) {
+      this.transitionToRoute("/occupation/" + id);
+      //this.modal.alert("We don't currently know anything more about this occupation. So sorry.");
     }
   }
 });
