@@ -23,12 +23,12 @@ module.exports = function(environment) {
       'font-src': "'self'",
       'connect-src': "'self' https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net api.parse.com",
       'img-src': "'self' data:",
-      'style-src': "'self' 'sha256-CeRQ3vBPrX7ig74XGeawXtXYviQ7pHKsd-iLl8sckN4='",
+      'style-src': "'self' 'sha256-brx_rg0MKs7Ak8cpHylVraZAxpjgd2vlxY-XpfuTR20='",
       'media-src': "'self'"
     },
     parse: {
-      appId: "Fb0w8YZ8IzTKaNtLT7AYNsBNUlR8fAwWKbIvMKwW",
-      javascriptKey: "7FubtodqX5Ew0UWZ1YvFCNt6GP7DdYeL0dkJiI4a",
+      appId: "hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3",
+      javascriptKey: "1gTcF2FQn6tKP52SbAMForTcsC6yHkn7BHRiqEEx",
       FacebookAppId: "699449926827946"
     }
   };
