@@ -134,6 +134,10 @@ var profilerDataUtils = Ember.Object.extend({
       if (that.get("parseAuth").user !== null) {
         that.get("store").findAll("answer").then(function (data) {
           var parseAnswerString = that.get("parseAuth").user.get("answers");
+          if(parseAnswerString === undefined) {
+            that.get("parseAuth").user.set("answers", "");
+            return resolve(false);
+          }
           var localAnswerString = that.answerString();
 
           if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
