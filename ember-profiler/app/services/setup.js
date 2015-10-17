@@ -12,7 +12,7 @@ import staticMasterData from '../data/master';
 
 
 var setupService = Ember.Object.extend({
-  staticDate: "2015-08-23",
+  staticDate: "2015-10-17",
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
