@@ -53,3 +53,9 @@ hr.formHR {
   width: 90%;
   text-align: center;
 }
+
+button.search-icon {
+  padding: 5px 9px !important;
+  border-radius: 100px;
+  min-width: 0px !important;
+}
