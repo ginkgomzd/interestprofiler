@@ -173,20 +173,25 @@ var setupService = Ember.Object.extend({
   staticColleges: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("college")) {
-        setup.localForageData.college = {};
-        setup.localForageData.college.records = {};
-      }
-      if (Object.keys(setup.localForageData.college.records).length < staticMasterData.colleges) {
-        staticCollegeData.forEach(function (college) {
-          if(!setup.localForageData.college.records.hasOwnProperty(college.id)) {
-            setup.localForageData.college.records[college.id] = college;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
+      localforage.getItem("H2CColleges", function(err, value) {
+        if (!value) {
+          value = {};
+          value.college = {};
+          value.college.records = {};
+        }
+        if (Object.keys(value.college.records).length < staticMasterData.colleges) {
+          staticCollegeData.forEach(function (college) {
+            if (!value.college.records.hasOwnProperty(college.id)) {
+              value.college.records[college.id] = college;
+            }
+          });
+          localforage.setItem("H2CColleges", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticPrograms: function() {
