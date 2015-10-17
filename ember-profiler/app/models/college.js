@@ -9,4 +9,5 @@ export default DS.Model.extend({
   zip: DS.attr('number'),
   lat: DS.attr('number'),
   long: DS.attr('number'),
+  distance: DS.attr('number')
 });
