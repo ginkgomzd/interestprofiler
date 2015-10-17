@@ -237,6 +237,9 @@ div.gray {
 .larger {
   font-size: 1.2em;
 }
+.center {
+    text-align: center;
+}
 
 .contentLoading {
   min-height: 40px;
