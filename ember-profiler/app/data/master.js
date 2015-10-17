@@ -7,6 +7,8 @@ var staticMasterData = {
   pathways: 77,
   programs: 13798,
   questions: 60,
-  questionOptions: 5
+  questionOptions: 5,
+  zipCodes: 2796,
+  colleges: 113
 };
 export default staticMasterData;
