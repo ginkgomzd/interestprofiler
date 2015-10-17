@@ -9,6 +9,7 @@ import staticProgramData from '../data/programs';
 import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
 import staticMasterData from '../data/master';
+import staticCollegeData from '../data/colleges';
 
 
 var setupService = Ember.Object.extend({
@@ -169,7 +170,25 @@ var setupService = Ember.Object.extend({
       }
     });
   },
-
+  staticColleges: function() {
+    var setup = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (!setup.localForageData.hasOwnProperty("college")) {
+        setup.localForageData.college = {};
+        setup.localForageData.college.records = {};
+      }
+      if (Object.keys(setup.localForageData.college.records).length < staticMasterData.colleges) {
+        staticCollegeData.forEach(function (college) {
+          if(!setup.localForageData.college.records.hasOwnProperty(college.id)) {
+            setup.localForageData.college.records[college.id] = college;
+          }
+        });
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  },
   staticPrograms: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -220,6 +239,7 @@ var setupService = Ember.Object.extend({
           careers: setup.staticOnetCareers(),
           occupations: setup.staticOccupations(),
           alumni: setup.staticAlumni(),
+          programs: setup.staticColleges(),
           programs: setup.staticPrograms()
         };
 
