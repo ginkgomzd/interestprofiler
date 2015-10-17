@@ -1,0 +1,50 @@
+.welcome-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #153672;
+  margin: 0px;
+  z-index: 9999;
+  color: #fff;
+  padding-top: 50px;
+}
+
+div.welcome-overlay div.logo-header {
+  margin-bottom: 0px;
+}
+
+.welcome-header {
+  padding: 30px;
+}
+.welcome-header h1 {
+  font-weight: normal;
+  font-size: 2.2em;
+}
+.welcome-header span {
+  font-size: 1.6em;
+}
+
+.welcomeActions {
+  background: #6480ab;
+  padding: 15px;
+}
+
+.welcomeActions button.clearButton {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 4px solid #fff;
+  padding: 10px 3px;
+  background: transparent;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 200%;
+}
+
+.welcomeActions button.clearButton i {
+  margin-left: 25px;
+  margin-right: 15px;
+  font-size: 2.0em;
+  float: left;
+}
