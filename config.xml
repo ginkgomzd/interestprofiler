@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.younginvincibles.here2career" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode = "15090101">
-    <name>Interest Profiler</name>
+    <name>Here2Career</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -9,7 +9,9 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="*" />
     <platform name="ios">
         <preference name="BackupWebStorage" value="none"/>
+        <allow-intent href="*"/>
     </platform>
 </widget>
