@@ -3,7 +3,6 @@ import LFAdapter from 'ember-localforage-adapter/adapters/localforage';
 export default LFAdapter.extend({
   namespace: 'H2CPrograms',
   query: function (records, query) {
-    console.log("My Query Function! And my bubbles!");
     if(typeof(query) === "object" && query.hasOwnProperty("occupation")) {
       var results = [],
         id, record, property, test, push;

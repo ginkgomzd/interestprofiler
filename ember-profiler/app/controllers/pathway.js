@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
     },
     exploreOccupation: function(id) {
       this.transitionToRoute("/occupation/" + id);
-      //this.modal.alert("We don't currently know anything more about this occupation. So sorry.");
     }
   }
 });
