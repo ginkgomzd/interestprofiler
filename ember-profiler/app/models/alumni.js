@@ -7,6 +7,10 @@ export default BaseModel.extend({
   img: DS.attr('string'),
 
   getImgPath: function() {
-    return 'img/alumni/' + this.get('img');
+    if(this.get("img").search("http:") !== -1) {
+      return this.get('img');
+    } else {
+      return 'img/alumni/' + this.get('img');
+    }
   }.property('img')
 });
