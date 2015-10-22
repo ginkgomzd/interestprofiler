@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 var rawData = Ember.Object.extend({
   fetch: function(namespace, model) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
