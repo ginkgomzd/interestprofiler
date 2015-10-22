@@ -30,3 +30,6 @@ div.hotOrNotButtons .Save {
   background: url(../img/save.png) no-repeat 100% 50%;
   padding-right: 65px;
 }
+div.hot-or-not img.img-alumni {
+  margin: 0px auto;
+}
