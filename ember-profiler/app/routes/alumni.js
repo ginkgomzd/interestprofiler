@@ -30,5 +30,19 @@ export default Ember.Route.extend({
     //This is rather simple right now, but in future it will have more
     // logic for filtering/matching alumni
     return this.get("rawData").fetchKeys("H2CAlumni", "alumni");
+  },
+  actions: {
+    navigateNext: function() {
+      var next = 1 + parseInt(this.get('index'));
+      if (next < this.get('suggestedAlumni').length) {
+        this.transitionTo('alumni', next);
+      } else {
+        var that = this;
+        this.modal.confirm("you've reached the end of your reccomended alumni profiles. Continue to view careers that match your interestes.",
+          {right: {text: "Continue", action: function() {
+            that.transitionTo('select-clusters');
+          }}});
+      }
+    }
   }
 });

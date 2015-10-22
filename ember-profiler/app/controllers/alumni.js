@@ -17,21 +17,8 @@ export default Ember.Controller.extend({
         hot: hotFlag,
         item: item
       });
+
       this.send('navigateNext');
-    },
-
-    navigateNext: function() {
-      var next = 1 + parseInt(this.model.get('id'));
-      if (next <= 2) {
-        this.transitionToRoute('alumni', next);
-      } else {
-        var that = this;
-        this.modal.confirm("you've reached the end of your reccomended alumni profiles. Continue to view careers that match your interestes.",
-          {right: {text: "Continue", action: function() {
-            that.transitionToRoute('select-clusters');
-          }}});
-      }
-    },
-
+    }
   }
 });
