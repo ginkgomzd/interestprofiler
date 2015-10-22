@@ -13,7 +13,8 @@ var pluginlist = [
 
 //    "https://github.com/ginkgostreet/phonegap-parse-plugin.git#healthyi-1.1 --variable APP_ID="+PARSE_APP_ID+" --variable CLIENT_KEY="+PARSE_CLIENT_KEY,
 
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "cordova-plugin-geolocation"
 ];
 
 // no need to configure below
