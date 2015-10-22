@@ -6,10 +6,10 @@ export default Ember.Route.extend({
       this.transitionTo("question", 0);
     },
     salaries: function() {
-      this.status.warn("This has not been implemented yet");
+      this.transitionTo("select-clusters");
     },
     proximity: function() {
       this.transitionTo("proximity");
-    },
+    }
   }
 });
