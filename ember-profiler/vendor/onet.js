@@ -3,7 +3,7 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
   var Ember = __dependency1__["default"] || __dependency1__;
   var ajax = __dependency2__["default"] || __dependency2__;
 
-  var onetBaseUrl = 'http://beaker.ginkgostreet.com/api_proxy';
+  var onetBaseUrl = 'http://here2career.beaker.ginkgostreet.com/api_proxy';
   if (EmberENV.onetUrl) {
     onetBaseUrl = EmberENV.onetUrl;
   }
