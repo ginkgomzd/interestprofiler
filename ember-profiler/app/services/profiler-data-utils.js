@@ -27,6 +27,7 @@ var profilerDataUtils = Ember.Object.extend({
     var store = this.get("store");
     return new Ember.RSVP.Promise(function(resolve, reject) {
       onet.interestProfiler.results(answerString).then(function (data) {
+          var results = [];
           data.forEach(function (item) {
 
             var r = store.getById('scoreArea', item.id);
@@ -37,9 +38,9 @@ var profilerDataUtils = Ember.Object.extend({
             r.set("score", item.score);
             r.set("desc", item.desc);
             r.save();
-
+            results.push(r);
           });
-          resolve(data);
+          resolve(results);
         },
         function(error) {
           reject(error);
@@ -80,7 +81,7 @@ var profilerDataUtils = Ember.Object.extend({
     });
   },
 
-  updateAllResults: function() {
+  updateAllResults: function(toReturn) {
     var that = this;
     var answerString = this.onetApiFormattedAnswerString();
     this.get("settings").save("fetchingResults", true);
@@ -96,7 +97,14 @@ var profilerDataUtils = Ember.Object.extend({
         that.get("settings").save("CalculatedAnswers", answerString);
         //This saves the current user answer string to Parse
         that.saveUserAnswers();
-        resolve(hash);
+
+        if(toReturn === 'none') {
+          resolve();
+        } else if (toReturn && hash.hasOwnProperty(toReturn)) {
+          resolve(hash[toReturn]);
+        } else {
+          resolve(hash);
+        }
       }, function (reason) {
         //Failed to update all
         reject(reason);
