@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.younginvincibles.profiler" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode = "15090101">
-    <name>Interest Profiler</name>
+<widget id="org.younginvincibles.here2career" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode = "15090101">
+    <name>Here to Career</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        This app provides resources on California Community Colleges.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="dev@ginkgostreet.com" href="http://www.ginkgostreet.com">
+        Ginkgo Street Labs
     </author>
     <content src="index.html" />
     <access origin="*" />
