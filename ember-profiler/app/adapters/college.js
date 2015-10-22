@@ -7,13 +7,6 @@ export default LFAdapter.extend({
       var results = [], id, push, proximity;
 
       proximity = this.makeProximity(query.proximity, query.location.lat, query.location.long);
-      //console.log(proximity);
-
-      //S = - lat
-      //N = + lat
-      //E = + long
-      //W = - long
-
 
       for (id in records) {
         push = true;
