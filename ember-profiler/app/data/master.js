@@ -1,6 +1,6 @@
 // jshint ignore: start
 var staticMasterData = {
-  alumni: 2,
+  alumni: 40,
   clusters: 22,
   occupations: 643,
   onetCareers: 1085,
