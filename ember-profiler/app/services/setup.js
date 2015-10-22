@@ -107,7 +107,7 @@ var setupService = Ember.Object.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       localforage.getItem("H2COccupation", function(err, value) {
         if (!value) {
-          value = {}
+          value = {};
           value.occupation = {};
           value.occupation.records = {};
         }
@@ -244,7 +244,7 @@ var setupService = Ember.Object.extend({
           careers: setup.staticOnetCareers(),
           occupations: setup.staticOccupations(),
           alumni: setup.staticAlumni(),
-          programs: setup.staticColleges(),
+          colleges: setup.staticColleges(),
           programs: setup.staticPrograms()
         };
 
