@@ -9,10 +9,11 @@ import staticProgramData from '../data/programs';
 import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
 import staticMasterData from '../data/master';
+import staticCollegeData from '../data/colleges';
 
 
 var setupService = Ember.Object.extend({
-  staticDate: "2015-08-23",
+  staticDate: "2015-10-17",
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
@@ -169,7 +170,30 @@ var setupService = Ember.Object.extend({
       }
     });
   },
-
+  staticColleges: function() {
+    var setup = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      localforage.getItem("H2CColleges", function(err, value) {
+        if (!value) {
+          value = {};
+          value.college = {};
+          value.college.records = {};
+        }
+        if (Object.keys(value.college.records).length < staticMasterData.colleges) {
+          staticCollegeData.forEach(function (college) {
+            if (!value.college.records.hasOwnProperty(college.id)) {
+              value.college.records[college.id] = college;
+            }
+          });
+          localforage.setItem("H2CColleges", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  },
   staticPrograms: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -220,6 +244,7 @@ var setupService = Ember.Object.extend({
           careers: setup.staticOnetCareers(),
           occupations: setup.staticOccupations(),
           alumni: setup.staticAlumni(),
+          programs: setup.staticColleges(),
           programs: setup.staticPrograms()
         };
 

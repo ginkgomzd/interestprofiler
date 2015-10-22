@@ -1,0 +1,17 @@
+<div class="full">
+  <div class="pageMessage gray full">
+    You're Exploring...
+    <div class="clusterName">{{model.occupation.title}} : {{model.occupation.awardDescription}}</div>
+  </div>
+  
+  <div class="padded">
+    {{#each program in model.programs}}
+      <div class="programDesc">
+        <div><strong>{{array-value model.colleges program.college "collegeName"}}</strong></div>
+        <div>{{program.awardDescription}}: {{program.title}}</div>
+        <div class="collegeUrl">{{array-value model.colleges program.college "collegeURL"}}</div>
+      </div>
+      <div class="programLearnMore">Tap to learn more and connect with this school.</div>
+    {{/each}}
+  </div>
+</div>

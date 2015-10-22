@@ -16,12 +16,13 @@
       <ul>
         {{#each occ in model.occupations}}
         <li {{action "exploreOccupation" occ.id}}>
-          <strong>{{occ.title}}</strong>
+          <strong>{{occ.title}}</strong> - {{occ.awardDescription}}
+          <i class="material-icons right exploreOccupation">navigate_next</i>
         </li>
       {{/each}}
       </ul>
     </div>
-    <div class="pathwayTitle smaller" {{action "exploreColleges" model.id}}>Explore Colleges Offering This Degree</div>
+    <!--//<div class="pathwayTitle smaller" {{action "exploreColleges" model.id}}>Explore Colleges Offering This Degree</div>//-->
     {{outlet}}
   </div>
 </div>

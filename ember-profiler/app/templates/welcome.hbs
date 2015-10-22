@@ -1,4 +1,16 @@
-<div>
-  <h1>Welcome</h1>
-  <button {{action "takeQuiz"}} class="full">Take the Quiz</button>
+<div class="welcome-overlay full">
+  <div class="logo-header">
+    <div class="logo">Logo</div>
+  </div>
+
+  <div class="welcome-header">
+    <h1>Here to Career</h1>
+    <span>I want to explore...</span>
+  </div>
+  <div class="clear"></div>
+  <div class="full welcomeActions">
+    <button {{action "salaries"}} class="clearButton"><i class="material-icons">attach_money</i>Inland Empire Salaries</button>
+    <button {{action "takeQuiz"}} class="clearButton"><i class="material-icons">computer</i>My Career Interests</button>
+    <button {{action "proximity"}} class="clearButton"><i class="material-icons">place</i>Local Degrees & Colleges</button>
+  </div>
 </div>

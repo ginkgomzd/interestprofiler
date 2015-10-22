@@ -6,10 +6,11 @@ export default DS.Model.extend({
   score: DS.attr('number', {defaultValue: 0}),
   awardDescription: DS.attr('string'),
   totalAwards: DS.attr('number', {defaultValue: 0}),
-  wagePre2: DS.attr('number', {defaultValue: 0}),
-  wagePost2: DS.attr('number', {defaultValue: 0}),
-  wagePost5: DS.attr('number', {defaultValue: 0}),
-  meridianPre2: DS.attr('number', {defaultValue: 0}),
-  meridianPost2: DS.attr('number', {defaultValue: 0}),
-  meridianPost5: DS.attr('number', {defaultValue: 0})
+  wageCountPre2: DS.attr('number', {defaultValue: 0}),
+  wageCountPost2: DS.attr('number', {defaultValue: 0}),
+  wageCountPost5: DS.attr('number', {defaultValue: 0}),
+  medianPre2: DS.attr('number', {defaultValue: 0}),
+  medianPost2: DS.attr('number', {defaultValue: 0}),
+  medianPost5: DS.attr('number', {defaultValue: 0}),
+  programs: DS.hasMany('program', { async: true })
 });
