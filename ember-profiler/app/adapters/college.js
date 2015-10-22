@@ -6,24 +6,15 @@ export default LFAdapter.extend({
     if(typeof(query) === "object" && query.hasOwnProperty("proximity")) {
       var results = [], id, push, proximity;
 
-      proximity = this.makeProximity(query.proximity, query.location.lat, query.location.long);
+      proximity = this.proximityBoundsFromRadius(query.proximity, query.location.lat, query.location.long);
 
       for (id in records) {
         push = true;
 
-        if(records[id].lat > proximity.n) {
-          push = false;
-        }
-
-        if(records[id].lat < proximity.s) {
-          push = false;
-        }
-
-        if(records[id].long < proximity.w) {
-          push = false;
-        }
-
-        if(records[id].long > proximity.e) {
+        if(records[id].lat > proximity.n
+          || records[id].lat < proximity.s
+          || records[id].long < proximity.w
+          || records[id].long > proximity.e) {
           push = false;
         }
 
@@ -39,12 +30,16 @@ export default LFAdapter.extend({
       return this._super(records, query);
     }
   },
-  calculateDistance: function(user, college) {
+  //This uses the ‘haversine’ formula to calculate the great-circle distance between two
+  //points – that is, the shortest distance over the earth’s surface – giving an ‘as-the-crow-flies’
+  //distance between the points (ignoring any hills they fly over, of course!).
+  //Borrowed from: http://www.movable-type.co.uk/scripts/latlong.html
+  calculateDistance: function(start, end) {
     var R = 6371000; // metres
-    var φ1 = this.toRadians(user.lat);
-    var φ2 = this.toRadians(college.lat);
-    var Δφ = this.toRadians(college.lat - user.lat);
-    var Δλ = this.toRadians(college.long - user.long);
+    var φ1 = this.toRadians(start.lat);
+    var φ2 = this.toRadians(end.lat);
+    var Δφ = this.toRadians(end.lat - start.lat);
+    var Δλ = this.toRadians(end.long - start.long);
 
     var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
       Math.cos(φ1) * Math.cos(φ2) *
@@ -53,7 +48,7 @@ export default LFAdapter.extend({
 
     return Math.round(((R * c) / 1609.34) * 100) / 100; //converting to miles;
   },
-  makeProximity: function(d, lat, long) {
+  proximityBoundsFromRadius: function(d, lat, long) {
     var proximity = {};
 
 

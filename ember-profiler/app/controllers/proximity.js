@@ -1,17 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  ProximityDistance: function() { return 25;}.property(),
+  searchRadius: function() { return 25;}.property(),
   deferredUpdate: function() {this.send("findInProximity");},
   liveUpdateProximity: function() {
     Ember.run.debounce(this, this.deferredUpdate, 150);
-  }.observes("ProximityDistance"),
+  }.observes("searchRadius"),
   actions: {
     findInProximity: function() {
       if (this.get("location")) {
 
         var that = this;
-        this.store.find("college", {proximity: this.get("ProximityDistance"), location: this.get("location")}).then(function(results) {
+        this.store.find("college", {proximity: this.get("searchRadius"), location: this.get("location")}).then(function(results) {
             var resultsController = Ember.ArrayController.create({
               content: results,
               sortProperties: ['distance'],
@@ -22,10 +22,11 @@ export default Ember.Controller.extend({
         );
 
       } else {
-        this.status.warn("We couldn't not find your current location");
+        this.status.warn("We could not find your current location");
       }
     },
     viewCollege: function(collegeId) {
+      //todo: Take the user to the college page CCC-145
       console.log("Let me take you to college: " + collegeId);
     }
   }

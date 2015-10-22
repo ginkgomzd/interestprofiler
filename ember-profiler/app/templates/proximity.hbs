@@ -1,11 +1,9 @@
 <div class="proximity-main full">
 
   <button {{action "findInProximity"}} class="search-icon right"><i class="material-icons">search</i></button>
-  <h3>Search within: {{ProximityDistance}} miles</h3>
+  <h3>Search within: {{searchRadius}} miles</h3>
   <br />
-  {{input type='range' min="1" max="100" step="1" value=ProximityDistance}}
-  <!--//<input type="range" min="1" max="100" value="25" id="ProximityDistance" step="1" oninput="" />//-->
-
+  {{input type='range' min="1" max="100" step="1" value=searchRadius}}
 </div>
 <div>
   {{#if proximityResults}}
@@ -20,7 +18,6 @@
       {{/each}}
     </ul>
   {{else}}
-    {{proximityResults.length}}
     <div class="center"><strong>No Results</strong></div>
   {{/if}}
 </div>
