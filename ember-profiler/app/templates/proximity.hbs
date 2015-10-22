@@ -1,0 +1,23 @@
+<div class="proximity-main full">
+
+  <button {{action "findInProximity"}} class="search-icon right"><i class="material-icons">search</i></button>
+  <h3>Search within: {{searchRadius}} miles</h3>
+  <br />
+  {{input type='range' min="1" max="100" step="1" value=searchRadius}}
+</div>
+<div>
+  {{#if proximityResults}}
+    <ul class="collegeProximityList">
+      {{#each college in proximityResults}}
+        <li {{action "viewCollege" college.id}}>
+          {{college.collegeName}}
+          <i class="material-icons">play_arrow</i>
+          <span class="distance smaller">{{college.distance}} miles</span>
+          <div class="clear"></div>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="center"><strong>No Results</strong></div>
+  {{/if}}
+</div>

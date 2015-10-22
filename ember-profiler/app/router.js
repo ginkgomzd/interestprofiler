@@ -17,6 +17,7 @@ Router.map(function() {
   this.route('login');
   this.route('welcome');
   this.route('settings');
+  this.route('proximity');
 });
 
 export default Router;
