@@ -15,8 +15,14 @@ export default Ember.Route.extend({
 
         that.getSuggestedAlumni().then(function(alumniIds) {
           that.set("suggestedAlumni", alumniIds);
-          that.transitionTo('alumni', 0);
-          resolve(true);
+          if(params.index == 0) {
+            that.store.find('alumni', alumniIds[0]).then(function(alumniModel) {
+              resolve(alumniModel);
+            });
+          } else {
+            that.transitionTo('alumni', 0);
+            resolve(true);
+          }
         });
       });
     } else {
