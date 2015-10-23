@@ -9,16 +9,16 @@ export default Ember.Controller.extend({
      * the user wants to dismiss the item.
      */
     hotOrNot: function (hot) {
-      var hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
-      var item = this.model;
-      this.store.push('hotOrNot', {
-        // this needs work... temporarily hardcoding an ID...
-        id: 5,
-        hot: hotFlag,
-        item: item
+      var item = this.model, that = this, hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
+      this.store.find('hotOrNot', item.id).then(function(record) {
+        record.set("hot", hotFlag);
+        record.save();
+        that.send('navigateNext');
+      }, function() {
+        var record = that.store.createRecord("hotOrNot", {id: item.id, hot: hotFlag});
+        record.save();
+        that.send('navigateNext');
       });
-
-      this.send('navigateNext');
     }
   }
 });
