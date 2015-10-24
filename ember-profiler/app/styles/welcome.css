@@ -43,8 +43,11 @@ div.welcome-overlay div.logo-header {
 }
 
 .welcomeActions button.clearButton i {
-  margin-left: 25px;
-  margin-right: 15px;
+  margin-left: 15px;
   font-size: 2.0em;
+  float: left;
+}
+.welcomeActions button.clearButton span {
+  margin-left: 15px;
   float: left;
 }
