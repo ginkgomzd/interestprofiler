@@ -11,6 +11,17 @@ var rawData = Ember.Object.extend({
         }
       });
     });
+  },
+  fetchKeys: function(namespace, model) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      localforage.getItem(namespace, function (err, value) {
+        if (value && value.hasOwnProperty(model)) {
+          resolve(Object.keys(value[model].records));
+        } else {
+          resolve([]);
+        }
+      });
+    });
   }
 });
 

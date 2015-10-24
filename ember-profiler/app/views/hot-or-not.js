@@ -12,8 +12,12 @@ export default Ember.View.extend({
    */
   bounceImageIn: function() {
     var alumniImg = this.$('.img-alumni');
+
     //reset the profile image to centered, and scaled to 0,0
     alumniImg.css({transform: "matrix(0, 0, 0, 0, 0, 0)", textIndent: 0});
+
+    //reset the color to "white" (transparent so the background under shows)
+    this.$().css("background-color", "transparent");
 
     var that = this;
     //Now animate it to normal size
@@ -36,6 +40,7 @@ export default Ember.View.extend({
    */
   returnToStart: function(start) {
     var alumniImg = this.$('.img-alumni');
+    this.$().css("background-color", "transparent");
     alumniImg.css({textIndent: start }).animate({textIndent: 0 }, {
         step: function(now) {
           alumniImg.css('transform','translateX('+now+'px)');

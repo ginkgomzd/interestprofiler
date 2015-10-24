@@ -152,22 +152,26 @@ var setupService = Ember.Object.extend({
     });
   },
   staticAlumni: function() {
-    var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("alumni")) {
-        setup.localForageData.alumni = {};
-        setup.localForageData.alumni.records = {};
-      }
-      if (Object.keys(setup.localForageData.alumni.records).length < staticMasterData.alumni) {
-        staticAlumniData.forEach(function (alumni) {
-          if(!setup.localForageData.alumni.records.hasOwnProperty(alumni.id)) {
-            setup.localForageData.alumni.records[alumni.id] = alumni;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
+      localforage.getItem("H2CAlumni", function(err, value) {
+        if (!value) {
+          value = {};
+          value.alumni = {};
+          value.alumni.records = {};
+        }
+        if (Object.keys(value.alumni.records).length < staticMasterData.alumni) {
+          staticAlumniData.forEach(function (alumni) {
+            if (!value.alumni.records.hasOwnProperty(alumni.id)) {
+              value.alumni.records[alumni.id] = alumni;
+            }
+          });
+          localforage.setItem("H2CAlumni", value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   staticColleges: function() {

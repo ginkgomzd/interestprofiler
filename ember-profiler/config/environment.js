@@ -22,8 +22,8 @@ module.exports = function(environment) {
       'frame-src': "'self' *.facebook.com",
       'font-src': "'self'",
       'connect-src': "'self' https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net api.parse.com",
-      'img-src': "'self' data:",
-      'style-src': "'self' 'sha256-brx_rg0MKs7Ak8cpHylVraZAxpjgd2vlxY-XpfuTR20='",
+      'img-src': "'self' *.ginkgostreet.com data:",
+      'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     },
     parse: {

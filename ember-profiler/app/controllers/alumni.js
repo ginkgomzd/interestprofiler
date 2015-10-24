@@ -9,29 +9,16 @@ export default Ember.Controller.extend({
      * the user wants to dismiss the item.
      */
     hotOrNot: function (hot) {
-      var hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
-      var item = this.model;
-      this.store.push('hotOrNot', {
-        // this needs work... temporarily hardcoding an ID...
-        id: 5,
-        hot: hotFlag,
-        item: item
+      var item = this.model, that = this, hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
+      this.store.find('hotOrNot', item.id).then(function(record) {
+        record.set("hot", hotFlag);
+        record.save();
+        that.send('navigateNext');
+      }, function() {
+        var record = that.store.createRecord("hotOrNot", {id: item.id, hot: hotFlag});
+        record.save();
+        that.send('navigateNext');
       });
-      this.send('navigateNext');
-    },
-
-    navigateNext: function() {
-      var next = 1 + parseInt(this.model.get('id'));
-      if (next <= 2) {
-        this.transitionToRoute('alumni', next);
-      } else {
-        var that = this;
-        this.modal.confirm("you've reached the end of your reccomended alumni profiles. Continue to view careers that match your interestes.",
-          {right: {text: "Continue", action: function() {
-            that.transitionToRoute('select-clusters');
-          }}});
-      }
-    },
-
+    }
   }
 });
