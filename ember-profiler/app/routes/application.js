@@ -10,6 +10,8 @@ export default Ember.Route.extend({
   beforeModel: function() {
     if(!this.parseAuth.loggedIn) {
       this.transitionTo("login");
+    } else {
+      this.transitionTo("welcome");
     }
   },
   actions: {
