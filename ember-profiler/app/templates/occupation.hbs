@@ -11,7 +11,7 @@
         <div>{{program.awardDescription}}: {{program.title}}</div>
         <div class="collegeUrl">{{array-value model.colleges program.college "collegeURL"}}</div>
       </div>
-      <div class="programLearnMore">Tap to learn more and connect with this school.</div>
+      <div {{action "viewCollege" program.college}} class="programLearnMore">Tap to learn more and connect with this school.</div>
     {{/each}}
   </div>
 </div>
