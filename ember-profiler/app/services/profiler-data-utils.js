@@ -4,6 +4,7 @@ import onet from 'onet';
 var profilerDataUtils = Ember.Object.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
+  status: Ember.inject.service('status'),
   parseAuth: Ember.inject.service('parse-auth'),
   answerString: function () {
     var answerString = "";
@@ -84,7 +85,11 @@ var profilerDataUtils = Ember.Object.extend({
   updateAllResults: function(toReturn) {
     var that = this;
     var answerString = this.onetApiFormattedAnswerString();
-    this.get("settings").save("fetchingResults", true);
+    if (this.answerString().length > 20) {
+      this.get("status").loading("Calculating", "Results");
+    } else {
+      this.get("status").loading("Loading");
+    }
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -93,7 +98,7 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        that.get("settings").save("fetchingResults", false);
+        that.get("status").loadingComplete();
         that.get("settings").save("CalculatedAnswers", answerString);
         //This saves the current user answer string to Parse
         that.saveUserAnswers();
