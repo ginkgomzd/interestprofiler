@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
+  status: Ember.inject.service('status'),
   model: function () {
     return this.get("setupUtils").appStartup();
   },
@@ -13,6 +14,12 @@ export default Ember.Route.extend({
     }
   },
   actions: {
+    willTransition: function(transition) {
+      this.get("status").loading();
+    },
+    didTransition: function(transition) {
+      this.get("status").loadingComplete();
+    },
     logout: function() {
       this.parseAuth.logout();
       this.transitionTo("login");
