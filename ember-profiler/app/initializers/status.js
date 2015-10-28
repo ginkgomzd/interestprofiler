@@ -44,11 +44,11 @@ export function initialize(registry, application) {
       this.set("cssLoading", false);
     }
   });
-  application.register('status:main', statusObject);
-  application.inject('route', 'status', 'status:main');
-  application.inject('controller', 'status', 'status:main');
-  application.inject('view', 'status', 'status:main');
-  application.inject('component', 'status', 'status:main');
+  application.register('service:status', statusObject);
+  application.inject('route', 'status', 'service:status');
+  application.inject('controller', 'status', 'service:status');
+  application.inject('view', 'status', 'service:status');
+  application.inject('component', 'status', 'service:status');
 }
 
 export default {
