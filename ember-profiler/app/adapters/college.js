@@ -11,10 +11,10 @@ export default LFAdapter.extend({
       for (id in records) {
         push = true;
 
-        if(records[id].lat > proximity.n
-          || records[id].lat < proximity.s
-          || records[id].long < proximity.w
-          || records[id].long > proximity.e) {
+        if(records[id].lat > proximity.n ||
+          records[id].lat < proximity.s ||
+          records[id].long < proximity.w ||
+          records[id].long > proximity.e) {
           push = false;
         }
 

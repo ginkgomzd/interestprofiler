@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   model: function (params) {
     this.set("index", params.index);
 
-    if(params.index == -1 ||
+    if(params.index == -1 || // jshint ignore:line
       this.get("suggestedAlumni").length === 0 ||
       params.index > this.get("suggestedAlumni").length) {
       var that = this;
@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 
         that.getSuggestedAlumni().then(function(alumniIds) {
           that.set("suggestedAlumni", alumniIds);
-          if(params.index == 0) {
+          if(params.index == 0) { // jshint ignore:line
             that.store.find('alumni', alumniIds[0]).then(function(alumniModel) {
               resolve(alumniModel);
             });
