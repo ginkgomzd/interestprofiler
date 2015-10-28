@@ -8,7 +8,7 @@ import staticPathwayData from '../data/pathways';
 import staticProgramData from '../data/programs';
 import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
-import staticMasterData from '../data/master';
+import expectedEntityCounts from '../data/entities';
 import staticCollegeData from '../data/colleges';
 
 
@@ -33,7 +33,7 @@ var setupService = Ember.Object.extend({
         setup.localForageData.question = {};
         setup.localForageData.question.records = {};
       }
-      if (Object.keys(setup.localForageData.question.records).length < staticMasterData.questions) {
+      if (Object.keys(setup.localForageData.question.records).length < expectedEntityCounts.questions) {
         staticQuestionData.forEach(function (question) {
           if(!setup.localForageData.question.records.hasOwnProperty(question.id)) {
             setup.localForageData.question.records[question.id] = question;
@@ -52,7 +52,7 @@ var setupService = Ember.Object.extend({
         setup.localForageData['question-option'] = {};
         setup.localForageData['question-option'].records = {};
       }
-      if (Object.keys(setup.localForageData['question-option'].records).length < staticMasterData.questionOptions) {
+      if (Object.keys(setup.localForageData['question-option'].records).length < expectedEntityCounts.questionOptions) {
         staticQuestionOptionData.forEach(function (option) {
           if(!setup.localForageData['question-option'].records.hasOwnProperty(option.id)) {
             setup.localForageData['question-option'].records[option.id] = option;
@@ -71,7 +71,7 @@ var setupService = Ember.Object.extend({
         setup.localForageData.cluster = {};
         setup.localForageData.cluster.records = {};
       }
-      if (Object.keys(setup.localForageData.cluster.records).length < staticMasterData.clusters) {
+      if (Object.keys(setup.localForageData.cluster.records).length < expectedEntityCounts.clusters) {
         staticClusterData.forEach(function (cluster) {
           if(!setup.localForageData.cluster.records.hasOwnProperty(cluster.id)) {
             cluster.is_selected = false;
@@ -91,7 +91,7 @@ var setupService = Ember.Object.extend({
         setup.localForageData.pathway = {};
         setup.localForageData.pathway.records = {};
       }
-      if (Object.keys(setup.localForageData.pathway.records).length < staticMasterData.pathways) {
+      if (Object.keys(setup.localForageData.pathway.records).length < expectedEntityCounts.pathways) {
         staticPathwayData.forEach(function (pathway) {
           if(!setup.localForageData.pathway.records.hasOwnProperty(pathway.id)) {
             setup.localForageData.pathway.records[pathway.id] = pathway;
@@ -111,7 +111,7 @@ var setupService = Ember.Object.extend({
           value.occupation = {};
           value.occupation.records = {};
         }
-        if (Object.keys(value.occupation.records).length < staticMasterData.occupations) {
+        if (Object.keys(value.occupation.records).length < expectedEntityCounts.occupations) {
           staticOccupationData.forEach(function (occupation) {
             if(!value.occupation.records.hasOwnProperty(occupation.id)) {
               value.occupation.records[occupation.id] = occupation;
@@ -135,7 +135,7 @@ var setupService = Ember.Object.extend({
           value['onet-career'] = {};
           value['onet-career'].records = {};
         }
-        if (Object.keys(value['onet-career'].records).length < staticMasterData.onetCareers) {
+        if (Object.keys(value['onet-career'].records).length < expectedEntityCounts.onetCareers) {
           staticOnetCareerData.forEach(function (career) {
             if(!value['onet-career'].records.hasOwnProperty(career.id)) {
               career.score = 0;
@@ -159,7 +159,7 @@ var setupService = Ember.Object.extend({
           value.alumni = {};
           value.alumni.records = {};
         }
-        if (Object.keys(value.alumni.records).length < staticMasterData.alumni) {
+        if (Object.keys(value.alumni.records).length < expectedEntityCounts.alumni) {
           staticAlumniData.forEach(function (alumni) {
             if (!value.alumni.records.hasOwnProperty(alumni.id)) {
               value.alumni.records[alumni.id] = alumni;
@@ -183,7 +183,7 @@ var setupService = Ember.Object.extend({
           value.college = {};
           value.college.records = {};
         }
-        if (Object.keys(value.college.records).length < staticMasterData.colleges) {
+        if (Object.keys(value.college.records).length < expectedEntityCounts.colleges) {
           staticCollegeData.forEach(function (college) {
             if (!value.college.records.hasOwnProperty(college.id)) {
               value.college.records[college.id] = college;
@@ -207,7 +207,7 @@ var setupService = Ember.Object.extend({
           value.program = {};
           value.program.records = {};
         }
-        if (Object.keys(value.program.records).length < staticMasterData.programs) {
+        if (Object.keys(value.program.records).length < expectedEntityCounts.programs) {
           staticProgramData.forEach(function (program) {
             if (!value.program.records.hasOwnProperty(program.id)) {
               value.program.records[program.id] = program;

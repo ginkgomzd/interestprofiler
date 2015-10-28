@@ -1,5 +1,5 @@
 // jshint ignore: start
-var staticMasterData = {
+var expectedEntityCounts = {
   alumni: 40,
   clusters: 22,
   occupations: 643,
@@ -11,4 +11,4 @@ var staticMasterData = {
   zipCodes: 2796,
   colleges: 113
 };
-export default staticMasterData;
+export default expectedEntityCounts;
