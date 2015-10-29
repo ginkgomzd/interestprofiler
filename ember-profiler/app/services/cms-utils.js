@@ -75,7 +75,12 @@ var cmsUtils = Ember.Object.extend({
   },
   updateAll: function(lastUpdated) {
     var promises = {
-      alumni: this.updateAlumniContent(lastUpdated)
+      alumni: this.updateAlumniContent(lastUpdated),
+      clusters: this.updateContentType("cluster", "clusters", lastUpdated),
+      pathways: this.updateContentType("pathway", "pathways", lastUpdated),
+      occupations: this.updateContentType("occupation", "occupations", lastUpdated),
+      programs: this.updateContentType("program", "programs", lastUpdated),
+      colleges: this.updateContentType("college", "colleges", lastUpdated)
     };
     return Ember.RSVP.hash(promises);
   }
