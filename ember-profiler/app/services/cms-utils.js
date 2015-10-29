@@ -43,6 +43,36 @@ var cmsUtils = Ember.Object.extend({
       });
     });
   },
+  updateContentType: function(type, path, lastUpdated) {
+    var store = this.get("store");
+    var url = this.baseUrl() + "/api/" + path + "?updated=" + lastUpdated;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      ajax(url).then(function (results) {
+        var promises = [];
+        results.forEach(function(item) {
+          var promise = store.find(type, item.id).then(function(record) {
+
+            record.eachAttribute(function(name, meta) {
+              if (item.hasOwnProperty(name)) {
+                record.set(name, item[name]);
+              }
+            });
+            record.save();
+
+          }, function() {
+            var record = store.createRecord(type, item);
+            record.save();
+          });
+          promises.push(promise);
+        });
+        Ember.RSVP.all(promises).then(function() {
+          resolve(results.length);
+        });
+      }, function(error) {
+        reject(error);
+      });
+    });
+  },
   updateAll: function(lastUpdated) {
     var promises = {
       alumni: this.updateAlumniContent(lastUpdated)
