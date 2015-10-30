@@ -26,8 +26,7 @@ export default Ember.Controller.extend({
       }
     },
     viewCollege: function(collegeId) {
-      //todo: Take the user to the college page CCC-145
-      console.log("Let me take you to college: " + collegeId);
+      this.transitionToRoute("college", collegeId);
     }
   }
 });

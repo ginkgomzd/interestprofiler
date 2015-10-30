@@ -1,0 +1,29 @@
+<div class="full">
+  <div class="padded">
+    <div class="pathwayTitle">{{model.college.collegeName}}</div>
+    <div class="pathwayDesc">
+      <p><strong>{{model.college.collegeURL}}</strong></p>
+      <p>{{model.college.address1}}<br />
+      {{#if model.college.address2}}
+        {{model.college.address2}}<br />
+      {{/if}}
+      {{model.college.city}}, CA, {{model.college.zip}}</p>
+      {{#if model.college.description}}
+        <hr />
+        <p>{{{model.college.description}}}</p>
+      {{/if}}
+    </div>
+
+    <div class="occupation-list">
+      <p><strong>Programs</strong></p>
+      <ul>
+        {{#each program in model.programs}}
+          <li>
+            {{program.title}} - {{program.awardDescription}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{outlet}}
+  </div>
+</div>

@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('welcome');
   this.route('settings');
   this.route('proximity');
+  this.route('college', {path: '/college/:index'});
 });
 
 export default Router;

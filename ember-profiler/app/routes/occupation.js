@@ -8,5 +8,10 @@ export default Ember.Route.extend({
       "programs": this.store.find('program', {"occupation": params.index}),
       "colleges": this.get("rawData").fetch("H2CColleges", 'college')
     });
+  },
+  actions: {
+    viewCollege: function(collegeID) {
+      this.transitionTo("college", collegeID);
+    }
   }
 });
