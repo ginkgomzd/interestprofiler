@@ -201,12 +201,14 @@ i.salaryGrowth {
     float: right;
     color: #39b34a;
     font-weight: bold;
+    vertical-align: middle;
 }
 
 i.jobGrowth {
     float: right;
     color: #39b34a;
     font-weight: bold;
+    vertical-align: middle;
 }
 
 /* Utility Classes */
