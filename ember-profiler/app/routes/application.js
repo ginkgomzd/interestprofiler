@@ -38,6 +38,12 @@ export default Ember.Route.extend({
     },
     enableDrawerSwipe: function() {
       this.controller.set('drawerSwipeEnabled', true);
+    },
+    explainJobGrowth: function() {
+      this.modal.alert("Some description about Job Growth");
+    },
+    explainSalaryGrowth: function() {
+      this.modal.alert("Some description about Salary Growth");
     }
   }
 });
