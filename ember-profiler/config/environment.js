@@ -9,6 +9,15 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
+      },
+      modelPaths: {
+        alumni: {modelName: "alumni", apiPath: "alumni", namespace: "H2CAlumni"},
+        clusters: {modelName: "cluster", apiPath: "clusters", namespace: "H2CMain"},
+        pathways: {modelName: "pathway", apiPath: "pathways", namespace: "H2CMain"},
+        occupations: {modelName: "occupation", apiPath: "occupations", namespace: "H2COccupation"},
+        programs: {modelName: "program", apiPath: "programs", namespace: "H2CPrograms"},
+        colleges: {modelName: "college", apiPath: "colleges", namespace: "H2CColleges"},
+        onetCareers: {modelName: "onet-career", apiPath: "onet-careers", namespace: "H2COnetCareer"}
       }
     },
 
@@ -21,7 +30,7 @@ module.exports = function(environment) {
       'script-src': "'self' https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net",
       'frame-src': "'self' *.facebook.com",
       'font-src': "'self'",
-      'connect-src': "'self' https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net api.parse.com",
+      'connect-src': "'self' blob: https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net api.parse.com",
       'img-src': "'self' *.ginkgostreet.com data:",
       'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
