@@ -196,6 +196,19 @@ button.rightArrow:after {
 }
 
 
+/* Misc Multi-screen classes */
+i.salaryGrowth {
+    float: right;
+    color: #39b34a;
+    font-weight: bold;
+}
+
+i.jobGrowth {
+    float: right;
+    color: #39b34a;
+    font-weight: bold;
+}
+
 /* Utility Classes */
 
 .pageMessage {
