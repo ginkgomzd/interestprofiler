@@ -22,6 +22,20 @@ var rawData = Ember.Object.extend({
         }
       });
     });
+  },
+  setValue: function(namespace, model, id, field, value) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      localforage.getItem(namespace, function (err, data) {
+        if (data && data.hasOwnProperty(model) && data[model].records.hasOwnProperty(id)) {
+          data[model].records[id][field] = value;
+          localforage.setItem(namespace, data).then(function() {
+            resolve(true);
+          });
+        } else {
+          reject(id);
+        }
+      });
+    });
   }
 });
 
