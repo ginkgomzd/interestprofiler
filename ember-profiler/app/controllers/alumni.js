@@ -20,5 +20,26 @@ export default Ember.Controller.extend({
         that.send('navigateNext');
       });
     }
-  }
+  },
+  jobGrowth: function() {
+    var pathway = this.get("pathway");
+    if (pathway) {
+      return pathway.get("jobGrowth");
+    } else {
+      //return false;
+      return true;
+    }
+  }.property("model.pathway.jobGrowth"),
+  salaryGrowth: function() {
+    var pathway = this.get("pathway");
+    if (pathway) {
+      return pathway.get("salaryGrowth");
+    } else {
+      //return false;
+      return true;
+    }
+  }.property("model.pathway.salaryGrowth"),
+  showGrowth: function() {
+    return !!(this.get("salaryGrowth") || this.get("jobGrowth"));
+  }.property("salaryGrowth,jobGrowth")
 });
