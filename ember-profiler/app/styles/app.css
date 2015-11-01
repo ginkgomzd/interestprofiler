@@ -210,11 +210,29 @@ i.jobGrowth {
     vertical-align: middle;
 }
 
+.ribbon-container {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    margin-top: -20px;
+}
+.ribbon-container i.jobGrowth {
+    z-index: 5;
+    position: absolute;
+    left: 10px;
+}
+
+.ribbon-container i.salaryGrowth {
+    z-index: 5;
+    position: absolute;
+    right: 10px;
+}
+
 .ribbon {
     font-size: 16px !important;
     /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
 
-    width: 65%;
+    width: 55%;
 
     position: relative;
     background: #e9bd00;
