@@ -26,8 +26,7 @@ export default Ember.Controller.extend({
     if (pathway) {
       return pathway.get("jobGrowth");
     } else {
-      //return false;
-      return true;
+      return false;
     }
   }.property("model.pathway.jobGrowth"),
   salaryGrowth: function() {
@@ -35,8 +34,7 @@ export default Ember.Controller.extend({
     if (pathway) {
       return pathway.get("salaryGrowth");
     } else {
-      //return false;
-      return true;
+      return false;
     }
   }.property("model.pathway.salaryGrowth"),
   showGrowth: function() {
