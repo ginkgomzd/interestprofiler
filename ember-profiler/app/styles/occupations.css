@@ -1,0 +1,28 @@
+.salaryInfo {
+    border: 2px solid #0071bc;
+    padding: 5px;
+    font-size: 11pt;
+}
+
+.salaryInfo h2 {
+    background: #0071bc;
+    width: 100%;
+}
+
+.salaryInfo ul {
+    list-style: none;
+    padding: 0px;
+    border: 1px solid #ddd;
+    margin: 0px;
+}
+
+.salaryInfo ul li {
+    padding: 5px 10px;
+}
+.salaryInfo ul li:nth-child(odd){
+    background: #eee;
+}
+
+.salaryInfo .money {
+    float: right;
+}

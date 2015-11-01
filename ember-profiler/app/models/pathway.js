@@ -6,6 +6,8 @@ export default DS.Model.extend({
   cluster: DS.belongsTo('cluster', { async: true }),
   occupations: DS.hasMany('occupation', { async: true }),
   onetCareers: DS.hasMany('onet-career', { async: true }),
+  jobGrowth: DS.attr('boolean', {defaultValue: false}),
+  salaryGrowth: DS.attr('boolean', {defaultValue: false}),
   bookmarked: DS.attr('boolean', {defaultValue: false}),
   score: function() {
     var onetCareers = this.get("onetCareers");
