@@ -1,1 +1,11 @@
+{{#if showGrowth}}
+<div class="ribbon-container">
+  <h1 class="ribbon">
+    <strong class="ribbon-content">
+      {{#if jobGrowth}}<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i>{{/if}}
+      {{#if salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
+      HIGH DEMAND</strong>
+  </h1>
+</div>
+{{/if}}
 <img src="{{model.getImgPath}}" class="img-alumni img-responsive" />
