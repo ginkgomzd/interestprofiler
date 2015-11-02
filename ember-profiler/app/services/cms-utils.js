@@ -11,41 +11,58 @@ var cmsUtils = Ember.Object.extend({
       return 'http://here2career.beaker.ginkgostreet.com';
     }
   },
-  fetchAlumniImage: function(alum) {
+
+  //This will be used for storing Alumni images offline
+  alumniDetails: function(alum) {
 
   },
-  updateAlumniContent: function(lastUpdated) {
-    var setup = this;
+
+
+  fetchUpdatedContent: function(modelMapping, lastUpdated) {
     var store = this.get("store");
-    var url = this.baseUrl() + "/api/alumni?updated=" + lastUpdated;
+    var thisService = this;
+    var url = this.baseUrl() + "/api/" + modelMapping.apiPath + "?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       ajax(url).then(function (results) {
-
-        results.forEach(function(alum) {
-          var r = store.getById("alumni", alum.id);
-          if(typeof r === undefined || r === null) {
-            r = store.createRecord("alumni", alum);
-          } else {
-            r.eachAttribute(function(name, meta) {
-              if (alum.hasOwnProperty(name)) {
-                r.set(name, alum[name]);
-              }
-            });
+        localforage.getItem(modelMapping.namespace, function(err, value) {
+          if(!value.hasOwnProperty(modelMapping.modelName)) {
+            console.log("Model missing: " + modelMapping.modelName);
+            return reject("Missing Model");
           }
-          setup.fetchAlumniImage(alum);
-          r.save();
+
+          results.forEach(function (item) {
+            if (typeof thisService[modelMapping.modelName + "Details"] === "function") {
+              thisService[modelMapping.modelName + "Details"](item);
+            }
+            if(value[modelMapping.modelName].records.hasOwnProperty(item.id)) {
+              for(var prop in item) {
+                if (item.hasOwnProperty(prop)) {
+                  value[modelMapping.modelName].records[item.id][prop] = item[prop];
+                }
+              }
+            } else {
+              value[modelMapping.modelName].records[item.id] = item;
+            }
+
+          });
+
+          localforage.setItem(modelMapping.namespace, value).then(function() {
+            resolve(results.length);
+          });
         });
-
-        resolve(results);
-
       }, function(error) {
         reject(error);
       });
-    });
+      });
   },
   updateAll: function(lastUpdated) {
     var promises = {
-      alumni: this.updateAlumniContent(lastUpdated)
+      alumni: this.fetchUpdatedContent(EmberENV.modelPaths.alumni, lastUpdated),
+      clusters: this.fetchUpdatedContent(EmberENV.modelPaths.clusters, lastUpdated),
+      pathways: this.fetchUpdatedContent(EmberENV.modelPaths.pathways, lastUpdated),
+      occupations: this.fetchUpdatedContent(EmberENV.modelPaths.occupations, lastUpdated),
+      programs: this.fetchUpdatedContent(EmberENV.modelPaths.programs, lastUpdated),
+      colleges: this.fetchUpdatedContent(EmberENV.modelPaths.colleges, lastUpdated)
     };
     return Ember.RSVP.hash(promises);
   }
