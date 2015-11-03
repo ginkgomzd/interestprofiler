@@ -1,14 +1,14 @@
 // jshint ignore: start
 var expectedEntityCounts = {
   alumni: 40,
-  clusters: 22,
-  occupations: 643,
-  onetCareers: 1085,
-  pathways: 77,
-  programs: 13798,
-  questions: 60,
-  questionOptions: 5,
-  zipCodes: 2796,
-  colleges: 113
+  cluster: 22,
+  occupation: 643,
+  "onet-career": 1085,
+  pathway: 77,
+  program: 13798,
+  question: 60,
+  "question-option": 5,
+  zipcode: 2796,
+  college: 113
 };
 export default expectedEntityCounts;
