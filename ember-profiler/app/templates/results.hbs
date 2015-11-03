@@ -1,15 +1,17 @@
 <div>
-    <div class="results" id="results">
-      <div class="padded">
-        <h2 class="congrats">Congratulations!</h2>
-        <div>Your traits can help you find careers you might like to explore. Click on any Trait below to learn more - and when you're ready, click below to see possible careers</div>
-      </div>
-      <dl>
-        {{#each scoreArea in model}}
-          {{view 'scoreArea' scoreArea}}
-        {{/each}}
-      </dl>
+  <div class="results" id="results">
+    <div class="padded">
+      <h2 class="congrats">Congratulations!</h2>
+      <div>Your traits can help you find careers you might like to explore. Click on any Trait below to learn more - and when you're ready, click below to see possible careers</div>
     </div>
-  {{#link-to 'alumni' 1 tagName='button'}}See My Career Options{{/link-to}}
-  <button {{action "shareResults"}} class="button grayButton"><i class="material-icons">&#xE80D;</i> Share Results</button>
+    <dl>
+      {{#each scoreArea in model}}
+        {{view 'scoreArea' scoreArea}}
+      {{/each}}
+    </dl>
+  </div>
+  <div class="padded actionButtons">
+    <button {{action "shareResults"}} class="button grayButton"><i class="material-icons">&#xE80D;</i> Share Results</button>
+    <button {{action "exploreAlumni"}} class="button"><i class="material-icons">&#xE84F;</i> See My Career Options</button>
+  </div>
 </div>

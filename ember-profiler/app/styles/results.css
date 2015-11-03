@@ -113,3 +113,13 @@ dd div.desc {
 div.results p {
   line-height: 1px;
 }
+
+.actionButtons .button, .actionButtons .button.grayButton {
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 10px;
+}
+.actionButtons .button i {
+  float: left;
+}
