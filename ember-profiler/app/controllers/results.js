@@ -7,6 +7,31 @@ export default Ember.Controller.extend({
       this.send("updateWidths");
     }
   }.observes('fetching'),
+  takeScreenshotAndShare: function() {
+    if (window.plugins && window.plugins.socialsharing) {
+      html2canvas(Ember.$(".results")[0], {
+        onrendered: function (canvas) {
+          window.plugins.socialsharing.share(
+            'Checkout My Results', //message
+            'Here to Career', //title
+            canvas.toDataURL(), //image
+            null); //link
+        }
+      });
+    } else {
+      this.status.warn("There was an error loading the sharing dialog");
+    }
+  },
+  shareWithoutDescriptions: function () {
+    //Hide the descriptions
+    Ember.$("#results .desc").slideUp(300);
+    Ember.run.debounce(this, this.takeScreenshotAndShare, 25);
+  },
+  shareWithDescriptions: function () {
+    //show all of the descriptions
+    Ember.$("#results .desc").slideDown(300);
+    Ember.run.debounce(this, this.takeScreenshotAndShare, 25);
+  },
   actions: {
     updateWidths: function() {
       Ember.$(".results .score").each(function() {
@@ -25,19 +50,15 @@ export default Ember.Controller.extend({
     },
     shareResults: function() {
       var that = this;
-      if (window.plugins && window.plugins.socialsharing) {
-        html2canvas(Ember.$(".results")[0], {
-          onrendered: function (canvas) {
-            window.plugins.socialsharing.share(
-              'Checkout My Results', //message
-              'Here to Career', //title
-              canvas.toDataURL(), //image
-              null); //link
-          }
-        });
-      } else {
-        this.status.warn("There was an error loading the sharing dialog");
-      }
+      this.modal.confirm("Would you like to include the descriptions?", {
+        left: {
+          text: "No",
+          action: function() {that.shareWithoutDescriptions();}
+        },
+        right: {
+          text: "Yes",
+          action: function() {that.shareWithDescriptions();}
+        }});
     },
     exploreAlumni: function() {
       this.transitionToRoute("alumni", 0);
