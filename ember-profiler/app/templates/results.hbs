@@ -1,13 +1,12 @@
 <div>
-    <div class="results">
+    <div class="results" id="results">
       <h2>Here are your Results</h2>
-
       <dl>
         {{#each scoreArea in model}}
           {{view 'scoreArea' scoreArea}}
         {{/each}}
       </dl>
-
-      {{#link-to 'alumni' 1 tagName='button'}}See My Career Options{{/link-to}}
     </div>
+  {{#link-to 'alumni' 1 tagName='button'}}See My Career Options{{/link-to}}
+  <button {{action "shareResults"}} class="button grayButton"><i class="material-icons">&#xE80D;</i> Share Results</button>
 </div>
