@@ -38,6 +38,9 @@ export default Ember.Controller.extend({
       } else {
         this.status.warn("There was an error loading the sharing dialog");
       }
+    },
+    exploreAlumni: function() {
+      this.transitionToRoute("alumni", 0);
     }
   }
 });
