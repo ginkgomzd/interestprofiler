@@ -24,13 +24,18 @@ export default Ember.Controller.extend({
   },
   shareWithoutDescriptions: function () {
     //Hide the descriptions
-    Ember.$("#results .desc").slideUp(300);
-    Ember.run.debounce(this, this.takeScreenshotAndShare, 25);
+    //Ember.$("#results .desc").slideUp(300);
+    Ember.$("#results .desc").slideUp(300).promise().done(function() {
+      that.takeScreenshotAndShare();
+    });
   },
   shareWithDescriptions: function () {
+    var that = this;
     //show all of the descriptions
-    Ember.$("#results .desc").slideDown(300);
-    Ember.run.debounce(this, this.takeScreenshotAndShare, 25);
+    //Ember.$("#results .desc").slideDown(300);
+    Ember.$("#results .desc").slideDown(300).promise().done(function() {
+      that.takeScreenshotAndShare();
+    });
   },
   actions: {
     updateWidths: function() {
