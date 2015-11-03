@@ -70,44 +70,38 @@ var setupService = Ember.Object.extend({
       });
     });
   },
+  preloadModels: function() {
+    this.get("store").findAll("onet-career");
+    this.get("store").findAll("cluster");
+    this.get("store").findAll("pathway");
+  },
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      var staticPromises = {
+        question: setup.loadStaticDataForModel(EmberENV.modelPaths.question, staticQuestionData),
+        questionOption: setup.loadStaticDataForModel(EmberENV.modelPaths["question-option"], staticQuestionOptionData),
+        cluster: setup.loadStaticDataForModel(EmberENV.modelPaths.cluster, staticClusterData),
+        pathway: setup.loadStaticDataForModel(EmberENV.modelPaths.pathway, staticPathwayData),
+        onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
+        occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
+        alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
+        college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
+        program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData)
+      };
 
-      localforage.getItem("H2CMain", function(err, value) {
-        setup.localForageData = value || {};
-
-        var staticPromises = {
-          question: setup.loadStaticDataForModel(EmberENV.modelPaths.question, staticQuestionData),
-          questionOption: setup.loadStaticDataForModel(EmberENV.modelPaths["question-option"], staticQuestionOptionData),
-          cluster: setup.loadStaticDataForModel(EmberENV.modelPaths.cluster, staticClusterData),
-          pathway: setup.loadStaticDataForModel(EmberENV.modelPaths.pathway, staticPathwayData),
-          onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
-          occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
-          alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
-          college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
-          program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData)
-        };
-
-        Ember.RSVP.hash(staticPromises).then(function() {
-          localforage.setItem("H2CMain", setup.localForageData).then(function() {
-            setup.checkForUpdates().then(function() {
-              var today = new Date();
-              setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-              setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-                setup.get("store").findAll("onet-career");
-                setup.get("store").findAll("cluster");
-                setup.get("store").findAll("pathway");
-                resolve();
-              });
-            }, function() {
-              setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-                setup.get("store").findAll("onet-career");
-                setup.get("store").findAll("cluster");
-                setup.get("store").findAll("pathway");
-                resolve();
-              });
-            });
+      Ember.RSVP.hash(staticPromises).then(function() {
+        setup.checkForUpdates().then(function() {
+          var today = new Date();
+          setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
+          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+            setup.preloadModels();
+            resolve();
+          });
+        }, function() {
+          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+            setup.preloadModels();
+            resolve();
           });
         });
       });
