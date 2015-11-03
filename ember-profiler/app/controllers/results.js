@@ -22,6 +22,22 @@ export default Ember.Controller.extend({
 
         scoreWidget.find(".fill").css({width: newWidth, backgroundColor: bgColor});
       });
+    },
+    shareResults: function() {
+      var that = this;
+      if (window.plugins && window.plugins.socialsharing) {
+        html2canvas(Ember.$(".results")[0], {
+          onrendered: function (canvas) {
+            window.plugins.socialsharing.share(
+              'Checkout My Results', //message
+              'Here to Career', //title
+              canvas.toDataURL(), //image
+              null); //link
+          }
+        });
+      } else {
+        this.status.warn("There was an error loading the sharing dialog");
+      }
     }
   }
 });
