@@ -105,9 +105,11 @@ dd div.desc {
   padding-bottom: 15px;
 }
 
-div.results h2 {
-  margin-left: 15px;
+.congrats {
+  color: #71c28e;
+  font-weight: normal;
 }
+
 div.results p {
   line-height: 1px;
 }
