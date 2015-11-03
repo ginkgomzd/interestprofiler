@@ -38,6 +38,8 @@ var setupService = Ember.Object.extend({
       localforage.getItem(modelInfo.namespace, function(err, value) {
         if (!value) {
           value = {};
+        }
+        if (!value.hasOwnProperty(modelInfo.modelName)) {
           value[modelInfo.modelName] = {};
           value[modelInfo.modelName].records = {};
         }
