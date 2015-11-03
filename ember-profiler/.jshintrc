@@ -4,6 +4,7 @@
     "window",
     "-Promise",
     "localforage",
+    "html2canvas",
     "EmberENV"
   ],
   "browser": true,
