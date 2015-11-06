@@ -100,9 +100,26 @@ dd div.desc {
   background: #ddd;
 }
 
-div.results h2 {
-  margin-left: 15px;
+#results {
+  background-color: #fff;
+  padding-bottom: 15px;
 }
+
+.congrats {
+  color: #71c28e;
+  font-weight: normal;
+}
+
 div.results p {
   line-height: 1px;
+}
+
+.actionButtons .button, .actionButtons .button.grayButton {
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 10px;
+}
+.actionButtons .button i {
+  float: left;
 }

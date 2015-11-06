@@ -20,5 +20,6 @@ var app = new EmberApp();
 app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
 //Include our O*NET Api Library
 app.import('vendor/onet.js');
+app.import('vendor/html2canvas.js');
 
 module.exports = app.toTree();
