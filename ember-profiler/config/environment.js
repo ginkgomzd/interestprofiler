@@ -12,12 +12,18 @@ module.exports = function(environment) {
       },
       modelPaths: {
         alumni: {modelName: "alumni", apiPath: "alumni", namespace: "H2CAlumni"},
-        clusters: {modelName: "cluster", apiPath: "clusters", namespace: "H2CMain"},
-        pathways: {modelName: "pathway", apiPath: "pathways", namespace: "H2CMain"},
-        occupations: {modelName: "occupation", apiPath: "occupations", namespace: "H2COccupation"},
-        programs: {modelName: "program", apiPath: "programs", namespace: "H2CPrograms"},
-        colleges: {modelName: "college", apiPath: "colleges", namespace: "H2CColleges"},
-        onetCareers: {modelName: "onet-career", apiPath: "onet-careers", namespace: "H2COnetCareer"}
+        cluster: {modelName: "cluster", apiPath: "clusters", namespace: "H2CCluster"},
+        pathway: {modelName: "pathway", apiPath: "pathways", namespace: "H2CPathway"},
+        occupation: {modelName: "occupation", apiPath: "occupations", namespace: "H2COccupation"},
+        program: {modelName: "program", apiPath: "programs", namespace: "H2CPrograms"},
+        college: {modelName: "college", apiPath: "colleges", namespace: "H2CColleges"},
+        "onet-career": {modelName: "onet-career", apiPath: "onet-careers", namespace: "H2COnetCareer"},
+
+        // These don't really have apiPaths, but we use this entry for namespacing
+        setting: {modelName: "setting", apiPath: "", namespace: "H2CSetting"},
+        question: {modelName: "question", apiPath: "", namespace: "H2CQuestions"},
+        "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestions"},
+        zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
       }
     },
 

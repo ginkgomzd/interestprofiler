@@ -58,11 +58,11 @@ var cmsUtils = Ember.Object.extend({
   updateAll: function(lastUpdated) {
     var promises = {
       alumni: this.fetchUpdatedContent(EmberENV.modelPaths.alumni, lastUpdated),
-      clusters: this.fetchUpdatedContent(EmberENV.modelPaths.clusters, lastUpdated),
-      pathways: this.fetchUpdatedContent(EmberENV.modelPaths.pathways, lastUpdated),
-      occupations: this.fetchUpdatedContent(EmberENV.modelPaths.occupations, lastUpdated),
-      programs: this.fetchUpdatedContent(EmberENV.modelPaths.programs, lastUpdated),
-      colleges: this.fetchUpdatedContent(EmberENV.modelPaths.colleges, lastUpdated)
+      cluster: this.fetchUpdatedContent(EmberENV.modelPaths.cluster, lastUpdated),
+      pathway: this.fetchUpdatedContent(EmberENV.modelPaths.pathway, lastUpdated),
+      occupation: this.fetchUpdatedContent(EmberENV.modelPaths.occupation, lastUpdated),
+      program: this.fetchUpdatedContent(EmberENV.modelPaths.program, lastUpdated),
+      college: this.fetchUpdatedContent(EmberENV.modelPaths.college, lastUpdated)
     };
     return Ember.RSVP.hash(promises);
   }

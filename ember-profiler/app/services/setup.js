@@ -26,194 +26,33 @@ var setupService = Ember.Object.extend({
     }
     return this.get("cmsUtils").updateAll(lastUpdated);
   },
-  staticQuestions: function() {
+  clusterDefaults: function(item) {
+    item.is_selected = false;
+  },
+  "onet-careerDefaults": function(item) {
+    item.score = 0;
+  },
+  loadStaticDataForModel: function(modelInfo, staticData) {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("question")) {
-        setup.localForageData.question = {};
-        setup.localForageData.question.records = {};
-      }
-      if (Object.keys(setup.localForageData.question.records).length < expectedEntityCounts.questions) {
-        staticQuestionData.forEach(function (question) {
-          if(!setup.localForageData.question.records.hasOwnProperty(question.id)) {
-            setup.localForageData.question.records[question.id] = question;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  },
-  staticQuestionOptions: function() {
-    var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("question-option")) {
-        setup.localForageData['question-option'] = {};
-        setup.localForageData['question-option'].records = {};
-      }
-      if (Object.keys(setup.localForageData['question-option'].records).length < expectedEntityCounts.questionOptions) {
-        staticQuestionOptionData.forEach(function (option) {
-          if(!setup.localForageData['question-option'].records.hasOwnProperty(option.id)) {
-            setup.localForageData['question-option'].records[option.id] = option;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  },
-  staticClusters: function() {
-    var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("cluster")) {
-        setup.localForageData.cluster = {};
-        setup.localForageData.cluster.records = {};
-      }
-      if (Object.keys(setup.localForageData.cluster.records).length < expectedEntityCounts.clusters) {
-        staticClusterData.forEach(function (cluster) {
-          if(!setup.localForageData.cluster.records.hasOwnProperty(cluster.id)) {
-            cluster.is_selected = false;
-            setup.localForageData.cluster.records[cluster.id] = cluster;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  },
-  staticPathways: function() {
-    var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!setup.localForageData.hasOwnProperty("pathway")) {
-        setup.localForageData.pathway = {};
-        setup.localForageData.pathway.records = {};
-      }
-      if (Object.keys(setup.localForageData.pathway.records).length < expectedEntityCounts.pathways) {
-        staticPathwayData.forEach(function (pathway) {
-          if(!setup.localForageData.pathway.records.hasOwnProperty(pathway.id)) {
-            setup.localForageData.pathway.records[pathway.id] = pathway;
-          }
-        });
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    });
-  },
-  staticOccupations: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem("H2COccupation", function(err, value) {
+      localforage.getItem(modelInfo.namespace, function(err, value) {
         if (!value) {
           value = {};
-          value.occupation = {};
-          value.occupation.records = {};
         }
-        if (Object.keys(value.occupation.records).length < expectedEntityCounts.occupations) {
-          staticOccupationData.forEach(function (occupation) {
-            if(!value.occupation.records.hasOwnProperty(occupation.id)) {
-              value.occupation.records[occupation.id] = occupation;
+        if (!value.hasOwnProperty(modelInfo.modelName)) {
+          value[modelInfo.modelName] = {};
+          value[modelInfo.modelName].records = {};
+        }
+        if (Object.keys(value[modelInfo.modelName].records).length < expectedEntityCounts[modelInfo.modelName]) {
+          staticData.forEach(function (item) {
+            if (!value[modelInfo.modelName].records.hasOwnProperty(item.id)) {
+              if (typeof setup[modelInfo.modelName + "Defaults"] === "function") {
+                setup[modelInfo.modelName + "Defaults"](item);
+              }
+              value[modelInfo.modelName].records[item.id] = item;
             }
           });
-          localforage.setItem("H2COccupation", value).then(function() {
-            resolve(true);
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  },
-  staticOnetCareers: function() {
-    //var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem("H2COnetCareer", function(err, value) {
-        if (!value) {
-          value = {};
-          value['onet-career'] = {};
-          value['onet-career'].records = {};
-        }
-        if (Object.keys(value['onet-career'].records).length < expectedEntityCounts.onetCareers) {
-          staticOnetCareerData.forEach(function (career) {
-            if(!value['onet-career'].records.hasOwnProperty(career.id)) {
-              career.score = 0;
-              value['onet-career'].records[career.id] = career;
-            }
-          });
-          localforage.setItem("H2COnetCareer", value).then(function() {
-            resolve(true);
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  },
-  staticAlumni: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem("H2CAlumni", function(err, value) {
-        if (!value) {
-          value = {};
-          value.alumni = {};
-          value.alumni.records = {};
-        }
-        if (Object.keys(value.alumni.records).length < expectedEntityCounts.alumni) {
-          staticAlumniData.forEach(function (alumni) {
-            if (!value.alumni.records.hasOwnProperty(alumni.id)) {
-              value.alumni.records[alumni.id] = alumni;
-            }
-          });
-          localforage.setItem("H2CAlumni", value).then(function() {
-            resolve(true);
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  },
-  staticColleges: function() {
-    var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem("H2CColleges", function(err, value) {
-        if (!value) {
-          value = {};
-          value.college = {};
-          value.college.records = {};
-        }
-        if (Object.keys(value.college.records).length < expectedEntityCounts.colleges) {
-          staticCollegeData.forEach(function (college) {
-            if (!value.college.records.hasOwnProperty(college.id)) {
-              value.college.records[college.id] = college;
-            }
-          });
-          localforage.setItem("H2CColleges", value).then(function() {
-            resolve(true);
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  },
-  staticPrograms: function() {
-    var setup = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem("H2CPrograms", function(err, value) {
-        if (!value) {
-          value = {};
-          value.program = {};
-          value.program.records = {};
-        }
-        if (Object.keys(value.program.records).length < expectedEntityCounts.programs) {
-          staticProgramData.forEach(function (program) {
-            if (!value.program.records.hasOwnProperty(program.id)) {
-              value.program.records[program.id] = program;
-            }
-          });
-            localforage.setItem("H2CPrograms", value).then(function() {
+          localforage.setItem(modelInfo.namespace, value).then(function() {
             resolve(true);
           });
         } else {
@@ -233,44 +72,38 @@ var setupService = Ember.Object.extend({
       });
     });
   },
+  preloadModels: function() {
+    this.get("store").findAll("onet-career");
+    this.get("store").findAll("cluster");
+    this.get("store").findAll("pathway");
+  },
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      var staticPromises = {
+        question: setup.loadStaticDataForModel(EmberENV.modelPaths.question, staticQuestionData),
+        questionOption: setup.loadStaticDataForModel(EmberENV.modelPaths["question-option"], staticQuestionOptionData),
+        cluster: setup.loadStaticDataForModel(EmberENV.modelPaths.cluster, staticClusterData),
+        pathway: setup.loadStaticDataForModel(EmberENV.modelPaths.pathway, staticPathwayData),
+        onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
+        occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
+        alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
+        college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
+        program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData)
+      };
 
-      localforage.getItem("H2CMain", function(err, value) {
-        setup.localForageData = value || {};
-
-        var staticPromises = {
-          questions: setup.staticQuestions(),
-          questionOptions: setup.staticQuestionOptions(),
-          clusters: setup.staticClusters(),
-          pathways: setup.staticPathways(),
-          careers: setup.staticOnetCareers(),
-          occupations: setup.staticOccupations(),
-          alumni: setup.staticAlumni(),
-          colleges: setup.staticColleges(),
-          programs: setup.staticPrograms()
-        };
-
-        Ember.RSVP.hash(staticPromises).then(function() {
-          localforage.setItem("H2CMain", setup.localForageData).then(function() {
-            setup.checkForUpdates().then(function() {
-              var today = new Date();
-              setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-              setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-                setup.get("store").findAll("onet-career");
-                setup.get("store").findAll("cluster");
-                setup.get("store").findAll("pathway");
-                resolve();
-              });
-            }, function() {
-              setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-                setup.get("store").findAll("onet-career");
-                setup.get("store").findAll("cluster");
-                setup.get("store").findAll("pathway");
-                resolve();
-              });
-            });
+      Ember.RSVP.hash(staticPromises).then(function() {
+        setup.checkForUpdates().then(function() {
+          var today = new Date();
+          setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
+          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+            setup.preloadModels();
+            resolve();
+          });
+        }, function() {
+          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
+            setup.preloadModels();
+            resolve();
           });
         });
       });
