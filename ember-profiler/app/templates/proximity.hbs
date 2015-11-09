@@ -3,7 +3,7 @@
   <button {{action "findInProximity"}} class="search-icon right"><i class="material-icons">&#xE8B6;</i></button>
   <h3>Search within: {{searchRadius}} miles</h3>
   <br />
-  {{input type='range' min="1" max="100" step="1" value=searchRadius}}
+  {{input type='range' min="1" max="100" step="1" value=searchRadius id="ProximitySlider"}}
   <p class="proximity-of">-of-</p>
   <div {{action "refreshLocation"}} id="proximity-location" class="proximity-detail active">
     <div class="proximity-detail-header">Your Location</div>

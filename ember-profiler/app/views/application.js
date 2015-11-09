@@ -11,6 +11,10 @@ export default Ember.View.extend({
     }
   },
   panRight: function(e) {
+    var ignoredTargets = ["ProximitySlider"];
+    if(ignoredTargets.indexOf(e.target.id) !== -1) {
+      return e;
+    }
     if (this.get("controller").get("drawerSwipeEnabled")) {
       if (e.originalEvent.gesture.deltaX > 100) {
         if (e.originalEvent.gesture.pointers[0].pageX < 150) {
