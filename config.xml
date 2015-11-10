@@ -7,7 +7,7 @@
     <author email="dev@ginkgostreet.com" href="http://www.ginkgostreet.com">
         Ginkgo Street Labs
     </author>
-    <content src="index.html/#/welcome" />
+    <content src="index.html#/welcome" />
     <access origin="*" />
     <platform name="ios">
         <preference name="BackupWebStorage" value="none"/>
