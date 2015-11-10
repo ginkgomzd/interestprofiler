@@ -6,6 +6,9 @@ export default Ember.View.extend({
   templateName: 'application',
   didInsertElement: function() {
     this.get("controller").set("drawerSwipeEnabled", true);
+    if (window.cordova) {
+      Ember.$("body").addClass("platform-" + cordova.platformId);
+    }
   },
   panRight: function(e) {
     if (this.get("controller").get("drawerSwipeEnabled")) {
