@@ -23,8 +23,8 @@ export default Ember.Controller.extend({
     }
   },
   shareWithoutDescriptions: function () {
+    var that = this;
     //Hide the descriptions
-    //Ember.$("#results .desc").slideUp(300);
     Ember.$("#results .desc").slideUp(300).promise().done(function() {
       that.takeScreenshotAndShare();
     });
@@ -32,7 +32,6 @@ export default Ember.Controller.extend({
   shareWithDescriptions: function () {
     var that = this;
     //show all of the descriptions
-    //Ember.$("#results .desc").slideDown(300);
     Ember.$("#results .desc").slideDown(300).promise().done(function() {
       that.takeScreenshotAndShare();
     });
