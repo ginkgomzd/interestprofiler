@@ -1,0 +1,27 @@
+.touch {
+    width: 40%;
+}
+
+.custom {
+    width: 80%;
+    -webkit-appearance: none !important;
+    height:20px;
+    border-radius: 8px;
+    background:-webkit-gradient(linear,center top, center bottom, from(#CFDCDD),to(#DFE9EA),color-stop(50%,#DFE9EA));
+    -webkit-transition: background 450ms;
+    transition: background 450ms;
+
+}
+
+/* Change the Slider Button Color Here */
+.custom::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background: #153672;
+    height:30px;
+    width:30px;
+    border-radius: 15px;
+}
+
+.custom::-webkit-slider-thumb:before {
+    background-color: yellow;
+}
