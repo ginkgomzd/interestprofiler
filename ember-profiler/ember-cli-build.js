@@ -2,7 +2,10 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+module.exports = function(defaults) {
+  var app = new EmberApp(defaults, {
+    // Any other options
+  });
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -17,9 +20,10 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
+  app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
 //Include our O*NET Api Library
-app.import('vendor/onet.js');
-app.import('vendor/html2canvas.js');
+  app.import('vendor/onet.js');
+  app.import('vendor/html2canvas.js');
 
-module.exports = app.toTree();
+  return app.toTree();
+}
