@@ -19,10 +19,9 @@ export default Ember.Route.extend({
     },
     didTransition: function(transition) {
       this.get("status").loadingComplete();
-      var appC = this.controllerFor("application");
-      var currentRoute = appC.get("currentRouteName");
-      console.log(currentRoute);
-      //appC.set("showBackButton", !this.controllerFor().get("hideBackButton"));
+      Ember.run.later(this, function() {
+        this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
+      }, 5);
     },
     logout: function() {
       this.parseAuth.logout();
