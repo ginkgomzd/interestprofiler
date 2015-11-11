@@ -1,3 +1,15 @@
 .platform-ios {
-  border-top: 10px solid #000;
+  border-top: 20px solid #fff;
+}
+
+.platform-ios .navbar-flat {
+  top: 20px;
+}
+
+.platform-ios #menuButton {
+  top: 20px;
+}
+
+.platform-ios .oc-drawer {
+  border-top: 20px solid #fff;
 }
