@@ -62,7 +62,7 @@ div.answers button.button.answer1 {
 .backButton {
   float: left;
   font-size: 22pt;
-  line-height: 22pt;
+  line-height: 38px;
   opacity: 1;
   -webkit-transition: opacity 0.4s ease;
   -moz-transition: opacity 0.4s ease;
