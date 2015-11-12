@@ -22,11 +22,10 @@ export function initialize(registry, application) {
       var setting = this.store.getById("setting", name);
       if (setting === null) {
         this.set(name, null);
-        return null;
       } else {
         this.set(name, setting.get("value"));
-        return setting.get("value");
       }
+      return this.get(name);
     },
     save: function(name, value) {
       var setting = this.store.getById("setting", name);
@@ -36,6 +35,9 @@ export function initialize(registry, application) {
         setting.set("value", value);
       }
       setting.save();
+
+      //This is to trigger observable changes, otherwise they aren't triggered
+      this.set(name, null);
       this.set(name, value);
     }
   });
