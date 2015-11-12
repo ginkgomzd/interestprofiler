@@ -1,20 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend(Ember.SortableMixin, {
-  rawData: Ember.inject.service('raw-data'),
   sortProperties: ['score'],
   sortAscending: false,
   selected: function() {
-    return this.get('arrangedContent').filterProperty('is_selected', true);
-  }.property('model.@each.is_selected', 'model.@each.score'),
+    var selectedClusters = this.get("settings").load("selectedClusters");
+    return this.get('arrangedContent').filter(function(item, index, enumerable){
+      return selectedClusters.indexOf(item.id) !== -1;
+    });
+  }.property("settings.selectedClusters"),
   unselected: function() {
-    return this.get('arrangedContent').filterProperty('is_selected', false);
-  }.property('model.@each.is_selected', 'model.@each.score'),
+    var selectedClusters = this.get("settings").load("selectedClusters");
+    return this.get('arrangedContent').filter(function(item, index, enumerable){
+      return selectedClusters.indexOf(item.id) === -1;
+    });
+  }.property("settings.selectedClusters"),
   actions: {
     saveSelection: function() {
-      var that = this;
       if (this.get("selected").get("length") === 3) {
-        that.transitionToRoute('select-pathways');
+        this.transitionToRoute('select-pathways');
       } else {
         if (this.get("selected").get("length") > 3 ) {
           this.modal.alert("You may only select 3 clusters");
@@ -23,12 +27,18 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
         }
       }
     },
-    toggleClusterSelection: function(cluster) {
-      var that = this;
-      cluster.toggleProperty("is_selected");
-      cluster.save();
-      this.get("rawData").setValue("H2CMain", "cluster", cluster.get("id"), "is_selected", cluster.get("is_selected"));
-      that.set("toggling", cluster.get("id"));
+    toggleClusterSelection: function(clusterId) {
+      var selectedClusters = this.get("settings").load("selectedClusters") || [];
+      var index = selectedClusters.indexOf(clusterId);
+      this.set("toggling", clusterId);
+      if(index === -1) {
+        //select it
+        selectedClusters.push(clusterId);
+      } else {
+        //unselect it
+        selectedClusters.splice(index, 1);
+      }
+      this.get("settings").save("selectedClusters", selectedClusters);
     }
   }
 });
