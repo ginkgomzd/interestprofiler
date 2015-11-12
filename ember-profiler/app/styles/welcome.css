@@ -8,7 +8,7 @@
   margin: 0px;
   z-index: 9999;
   color: #fff;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 div.welcome-overlay div.logo-header {
@@ -16,11 +16,12 @@ div.welcome-overlay div.logo-header {
 }
 
 .welcome-header {
-  padding: 30px;
+  padding: 0px 30px;
 }
 .welcome-header h1 {
   font-weight: normal;
   font-size: 2.2em;
+  margin-top: 10px;
 }
 .welcome-header span {
   font-size: 1.6em;

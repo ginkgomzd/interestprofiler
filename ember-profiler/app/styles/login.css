@@ -9,8 +9,25 @@
 }
 .logo-header{
   background: #153672;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 5px;
+  text-align: center;
+}
+.logo-header img {
+  margin: auto;
+  border-radius: 50%;
+  background-color: #ddd;
+  padding: 10px;
+}
+.logo-header h2 {
+  color: #fff;
+  font-weight: normal;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+.login-logo {
+  max-width: 30%;
 }
 .logo-header .logo {
   border-radius: 200px;
