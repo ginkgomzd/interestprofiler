@@ -26,9 +26,6 @@ var setupService = Ember.Object.extend({
     }
     return this.get("cmsUtils").updateAll(lastUpdated);
   },
-  clusterDefaults: function(item) {
-    item.is_selected = false;
-  },
   "onet-careerDefaults": function(item) {
     item.score = 0;
   },
