@@ -1,5 +1,8 @@
 {{view "main-menu"}}
 <div class="mainContent {{settings.ProgressStyle}}">
+  {{#if showBackButton}}
+    <div {{action "registerBackButtonClick"}} class="backButton"><i class="material-icons">&#xE166;</i></div>
+  {{/if}}
     {{outlet}}
 </div>
 {{view "modal"}}

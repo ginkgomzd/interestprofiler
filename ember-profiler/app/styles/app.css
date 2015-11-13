@@ -60,7 +60,7 @@ body {
 }
 .mainContent {
   /*  This makes the various pieces relatively space, start below the fixed header */
-  padding-top: 74px;
+  padding-top: 50px;
 }
 .mainContent>div {
     margin-left: 15px;
@@ -131,6 +131,30 @@ ul.navbar-nav {
 }
 ul.navbar-nav li a {
     color: #235ABE !important;
+}
+
+.mainContent .backButton {
+  background: #235ABE;
+  color: #fff;
+
+  border-right: 1px solid #153672;
+  border-bottom: 1px solid #153672;
+
+  border-bottom-right-radius:50%;
+  border-top-right-radius:50%;
+  height: 32px;
+  width: 35px;
+  position: fixed;
+  left: 0px;
+  margin: 0px;
+
+  font-size: 22pt;
+  line-height: 35px;
+  vertical-align: middle;
+  text-align: center;
+}
+.mainContent>.backButton + div {
+  margin-top: 30px;
 }
 
 .mainContent button, .button {
@@ -282,11 +306,10 @@ i.jobGrowth {
 
 /* Utility Classes */
 
-.pageMessage {
+div.pageMessage, .pageMessage {
   font-size: 10pt;
   font-weight: bold;
-  margin-top: 10px;
-  padding-bottom: 10px;
+  padding: 0px 15px 10px 15px;
 }
 
 .left {
@@ -304,7 +327,6 @@ div.full,.mainContent div.full,#mainContent div.full {
 }
 
 div.gray {
-  padding: 15px;
   background: #ddd;
 }
 .padded {

@@ -19,6 +19,9 @@ export default Ember.Route.extend({
     },
     didTransition: function(transition) {
       this.get("status").loadingComplete();
+      Ember.run.later(this, function() {
+        this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
+      }, 5);
     },
     logout: function() {
       this.parseAuth.logout();
@@ -44,6 +47,12 @@ export default Ember.Route.extend({
     },
     explainSalaryGrowth: function() {
       this.modal.alert("Some description about Salary Growth");
+    },
+    registerBackButtonClick: function() {
+      this.controllerFor(this.controllerFor("application").get("currentRouteName")).send("executeBackAction");
+    },
+    executeBackAction: function() {
+      window.history.back();
     }
   }
 });

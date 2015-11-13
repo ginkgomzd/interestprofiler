@@ -56,11 +56,10 @@ export default Ember.Route.extend({
         this.transitionTo('results');
       }
     },
-    goBack: function() {
-      var prev = parseInt(this.controller.get('model').get('index')) - 1;
-      if (prev > 0) {
-        this.transitionTo('question', prev );
-      }
+    executeBackAction: function() {
+      //Todo: CCC-187 Unset last answer made
+      //returning true will cause the action to bubble and return us to previous screen.
+      return true;
     }
   }
 });
