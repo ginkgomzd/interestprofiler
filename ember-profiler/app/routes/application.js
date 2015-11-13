@@ -26,8 +26,12 @@ export default Ember.Route.extend({
       }, 5);
 
       //This is to hide the Splashscreen
-      if (this.stillLoading && navigator && navigator.splashscreen) {
-        navigator.splashscreen.hide();
+      if (this.stillLoading) {
+        if (navigator && navigator.splashscreen) {
+          setTimeout(function () {
+            navigator.splashscreen.hide();
+          }, 700);
+        }
         this.stillLoading = false;
       }
     },
