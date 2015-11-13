@@ -67,7 +67,11 @@ export default Ember.Route.extend({
       window.history.back();
     },
     openExternalLink: function(url) {
+      if(url.substring(0,4) !== 'http') {
+        url = "http://" + url;
+      }
       if (typeof(cordova) !== 'undefined' && cordova.InAppBrowser) {
+        console.log("open system");
         cordova.InAppBrowser.open(url,"_system");
       } else {
         window.open(url,"_blank");
