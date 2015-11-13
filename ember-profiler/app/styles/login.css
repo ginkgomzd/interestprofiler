@@ -11,7 +11,6 @@
   background: #153672;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-bottom: 40px;
 }
 .logo-header .logo {
   border-radius: 200px;
@@ -62,7 +61,7 @@ span.icon.linkedin {
 .login-footer {
   background: #153672;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   padding: 15px 0 15px 0;
   color: #435C89;
@@ -96,4 +95,18 @@ span.icon.linkedin {
 }
 #signup-actions, #login-password-confirm, #reset-actions {
   display: none;
+}
+
+.login-buttons {
+  padding-top: 20px;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 50%;
+}
+
+/***[ CCC-155 Fix login overlap on small screens ]***/
+@media screen and (max-height: 550px) {
+  .login-buttons {
+    padding-bottom: 50px;
+  }
 }
