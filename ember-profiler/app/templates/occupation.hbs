@@ -3,7 +3,18 @@
     You're Exploring...
     <div class="clusterName">{{model.occupation.title}} : {{model.occupation.awardDescription}}</div>
   </div>
-  
+
+  <div class="padded">
+    <div class="salaryInfo">
+      <p><strong>Salary Information:</strong></p>
+      <ul>
+        <li>2 years before: <span class="money">{{money-format model.occupation.medianPre2}}</span></li>
+        <li>2 years after: <span class="money">{{money-format model.occupation.medianPost2}}</span></li>
+        <li>5 years after: <span class="money">{{money-format model.occupation.medianPost5}}</span></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="padded">
     {{#each program in model.programs}}
       <div class="programDesc">

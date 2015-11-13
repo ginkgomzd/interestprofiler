@@ -22,6 +22,9 @@
         <li {{action "exploreOccupation" occ.id}}>
           <strong>{{occ.title}}</strong> - {{occ.awardDescription}}
           <i class="material-icons right exploreOccupation">&#xE409;</i>
+          {{#if occ.medianPre2}}
+            <p>{{money-format occ.medianPre2}} - {{money-format occ.medianPost5}}</p>
+          {{/if}}
         </li>
       {{/each}}
       </ul>
