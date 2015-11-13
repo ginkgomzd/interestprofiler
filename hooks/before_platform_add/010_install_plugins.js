@@ -16,6 +16,7 @@ var pluginlist = [
 
     "cordova-plugin-whitelist",
     "cordova-plugin-geolocation",
+    "cordova-plugin-splashscreen",
     "https://github.com/Paldom/SpinnerDialog.git",
     "https://github.com/Telerik-Verified-Plugins/SocialSharing",
     "phonegap-facebook-plugin --variable APP_ID="+FACEBOOK_APP_ID+" --variable APP_NAME=" + FACEBOOK_APP_NAME
