@@ -32,7 +32,7 @@ export default Ember.Route.extend({
   getSuggestedAlumni: function() {
     //This is rather simple right now, but in future it will have more
     // logic for filtering/matching alumni
-    return this.get("rawData").fetchKeys("H2CAlumni", "alumni");
+    return this.get("rawData").fetchKeys(EmberENV.modelPaths.alumni.namespace, "alumni");
   },
   actions: {
     navigateNext: function() {
@@ -46,6 +46,28 @@ export default Ember.Route.extend({
             that.transitionTo('select-clusters');
           }}});
       }
+    },
+    /**
+     * This method is triggered by the global back-button and should
+     * "unset" the previous selection
+     */
+    executeBackAction: function() {
+      var prev = parseInt(this.get('index')) - 1;
+      if (prev > -1) {
+        //Set the index back one.
+        this.set("index", prev);
+        //Unset what we last selected
+        this.store.find('hotOrNot', this.suggestedAlumni[prev]).then(function(hotOrNotModel) {
+          hotOrNotModel.destroyRecord();
+          //Transition Backwards.
+          //We are using history here rather than transition to prev,
+          // because otherwise it breaks the backbutton when you get to the first
+          //alumni profile. You would end up in a loop.
+          window.history.back();
+        });
+        return false;
+      }
+      return true;
     }
   }
 });
