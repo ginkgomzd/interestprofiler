@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  stillLoading: true,
   model: function () {
     return this.get("setupUtils").appStartup();
   },
@@ -19,9 +20,16 @@ export default Ember.Route.extend({
     },
     didTransition: function(transition) {
       this.get("status").loadingComplete();
+
       Ember.run.later(this, function() {
         this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
       }, 5);
+
+      //This is to hide the Splashscreen
+      if (this.stillLoading && navigator && navigator.splashscreen) {
+        navigator.splashscreen.hide();
+        this.stillLoading = false;
+      }
     },
     logout: function() {
       this.parseAuth.logout();
