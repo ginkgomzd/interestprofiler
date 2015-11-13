@@ -4,13 +4,13 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
   sortProperties: ['score'],
   sortAscending: false,
   selected: function() {
-    var selectedClusters = this.get("settings").load("selectedClusters");
+    var selectedClusters = this.get("settings").load("selectedClusters") || [];
     return this.get('arrangedContent').filter(function(item, index, enumerable){
       return selectedClusters.indexOf(item.id) !== -1;
     });
   }.property("settings.selectedClusters"),
   unselected: function() {
-    var selectedClusters = this.get("settings").load("selectedClusters");
+    var selectedClusters = this.get("settings").load("selectedClusters") || [];
     return this.get('arrangedContent').filter(function(item, index, enumerable){
       return selectedClusters.indexOf(item.id) === -1;
     });
