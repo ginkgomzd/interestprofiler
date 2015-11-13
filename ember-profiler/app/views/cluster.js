@@ -18,7 +18,7 @@ export default Ember.View.extend({
     var that = this;
     this.$().slideUp(function() {
       Ember.$("body").animate({ scrollTop: 0 }, {complete: function() {
-        that.get('controller').send('toggleClusterSelection', that.cluster);
+        that.get('controller').send('toggleClusterSelection', that.cluster.get("id"));
       }});
     });
   }

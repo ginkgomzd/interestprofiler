@@ -4,12 +4,17 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
   sortProperties: ['score'],
   sortAscending: false,
   selected: function() {
-    return this.get('arrangedContent').filterProperty('is_selected', true);
-  }.property('model.@each.is_selected', 'model.@each.score'),
+    var selectedClusters = this.get("settings").load("selectedClusters");
+    return this.get('arrangedContent').filter(function(item, index, enumerable){
+      return selectedClusters.indexOf(item.id) !== -1;
+    });
+  }.property("settings.selectedClusters"),
   unselected: function() {
-    return this.get('arrangedContent').filterProperty('is_selected', false);
-  }.property('model.@each.is_selected', 'model.@each.score'),
-
+    var selectedClusters = this.get("settings").load("selectedClusters");
+    return this.get('arrangedContent').filter(function(item, index, enumerable){
+      return selectedClusters.indexOf(item.id) === -1;
+    });
+  }.property("settings.selectedClusters"),
   actions: {
     saveSelection: function() {
       if (this.get("selected").get("length") === 3) {
@@ -22,10 +27,18 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
         }
       }
     },
-    toggleClusterSelection: function(cluster) {
-      cluster.toggleProperty("is_selected");
-      cluster.save();
-      this.set("toggling", cluster.get("id"));
+    toggleClusterSelection: function(clusterId) {
+      var selectedClusters = this.get("settings").load("selectedClusters") || [];
+      var index = selectedClusters.indexOf(clusterId);
+      this.set("toggling", clusterId);
+      if(index === -1) {
+        //select it
+        selectedClusters.push(clusterId);
+      } else {
+        //unselect it
+        selectedClusters.splice(index, 1);
+      }
+      this.get("settings").save("selectedClusters", selectedClusters);
     }
   }
 });
