@@ -10,6 +10,7 @@ import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
 import expectedEntityCounts from '../data/entities';
 import staticCollegeData from '../data/colleges';
+import staticZipData from '../data/zipcodes';
 
 
 var setupService = Ember.Object.extend({
@@ -86,7 +87,8 @@ var setupService = Ember.Object.extend({
         occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
         alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
         college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
-        program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData)
+        program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
+        zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData)
       };
 
       Ember.RSVP.hash(staticPromises).then(function() {
