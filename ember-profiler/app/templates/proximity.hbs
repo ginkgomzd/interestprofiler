@@ -4,6 +4,13 @@
   <h3>Search within: {{searchRadius}} miles</h3>
   <br />
   {{input type='range' min="1" max="100" step="1" value=searchRadius}}
+  <p class="proximity-of">-of-</p>
+  <div {{action "refreshLocation"}} id="proximity-location" class="proximity-detail active">
+    <div class="proximity-detail-header">Your Location</div>
+  </div>
+  <div {{action "zipLocation"}} id="proximity-zip" class="proximity-detail">
+    <div class="proximity-detail-header">Zip Code: {{input type=number size=15 value=zipCodeSelected class="zipCodeInput"}}</div>
+  </div>
 </div>
 <div>
   {{#if proximityResults}}

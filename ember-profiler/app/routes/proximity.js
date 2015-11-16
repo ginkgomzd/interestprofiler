@@ -23,5 +23,12 @@ export default Ember.Route.extend({
       }
 
     });
+  },
+  actions: {
+    refreshLocation: function () {
+      this.getLocation();
+      Ember.$("#proximity-zip").removeClass("active");
+      Ember.$("#proximity-location").addClass("active");
+    }
   }
 });
