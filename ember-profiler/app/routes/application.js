@@ -65,6 +65,13 @@ export default Ember.Route.extend({
     },
     executeBackAction: function() {
       window.history.back();
+    },
+    openExternalLink: function(url) {
+      if (typeof(cordova) !== 'undefined' && cordova.InAppBrowser) {
+        cordova.InAppBrowser.open(url,"_system");
+      } else {
+        window.open(url,"_blank");
+      }
     }
   }
 });
