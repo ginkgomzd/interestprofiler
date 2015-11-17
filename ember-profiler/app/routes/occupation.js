@@ -12,6 +12,9 @@ export default Ember.Route.extend({
   actions: {
     viewCollege: function(collegeID) {
       this.transitionTo("college", collegeID);
+    },
+    openCollegeLink: function(data, id) {
+      this.send("openExternalLink", data[id]['collegeURL']);
     }
   }
 });
