@@ -22,3 +22,29 @@
 .collegeProximityList li i, .collegeProximityList .distance {
     float: right;
 }
+
+.proximity-of {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+.proximity-detail {
+    border: 3px solid #0a4a72;
+    margin: 3px 15px 0px 15px;
+    border-radius: 10px;
+}
+.proximity-detail.active {
+    background: #7d92ab;
+}
+.proximity-detail-header {
+    width: 100%;
+    font-weight: bold;
+    padding: 3px 10px;
+}
+.zipCodeInput {
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px solid #0a4a72;
+    text-align: center;
+    color: #fff;
+}

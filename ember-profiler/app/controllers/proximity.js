@@ -5,7 +5,15 @@ export default Ember.Controller.extend({
   deferredUpdate: function() {this.send("findInProximity");},
   liveUpdateProximity: function() {
     Ember.run.debounce(this, this.deferredUpdate, 150);
-  }.observes("searchRadius"),
+  }.observes("searchRadius,location"),
+  zipCodeSelected: function() { return "";}.property(),
+  updateLocationFromZip: function() {
+    var that = this;
+    this.get("store").find("zipcode", this.get("zipCodeSelected")).then(function(zipcode) {
+      console.log({lat: zipcode.get("lat"), long: zipcode.get("long")});
+      that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
+    });
+  }.observes("zipCodeSelected"),
   actions: {
     findInProximity: function() {
       if (this.get("location")) {
@@ -27,6 +35,11 @@ export default Ember.Controller.extend({
     },
     viewCollege: function(collegeId) {
       this.transitionToRoute("college", collegeId);
+    },
+    zipLocation: function() {
+      Ember.$("#proximity-location").removeClass("active");
+      Ember.$("#proximity-zip").addClass("active");
+      this.updateLocationFromZip();
     }
   }
 });
