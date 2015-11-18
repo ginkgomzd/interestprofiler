@@ -2,18 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
-  model: function(params) {
+  model: function(params, transition) {
 
     if (params.index == 0) { // jshint ignore:line
       var localAnswerString = this.get("profilerDataUtils").answerString();
 
       if (localAnswerString.length > 0 && localAnswerString.length < 60) {
+        transition.abort();
         return this.transitionTo('question', localAnswerString.length + 1);
       }
+      transition.abort();
       return this.transitionTo('question', 1);
     }
 
-    return this.store.find('question', params.index);
+    return this.get("store").find('question', params.index);
   },
   actions: {
     makeSelection: function(selectedAnswer) {
