@@ -6,12 +6,10 @@ export default Ember.Route.extend({
 
     if (params.index == 0) { // jshint ignore:line
       var localAnswerString = this.get("profilerDataUtils").answerString();
-
+      
       if (localAnswerString.length > 0 && localAnswerString.length < 60) {
-        transition.abort();
         return this.transitionTo('question', localAnswerString.length + 1);
       }
-      transition.abort();
       return this.transitionTo('question', 1);
     }
 
