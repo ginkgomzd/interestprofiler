@@ -12,6 +12,7 @@ export default Ember.Route.extend({
       var setLocation;
 
       setLocation = function (position) {
+        that.get("controller").set("locationType", "device");
         that.get("controller").set("location", {lat: position.coords.latitude, long: position.coords.longitude});
         resolve({lat: position.coords.latitude, long: position.coords.longitude});
       };

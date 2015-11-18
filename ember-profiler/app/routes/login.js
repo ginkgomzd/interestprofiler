@@ -7,10 +7,19 @@ export default Ember.Route.extend({
       this.transitionTo("welcome");
     }
   },
+  registerLoginLocationAnalytics: function(method) {
+    var that = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        that.send("analytics", "loginLocation", {latitude: "" + position.coords.latitude, longitude: "" + position.coords.longitude, "method": method});
+      });
+    }
+  },
   actions: {
     loginWithFacebook: function() {
       var that = this;
       this.parseAuth.authenticate_fb(function() {
+        that.registerLoginLocationAnalytics("facebook");
         that.transitionTo("welcome");
       },
       function(user, error) {
@@ -31,6 +40,7 @@ export default Ember.Route.extend({
         function() {
           //success
           that.get("setupUtils").handleLogin().then(function() {
+            that.registerLoginLocationAnalytics("email");
             that.transitionTo("welcome");
           });
         },
@@ -49,7 +59,8 @@ export default Ember.Route.extend({
           function() {
             //success
               that.get("setupUtils").handleLogin().then(function() {
-              that.transitionTo("welcome");
+                that.registerLoginLocationAnalytics("email-signup");
+                that.transitionTo("welcome");
             });
           },
           function(user, error) {

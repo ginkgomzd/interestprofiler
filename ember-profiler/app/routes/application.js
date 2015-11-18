@@ -22,6 +22,11 @@ export default Ember.Route.extend({
       this.get("status").loadingComplete();
 
       Ember.run.later(this, function() {
+        //This will run MANY times and could cause performance issues
+        //Or lead to a lot of bandwidth being used.
+        //The client has asked for it, so we are implementing it.
+        this.send("analytics", "pageLoad", this.controller.currentRouteName);
+        
         this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
       }, 5);
 
@@ -75,6 +80,24 @@ export default Ember.Route.extend({
         cordova.InAppBrowser.open(url,"_system");
       } else {
         window.open(url,"_blank");
+      }
+    },
+    /**
+     * This function is used to register analytics.
+     * We are encapsulating it so that we have easier
+     * access to refactor when analytics are sent in
+     * reference to user vs sessions etc.
+     *
+     * @param type
+     * @param data
+     */
+    analytics: function(type, data) {
+      //for reference: new Parse.GeoPoint({latitude: 40.0, longitude: -30.0});
+      if(typeof(data) !== "object") {
+        data = {"data": data};
+      }
+      if(Parse && Parse.Analytics) {
+        Parse.Analytics.track(type, data);
       }
     }
   }
