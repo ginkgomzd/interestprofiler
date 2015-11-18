@@ -47,4 +47,21 @@ if (rootdir && platform === 'android') {
     fs.writeFileSync(builtSrc, data, 'utf8');
   }
 
+  //Handle movement of bolts-android lib
+  var parseVersion = path.join(rootdir, 'platforms/android/libs/bolts-android-1.1.4.jar');
+  var fbVersion = path.join(rootdir, 'platforms/android/phonegap-facebook-plugin/here2career-FacebookLib/libs/bolts-android-1.1.2.jar');
+  var newVersion = path.join(rootdir, 'platforms/android/phonegap-facebook-plugin/here2career-FacebookLib/libs/bolts-android-1.1.4.jar');
+
+  if (fs.existsSync(fbVersion)) {
+    fs.unlinkSync(fbVersion);
+  }
+
+  if (!fs.existsSync(newVersion) && fs.existsSync(parseVersion)) {
+    fs.renameSync(parseVersion, newVersion);
+  }
+
+  if (fs.existsSync(parseVersion) && fs.existsSync(newVersion)) {
+    fs.unlinkSync(parseVersion);
+  }
+
 }
