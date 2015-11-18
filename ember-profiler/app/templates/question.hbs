@@ -4,7 +4,7 @@
 
     <div class="answers">
         {{#each opt in questionOptions}}
-          <button {{action 'saveSelection' opt.value}} class="button answer{{opt.value}}">{{opt.label}}</button>
+          <button {{action 'makeSelection' opt.value}} class="button answer{{opt.value}}">{{opt.label}}</button>
         {{/each}}
     </div>
 </div>
