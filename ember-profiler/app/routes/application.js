@@ -76,6 +76,24 @@ export default Ember.Route.extend({
       } else {
         window.open(url,"_blank");
       }
+    },
+    /**
+     * This function is used to register analytics.
+     * We are encapsulating it so that we have easier
+     * access to refactor when analytics are sent in
+     * reference to user vs sessions etc.
+     *
+     * @param type
+     * @param data
+     */
+    analytics: function(type, data) {
+      //for reference: new Parse.GeoPoint({latitude: 40.0, longitude: -30.0});
+      if(typeof(data) !== "object") {
+        data = {"data": data};
+      }
+      if(Parse && Parse.Analytics) {
+        Parse.Analytics.track(type, data);
+      }
     }
   }
 });
