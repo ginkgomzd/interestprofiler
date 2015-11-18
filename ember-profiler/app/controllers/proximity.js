@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
   updateLocationFromZip: function() {
     var that = this;
     this.get("store").find("zipcode", this.get("zipCodeSelected")).then(function(zipcode) {
-      console.log({lat: zipcode.get("lat"), long: zipcode.get("long")});
       that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
     });
   }.observes("zipCodeSelected"),
