@@ -22,6 +22,13 @@ Ember.LinkView.reopen({
     attributeBindings: ['data-toggle', 'data-target']
 });
 
+//This is to init the parse library
+document.addEventListener('deviceready', function() {
+    if(parsePlugin) {
+        parsePlugin.initialize(config.parse.appId, config.parse.clientKey);
+    }
+}, false);
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;
