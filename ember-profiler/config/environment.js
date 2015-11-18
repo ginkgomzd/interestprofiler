@@ -22,7 +22,7 @@ module.exports = function(environment) {
         // These don't really have apiPaths, but we use this entry for namespacing
         setting: {modelName: "setting", apiPath: "", namespace: "H2CSetting"},
         question: {modelName: "question", apiPath: "", namespace: "H2CQuestions"},
-        "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestions"},
+        "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestionOptions"},
         zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
       }
     },
