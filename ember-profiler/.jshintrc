@@ -6,7 +6,8 @@
     "localforage",
     "html2canvas",
     "EmberENV",
-    "cordova"
+    "cordova",
+    "Parse"
   ],
   "browser": true,
   "boss": true,
