@@ -10,9 +10,21 @@ export default Ember.Controller.extend({
   updateLocationFromZip: function() {
     var that = this;
     this.get("store").find("zipcode", this.get("zipCodeSelected")).then(function(zipcode) {
+      that.set("locationType", "zip");
       that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
     });
   }.observes("zipCodeSelected"),
+  registerLocationAnalytics: function() {
+    var thisLocation = this.get("location");
+    var PS = {};
+    PS.latitude = "" + thisLocation.lat;
+    PS.longitude = "" + thisLocation.long;
+    PS.locationType = this.get("locationType");
+    if(this.get("locationType") === "zip") {
+      PS.zipcode = this.get("zipCodeSelected");
+    }
+    this.send("analytics", "proximitySearch", PS);
+  }.observes("location"),
   actions: {
     findInProximity: function() {
       if (this.get("location")) {
