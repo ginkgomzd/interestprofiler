@@ -16,6 +16,14 @@ export default Ember.Route.extend({
     return this.store.find('question', params.index);
   },
   actions: {
+    makeSelection: function(selectedAnswer) {
+      var that = this;
+      Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0.3 })}, 200, function() {
+          Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0 })}, 200, function() {
+            that.send("saveSelection", selectedAnswer);
+          });
+      });
+    },
     saveSelection: function(selectedAnswer) {
       var answer = {
         id: this.controller.get('model').get('id'),
