@@ -44,7 +44,9 @@ module.exports = function(environment) {
     parse: {
       appId: "hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3",
       javascriptKey: "1gTcF2FQn6tKP52SbAMForTcsC6yHkn7BHRiqEEx",
-      FacebookAppId: "699449926827946"
+      clientKey: "YwRrf7cxtwGoEHSJR5SPLXTuyBHEh1hdaRJUFxIo",
+      FacebookAppId: "699449926827946",
+      FacebookAppName: "here-career"
     }
   };
 
