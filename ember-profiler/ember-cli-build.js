@@ -28,8 +28,6 @@ module.exports = function(defaults) {
   app.import('vendor/onet.js');
   //Include the screenshot library
   app.import('vendor/html2canvas.js');
-  //Include the slider widget
-  app.import('vendor/range-touch.min.js');
 
   return app.toTree();
 }
