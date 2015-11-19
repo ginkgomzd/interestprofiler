@@ -13,3 +13,16 @@
 .platform-ios .oc-drawer {
   border-top: 20px solid #fff;
 }
+.statusbar-helper {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  left: 0px;
+  top: 0px;
+  height: 20px;
+  background-color: #fff;
+  display: none;
+}
+.platform-ios .statusbar-helper {
+  display: block;
+}
