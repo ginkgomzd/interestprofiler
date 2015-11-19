@@ -26,7 +26,7 @@ export default Ember.Route.extend({
         //Or lead to a lot of bandwidth being used.
         //The client has asked for it, so we are implementing it.
         this.send("analytics", "pageLoad", this.controller.currentRouteName);
-        
+
         this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
       }, 5);
 
@@ -76,7 +76,6 @@ export default Ember.Route.extend({
         url = "http://" + url;
       }
       if (typeof(cordova) !== 'undefined' && cordova.InAppBrowser) {
-        console.log("open system");
         cordova.InAppBrowser.open(url,"_system");
       } else {
         window.open(url,"_blank");
