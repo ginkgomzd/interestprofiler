@@ -7,7 +7,7 @@
     margin-bottom: 15px;
 }
 .proximity-main input {
- -webkit-user-select: all !important;
+  -webkit-user-select: auto !important;
 }
 .collegeProximityList {
     padding: 0px;
