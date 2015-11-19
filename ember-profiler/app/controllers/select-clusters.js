@@ -17,14 +17,12 @@ export default Ember.Controller.extend(Ember.SortableMixin, {
   }.property("settings.selectedClusters"),
   actions: {
     saveSelection: function() {
-      if (this.get("selected").get("length") === 3) {
-        this.transitionToRoute('select-pathways');
+      if (this.get("selected").get("length") > 3 ) {
+        this.modal.alert("You may only select 3 clusters");
+      } else if(this.get("selected").get("length") < 1) {
+        this.modal.alert("You must select at least 1 cluster");
       } else {
-        if (this.get("selected").get("length") > 3 ) {
-          this.modal.alert("You may only select 3 clusters");
-        } else {
-          this.modal.alert("You must select 3 clusters");
-        }
+        this.transitionToRoute('select-pathways');
       }
     },
     toggleClusterSelection: function(clusterId) {
