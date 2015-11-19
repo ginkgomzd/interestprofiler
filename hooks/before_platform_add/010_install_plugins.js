@@ -19,7 +19,8 @@ var pluginlist = [
     "cordova-plugin-splashscreen",
     "https://github.com/Paldom/SpinnerDialog.git",
     "https://github.com/Telerik-Verified-Plugins/SocialSharing",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-transport-security"
 
 ];
 
