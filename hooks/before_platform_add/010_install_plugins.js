@@ -6,6 +6,8 @@
 var config = require('../../ember-profiler/config/environment');
 config = config();
 
+var platform = process.env.CORDOVA_PLATFORMS;
+
 // add your plugins to this list--either the identifier, the filesystem location or the URL
 var pluginlist = [
 // appear to be built in reverse
@@ -18,9 +20,15 @@ var pluginlist = [
     "https://github.com/Paldom/SpinnerDialog.git",
     "https://github.com/Telerik-Verified-Plugins/SocialSharing",
     "cordova-plugin-inappbrowser",
-    "phonegap-facebook-plugin --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName
-    //"cordova-plugin-facebook4 --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName
+    "cordova-plugin-transport-security"
+
 ];
+
+if (platform === 'android') {
+    pluginlist.push("phonegap-facebook-plugin --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName);
+} else {
+    pluginlist.push("cordova-plugin-facebook4 --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName);
+}
 
 // no need to configure below
 

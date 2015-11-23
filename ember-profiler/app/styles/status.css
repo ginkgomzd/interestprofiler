@@ -1,9 +1,14 @@
 div.statusMessages {
   position: fixed;
   left: 0px;
-  top: 100px;
+  top: 0px;
+  height: 0px;
   width: 100%;
   z-index: 9999;
+  overflow-y: visible;
+}
+div.statusMessages .message:first-of-type {
+  margin: 105px auto 5px auto;
 }
 div.statusMessages .message {
   width: 85%;

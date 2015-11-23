@@ -33,11 +33,11 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'self'",
-      'script-src': "'self' https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net",
-      'frame-src': "'self' *.facebook.com",
+      'script-src': "'self' https://services.onetcenter.org http://*.ginkgostreet.com https://*.ginkgostreet.com https://connect.facebook.net",
+      'frame-src': "'self' https://*.facebook.com http://*.facebook.com",
       'font-src': "'self'",
-      'connect-src': "'self' blob: https://services.onetcenter.org *.ginkgostreet.com connect.facebook.net api.parse.com",
-      'img-src': "'self' *.ginkgostreet.com data:",
+      'connect-src': "'self' blob: https://services.onetcenter.org https://*.ginkgostreet.com http://*.ginkgostreet.com https://connect.facebook.net https://api.parse.com http://api.parse.com",
+      'img-src': "'self' http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
       'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     },

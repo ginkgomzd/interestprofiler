@@ -20,10 +20,13 @@ module.exports = function(defaults) {
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+  //Include Bootstrap
   app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
+  //Include the color animation library
   app.import('bower_components/jquery-color/jquery.color.js');
-//Include our O*NET Api Library
+  //Include our O*NET Api Library
   app.import('vendor/onet.js');
+  //Include the screenshot library
   app.import('vendor/html2canvas.js');
 
   return app.toTree();
