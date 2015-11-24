@@ -164,6 +164,22 @@ var profilerDataUtils = Ember.Object.extend({
       }
     });
   },
+  loadAllUserDataFromParse: function() {
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (that.get("parseAuth").user !== null) {
+        var promises = {
+          savedAnswerString: that.marshalSavedAnswers()
+        };
+
+        Ember.RSVP.hash(promises).then(function(updates) {
+          resolve(updates);
+        });
+      } else {
+        resolve(false);
+      }
+    });
+  },
   addItemToParseUserData: function(arrayName, dataItem) {
     if (this.get("parseAuth").user !== null) {
       var parseArray = this.get("parseAuth").user.get(arrayName);
