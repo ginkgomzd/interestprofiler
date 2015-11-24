@@ -59,6 +59,21 @@ var setupService = Ember.Object.extend({
       });
     });
   },
+  validateDatabaseVersion: function() {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+        localforage.getItem("databaseVersion", function(err, value) {
+          if (EmberENV.databaseVersion > value) {
+            //Delete the old Database Structure so it can be reloaded.
+            localforage.clear();
+            //Save the new database version code.
+            localforage.setItem("databaseVersion", EmberENV.databaseVersion);
+            resolve(EmberENV.databaseVersion);
+          } else {
+            resolve(false);
+          }
+        });
+    });
+  },
   handleLogin: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
