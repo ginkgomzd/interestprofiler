@@ -72,23 +72,23 @@ var setupService = Ember.Object.extend({
   },
   validateDatabaseVersion: function() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
-        localforage.getItem("databaseVersion", function(err, value) {
-          if (EmberENV.databaseVersion > value) {
-            //Delete the old Database Structure so it can be reloaded.
-            localforage.clear();
-            //Save the new database version code.
-            localforage.setItem("databaseVersion", EmberENV.databaseVersion);
-            resolve(EmberENV.databaseVersion);
-          } else {
-            resolve(false);
-          }
-        });
+      localforage.getItem("databaseVersion", function(err, value) {
+        if (EmberENV.databaseVersion > value) {
+          //Delete the old Database Structure so it can be reloaded.
+          localforage.clear();
+          //Save the new database version code.
+          localforage.setItem("databaseVersion", EmberENV.databaseVersion);
+          resolve(EmberENV.databaseVersion);
+        } else {
+          resolve(false);
+        }
+      });
     });
   },
   handleLogin: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      setup.get("profilerDataUtils").marshalSavedAnswers().then(function (updated) {
+      setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function (userData) {
         setup.preloadModels();
         resolve();
       });
@@ -102,24 +102,32 @@ var setupService = Ember.Object.extend({
   appStartup: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var staticPromises = {
-        question: setup.loadStaticDataForModel(EmberENV.modelPaths.question, staticQuestionData),
-        questionOption: setup.loadStaticDataForModel(EmberENV.modelPaths["question-option"], staticQuestionOptionData),
-        cluster: setup.loadStaticDataForModel(EmberENV.modelPaths.cluster, staticClusterData),
-        pathway: setup.loadStaticDataForModel(EmberENV.modelPaths.pathway, staticPathwayData),
-        onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
-        occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
-        alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
-        college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
-        program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
-        zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData)
-      };
+      setup.validateDatabaseVersion().then(function(fetchUserData) {
 
-      Ember.RSVP.hash(staticPromises).then(function() {
-        setup.checkForUpdates().then(function() {
-          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-            setup.preloadModels();
-            resolve();
+        var staticPromises = {
+          question: setup.loadStaticDataForModel(EmberENV.modelPaths.question, staticQuestionData),
+          questionOption: setup.loadStaticDataForModel(EmberENV.modelPaths["question-option"], staticQuestionOptionData),
+          cluster: setup.loadStaticDataForModel(EmberENV.modelPaths.cluster, staticClusterData),
+          pathway: setup.loadStaticDataForModel(EmberENV.modelPaths.pathway, staticPathwayData),
+          onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
+          occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
+          alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
+          college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
+          program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
+          zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData)
+        };
+
+        Ember.RSVP.hash(staticPromises).then(function() {
+          setup.checkForUpdates().then(function() {
+            if(fetchUserData) {
+              setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function(userData) {
+                setup.preloadModels();
+                resolve();
+              });
+            } else {
+              setup.preloadModels();
+              resolve();
+            }
           });
         });
       });
