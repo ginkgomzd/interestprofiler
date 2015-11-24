@@ -3,6 +3,7 @@ import Ember from 'ember';
 export function initialize(registry, application) {
   var Settings = Ember.Object.extend({
     store: null,
+    parseAuth: Ember.inject.service('parse-auth'),
     //This watches for our initial load of all settings and adds them to the object
     //so they can be observedand bound by controllers, routes, views and components
     watchModel: function() {
@@ -16,10 +17,14 @@ export function initialize(registry, application) {
     //it is accessible from our load and save functions.
     setStore: function(store) {
       this.store = store;
-      this.set('model', store.findAll("setting"));
+      this.reloadAllSettings();
+    },
+    reloadAllSettings: function() {
+      this.set('model', this.store.findAll("setting"));
     },
     load: function(name) {
       var setting = this.store.getById("setting", name);
+      //Todo: Load from Parse
       if (setting === null) {
         this.set(name, null);
       } else {
@@ -35,6 +40,9 @@ export function initialize(registry, application) {
         setting.set("value", value);
       }
       setting.save();
+
+      //todo: Save to Parse
+      //Put
 
       //This is to trigger observable changes, otherwise they aren't triggered
       this.set(name, null);
