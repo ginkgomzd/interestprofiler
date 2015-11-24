@@ -20,12 +20,23 @@ var setupService = Ember.Object.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   cmsUtils: Ember.inject.service('cmsUtils'),
   checkForUpdates: function() {
+    var setup = this;
     //Calculate the last updated date
     var lastUpdated = this.get("settings").load("lastUpdatedDate");
     if (!lastUpdated) {
       lastUpdated = this.get("staticDate");
     }
-    return this.get("cmsUtils").updateAll(lastUpdated);
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      setup.get("cmsUtils").updateAll(lastUpdated).then(function(updated) {
+        var today = new Date();
+        setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
+        resolve(true);
+      }, function() {
+        resolve(false);
+      });
+    });
+
   },
   "onet-careerDefaults": function(item) {
     item.score = 0;
@@ -78,9 +89,7 @@ var setupService = Ember.Object.extend({
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       setup.get("profilerDataUtils").marshalSavedAnswers().then(function (updated) {
-        setup.get("store").findAll("onet-career");
-        setup.get("store").findAll("cluster");
-        setup.get("store").findAll("pathway");
+        setup.preloadModels();
         resolve();
       });
     });
@@ -108,13 +117,6 @@ var setupService = Ember.Object.extend({
 
       Ember.RSVP.hash(staticPromises).then(function() {
         setup.checkForUpdates().then(function() {
-          var today = new Date();
-          setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-          setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
-            setup.preloadModels();
-            resolve();
-          });
-        }, function() {
           setup.get("profilerDataUtils").marshalSavedAnswers().then(function(updated) {
             setup.preloadModels();
             resolve();
