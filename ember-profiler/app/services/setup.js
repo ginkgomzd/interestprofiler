@@ -14,7 +14,6 @@ import staticZipData from '../data/zipcodes';
 
 
 var setupService = Ember.Object.extend({
-  staticDate: "2015-10-17",
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
@@ -24,7 +23,7 @@ var setupService = Ember.Object.extend({
     //Calculate the last updated date
     var lastUpdated = this.get("settings").load("lastUpdatedDate");
     if (!lastUpdated) {
-      lastUpdated = this.get("staticDate");
+      lastUpdated = EmberENV.staticDataUpdatedDate;
     }
 
     return new Ember.RSVP.Promise(function(resolve, reject) {

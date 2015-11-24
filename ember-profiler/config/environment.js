@@ -25,7 +25,8 @@ module.exports = function(environment) {
         "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestionOptions"},
         zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
       },
-      databaseVersion: 1.001
+      databaseVersion: 1.001,
+      staticDataUpdatedDate: "2015-10-17"
     },
 
     APP: {
