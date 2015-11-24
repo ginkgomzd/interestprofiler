@@ -164,7 +164,39 @@ var profilerDataUtils = Ember.Object.extend({
       }
     });
   },
+  addItemToParseUserData: function(arrayName, dataItem) {
+    if (this.get("parseAuth").user !== null) {
+      var parseArray = this.get("parseAuth").user.get(arrayName);
+      if(!parseArray) {
+        parseArray = [];
+      }
+      if (parseArray.indexOf(dataItem) === -1) {
+        parseArray.push(dataItem);
+        this.get("parseAuth").user.set(arrayName, parseArray);
+        this.get("parseAuth").user.save();
+        return true;
+      }
+    }
 
+    return false;
+  },
+  removeItemFromParseUserData: function(arrayName, dataItem) {
+    if (this.get("parseAuth").user !== null) {
+      var parseArray = this.get("parseAuth").user.get(arrayName);
+      if(!parseArray) {
+        parseArray = [];
+      }
+      var index = parseArray.indexOf(dataItem);
+      if (index !== -1) {
+        parseArray.slice(index, 1);
+        this.get("parseAuth").user.set(arrayName, parseArray);
+        this.get("parseAuth").user.save();
+        return true;
+      }
+    }
+
+    return false;
+  },
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
     var answerString = this.onetApiFormattedAnswerString();
