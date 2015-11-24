@@ -6,6 +6,7 @@ var profilerDataUtils = Ember.Object.extend({
   settings: Ember.inject.service('settings'),
   status: Ember.inject.service('status'),
   parseAuth: Ember.inject.service('parse-auth'),
+  rawData: Ember.inject.service('raw-data'),
   answerString: function () {
     var answerString = "";
     this.get("store").all('answer').forEach(function (item) {
@@ -164,12 +165,58 @@ var profilerDataUtils = Ember.Object.extend({
       }
     });
   },
+  populateHotOrNot: function() {
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var hotAlumni = that.get("parseAuth").user.get("hotAlumni");
+      var notAlumni = that.get("parseAuth").user.get("notAlumni");
+      var hotOrNot = {};
+      var id;
+
+
+      for (id in hotAlumni) {
+        if (hotAlumni.hasOwnProperty(id)) {
+          hotOrNot[id] = {hot: true};
+        }
+      }
+
+      for (id in notAlumni) {
+        if (notAlumni.hasOwnProperty(id)) {
+          hotOrNot[id] = {hot: false};
+        }
+      }
+
+      var data = {};
+      data[EmberENV.modelPaths.hotOrNot.modelName] = {};
+      data[EmberENV.modelPaths.hotOrNot.modelName].records = hotOrNot;
+      localforage.setItem(EmberENV.modelPaths.hotOrNot.namespace, data).then(function() {
+        resolve(hotOrNot);
+      });
+    });
+  },
+  popuateBookmarkedPathways: function() {
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
+      var promises = [];
+      for (var i in Ids) {
+        if (Ids.hasOwnProperty(i)) {
+          promises.push(that.get("rawData").setValue(EmberENV.modelPaths.pathway.namespace, EmberENV.modelPaths.pathway.modelName, i, "bookmarked", true));
+        }
+      }
+      Ember.RSVP.all(promises).then(function(bookmarks) {
+        resolve(bookmarks);
+      });
+    });
+  },
   loadAllUserDataFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (that.get("parseAuth").user !== null) {
         var promises = {
-          savedAnswerString: that.marshalSavedAnswers()
+          savedAnswerString: that.marshalSavedAnswers(),
+          bookmarkedPathways: that.popuateBookmarkedPathways(),
+          hotOrNot: that.populateHotOrNot()
         };
 
         Ember.RSVP.hash(promises).then(function(updates) {
@@ -219,8 +266,8 @@ var profilerDataUtils = Ember.Object.extend({
     var scores = this.get("store").all('scoreArea');
 
     return (scores.get("length") === 0 ||
-      !oldAnswerString ||
-      oldAnswerString !== answerString);
+    !oldAnswerString ||
+    oldAnswerString !== answerString);
   },
   saveAnswerToParse: function(answer) {
     var answerString = this.get("parseAuth").user.get("answers");
