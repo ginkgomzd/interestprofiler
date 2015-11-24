@@ -23,6 +23,7 @@ module.exports = function(environment) {
         setting: {modelName: "setting", apiPath: "", namespace: "H2CSetting"},
         question: {modelName: "question", apiPath: "", namespace: "H2CQuestions"},
         "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestionOptions"},
+        hotOrNot: {modelName: "hotOrNot", apiPath: "", namespace: "H2CHotOrNot"},
         zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
       },
       databaseVersion: 1.001,
