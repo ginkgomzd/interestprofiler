@@ -213,9 +213,12 @@ var profilerDataUtils = Ember.Object.extend({
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var settings = that.get("parseAuth").user.get("settings");
+      if(settings.hasOwnProperty("lastUpdatedDate")) {
+        delete settings.lastUpdatedDate;
+      }
       var data = {};
       data[EmberENV.modelPaths.setting.modelName] = {};
-      data[EmberENV.modelPaths.setting.modelName].records = settings
+      data[EmberENV.modelPaths.setting.modelName].records = settings;
       localforage.setItem(EmberENV.modelPaths.setting.namespace, data).then(function() {
         that.get("settings").reloadAllSettings(settings);
         resolve();

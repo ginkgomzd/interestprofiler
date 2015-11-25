@@ -17,11 +17,8 @@ export function initialize(registry, application) {
     },
     reloadAllSettings: function(data) {
       var settings = this;
-      var ignoreList = ["lastUpdatedDate"];
       data.forEach(function(setting) {
-        if (ignoreList.indexOf(setting.id) === -1) {
-          settings.set(setting.id, setting.value);
-        }
+        settings.set(setting.id, setting.value);
       });
     },
     load: function(name) {
