@@ -165,7 +165,7 @@ var profilerDataUtils = Ember.Object.extend({
       }
     });
   },
-  populateHotOrNot: function() {
+  populateHotOrNotFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var hotAlumni = that.get("parseAuth").user.get("hotAlumni");
@@ -176,13 +176,13 @@ var profilerDataUtils = Ember.Object.extend({
 
       for (id in hotAlumni) {
         if (hotAlumni.hasOwnProperty(id)) {
-          hotOrNot[id] = {hot: true};
+          hotOrNot[id] = {hot: true, "id": id};
         }
       }
 
       for (id in notAlumni) {
         if (notAlumni.hasOwnProperty(id)) {
-          hotOrNot[id] = {hot: false};
+          hotOrNot[id] = {hot: false, "id": id};
         }
       }
 
@@ -194,7 +194,7 @@ var profilerDataUtils = Ember.Object.extend({
       });
     });
   },
-  popuateBookmarkedPathways: function() {
+  popuateBookmarkedPathwaysFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
@@ -209,14 +209,28 @@ var profilerDataUtils = Ember.Object.extend({
       });
     });
   },
+  populateSettingsFromParse: function() {
+    var that = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var settings = that.get("parseAuth").user.get("settings");
+      var data = {};
+      data[EmberENV.modelPaths.setting.modelName] = {};
+      data[EmberENV.modelPaths.setting.modelName].records = settings
+      localforage.setItem(EmberENV.modelPaths.setting.namespace, data).then(function() {
+        that.get("settings").reloadAllSettings(settings);
+        resolve();
+      });
+    });
+  },
   loadAllUserDataFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (that.get("parseAuth").user !== null) {
         var promises = {
           savedAnswerString: that.marshalSavedAnswers(),
-          bookmarkedPathways: that.popuateBookmarkedPathways(),
-          hotOrNot: that.populateHotOrNot()
+          bookmarkedPathways: that.popuateBookmarkedPathwaysFromParse(),
+          hotOrNot: that.populateHotOrNotFromParse(),
+          settings: that.populateSettingsFromParse()
         };
 
         Ember.RSVP.hash(promises).then(function(updates) {
@@ -227,7 +241,7 @@ var profilerDataUtils = Ember.Object.extend({
       }
     });
   },
-  addItemToParseUserData: function(arrayName, dataItem) {
+  addItemToParseUserDataArray: function(arrayName, dataItem) {
     if (this.get("parseAuth").user !== null) {
       var parseArray = this.get("parseAuth").user.get(arrayName);
       if(!parseArray) {
@@ -243,7 +257,7 @@ var profilerDataUtils = Ember.Object.extend({
 
     return false;
   },
-  removeItemFromParseUserData: function(arrayName, dataItem) {
+  removeItemFromParseUserDataArray: function(arrayName, dataItem) {
     if (this.get("parseAuth").user !== null) {
       var parseArray = this.get("parseAuth").user.get(arrayName);
       if(!parseArray) {

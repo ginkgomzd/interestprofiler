@@ -113,7 +113,8 @@ var setupService = Ember.Object.extend({
           alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
           college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
           program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
-          zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData)
+          zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData),
+          settings: setup.get("settings").setup()
         };
 
         Ember.RSVP.hash(staticPromises).then(function() {
