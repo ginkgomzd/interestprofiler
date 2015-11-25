@@ -40,6 +40,9 @@ var setupService = Ember.Object.extend({
   "onet-careerDefaults": function(item) {
     item.score = 0;
   },
+  pathwayDefaults: function(item) {
+    item.bookmarked = false;
+  },
   loadStaticDataForModel: function(modelInfo, staticData) {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -88,18 +91,36 @@ var setupService = Ember.Object.extend({
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function (userData) {
-        setup.preloadModels();
-        resolve();
+        setup.preloadModels().then(function() {
+          resolve();
+        });
       });
     });
   },
   preloadModels: function() {
-    this.get("store").findAll("onet-career");
-    this.get("store").findAll("cluster");
-    this.get("store").findAll("pathway");
+    var setup = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+
+      //Here we flush the adapter cache so any changes made by setup will show up.
+      var appAdapter = setup.get("store").adapterFor("application");
+      appAdapter.flushCache(EmberENV.modelPaths["onet-career"].modelName);
+      appAdapter.flushCache(EmberENV.modelPaths.cluster.modelName);
+      appAdapter.flushCache(EmberENV.modelPaths.pathway.modelName);
+
+      var promises = [
+        setup.get("store").findAll("onet-career"),
+        setup.get("store").findAll("cluster"),
+        setup.get("store").findAll("pathway")
+      ];
+
+      Ember.RSVP.all(promises).then(function() {
+        resolve();
+      });
+    });
   },
   appStartup: function() {
     var setup = this;
+    //console.log(this.get("store").unloadAll());
     return new Ember.RSVP.Promise(function(resolve, reject) {
       setup.validateDatabaseVersion().then(function(fetchUserData) {
 
@@ -121,12 +142,14 @@ var setupService = Ember.Object.extend({
           setup.checkForUpdates().then(function() {
             if(fetchUserData) {
               setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function(userData) {
-                setup.preloadModels();
-                resolve();
+                setup.preloadModels().then(function() {
+                  resolve();
+                });
               });
             } else {
-              setup.preloadModels();
-              resolve();
+              setup.preloadModels().then(function() {
+                resolve();
+              });
             }
           });
         });
