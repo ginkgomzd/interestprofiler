@@ -7,9 +7,16 @@ export default Ember.Controller.extend({
     Ember.run.debounce(this, this.deferredUpdate, 150);
   }.observes("searchRadius,location"),
   zipCodeSelected: function() { return "";}.property(),
+  hideKeyboard: function() {
+    Ember.$("#zipCodeInput").blur();
+  },
   updateLocationFromZip: function() {
     var that = this;
+    if (this.get("zipCodeSelected").length  > 4) {
+      Ember.run.debounce(that, that.hideKeyboard, 10000);
+    }
     this.get("store").find("zipcode", this.get("zipCodeSelected")).then(function(zipcode) {
+      Ember.run.debounce(that, that.hideKeyboard, 2000);
       that.set("locationType", "zip");
       that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
     });
