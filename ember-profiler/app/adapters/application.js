@@ -30,5 +30,8 @@ export default LFAdapter.extend({
   setNamespace: function(type) {
     var namespace = (EmberENV.modelPaths.hasOwnProperty(type)) ? EmberENV.modelPaths[type].namespace : "H2C" + type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
     this.set("namespace", namespace);
+  },
+  flushCache: function(namespace) {
+    this.cache.data.set(namespace, null);
   }
 });
