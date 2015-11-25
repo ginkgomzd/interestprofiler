@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   actions: {
     /**
      * Action to record user preferences.
@@ -10,6 +11,14 @@ export default Ember.Controller.extend({
      */
     hotOrNot: function (hot) {
       var item = this.model, that = this, hotFlag = (hot === 1 || hot === true || hot === '1') ? true : false;
+      //todo: Store these in Parse
+      if(hotFlag) {
+        this.get("profilerDataUtils").addItemToParseUserDataArray("hotAlumni", item.id);
+        this.get("profilerDataUtils").removeItemFromParseUserDataArray("notAlumni", item.id);
+      } else {
+        this.get("profilerDataUtils").removeItemFromParseUserDataArray("hotAlumni", item.id);
+        this.get("profilerDataUtils").addItemToParseUserDataArray("notAlumni", item.id);
+      }
       this.store.find('hotOrNot', item.id).then(function(record) {
         record.set("hot", hotFlag);
         record.save();
