@@ -15,7 +15,7 @@ var pluginlist = [
     "https://github.com/ginkgostreet/phonegap-parse-plugin.git#healthyi-1.1 --variable APP_ID="+config.parse.appId+" --variable CLIENT_KEY="+config.parse.clientKey,
 
     "cordova-plugin-whitelist",
-    "cordova-plugin-geolocation",
+    "cordova-plugin-geolocation@1.0.1",
     "cordova-plugin-splashscreen",
     "https://github.com/Paldom/SpinnerDialog.git",
     "https://github.com/Telerik-Verified-Plugins/SocialSharing",
@@ -24,7 +24,7 @@ var pluginlist = [
 
 ];
 
-if (platform === 'android') {
+if (platform.search(/$android.*/)) {
     pluginlist.push("phonegap-facebook-plugin --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName);
 } else {
     pluginlist.push("cordova-plugin-facebook4 --variable APP_ID="+config.parse.FacebookAppId+" --variable APP_NAME=" + config.parse.FacebookAppName);
