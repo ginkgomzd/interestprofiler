@@ -28,6 +28,7 @@ export default Ember.Route.extend({
   actions: {
     refreshLocation: function () {
       this.getLocation();
+      this.get("controller").hideKeyboard();
       Ember.$("#proximity-zip").removeClass("active");
       Ember.$("#proximity-location").addClass("active");
     }
