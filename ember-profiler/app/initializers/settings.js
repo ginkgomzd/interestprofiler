@@ -2,39 +2,66 @@ import Ember from 'ember';
 
 export function initialize(registry, application) {
   var Settings = Ember.Object.extend({
-    store: null,
-    //This watches for our initial load of all settings and adds them to the object
-    //so they can be observedand bound by controllers, routes, views and components
-    watchModel: function() {
-      this.model.forEach(function(item) {
-        this.set(item.id, item.value);
+    profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+    parseAuth: Ember.inject.service('parse-auth'),
+    store: Ember.inject.service('store'),
+    setup: function() {
+      var settings = this;
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        settings.get("store").findAll("setting").then(function(model) {
+          model.forEach(function(item) {
+            settings.set(item.get("id"), item.get("value"));
+          });
+          resolve();
+        });
       });
-    }.observes("model"),
-    //Because of the way initializers work, we can't get an instance of the store
-    //until the instance-initializers run, and the settings file there, passes
-    //an instance of the store here, and we place it on the object so that
-    //it is accessible from our load and save functions.
-    setStore: function(store) {
-      this.store = store;
-      this.set('model', store.findAll("setting"));
+    },
+    reloadAllSettings: function(data) {
+      var settings = this;
+      for(var i in data) {
+        if(data.hasOwnProperty(i)) {
+          this.set(i, data[i]);
+        }
+      }
     },
     load: function(name) {
-      var setting = this.store.getById("setting", name);
-      if (setting === null) {
-        this.set(name, null);
-      } else {
-        this.set(name, setting.get("value"));
+      var localVal, val;
+      localVal = this.get(name);
+      val = this.get(name);
+      if (!val) {
+        var setting = this.get("store").getById("setting", name);
+        if (setting !== null) {
+          val = setting.get("value");
+        }
       }
-      return this.get(name);
+
+      //Load directly from Parse
+      if (!val) {
+        if(this.get("parseAuth").user !== null) {
+          var settings = this.get("parseAuth").user.get("settings");
+          if(settings.hasOwnProperty(name)) {
+            val = settings[name];
+          }
+        }
+      }
+
+      if(localVal !== val) {
+        this.set(name, val);
+      }
+
+      return val;
     },
     save: function(name, value) {
-      var setting = this.store.getById("setting", name);
+      var setting = this.get("store").getById("setting", name);
       if (setting === null) {
-        setting = this.store.createRecord("setting", {id: name, 'value': value});
+        setting = this.get("store").createRecord("setting", {id: name, 'value': value});
       } else {
         setting.set("value", value);
       }
       setting.save();
+
+      //Save to Parse
+      this.get("profilerDataUtils").addItemToParseUserDataObject("settings", name, value);
 
       //This is to trigger observable changes, otherwise they aren't triggered
       this.set(name, null);
