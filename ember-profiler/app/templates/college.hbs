@@ -2,7 +2,7 @@
   <div class="padded">
     <div class="pathwayTitle">{{model.college.collegeName}}</div>
     <div class="pathwayDesc">
-      <p><strong>{{model.college.collegeURL}}</strong></p>
+      <p {{action "openExternalLink" model.college.collegeURL}}><strong>{{model.college.collegeURL}}</strong></p>
       <p>{{model.college.address1}}<br />
       {{#if model.college.address2}}
         {{model.college.address2}}<br />
