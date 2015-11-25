@@ -293,6 +293,7 @@ var profilerDataUtils = Ember.Object.extend({
       delete obj[id];
 
       this.get("parseAuth").user.set(objName, obj);
+      this.get("parseAuth").user.save();
       return true;
     }
     return false;
@@ -308,6 +309,7 @@ var profilerDataUtils = Ember.Object.extend({
       obj[id] = data;
 
       this.get("parseAuth").user.set(objName, obj);
+      this.get("parseAuth").user.save();
       return true;
     }
     return false;

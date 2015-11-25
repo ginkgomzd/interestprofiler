@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export function initialize(registry, application) {
   var Settings = Ember.Object.extend({
+    profilerDataUtils: Ember.inject.service('profilerDataUtils'),
     parseAuth: Ember.inject.service('parse-auth'),
     store: Ember.inject.service('store'),
     setup: function() {
@@ -17,19 +18,38 @@ export function initialize(registry, application) {
     },
     reloadAllSettings: function(data) {
       var settings = this;
-      data.forEach(function(setting) {
-        settings.set(setting.id, setting.value);
-      });
+      for(var i in data) {
+        if(data.hasOwnProperty(i)) {
+          this.set(i, data[i]);
+        }
+      }
     },
     load: function(name) {
-      var setting = this.get("store").getById("setting", name);
-      //Todo: Load from Parse
-      if (setting === null) {
-        this.set(name, null);
-      } else {
-        this.set(name, setting.get("value"));
+      var localVal, val;
+      localVal = this.get(name);
+      val = this.get(name);
+      if (!val) {
+        var setting = this.get("store").getById("setting", name);
+        if (setting !== null) {
+          val = setting.get("value");
+        }
       }
-      return this.get(name);
+
+      //Load directly from Parse
+      if (!val) {
+        if(this.get("parseAuth").user !== null) {
+          var settings = this.get("parseAuth").user.get("settings");
+          if(settings.hasOwnProperty(name)) {
+            val = settings[name];
+          }
+        }
+      }
+
+      if(localVal !== val) {
+        this.set(name, val);
+      }
+
+      return val;
     },
     save: function(name, value) {
       var setting = this.get("store").getById("setting", name);
@@ -40,8 +60,8 @@ export function initialize(registry, application) {
       }
       setting.save();
 
-      //todo: Save to Parse
-      //Put
+      //Save to Parse
+      this.get("profilerDataUtils").addItemToParseUserDataObject("settings", name, value);
 
       //This is to trigger observable changes, otherwise they aren't triggered
       this.set(name, null);
