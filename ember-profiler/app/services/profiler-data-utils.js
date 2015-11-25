@@ -218,7 +218,12 @@ var profilerDataUtils = Ember.Object.extend({
       }
       var data = {};
       data[EmberENV.modelPaths.setting.modelName] = {};
-      data[EmberENV.modelPaths.setting.modelName].records = settings;
+      data[EmberENV.modelPaths.setting.modelName].records = {};
+      for(var id in settings) {
+        if(settings.hasOwnProperty(id)) {
+          data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]}
+        }
+      }
       localforage.setItem(EmberENV.modelPaths.setting.namespace, data).then(function() {
         that.get("settings").reloadAllSettings(settings);
         resolve();
@@ -275,6 +280,36 @@ var profilerDataUtils = Ember.Object.extend({
       }
     }
 
+    return false;
+  },
+  removeItemFromParseUserDataObject: function(objName, id) {
+    if (this.get("parseAuth").user !== null) {
+      var obj = this.get("parseAuth").user.get(objName);
+
+      if(!obj) {
+        return false;
+      }
+
+      delete obj[id];
+
+      this.get("parseAuth").user.set(objName, obj);
+      return true;
+    }
+    return false;
+  },
+  addItemToParseUserDataObject: function(objName, id, data) {
+    if (this.get("parseAuth").user !== null) {
+      var obj = this.get("parseAuth").user.get(objName);
+
+      if(!obj) {
+        obj = {};
+      }
+
+      obj[id] = data;
+
+      this.get("parseAuth").user.set(objName, obj);
+      return true;
+    }
     return false;
   },
   dirtyAnswers: function() {
