@@ -198,14 +198,15 @@ var profilerDataUtils = Ember.Object.extend({
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
-      var promises = [];
-      for (var i in Ids) {
-        if (Ids.hasOwnProperty(i)) {
-          promises.push(that.get("rawData").setValue(EmberENV.modelPaths.pathway.namespace, EmberENV.modelPaths.pathway.modelName, i, "bookmarked", true));
+      localforage.getItem(EmberENV.modelPaths.pathway.namespace, function (err, data) {
+        for (var i in Ids) {
+          if (Ids.hasOwnProperty(i) && data[EmberENV.modelPaths.pathway.modelName].records.hasOwnProperty(Ids[i])) {
+            data[EmberENV.modelPaths.pathway.modelName].records[Ids[i]]["bookmarked"] = true;
+          }
         }
-      }
-      Ember.RSVP.all(promises).then(function(bookmarks) {
-        resolve(bookmarks);
+        localforage.setItem(EmberENV.modelPaths.pathway.namespace, data).then(function() {
+          resolve();
+        });
       });
     });
   },
