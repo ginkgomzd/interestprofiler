@@ -27,7 +27,7 @@ module.exports = function(environment) {
         zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
       },
       databaseVersion: 1.001,
-      staticDataUpdatedDate: "2015-10-17"
+      staticDataUpdatedDate: "2015-11-25"
     },
 
     APP: {
