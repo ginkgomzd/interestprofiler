@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   store: Ember.inject.service('store'),
   sortingDesc: ['bookmarked:desc', 'score:desc', 'jobGrowth:desc', 'salaryGrowth:desc', 'name:asc'],
   pathwaysList: function() {
@@ -23,6 +24,11 @@ export default Ember.Controller.extend({
     toggleBookmark: function(pathway) {
       pathway.toggleProperty("bookmarked");
       pathway.save();
+      if(pathway.get("bookmarked")) {
+        this.get("profilerDataUtils").addItemToParseUserDataArray("bookmarkedPathways", pathway.get("id"));
+      } else {
+        this.get("profilerDataUtils").removeItemFromParseUserDataArray("bookmarkedPathways", pathway.get("id"));
+      }
     }
   }
 });
