@@ -39,7 +39,7 @@ export function initialize(registry, application) {
       if (!val) {
         if(this.get("parseAuth").user !== null) {
           var settings = this.get("parseAuth").user.get("settings");
-          if(settings.hasOwnProperty(name)) {
+          if(settings && settings.hasOwnProperty(name)) {
             val = settings[name];
           }
         }
