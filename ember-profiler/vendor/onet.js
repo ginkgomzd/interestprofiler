@@ -15,6 +15,9 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
       results: function(answerString) {
         return new Promise(function(resolve, reject) {
           ajax(onetBaseUrl + '/ws/mnm/interestprofiler/results?answers=' + answerString).then(function(result) {
+            if(typeof(result) === "object") {
+              result = new XMLSerializer().serializeToString(result);
+            }
             var x2js = new X2JS();
             var jsObj = x2js.xml_str2json(result);
             for(var i in jsObj.results.result) {
@@ -39,6 +42,9 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
         return new Promise(function(resolve, reject) {
           //https://services.onetcenter.org/ws/mnm/interestprofiler/careers
           ajax(onetBaseUrl + '/ws/mnm/interestprofiler/careers?start=1&end=1000&answers=' + answerString).then(function(result) {
+            if(typeof(result) === "object") {
+              result = new XMLSerializer().serializeToString(result);
+            }
             var x2js = new X2JS();
             var jsObj = x2js.xml_str2json(result);
             resolve(jsObj.careers.career);
