@@ -222,7 +222,7 @@ var profilerDataUtils = Ember.Object.extend({
       data[EmberENV.modelPaths.setting.modelName].records = {};
       for(var id in settings) {
         if(settings.hasOwnProperty(id)) {
-          data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]}
+          data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
         }
       }
       localforage.setItem(EmberENV.modelPaths.setting.namespace, data).then(function() {
