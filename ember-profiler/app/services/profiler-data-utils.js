@@ -213,7 +213,7 @@ var profilerDataUtils = Ember.Object.extend({
   populateSettingsFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var settings = that.get("parseAuth").user.get("settings");
+      var settings = that.get("parseAuth").user.get("settings") || {};
       if(settings.hasOwnProperty("lastUpdatedDate")) {
         delete settings.lastUpdatedDate;
       }
