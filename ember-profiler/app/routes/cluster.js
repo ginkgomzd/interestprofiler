@@ -10,12 +10,14 @@ export default Ember.Route.extend({
           var occupationList = [];
 
           pathways.forEach( function(item) {
-            promises.push(item.get("occupations").then(function(occupations) {
-              occupationList += occupations;
+            promises.push(that.store.find("occupation", {"pathway": item.id}).then(function(occupations) {
+              //console.log(occupations.toArray());
+              occupationList = occupationList.concat( occupations.toArray() );
             }));
           });
 
           Ember.RSVP.all(promises).then(function() {
+            console.log(occupationList);
             cluster.occupations = occupationList;
             resolve(cluster);
           });

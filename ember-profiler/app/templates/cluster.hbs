@@ -4,3 +4,11 @@
     <div class="clusterName">{{model.name}}</div>
   </div>
 </div>
+
+<div class="listView">
+  <ul>
+    {{#each occupation in model.occupations}}
+      <li>{{occupation.title}}</li>
+    {{/each}}
+  </ul>
+</div>
