@@ -4,9 +4,8 @@
 </div>
 <div class="full padded">
   <div class="clusters">
-    <h3>Selected Clusters</h3>
     <ul>{{#each cluster in arrangedContent}}
-      <li>{{cluster.name}}</li>
+      <li {{action "forwardToClusterDetail" cluster.id}}>{{cluster.name}}</li>
     {{/each}}</ul>
   </div>
 </div>
