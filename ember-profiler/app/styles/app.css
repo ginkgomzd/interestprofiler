@@ -365,3 +365,13 @@ div.bluegray {
 input {
     -webkit-user-select: auto !important;
 }
+
+.listView ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.listView li {
+  padding: 5px;
+  margin: 0px;
+}
