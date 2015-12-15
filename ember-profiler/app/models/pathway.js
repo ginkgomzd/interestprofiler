@@ -4,7 +4,12 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
   cluster: DS.belongsTo('cluster', { async: true }),
-  occupations: DS.hasMany('occupation', { async: true }),
+  occupations: DS.hasMany('occupation', { async: false }),
+  occupationCount: DS.attr('number'),
+  hasOccupations: function() {
+    var manualExceptions = [98, 85];
+    return ((this.get("occupationCount") - this.get("onetCareers.length")) > 1) ||  (manualExceptions.indexOf(parseInt(this.get("id"))) !== -1);
+  }.property("onetCareers.length"),
   onetCareers: DS.hasMany('onet-career', { async: true }),
   jobGrowth: DS.attr('boolean', {defaultValue: false}),
   salaryGrowth: DS.attr('boolean', {defaultValue: false}),
