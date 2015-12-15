@@ -42,5 +42,10 @@ export default Ember.Route.extend({
         });
       });
     });
+  },
+  actions: {
+    viewOccupation: function(occupationId) {
+      this.transitionTo("occupation", occupationId);
+    }
   }
 });

@@ -8,7 +8,7 @@
 <div class="listView">
   <ul>
     {{#each occupation in model.occupations}}
-      <li>
+      <li {{action "viewOccupation" occupation.first.id}}>
         <div class="OccupationDetail">
           <span class="OccupationTitle">{{occupation.first.title}}</span>
           {{#if occupation.hasData}}
