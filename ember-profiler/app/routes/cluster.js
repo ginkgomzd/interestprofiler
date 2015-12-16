@@ -18,6 +18,7 @@ export default Ember.Route.extend({
                 if(occupations.hasOwnProperty(i)) {
                   if (occupations.hasOwnProperty(i + 1)) {
                     if (occupations[i].get("title") ===  occupations[i + 1].get("title")) {
+                      // Collapse Degree and Certificate Programs with the same Occupation title:
                       rowHasData = (occupations[i].get("hasWageData") || occupations[i + 1].get("hasWageData"));
                       occupationList.push({first: occupations[i], second: occupations[i + 1], hasData: rowHasData});
                       i++;
