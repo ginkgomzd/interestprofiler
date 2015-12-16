@@ -189,7 +189,7 @@ var profilerDataUtils = Ember.Object.extend({
       var data = {};
       data[EmberENV.modelPaths.hotOrNot.modelName] = {};
       data[EmberENV.modelPaths.hotOrNot.modelName].records = hotOrNot;
-      localforage.setItem(EmberENV.modelPaths.hotOrNot.namespace, data).then(function() {
+      localforage.setItem(EmberENV.modelPaths.hotOrNot.emberDataNamespace, data).then(function() {
         resolve(hotOrNot);
       });
     });
@@ -198,13 +198,13 @@ var profilerDataUtils = Ember.Object.extend({
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
-      localforage.getItem(EmberENV.modelPaths.pathway.namespace, function (err, data) {
+      localforage.getItem(EmberENV.modelPaths.pathway.emberDataNamespace, function (err, data) {
         for (var i in Ids) {
           if (Ids.hasOwnProperty(i) && data[EmberENV.modelPaths.pathway.modelName].records.hasOwnProperty(Ids[i])) {
             data[EmberENV.modelPaths.pathway.modelName].records[Ids[i]]["bookmarked"] = true;
           }
         }
-        localforage.setItem(EmberENV.modelPaths.pathway.namespace, data).then(function() {
+        localforage.setItem(EmberENV.modelPaths.pathway.emberDataNamespace, data).then(function() {
           resolve();
         });
       });
@@ -225,7 +225,7 @@ var profilerDataUtils = Ember.Object.extend({
           data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
         }
       }
-      localforage.setItem(EmberENV.modelPaths.setting.namespace, data).then(function() {
+      localforage.setItem(EmberENV.modelPaths.setting.emberDataNamespace, data).then(function() {
         that.get("settings").reloadAllSettings(settings);
         resolve();
       });

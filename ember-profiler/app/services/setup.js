@@ -46,7 +46,7 @@ var setupService = Ember.Object.extend({
   loadStaticDataForModel: function(modelInfo, staticData) {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      localforage.getItem(modelInfo.namespace, function(err, value) {
+      localforage.getItem(modelInfo.emberDataNamespace, function(err, value) {
         if (!value) {
           value = {};
         }
@@ -63,7 +63,7 @@ var setupService = Ember.Object.extend({
               value[modelInfo.modelName].records[item.id] = item;
             }
           });
-          localforage.setItem(modelInfo.namespace, value).then(function() {
+          localforage.setItem(modelInfo.emberDataNamespace, value).then(function() {
             resolve(true);
           });
         } else {
