@@ -32,7 +32,7 @@ export default Ember.Route.extend({
   getSuggestedAlumni: function() {
     //This is rather simple right now, but in future it will have more
     // logic for filtering/matching alumni
-    return this.get("rawData").fetchKeys(EmberENV.modelPaths.alumni.namespace, "alumni");
+    return this.get("rawData").fetchKeys(EmberENV.modelPaths.alumni.emberDataNamespace, "alumni");
   },
   actions: {
     navigateNext: function() {

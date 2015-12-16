@@ -11,20 +11,20 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
       modelPaths: {
-        alumni: {modelName: "alumni", apiPath: "alumni", namespace: "H2CAlumni"},
-        cluster: {modelName: "cluster", apiPath: "clusters", namespace: "H2CCluster"},
-        pathway: {modelName: "pathway", apiPath: "pathways", namespace: "H2CPathway"},
-        occupation: {modelName: "occupation", apiPath: "occupations", namespace: "H2COccupation"},
-        program: {modelName: "program", apiPath: "programs", namespace: "H2CPrograms"},
-        college: {modelName: "college", apiPath: "colleges", namespace: "H2CColleges"},
-        "onet-career": {modelName: "onet-career", apiPath: "onet-careers", namespace: "H2COnetCareer"},
+        alumni: {modelName: "alumni", apiPath: "alumni", emberDataNamespace: "H2CAlumni"},
+        cluster: {modelName: "cluster", apiPath: "clusters", emberDataNamespace: "H2CCluster"},
+        pathway: {modelName: "pathway", apiPath: "pathways", emberDataNamespace: "H2CPathway"},
+        occupation: {modelName: "occupation", apiPath: "occupations", emberDataNamespace: "H2COccupation"},
+        program: {modelName: "program", apiPath: "programs", emberDataNamespace: "H2CPrograms"},
+        college: {modelName: "college", apiPath: "colleges", emberDataNamespace: "H2CColleges"},
+        "onet-career": {modelName: "onet-career", apiPath: "onet-careers", emberDataNamespace: "H2COnetCareer"},
 
         // These don't really have apiPaths, but we use this entry for namespacing
-        setting: {modelName: "setting", apiPath: "", namespace: "H2CSetting"},
-        question: {modelName: "question", apiPath: "", namespace: "H2CQuestions"},
-        "question-option": {modelName: "question-option", apiPath: "", namespace: "H2CQuestionOptions"},
-        hotOrNot: {modelName: "hotOrNot", apiPath: "", namespace: "H2CHotOrNot"},
-        zipcode: {modelName: "zipcode", apiPath: "", namespace: "H2CZipCodes"}
+        setting: {modelName: "setting", apiPath: "", emberDataNamespace: "H2CSetting"},
+        question: {modelName: "question", apiPath: "", emberDataNamespace: "H2CQuestions"},
+        "question-option": {modelName: "question-option", apiPath: "", emberDataNamespace: "H2CQuestionOptions"},
+        hotOrNot: {modelName: "hotOrNot", apiPath: "", emberDataNamespace: "H2CHotOrNot"},
+        zipcode: {modelName: "zipcode", apiPath: "", emberDataNamespace: "H2CZipCodes"}
       },
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25"

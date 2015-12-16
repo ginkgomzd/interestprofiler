@@ -24,7 +24,7 @@ var cmsUtils = Ember.Object.extend({
     var url = this.baseUrl() + "/api/" + modelMapping.apiPath + "?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       ajax(url).then(function (results) {
-        localforage.getItem(modelMapping.namespace, function(err, value) {
+        localforage.getItem(modelMapping.emberDataNamespace, function(err, value) {
           if(!value.hasOwnProperty(modelMapping.modelName)) {
             console.log("Model missing: " + modelMapping.modelName);
             return reject("Missing Model");
@@ -46,7 +46,7 @@ var cmsUtils = Ember.Object.extend({
 
           });
 
-          localforage.setItem(modelMapping.namespace, value).then(function() {
+          localforage.setItem(modelMapping.emberDataNamespace, value).then(function() {
             resolve(results.length);
           });
         });
