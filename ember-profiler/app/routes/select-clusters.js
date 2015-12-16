@@ -7,5 +7,5 @@ export default Ember.Route.extend({
       this.get("profilerDataUtils").updateAllResults();
     }
     return this.store.findAll('cluster');
-  },
+  }
 });

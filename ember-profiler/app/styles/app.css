@@ -158,7 +158,7 @@ ul.navbar-nav li a {
   text-align: center;
 }
 .mainContent>.backButton + div {
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
 .mainContent button, .button {
@@ -312,8 +312,8 @@ i.jobGrowth {
 
 div.pageMessage, .pageMessage {
   font-size: 10pt;
-  font-weight: bold;
-  padding: 0px 15px 10px 15px;
+  font-weight: normal;
+  padding: 5px 15px 10px 15px;
 }
 
 .left {
@@ -332,6 +332,9 @@ div.full,.mainContent div.full,#mainContent div.full {
 
 div.gray {
   background: #ddd;
+}
+div.bluegray {
+  background: #627caf;
 }
 .padded {
   padding: 15px;
@@ -361,4 +364,14 @@ div.gray {
 
 input {
     -webkit-user-select: auto !important;
+}
+
+.listView ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.listView li {
+  padding: 5px;
+  margin: 0px;
 }

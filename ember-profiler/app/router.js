@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('select-clusters');
   this.route('select-pathways');
   this.route('pathway', {path: '/pathway/:index'});
+  this.route('cluster', {path: '/cluster/:index'});
   this.route('occupation', {path: '/occupation/:index'});
   this.route('resources');
   this.route('login');

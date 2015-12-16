@@ -1,8 +1,49 @@
-<div class="dots">
-  <div class="dot"></div>
-  <div class="dot"></div>
-  <div class="dot"></div>
-  <div class="dot"></div>
+<div class="full bluegray">
+  <div class="pageMessage full">
+    You're Exploring...
+    <div class="clusterName">{{model.name}}</div>
+  </div>
 </div>
-{{cluster.name}}
-<div class="clear"></div>
+
+<div class="listView">
+  <ul>
+    {{#each occupation in model.occupations}}
+      <li {{action "viewOccupation" occupation.first.id}}>
+        <div class="OccupationDetail">
+          <span class="OccupationTitle">{{occupation.first.title}}</span>
+          {{#if occupation.hasData}}
+            <table class="OccupationSalaryDataTable">
+              <thead>
+              <td></td>
+              <td>2 Years Before</td>
+              <td>2 Years After</td>
+              <td>5 Years After</td>
+              </thead>
+              <tbody>
+              {{#if occupation.first.hasWageData}}
+                <tr>
+                  <td>{{occupation.first.awardDescription}}:</td>
+                  <td>{{currency-format-na occupation.first.medianPre2}}</td>
+                  <td>{{currency-format-na occupation.first.medianPost2}}</td>
+                  <td>{{currency-format-na occupation.first.medianPost5}}</td>
+                </tr>
+              {{/if}}
+              {{#if occupation.second}}
+                {{#if occupation.second.hasWageData}}
+                  <tr>
+                    <td>{{occupation.second.awardDescription}}:</td>
+                    <td>{{currency-format-na occupation.second.medianPre2}}</td>
+                    <td>{{currency-format-na occupation.second.medianPost2}}</td>
+                    <td>{{currency-format-na occupation.second.medianPost5}}</td>
+                  </tr>
+                {{/if}}
+              {{/if}}
+
+              </tbody>
+            </table>
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

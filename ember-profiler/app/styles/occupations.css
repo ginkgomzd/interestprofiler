@@ -26,3 +26,20 @@
 .salaryInfo .money {
     float: right;
 }
+
+.OccupationDetail {
+    border: 3px solid #336ebf;
+    border-radius: 10px;
+    padding: 5px;
+}
+.OccupationDetail .OccupationTitle {
+    font-size: .9em;
+    font-weight: 600;
+}
+.OccupationSalaryDataTable {
+    font-size: .75em;
+}
+
+.OccupationSalaryDataTable td {
+    padding-right: 10px;
+}
