@@ -17,10 +17,9 @@ export default Ember.Route.extend({
           if (occupations.get("length") < 2) {
             occupations = [occupation];
           }
-          //Group the extra data and resolve
+          //Group the Colleges and Programs
           that.groupProgramsAndColleges(programsAndColleges).then(function(data) {
-            var allData = {title: occupationTitle, occupations: occupations, programs: data.programs, colleges: data.colleges};
-            resolve(allData);
+            resolve({title: occupationTitle, occupations: occupations, programs: data});
           });
 
         });
@@ -30,20 +29,26 @@ export default Ember.Route.extend({
   groupProgramsAndColleges: function(extras) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       extras.then(function(programsAndColleges) {
+        var data = {};
 
-        //Group the Programs
-        //todo: Group the programs by college
+        //Group the Programs with their respective college data
+        programsAndColleges.programs.forEach(function(program) {
+          var collegeId = program.get("college");
+          if(!data.hasOwnProperty(collegeId)) {
+            data[collegeId] = {college: programsAndColleges.colleges[collegeId], programs: []};
+          }
+          data[collegeId].programs.push(program);
+        });
 
-        resolve({programs: programsAndColleges.programs, colleges: programsAndColleges.colleges});
+        //Flatten to an array so ember doesn't throw a fit about looping
+        data = Object.keys(data).map(function (key) {return data[key]});
+        resolve(data);
       });
     });
   },
   actions: {
     viewCollege: function(collegeID) {
       this.transitionTo("college", collegeID);
-    },
-    openCollegeLink: function(data, id) {
-      this.send("openExternalLink", data[id]['collegeURL']);
     }
   }
 });

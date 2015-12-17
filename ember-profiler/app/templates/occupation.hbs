@@ -21,11 +21,13 @@
   <div class="padded">
     {{#each program in model.programs}}
       <div class="programDesc">
-        <div><strong>{{array-value model.colleges program.college "collegeName"}}</strong></div>
-        <div>{{program.awardDescription}}: {{program.title}}</div>
-        <div class="collegeUrl" {{action "openCollegeLink" model.colleges program.college}}>{{array-value model.colleges program.college "collegeURL"}}</div>
+        <div><strong>{{program.college.collegeName}}</strong></div>
+        {{#each programRow in program.programs}}
+          <div>{{programRow.awardDescription}}: {{programRow.title}}</div>
+        {{/each}}
+        <div class="collegeUrl" {{action "openExternalLink" program.college.collegeURL}}>{{program.college.collegeURL}}</div>
       </div>
-      <div {{action "viewCollege" program.college}} class="programLearnMore">Tap to learn more and connect with this school.</div>
+      <div {{action "viewCollege" program.college.id}} class="programLearnMore">Tap to learn more and connect with this school.</div>
     {{/each}}
   </div>
 </div>
