@@ -20,17 +20,17 @@ export default Ember.Route.extend({
                     if (occupations[i].get("title") ===  occupations[i + 1].get("title")) {
                       // Collapse Degree and Certificate Programs with the same Occupation title:
                       rowHasData = (occupations[i].get("hasWageData") || occupations[i + 1].get("hasWageData"));
-                      var higherSalary = Math.max(occupations[i].get("medianPre2"), occupations[i + 1].get("medianPre2"));
+                      var higherSalary = Math.max(occupations[i].get("medianPost5"), occupations[i + 1].get("medianPost5"));
                       occupationList.push({first: occupations[i], second: occupations[i + 1], hasData: rowHasData, salary: higherSalary});
                       i++;
                     } else {
                       rowHasData = occupations[i].get("hasWageData");
 
-                      occupationList.push({first: occupations[i], hasData: rowHasData, salary: occupations[i].get("medianPre2")});
+                      occupationList.push({first: occupations[i], hasData: rowHasData, salary: occupations[i].get("medianPost5")});
                     }
                   } else {
                     rowHasData = occupations[i].get("hasWageData");
-                    occupationList.push({first: occupations[i], hasData: rowHasData, salary: occupations[i].get("medianPre2")});
+                    occupationList.push({first: occupations[i], hasData: rowHasData, salary: occupations[i].get("medianPost5")});
                   }
                 }
                 i++;
