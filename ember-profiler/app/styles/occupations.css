@@ -43,3 +43,30 @@
 .OccupationSalaryDataTable td {
     padding-right: 10px;
 }
+.sortTypes {
+    white-space: nowrap;
+    white-space-collapse: discard;
+    text-align: center;
+    margin: 5px 0px;
+}
+.sortTypes .sortOption {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 4px 6px;
+    font-size: .75em;
+    display: inline;
+    margin: 0px;
+}
+.sortTypes .sortOption:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: none;
+}
+.sortTypes .sortOption:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+}
+.sortTypes .sortOption.active {
+    background-color: #336ebf;
+}
