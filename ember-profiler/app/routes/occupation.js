@@ -10,33 +10,31 @@ export default Ember.Route.extend({
     });
     return new Ember.RSVP.Promise(function(resolve, reject) {
       that.store.find('occupation', params.index).then(function(occupation) {
-
+        var occupationTitle = occupation.get("title");
         //Now find the other occupation
-        that.store.find('occupation', {'top_code': occupation.get("top_code")}).then(function(secondOccupation) {
-          if (secondOccupation.get("length") === 1) {
-
-            //Group the occupations
-            console.log("Group the Occupations", secondOccupation.get("length"));
-            //todo: Group the occupations
-
-            //Group the extra data and resolve
-            that.groupProgramsAndColleges(occupation, programsAndColleges).then(function(data) { resolve(data);});
-          } else {
-            //Group the extra data and resolve
-            that.groupProgramsAndColleges(occupation, programsAndColleges).then(function(data) { resolve(data);});
+        //We are casting to string because the adaptor does an === and there is a conflict otherwise
+        that.store.find('occupation', {topCode: String(occupation.get("topCode"))}).then(function(occupations) {
+          if (occupations.get("length") < 2) {
+            occupations = [occupation];
           }
+          //Group the extra data and resolve
+          that.groupProgramsAndColleges(programsAndColleges).then(function(data) {
+            var allData = {title: occupationTitle, occupations: occupations, programs: data.programs, colleges: data.colleges};
+            resolve(allData);
+          });
+
         });
       });
     });
   },
-  groupProgramsAndColleges: function(occupation, extras) {
+  groupProgramsAndColleges: function(extras) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       extras.then(function(programsAndColleges) {
 
         //Group the Programs
         //todo: Group the programs by college
 
-        resolve({occupation: occupation, programs: programsAndColleges.programs, colleges: programsAndColleges.colleges});
+        resolve({programs: programsAndColleges.programs, colleges: programsAndColleges.colleges});
       });
     });
   },

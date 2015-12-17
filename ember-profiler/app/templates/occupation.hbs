@@ -1,17 +1,20 @@
 <div class="full">
   <div class="pageMessage gray full">
     You're Exploring...
-    <div class="clusterName">{{model.occupation.title}} : {{model.occupation.awardDescription}}</div>
+    <div class="clusterName">{{model.title}}</div>
   </div>
 
   <div class="padded">
     <div class="salaryInfo">
       <p><strong>Salary Information:</strong></p>
+      {{#each occupation in model.occupations}}
+        {{occupation.awardDescription}}
       <ul>
-        <li>2 years before: <span class="money">{{currency-format-na model.occupation.medianPre2}}</span></li>
-        <li>2 years after: <span class="money">{{currency-format-na model.occupation.medianPost2}}</span></li>
-        <li>5 years after: <span class="money">{{currency-format-na model.occupation.medianPost5}}</span></li>
+        <li>2 years before: <span class="money">{{currency-format-na occupation.medianPre2}}</span></li>
+        <li>2 years after: <span class="money">{{currency-format-na occupation.medianPost2}}</span></li>
+        <li>5 years after: <span class="money">{{currency-format-na occupation.medianPost5}}</span></li>
       </ul>
+      {{/each}}
     </div>
   </div>
 
