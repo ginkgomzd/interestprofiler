@@ -58,13 +58,13 @@
     margin: 0px;
 }
 .sortTypes .sortOption:first-of-type {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     border-right: none;
 }
 .sortTypes .sortOption:last-of-type {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     border-left: none;
 }
 .sortTypes .sortOption.active {
