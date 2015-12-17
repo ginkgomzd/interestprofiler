@@ -1,0 +1,13 @@
+This is a list of notes compiled to make building for iOS a bit smoother.
+
+1: in config.xml rename the app 'HereToCareer' and then run `cordova build ios`
+2: In xcode::build settings turn bitcode off
+3: In orientation and screen settings check "Requires Fullscreen"
+4: In the general config, set the app display name to "Here to Career"
+5: Verify that the url Schemes for facebook are set eg "FB#APPID#"
+6: Set the build number
+7: Verify the Cert Settings
+8: If needed add "$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include" to the header search path in build settings
+
+
+further reference: https://ginkgostreet.atlassian.net/browse/CCC-173
