@@ -7,7 +7,8 @@
 
 <div class="sortTypes">
   <div class="sortOption sortHighSalary" {{action "sortHighSalary"}}>High Salary</div><!--
-  --><div class="sortOption sortHighSalaryChange" {{action "sortHighSalaryChange"}}>High Salary Change</div><!--
+  --><!--<div class="sortOption sortHighSalaryChange" {{action "sortHighSalaryChange"}}>High Salary Change</div>//--><!--
+  -->{{#if showSortScore}}<div class="sortOption sortScore" {{action "sortScore"}}>Relevance</div>{{/if}}<!--
   --><div class="sortOption sortAlphabetical" {{action "sortAlphabetical"}}>Alphabetical</div>
 </div>
 <div class="listView">

@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  sortProperties: ["first.score"],
+  sortProperties: [""],
   occupations: Ember.computed.sort("model.occupations", 'sortProperties'),
+  showSortScore: function() {
+    return (this.settings.ProgressQuiz3 === "complete");
+  }.property("settings.ProgressQuiz3"),
   actions: {
     viewOccupation: function(occupationId) {
       this.transitionToRoute("occupation", occupationId);
@@ -21,6 +24,11 @@ export default Ember.Controller.extend({
       Ember.$(".sortTypes .sortOption").removeClass("active");
       Ember.$(".sortTypes .sortOption.sortAlphabetical").addClass("active");
       this.set("sortProperties", ["first.title"]);
+    },
+    sortScore: function() {
+      Ember.$(".sortTypes .sortOption").removeClass("active");
+      Ember.$(".sortTypes .sortOption.sortScore").addClass("active");
+      this.set("sortProperties", ["first.score:desc"]);
     }
   }
 });
