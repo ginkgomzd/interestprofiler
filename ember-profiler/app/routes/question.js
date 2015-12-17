@@ -10,6 +10,9 @@ export default Ember.Route.extend({
       if (localAnswerString.length > 0 && localAnswerString.length < 60) {
         return this.transitionTo('question', localAnswerString.length + 1);
       }
+      if (localAnswerString.length === 60) {
+        this.get("profilerDataUtils").retakeQuiz();
+      }
       return this.transitionTo('question', 1);
     }
 
