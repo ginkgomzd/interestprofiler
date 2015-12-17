@@ -4,6 +4,7 @@ export default DS.Model.extend({
   pathway: DS.belongsTo('pathway', { async: true }),
   title: DS.attr('string'),
   score: DS.attr('number', {defaultValue: 0}),
+  topCode: DS.attr('number'),
   awardDescription: DS.attr('string'),
   totalAwards: DS.attr('number', {defaultValue: 0}),
   wageCountPre2: DS.attr('number', {defaultValue: 0}),
