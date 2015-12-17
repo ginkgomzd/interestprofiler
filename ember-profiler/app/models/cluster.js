@@ -16,5 +16,17 @@ export default DS.Model.extend({
     if (scores.weights === 0) {return 0;}
 
     return (scores.squares / scores.weights);
-  }.property("pathways.@each.score")
+  }.property("pathways.@each.score"),
+  jobGrowth: function() {
+    var pathways = this.get("pathways");
+    return pathways.reduce(function(previousValues, pathway){
+      return pathway.get("jobGrowth") || previousValues;
+    });
+  }.property("pathways.@each.jobGrowth"),
+  salaryGrowth: function() {
+    var pathways = this.get("pathways");
+    return pathways.reduce(function(previousValues, pathway){
+      return pathway.get("salaryGrowth") || previousValues;
+    });
+  }.property("pathways.@each.salaryGrowth")
 });
