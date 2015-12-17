@@ -12,7 +12,7 @@
 </div>
 <div class="listView">
   <ul>
-    {{#each occupation in model.occupations}}
+    {{#each occupation in occupations}}
       <li {{action "viewOccupation" occupation.first.id}}>
         <div class="OccupationDetail">
           <span class="OccupationTitle">{{occupation.first.title}}</span>
