@@ -5,6 +5,11 @@
   </div>
 </div>
 
+<div class="sortTypes">
+  <div class="sortOption sortHighSalary" {{action "sortHighSalary"}}>High Salary</div><!--
+  --><div class="sortOption sortHighSalaryChange" {{action "sortHighSalaryChange"}}>High Salary Change</div><!--
+  --><div class="sortOption sortAlphabetical" {{action "sortAlphabetical"}}>Alphabetical</div>
+</div>
 <div class="listView">
   <ul>
     {{#each occupation in model.occupations}}
