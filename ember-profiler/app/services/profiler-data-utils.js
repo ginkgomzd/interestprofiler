@@ -123,7 +123,18 @@ var profilerDataUtils = Ember.Object.extend({
     this.get("parseAuth").user.set("answers", answerString);
     this.get("parseAuth").user.save();
   },
+  retakeQuiz: function() {
+    //Erase old answers
+    this.get("store").unloadAll('answer');
 
+    this.saveUserAnswers();
+    this.get("settings").save("answers", "");
+
+    //reset the indicators
+    this.get("settings").save("ProgressQuiz1", null);
+    this.get("settings").save("ProgressQuiz2", null);
+    this.get("settings").save("ProgressQuiz3", null);
+  },
   populatePreviousAnswers: function() {
     var answers = this.get("parseAuth").user.get("answers");
     var store = this.get("store");
