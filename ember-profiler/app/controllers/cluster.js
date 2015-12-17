@@ -1,11 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  sortBy: function() {return "";}.property(),
-  occupations: function() {
-    console.log("ReSort");
-    return this.get("model").occupations.sortBy(this.get("sortBy"));
-  }.property('sortBy'),
+  sortProperties: ["first.score"],
+  occupations: Ember.computed.sort("model.occupations", 'sortProperties'),
   actions: {
     viewOccupation: function(occupationId) {
       this.transitionToRoute("occupation", occupationId);
@@ -13,17 +10,17 @@ export default Ember.Controller.extend({
     sortHighSalary: function() {
       Ember.$(".sortTypes .sortOption").removeClass("active");
       Ember.$(".sortTypes .sortOption.sortHighSalary").addClass("active");
-      this.set("sortBy", "highSalary");
+      this.set("sortProperties", ["salary:desc"]);
     },
     sortHighSalaryChange: function() {
       Ember.$(".sortTypes .sortOption").removeClass("active");
       Ember.$(".sortTypes .sortOption.sortHighSalaryChange").addClass("active");
-      this.set("sortBy", "highSalaryChange");
+      this.set("sortProperties", ["first.totalAwards"]);
     },
     sortAlphabetical: function() {
       Ember.$(".sortTypes .sortOption").removeClass("active");
       Ember.$(".sortTypes .sortOption.sortAlphabetical").addClass("active");
-      this.set("sortBy", "title");
+      this.set("sortProperties", ["first.title"]);
     }
   }
 });
