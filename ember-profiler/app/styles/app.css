@@ -157,8 +157,11 @@ ul.navbar-nav li a {
   vertical-align: middle;
   text-align: center;
 }
-.mainContent>.backButton + div {
-  padding-top: 30px;
+.mainContent>.backButtonShim {
+  height: 32px;
+  width: 25px;
+  float: left;
+  display: inline-block;
 }
 
 .mainContent button, .button {
@@ -250,7 +253,7 @@ i.jobGrowth {
     position: absolute;
     z-index: 5;
     width: 100%;
-    margin-top: -20px;
+    margin-top: -15px;
 }
 .ribbon-container i.jobGrowth {
     z-index: 5;
@@ -274,7 +277,7 @@ i.jobGrowth {
     background: #e9bd00;
     color: #fff;
     text-align: center;
-    padding: 0.4em 1em; /* Adjust to suit */
+    padding: 0.2em 1em; /* Adjust to suit */
     margin: auto; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
     border-radius: 20px/50px;
     border-top: 5px solid #e9bd00;
@@ -286,22 +289,22 @@ i.jobGrowth {
     display: block;
     bottom: -0.1em;
 
-    border: 1em solid #f6c700;
+    border: 0.85em solid #f6c700;
     z-index: -1;
 }
 .ribbon:before {
     left: -1.5em;
-    border-right-width: 1.5em;
+    border-right-width: 0.9em;
     border-left-color: transparent;
 }
 .ribbon:after {
     right: -1.5em;
-    border-left-width: 1.5em;
+    border-left-width: 1.1em;
     border-right-color: transparent;
 }
 .ribbon .ribbon-content:before {
     left: 0;
-    border-width: 1em 0 0 1em;
+    border-width: 0.8em 0 0 0.8em;
 }
 .ribbon .ribbon-content:after {
     right: 0;

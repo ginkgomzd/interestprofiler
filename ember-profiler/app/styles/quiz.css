@@ -1,6 +1,7 @@
 div.questions h1 {
-  padding-top: 10px;
+  padding-top: 0px;
   clear: both;
+  margin-bottom: 0px;
 }
 div.answers {
   padding: 5px 15px 15px 15px;
