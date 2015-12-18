@@ -62,6 +62,7 @@ export default Ember.Route.extend({
     navigateNextQuestion: function() {
       var next = 1 + parseInt(this.controller.get('model').get('index'));
       if (next <= 60) {
+        this.get("status").loading();
         this.transitionTo('question', next);
       } else {
         this.transitionTo('results');
