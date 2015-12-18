@@ -17,6 +17,7 @@ export default LFAdapter.extend({
       return this._super(records, query);
     }
   },
+  /*
   persistData: function(type, data) {
     var modelNamespace = this.modelNamespace(type);
     this.setNamespace(modelNamespace);
@@ -30,7 +31,7 @@ export default LFAdapter.extend({
   setNamespace: function(type) {
     var namespace = (EmberENV.modelPaths.hasOwnProperty(type)) ? EmberENV.modelPaths[type].emberDataNamespace : "H2C" + type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
     this.set("namespace", namespace);
-  },
+  },*/
   flushCache: function(namespace) {
     this.cache.data.set(namespace, null);
   }

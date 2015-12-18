@@ -1,7 +1,7 @@
 import LFAdapter from 'ember-localforage-adapter/adapters/localforage';
 
 export default LFAdapter.extend({
-  namespace: 'H2CColleges',
+  namespace: EmberENV.modelPaths.college.emberDataNamespace,
   query: function (records, query) {
     if(typeof(query) === "object" && query.hasOwnProperty("proximity")) {
       var results = [], id, push, proximity;
