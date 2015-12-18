@@ -41,7 +41,7 @@ export default Ember.Route.extend({
         });
 
         //Flatten to an array so ember doesn't throw a fit about looping
-        data = Object.keys(data).map(function (key) {return data[key]});
+        data = Object.keys(data).map(function (key) {return data[key];});
         resolve(data);
       });
     });
