@@ -39,7 +39,7 @@ export default Ember.Route.extend({
           });
 
           Ember.RSVP.all(promises).then(function() {
-            cluster.occupations = occupationList;
+            cluster.set("occupations", occupationList);
             resolve(cluster);
           });
         });
