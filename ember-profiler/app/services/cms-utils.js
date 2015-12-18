@@ -25,6 +25,12 @@ var cmsUtils = Ember.Object.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       ajax(url).then(function (results) {
         localforage.getItem(modelMapping.emberDataNamespace, function(err, value) {
+
+          if(!value) {
+            value = {};
+            value[modelMapping.modelName] = {records: {}};
+          }
+          
           if(!value.hasOwnProperty(modelMapping.modelName)) {
             console.log("Model missing: " + modelMapping.modelName);
             return reject("Missing Model");
@@ -62,7 +68,8 @@ var cmsUtils = Ember.Object.extend({
       pathway: this.fetchUpdatedContent(EmberENV.modelPaths.pathway, lastUpdated),
       occupation: this.fetchUpdatedContent(EmberENV.modelPaths.occupation, lastUpdated),
       program: this.fetchUpdatedContent(EmberENV.modelPaths.program, lastUpdated),
-      college: this.fetchUpdatedContent(EmberENV.modelPaths.college, lastUpdated)
+      college: this.fetchUpdatedContent(EmberENV.modelPaths.college, lastUpdated),
+      resources: this.fetchUpdatedContent(EmberENV.modelPaths.resource, lastUpdated)
     };
     return Ember.RSVP.hash(promises);
   }
