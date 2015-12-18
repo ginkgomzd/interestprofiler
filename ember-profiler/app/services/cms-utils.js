@@ -24,38 +24,41 @@ var cmsUtils = Ember.Object.extend({
     var url = this.baseUrl() + "/api/" + modelMapping.apiPath + "?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       ajax(url).then(function (results) {
-        localforage.getItem(modelMapping.emberDataNamespace, function(err, value) {
+        if(results.length > 0) {
+          localforage.getItem(modelMapping.emberDataNamespace, function (err, value) {
 
-          if(!value) {
-            value = {};
-            value[modelMapping.modelName] = {records: {}};
-          }
-          
-          if(!value.hasOwnProperty(modelMapping.modelName)) {
-            console.log("Model missing: " + modelMapping.modelName);
-            return reject("Missing Model");
-          }
-
-          results.forEach(function (item) {
-            if (typeof thisService[modelMapping.modelName + "Details"] === "function") {
-              thisService[modelMapping.modelName + "Details"](item);
+            if (!value) {
+              value = {};
+              value[modelMapping.modelName] = {records: {}};
             }
-            if(value[modelMapping.modelName].records.hasOwnProperty(item.id)) {
-              for(var prop in item) {
-                if (item.hasOwnProperty(prop)) {
-                  value[modelMapping.modelName].records[item.id][prop] = item[prop];
-                }
+
+            if (!value.hasOwnProperty(modelMapping.modelName)) {
+              console.log("Model missing: " + modelMapping.modelName);
+              return reject("Missing Model");
+            }
+
+            results.forEach(function (item) {
+              if (typeof thisService[modelMapping.modelName + "Details"] === "function") {
+                thisService[modelMapping.modelName + "Details"](item);
               }
-            } else {
-              value[modelMapping.modelName].records[item.id] = item;
-            }
+              if (value[modelMapping.modelName].records.hasOwnProperty(item.id)) {
+                for (var prop in item) {
+                  if (item.hasOwnProperty(prop)) {
+                    value[modelMapping.modelName].records[item.id][prop] = item[prop];
+                  }
+                }
+              } else {
+                value[modelMapping.modelName].records[item.id] = item;
+              }
+            });
 
+            localforage.setItem(modelMapping.emberDataNamespace, value).then(function () {
+              resolve(results.length);
+            });
           });
-
-          localforage.setItem(modelMapping.emberDataNamespace, value).then(function() {
-            resolve(results.length);
-          });
-        });
+        } else {
+          resolve([]);
+        }
       }, function(error) {
         reject(error);
       });
