@@ -10,6 +10,10 @@
   top: 20px;
 }
 
+.platform-ios .login-overlay {
+  padding-top: 20px;
+}
+
 .platform-ios .oc-drawer {
   border-top: 20px solid #fff;
 }
