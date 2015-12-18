@@ -1,7 +1,7 @@
 import LFAdapter from 'ember-localforage-adapter/adapters/localforage';
 
 export default LFAdapter.extend({
-  namespace: 'H2CPrograms',
+  namespace: EmberENV.modelPaths.program.emberDataNamespace,
   query: function (records, query) {
     if(typeof(query) === "object" && query.hasOwnProperty("occupation")) {
       var results = [],

@@ -25,7 +25,9 @@ module.exports = function(environment) {
         question: {modelName: "question", apiPath: "", emberDataNamespace: "H2CQuestions"},
         "question-option": {modelName: "question-option", apiPath: "", emberDataNamespace: "H2CQuestionOptions"},
         hotOrNot: {modelName: "hotOrNot", apiPath: "", emberDataNamespace: "H2CHotOrNot"},
-        zipcode: {modelName: "zipcode", apiPath: "", emberDataNamespace: "H2CZipCodes"}
+        zipcode: {modelName: "zipcode", apiPath: "", emberDataNamespace: "H2CZipCodes"},
+        scoreArea: {modelName: "score-area", apiPath: "", emberDataNamespace: "H2CScoreArea"},
+        answer: {modelName: "answer", apiPath: "", emberDataNamespace: "H2CAnswer"}
       },
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25"
