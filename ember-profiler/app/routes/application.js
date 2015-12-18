@@ -22,12 +22,15 @@ export default Ember.Route.extend({
       this.get("status").loadingComplete();
 
       Ember.run.later(this, function() {
+
+
         //This will run MANY times and could cause performance issues
         //Or lead to a lot of bandwidth being used.
         //The client has asked for it, so we are implementing it.
         this.send("analytics", "pageLoad", this.controller.currentRouteName);
 
         this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
+        this.controller.get('drawer').hideDrawer();
       }, 5);
 
       //This is to hide the Splashscreen
