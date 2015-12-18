@@ -7,7 +7,7 @@ export default LFAdapter.extend({
     if(typeof(query) === "object" && query.hasOwnProperty("in")) {
 
       for(objId in query.in) {
-        if(query.in.hasOwnProperty(objId)) {
+        if(query.in.hasOwnProperty(objId) && records.hasOwnProperty(query.in[objId])) {
           results.push(records[query.in[objId]]);
         }
       }
@@ -17,6 +17,7 @@ export default LFAdapter.extend({
       return this._super(records, query);
     }
   },
+
   /*
   persistData: function(type, data) {
     var modelNamespace = this.modelNamespace(type);
