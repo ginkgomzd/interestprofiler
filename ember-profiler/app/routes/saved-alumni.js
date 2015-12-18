@@ -15,5 +15,10 @@ export default Ember.Route.extend({
         });
       });
     });
+  },
+  actions: {
+    viewAlumni: function(alumniId) {
+      this.transitionTo("saved-alumni-detail", alumniId);
+    }
   }
 });
