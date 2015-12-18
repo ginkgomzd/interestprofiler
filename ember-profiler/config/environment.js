@@ -18,6 +18,7 @@ module.exports = function(environment) {
         program: {modelName: "program", apiPath: "programs", emberDataNamespace: "H2CPrograms"},
         college: {modelName: "college", apiPath: "colleges", emberDataNamespace: "H2CColleges"},
         "onet-career": {modelName: "onet-career", apiPath: "onet-careers", emberDataNamespace: "H2COnetCareer"},
+        resource: {modelName: "resource", apiPath: "resources", emberDataNamespace: "H2CResources"},
 
         // These don't really have apiPaths, but we use this entry for namespacing
         setting: {modelName: "setting", apiPath: "", emberDataNamespace: "H2CSetting"},
