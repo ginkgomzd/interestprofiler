@@ -1,5 +1,4 @@
 .oc-drawer {
-  list-style: none;
   background: rgba(1,0,0,0.9);
   height: 100%;
   position: fixed;
@@ -34,6 +33,14 @@
   transform: translate(-100%, 0);
 }
 /* Navigation Menu - List items */
+
+.oc-drawer ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  height: 90%;
+}
+
 .oc-drawer li {
   margin-left: 10px;
   min-width: 200px;
@@ -59,8 +66,7 @@
 }
 
 .oc-drawer li.logout {
-  position: absolute;
-  bottom: 15px;
+  list-style: none;
   color: #fff;
   padding-left: 5px;
 }

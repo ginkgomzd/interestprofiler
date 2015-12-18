@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'ul',
+  tagName: 'div',
   classNames: ['oc-drawer'],
   classNameBindings: ['open:oc-drawer-open:oc-drawer-closed'],
   quizPrefix: function() {
