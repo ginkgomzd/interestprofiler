@@ -28,7 +28,7 @@ export function initialize(registry, application) {
     },
     loading: function(title, msg, cancel) {
       if(window.plugins && window.plugins.spinnerDialog) {
-        window.plugins.spinnerDialog.show(title, msg, cancel);
+        window.plugins.spinnerDialog.show(title, msg, true);
       } else {
         this.set("loadingTitle", title);
         this.set("loadingMessage", msg);
