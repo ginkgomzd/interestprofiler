@@ -29,12 +29,10 @@ var cmsUtils = Ember.Object.extend({
 
             if (!value) {
               value = {};
-              value[modelMapping.modelName] = {records: {}};
             }
 
             if (!value.hasOwnProperty(modelMapping.modelName)) {
-              console.log("Model missing: " + modelMapping.modelName);
-              return reject("Missing Model");
+              value[modelMapping.modelName] = {records: {}};
             }
 
             results.forEach(function (item) {
