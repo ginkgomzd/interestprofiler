@@ -1,9 +1,11 @@
 <div class="Resources">
-    <ul>
-        <li>{{#link-to 'resources'}}Find Applications{{/link-to}}</li>
-        <li>{{#link-to 'resources'}}College Terms Glossary{{/link-to}}</li>
-        <li>{{#link-to 'resources'}}Application Deadlines{{/link-to}}</li>
-        <li>{{#link-to 'resources'}}Schedule a Campus Tour{{/link-to}}</li>
-        <li>{{#link-to 'resources'}}FAFSA Deadlines{{/link-to}}</li>
+  {{#if model}}
+  <ul>
+    {{#each resource in model}}
+      <li {{action "openExternalLink" resource.linkURL}}>{{resource.title}}</li>
+    {{/each}}
   </ul>
+  {{else}}
+    <div class="center"><strong>No Resources Found</strong></div>
+  {{/if}}
 </div>
