@@ -9,6 +9,8 @@ Router.map(function() {
   this.route('question', {path: '/question/:index'});
   this.route('results');
   this.route('alumni', {path: '/alumni/:index'});
+  this.route('saved-alumni', {path: '/saved-alumni'});
+  this.route('saved-alumni-detail', {path: '/saved-alumni/:index'});
   this.route('select-clusters');
   this.route('select-pathways');
   this.route('pathway', {path: '/pathway/:index'});
