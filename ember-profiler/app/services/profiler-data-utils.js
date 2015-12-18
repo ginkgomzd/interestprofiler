@@ -187,13 +187,13 @@ var profilerDataUtils = Ember.Object.extend({
 
       for (id in hotAlumni) {
         if (hotAlumni.hasOwnProperty(id)) {
-          hotOrNot[id] = {hot: true, "id": id};
+          hotOrNot[hotAlumni[id]] = {hot: true, "id": hotAlumni[id]};
         }
       }
 
       for (id in notAlumni) {
         if (notAlumni.hasOwnProperty(id)) {
-          hotOrNot[id] = {hot: false, "id": id};
+          hotOrNot[notAlumni[id]] = {hot: false, "id": notAlumni[id]};
         }
       }
 
