@@ -5,7 +5,7 @@ export default LFAdapter.extend({
   query: function (records, query) {
     var results = [], objId;
     if(typeof(query) === "object" && query.hasOwnProperty("in")) {
-
+      
       for(objId in query.in) {
         if(query.in.hasOwnProperty(objId) && records.hasOwnProperty(query.in[objId])) {
           results.push(records[query.in[objId]]);

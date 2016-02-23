@@ -1,6 +1,6 @@
-import LFAdapter from 'ember-localforage-adapter/adapters/localforage';
+import appAdapter from './application';
 
-export default LFAdapter.extend({
+export default appAdapter.extend({
   namespace: EmberENV.modelPaths.program.emberDataNamespace,
   query: function (records, query) {
     if(typeof(query) === "object" && query.hasOwnProperty("occupation")) {
