@@ -27,7 +27,14 @@ module.exports = function(environment) {
         hotOrNot: {modelName: "hot-or-not", apiPath: "", emberDataNamespace: "H2CHotOrNot"},
         zipcode: {modelName: "zipcode", apiPath: "", emberDataNamespace: "H2CZipCodes"},
         scoreArea: {modelName: "score-area", apiPath: "", emberDataNamespace: "H2CScoreArea"},
-        answer: {modelName: "answer", apiPath: "", emberDataNamespace: "H2CAnswer"}
+        answer: {modelName: "answer", apiPath: "", emberDataNamespace: "H2CAnswer"},
+
+        //These are indexes but we are treating them as pseudo models so we can piggyback
+        //on the pre-developed functions inside raw-data and setup. This basically means the format we are using
+        //for storing them in local forage matches what ember-data expects and thus what our utilities
+        //are expecting the format to look like.
+        occupationIndex: {modelName: "occupationIndex", apiPath: "", emberDataNamespace: "H2COccupationIndex"},
+        collegeIndex: {modelName: "collegeIndex", apiPath: "", emberDataNamespace: "H2CCollegeIndex"}
       },
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25"
@@ -43,7 +50,7 @@ module.exports = function(environment) {
       'frame-src': "'self' https://*.facebook.com http://*.facebook.com",
       'font-src': "'self'",
       'connect-src': "'self' blob: https://services.onetcenter.org https://*.ginkgostreet.com http://*.ginkgostreet.com https://connect.facebook.net https://api.parse.com http://api.parse.com",
-      'img-src': "'self' http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
+      'img-src': "'self' https://*.facebook.com http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
       'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     },
