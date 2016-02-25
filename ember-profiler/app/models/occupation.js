@@ -13,7 +13,6 @@ export default DS.Model.extend({
   medianPre2: DS.attr('number', {defaultValue: 0}),
   medianPost2: DS.attr('number', {defaultValue: 0}),
   medianPost5: DS.attr('number', {defaultValue: 0}),
-  programs: DS.hasMany('program', { async: true }),
   hasWageData: function() {
     return ((this.get("medianPre2") && this.get("medianPre2") != "0") ||
     (this.get("medianPost2") && this.get("medianPost2") != "0") ||
