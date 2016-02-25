@@ -36,6 +36,17 @@ var rawData = Ember.Object.extend({
         }
       });
     });
+  },
+  fetchIndex: function(namespace, model, id) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      localforage.getItem(namespace, function (err, value) {
+        if (value && value.hasOwnProperty(model) && value[model].hasOwnProperty("records") && value[model].records.hasOwnProperty(id)) {
+          resolve(value[model].records[id]);
+        } else {
+          resolve([]);
+        }
+      });
+    });
   }
 });
 
