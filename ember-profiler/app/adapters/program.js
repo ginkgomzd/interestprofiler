@@ -1,27 +1,8 @@
 import appAdapter from './application';
+import Ember from 'ember';
 
 export default appAdapter.extend({
   namespace: EmberENV.modelPaths.program.emberDataNamespace,
-  query: function (records, query) {
-    if(typeof(query) === "object" && query.hasOwnProperty("occupation")) {
-      var results = [],
-        id, record, property, test, push;
-      for (id in records) {
-
-        record = records[id];
-        push = false;
-        if(records[id].hasOwnProperty("occupation")) {
-            push = records[id].occupation.indexOf(query.occupation) !== -1;
-        }
-
-        if (push) {
-          results.push(record);
-        }
-
-      }
-      return results;
-    } else {
-      return this._super(records, query);
-    }
-  }
+  //Cachine program data adds 2500ms of overhead per request
+  caching: 'none'
 });
