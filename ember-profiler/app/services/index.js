@@ -7,7 +7,7 @@ var indexService = Ember.Object.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       rawData.fetchIndex(indexMapping.emberDataNamespace, indexMapping.modelName, id).then(function(ids) {
         if(ids.length > 0) {
-          store.find(modelName, {in: ids}).then(function (models) {
+          store.findMany(modelName, ids).then(function (models) {
             resolve(models);
           }, function(error) {
             reject(error);
