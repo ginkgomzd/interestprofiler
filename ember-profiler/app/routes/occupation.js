@@ -2,10 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   rawData: Ember.inject.service('raw-data'),
+  indexService: Ember.inject.service('index'),
   model: function(params) {
     var that = this;
     var programsAndColleges = Ember.RSVP.hash({
-      "programs": this.store.find('program', {"occupation": params.index}),
+      "programs": this.get("indexService").find('program', EmberENV.modelPaths.occupationIndex, params.index, this.store),
       "colleges": this.get("rawData").fetch("H2CColleges", 'college')
     });
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -30,7 +31,6 @@ export default Ember.Route.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       extras.then(function(programsAndColleges) {
         var data = {};
-
         //Group the Programs with their respective college data
         programsAndColleges.programs.forEach(function(program) {
           var collegeId = program.get("college");
