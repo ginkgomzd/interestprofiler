@@ -4,14 +4,21 @@ export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
   stillLoading: true,
+  demoSeen: false,
   model: function () {
     return this.get("setupUtils").appStartup();
   },
   //This may need to be updated in the future depending on what we do
   //in regards to pre-loading data
-  beforeModel: function() {
+  beforeModel: function(transition) {
     if(!this.parseAuth.loggedIn) {
-      this.transitionTo("login");
+      console.log(transition);
+      if(this.get("demoSeen") && transition.targetName !== "demo") {
+        this.transitionTo("login");
+      } else {
+        this.set("demoSeen", true);
+        this.transitionTo("demo");
+      }
     }
   },
   actions: {
