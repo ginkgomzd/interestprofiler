@@ -1,0 +1,8 @@
+<div class="demo full">
+  {{#slick-slider autoplay=false arrows=false dots=true mobileFirst=true adaptiveHeight=false infinite=false}}
+    {{#each img in model}}
+      <div class="box carousel-slide"><img src="img/demo/{{img}}" /></div>
+    {{/each}}
+  {{/slick-slider}}
+  <button {{action "navigateAway"}} class="demo-skip">Skip >></button>
+</div>

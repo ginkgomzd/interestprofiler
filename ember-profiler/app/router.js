@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('proximity');
   this.route('college', {path: '/college/:index'});
   this.route('about');
+  this.route('demo');
 });
 
 export default Router;
