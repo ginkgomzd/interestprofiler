@@ -14,10 +14,10 @@
 <div class="listView">
   <ul>
     {{#each occupation in occupations}}
-      <li {{action "viewOccupation" occupation.first.id}}>
-        <div class="OccupationDetail">
-          <span class="OccupationTitle">{{occupation.first.title}}</span>
-          {{#if occupation.hasData}}
+      {{#if occupation.hasData}}
+        <li {{action "viewOccupation" occupation.first.id}}>
+          <div class="OccupationDetail">
+            <span class="OccupationTitle">{{occupation.first.title}}</span>
             <table class="OccupationSalaryDataTable">
               <thead>
               <td></td>
@@ -47,9 +47,10 @@
 
               </tbody>
             </table>
-          {{/if}}
-        </div>
-      </li>
+
+          </div>
+        </li>
+      {{/if}}
     {{/each}}
   </ul>
 </div>
