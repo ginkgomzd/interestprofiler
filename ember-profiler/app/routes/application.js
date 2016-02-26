@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  showHamburger: true,
+  backButtonText: false,
   stillLoading: true,
   model: function () {
     return this.get("setupUtils").appStartup();
@@ -27,7 +29,25 @@ export default Ember.Route.extend({
         //The client has asked for it, so we are implementing it.
         this.send("analytics", "pageLoad", this.controller.currentRouteName);
 
-        this.controller.set("showBackButton", !this.controllerFor(this.controller.currentRouteName).get("hideBackButton"));
+        //Handle hide/show or back button and hamburger icon
+        var mode =  this.controllerFor(this.controller.currentRouteName).get("showBackButton") || 'never';
+
+        var platformName = "web";
+        //var platformName = "ios";
+        //var platformName = "android";
+
+        if (window.cordova) {
+          platformName = cordova.platformId;
+        }
+        var showBB = (mode === "always" || mode === platformName);
+        this.controller.set("showBackButton", showBB);
+        if(platformName === "ios") {
+          var BBText =  this.controllerFor(this.controller.currentRouteName).get("backButtonText") || 'Back';
+          this.controller.set("backButtonText", BBText);
+          this.controller.set("showHamburger", !showBB);
+        } else {
+          this.controller.set("showHamburger", true);
+        }
       }, 5);
 
       //This is to hide the Splashscreen
