@@ -8,5 +8,14 @@ export default Ember.Route.extend({
       "Slide3.png",
       "Slide4.png"
     ];
+  },
+  actions: {
+    navigateAway: function() {
+      if(this.parseAuth.loggedIn) {
+        this.transitionTo("welcome");
+      } else {
+        this.transitionTo("login");
+      }
+    }
   }
 });
