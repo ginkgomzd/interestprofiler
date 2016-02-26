@@ -14,8 +14,8 @@ export default DS.Model.extend({
   medianPost2: DS.attr('number', {defaultValue: 0}),
   medianPost5: DS.attr('number', {defaultValue: 0}),
   hasWageData: function() {
-    return ((this.get("medianPre2") && this.get("medianPre2") != "0") ||
-    (this.get("medianPost2") && this.get("medianPost2") != "0") ||
-    (this.get("medianPost5") && this.get("medianPost5") != "0"));
+    return Boolean((this.get("medianPre2") && parseInt(this.get("medianPre2")) !== 0) ||
+    (this.get("medianPost2") && parseInt(this.get("medianPost2")) !== 0) ||
+    (this.get("medianPost5") && parseInt(this.get("medianPost5")) !== 0));
   }.property("medianPre2,medianPost2,medianPost5")
 });
