@@ -9,6 +9,19 @@ export default Ember.View.extend({
     if (window.cordova) {
       Ember.$("body").addClass("platform-" + cordova.platformId);
     }
+
+    //Capture android back-button
+    var that = this;
+    document.addEventListener("backbutton", function(e) {
+      //When history is 1 we have no place left to go back, so don't act on it
+      //instead call exit.
+      if (window.history.length > 1) {
+        that.get("controller").send("registerBackButtonClick");
+        e.preventDefault();
+      } else {
+        navigator.app.exitApp();
+      }
+    }, false);
   },
   panRight: function(e) {
     if (this.get("controller").get("drawerSwipeEnabled")) {
