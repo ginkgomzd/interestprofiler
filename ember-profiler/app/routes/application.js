@@ -12,7 +12,6 @@ export default Ember.Route.extend({
   //in regards to pre-loading data
   beforeModel: function(transition) {
     if(!this.parseAuth.loggedIn) {
-      console.log(transition);
       if(this.get("demoSeen") && transition.targetName !== "demo") {
         this.transitionTo("login");
       } else {
