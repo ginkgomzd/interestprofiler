@@ -25,3 +25,8 @@ div.demo {
   bottom: 0px;
   width: 100%;
 }
+
+.button.Demo-Button {
+  text-align: left;
+  padding-left: 25px;
+}
