@@ -27,6 +27,8 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
               jsObj.results.result[i].score = parseInt(jsObj.results.result[i].score);
             }
             resolve(jsObj.results.result);
+          }, function(error) {
+            reject(error);
           });
         });
       },
@@ -48,6 +50,8 @@ define("onet",["ember", "ic-ajax", "x2js"], function(__dependency1__, __dependen
             var x2js = new X2JS();
             var jsObj = x2js.xml_str2json(result);
             resolve(jsObj.careers.career);
+          }, function(error) {
+            reject(error);
           });
         });
       }
