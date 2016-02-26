@@ -2,9 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  goingBack: false,
   model: function(params, transition) {
-
     if (params.index == 0) { // jshint ignore:line
+      this.set("goingBack", false);
       var localAnswerString = this.get("profilerDataUtils").answerString();
       
       if (localAnswerString.length > 0 && localAnswerString.length < 60) {
@@ -14,6 +15,16 @@ export default Ember.Route.extend({
         this.get("profilerDataUtils").retakeQuiz();
       }
       return this.transitionTo('question', 1);
+    } else if (this.get("goingBack")) {
+      var that = this;
+      this.get("store").find('answer', params.index).then(function(answer) {
+        answer.destroyRecord().finally(function() {
+          that.get("profilerDataUtils").saveUserAnswers();
+        });
+        that.set("goingBack", false);
+      }, function() {
+        that.set("goingBack", false);
+      });
     }
 
     return this.get("store").find('question', params.index);
@@ -70,6 +81,7 @@ export default Ember.Route.extend({
     },
     executeBackAction: function() {
       //Todo: CCC-187 Unset last answer made
+      this.set("goingBack", true);
       //returning true will cause the action to bubble and return us to previous screen.
       return true;
     }
