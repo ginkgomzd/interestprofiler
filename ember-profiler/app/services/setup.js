@@ -11,6 +11,8 @@ import staticQuestionOptionData from '../data/questionOptions';
 import expectedEntityCounts from '../data/entities';
 import staticCollegeData from '../data/colleges';
 import staticZipData from '../data/zipcodes';
+import staticProgramCollegeIndex from '../data/programCollegeIndex';
+import staticProgramOccupationIndex from '../data/programOccupationIndex';
 
 
 var setupService = Ember.Object.extend({
@@ -72,6 +74,29 @@ var setupService = Ember.Object.extend({
       });
     });
   },
+
+  loadStaticIndex: function(modelInfo, staticData) {
+    var setup = this;
+    return new Ember.RSVP.Promise(function (resolve, reject) {
+      localforage.getItem(modelInfo.emberDataNamespace, function (err, value) {
+
+        if (!value) {
+          value = {};
+        }
+
+        if(!value.hasOwnProperty(modelInfo.modelName) || !value[modelInfo.modelName].hasOwnProperty("records")) {
+          value[modelInfo.modelName] = {};
+          value[modelInfo.modelName].records = staticData;
+          localforage.setItem(modelInfo.emberDataNamespace, value).then(function() {
+            resolve(true);
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  },
+
   validateDatabaseVersion: function() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       localforage.getItem("databaseVersion", function(err, value) {
@@ -135,7 +160,9 @@ var setupService = Ember.Object.extend({
           college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
           program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
           zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData),
-          settings: setup.get("settings").setup()
+          settings: setup.get("settings").setup(),
+          collegeIndex: setup.loadStaticIndex(EmberENV.modelPaths.collegeIndex, staticProgramCollegeIndex),
+          occupationIndex: setup.loadStaticIndex(EmberENV.modelPaths.occupationIndex, staticProgramOccupationIndex)
         };
 
         Ember.RSVP.hash(staticPromises).then(function() {
