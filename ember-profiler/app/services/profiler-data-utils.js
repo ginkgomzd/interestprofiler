@@ -83,14 +83,9 @@ var profilerDataUtils = Ember.Object.extend({
     });
   },
 
-  updateAllResults: function(toReturn) {
+  updateAllResults: function() {
     var that = this;
     var answerString = this.onetApiFormattedAnswerString();
-    if (this.answerString().length > 20) {
-      this.get("status").loading("Calculating", "Results");
-    } else {
-      this.get("status").loading("Loading");
-    }
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var promises = {
         results: that.updateProfilerResults(answerString),
@@ -99,18 +94,10 @@ var profilerDataUtils = Ember.Object.extend({
 
       Ember.RSVP.hash(promises).then(function (hash) {
         //Success!
-        that.get("status").loadingComplete();
         that.get("settings").save("CalculatedAnswers", answerString);
         //This saves the current user answer string to Parse
         that.saveUserAnswers();
-
-        if(toReturn === 'none') {
-          resolve();
-        } else if (toReturn && hash.hasOwnProperty(toReturn)) {
-          resolve(hash[toReturn]);
-        } else {
-          resolve(hash);
-        }
+        resolve(true);
       }, function (reason) {
         //Failed to update all
         reject(reason);
