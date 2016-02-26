@@ -1,0 +1,22 @@
+.platform-android .backButton {
+  background: #235ABE;
+  color: #fff;
+
+  border: 1px solid #008cdd;
+  border-radius:50%;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+
+  height: 40px;
+  width: 40px;
+
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+
+  margin: 0px;
+
+  font-size: 22pt;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+}
