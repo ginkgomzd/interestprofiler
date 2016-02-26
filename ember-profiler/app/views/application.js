@@ -8,7 +8,15 @@ export default Ember.View.extend({
     this.get("controller").set("drawerSwipeEnabled", true);
     if (window.cordova) {
       Ember.$("body").addClass("platform-" + cordova.platformId);
+    } else {
+      //Default the styling to that of android
+      Ember.$("body").addClass("platform-android");
+
+      //This is for testing ios Specific styles and should be commented out for production
+      //Ember.$("body").addClass("platform-ios");
     }
+
+
 
     //Capture android back-button
     var that = this;
@@ -21,6 +29,11 @@ export default Ember.View.extend({
       } else {
         navigator.app.exitApp();
       }
+    }, false);
+
+    //React to the Android Menu button
+    document.addEventListener("menubutton", function() {
+      that.get("controller").send("toggleDrawer");
     }, false);
   },
   panRight: function(e) {
