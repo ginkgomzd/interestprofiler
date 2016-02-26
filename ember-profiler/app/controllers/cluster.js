@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   sortProperties: [""],
   occupations: Ember.computed.sort("model.occupations", 'sortProperties'),
+  showBackButton: "ios",
   showSortScore: function() {
     return (this.settings.ProgressQuiz3 === "complete");
   }.property("settings.ProgressQuiz3"),

@@ -36,8 +36,11 @@
 /* Navigation Menu - List items */
 .oc-drawer li {
   margin-left: 10px;
-  min-width: 200px;
   width: 100%;
+}
+
+.oc-drawer li a:focus {
+  outline: none;
 }
 
 .oc-drawer li a {

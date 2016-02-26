@@ -10,6 +10,10 @@
   top: 20px;
 }
 
+.platform-ios #title {
+  margin-left: 60px;
+}
+
 .platform-ios .login-overlay {
   padding-top: 20px;
 }
@@ -29,4 +33,60 @@
 }
 .platform-ios .statusbar-helper {
   display: block;
+}
+
+.platform-ios #backButton {
+  position: fixed;
+  float: left;
+  margin-right: 30px;
+  margin-left: -5px;
+  margin-top: 0px;
+  padding: 0px;
+  color: #fff;
+  z-index: 11000;
+  cursor: pointer;
+  line-height: 50px;
+  left: 3px;
+  font-size: 12px;
+  top: 20px;
+}
+
+.platform-ios #backButton p {
+  border: solid #008cdd;
+  border-width: 1px 1px 1px 0;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
+  display: inline-block;
+  height: 28px;
+  line-height: 26px;
+  margin-left: 20px;
+  margin-right: 2px;
+  padding: 0 7px 0 3px;
+  position: relative;
+  text-decoration: none;
+  background: #235ABE;
+}
+.platform-ios #backButton p:before {
+  background: #235ABE;
+  border: solid #008cdd;
+  border-width: 0 0 1px 1px;
+  border-radius: 2px 2px 2px 2px;
+  content: '';
+  display: block;
+  height: 20px;
+  left: -10px;
+  position: absolute;
+  top: 3px;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 20px;
+}
+
+.platform-ios #backButton p span {
+  color: #fff;
+  font-weight: bold;
+  position: relative;
 }

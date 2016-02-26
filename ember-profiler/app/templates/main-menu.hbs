@@ -1,8 +1,20 @@
+{{#if showHamburger}}
+  <span {{action "toggleDrawer"}} class="navbar-brand material-icons" id="menuButton">&#xE5D2;</span>
+{{/if}}
+{{#if showBackButton}}
+  <div {{action "registerBackButtonClick"}} id="backButton" class="backButton">
+    {{#if backButtonText}}
+      <p><span>{{backButtonText}}</span></p>
+    {{else}}
+      <i class="material-icons">&#xE166;</i>
+    {{/if}}
+  </div>
+
+{{/if}}
 <nav class="navbar-flat" >
   <span class="navbar-brand" id="title">
     Here to Career
   </span>
   {{main-progress}}
 </nav>
-<span {{action "toggleDrawer"}} class="navbar-brand material-icons" id="menuButton">&#xE5D2;</span>
 {{oc-drawer register-as=drawer logout="logout"}}
