@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   showHamburger: true,
   backButtonText: false,
   stillLoading: true,
-  demoSeen: false,
+  demoSeen: true,
   model: function () {
     return this.get("setupUtils").appStartup();
   },
