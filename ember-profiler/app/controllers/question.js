@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
   sortingDesc: ['value:desc'],
-  showBackButton: "always",
+  showBackButton: "ios",
   backButtonText: "Undo",
   progress: function() {
     //This hides the loading spinner.
