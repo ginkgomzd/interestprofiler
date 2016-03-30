@@ -16,7 +16,7 @@
 /* Change the Slider Button Color Here */
 .custom::-webkit-slider-thumb {
     -webkit-appearance: none !important;
-    background: #153672;
+    background: $htcBlue;
     height:30px;
     width:30px;
     border-radius: 15px;

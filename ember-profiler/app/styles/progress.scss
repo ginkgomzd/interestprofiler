@@ -11,15 +11,15 @@
   background-image:
   linear-gradient(
     to left,
-    #153672,
-    #153672 18%,
+    $htcBlue,
+    $htcBlue 18%,
     rgba(255, 255, 255, 0) 19%,
     rgba(255, 255, 255, 0)
   ),
   linear-gradient(
     to right,
-    #153672,
-    #153672 1%,
+    $htcBlue,
+    $htcBlue 1%,
     rgba(255, 255, 255, 0) 1%,
     rgba(255, 255, 255, 0)
   ),
@@ -73,5 +73,5 @@
 }
 
 .progressIndicator.complete, .progressIndicator.completed {
-  background-color: #c2212c;
+  background-color: $errorRed;
 }
