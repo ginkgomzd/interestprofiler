@@ -5,6 +5,13 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Any other options
+    outputPaths: {
+      app: {
+        css: {
+          'app': '/assets/ember-profiler.css'
+        }
+      }
+    }
   });
 
 // Use `app.import` to add additional libraries to the generated
@@ -30,4 +37,4 @@ module.exports = function(defaults) {
   app.import('vendor/html2canvas.js');
 
   return app.toTree();
-}
+};
