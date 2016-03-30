@@ -62,7 +62,7 @@ body {
   font-weight: bold;
 }
 .navbar-flat {
-  background-color: #153672;
+  background-color: $htcBlue;
   color: #fff;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
@@ -106,17 +106,17 @@ div.menu-hidden #menuButton {
 
 ul.navbar-nav {
   background-color: #ddd;
-  color: #235ABE;
+  color: $brightBlue;
   margin-top: 0px;
   margin-bottom: 1px;
 }
 ul.navbar-nav li a {
-  color: #235ABE !important;
+  color: $brightBlue !important;
 }
 
 .mainContent button, .button {
   border: 0px;
-  background-color: #153672;
+  background-color: $htcBlue;
   color: #fff;
   text-align: center;
   padding: 5px 10px;
@@ -135,12 +135,12 @@ ul.navbar-nav li a {
 }
 .mainContent .redButton,
 .redButton {
-  background-color: #f00;
+  background-color: $red;
 }
 
 .mainContent .greenButton,
 .greenButton {
-  background-color: #2DCE06;
+  background-color: $brightGreen;
 }
 .mainContent .yellowButton,
 .yellowButton {
@@ -187,14 +187,14 @@ button.rightArrow:after {
 /* Misc Multi-screen classes */
 i.salaryGrowth {
   float: right;
-  color: #39b34a;
+  color: $brightGreen;
   font-weight: bold;
   vertical-align: middle;
 }
 
 i.jobGrowth {
   float: right;
-  color: #39b34a;
+  color: $brightGreen;
   font-weight: bold;
   vertical-align: middle;
 }
@@ -224,14 +224,14 @@ i.jobGrowth {
   width: 55%;
 
   position: relative;
-  background: #e9bd00;
+  background: $htcYellow;
   color: #fff;
   text-align: center;
   padding: 0.2em 1em; /* Adjust to suit */
   margin: auto; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
   border-radius: 20px/50px;
-  border-top: 5px solid #e9bd00;
-  border-bottom: 5px solid #e9bd00;
+  border-top: 5px solid $htcYellow;
+  border-bottom: 5px solid $htcYellow;
 }
 .ribbon:before, .ribbon:after {
   content: "";
@@ -239,7 +239,7 @@ i.jobGrowth {
   display: block;
   bottom: -0.1em;
 
-  border: 0.85em solid #f6c700;
+  border: 0.85em solid $htcYellow;
   z-index: -1;
 }
 .ribbon:before {
@@ -287,7 +287,7 @@ div.gray {
   background: #ddd;
 }
 div.bluegray {
-  background: #627caf;
+  background: $lightBlue;
 }
 .padded {
   padding: 15px;

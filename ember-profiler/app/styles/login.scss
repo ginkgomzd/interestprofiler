@@ -4,11 +4,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #435C89;
+  background: $lightBlue;
   margin: 0px;
 }
 .logo-header{
-  background: #153672;
+  background: $htcBlue;
   padding-left: 20%;
   padding-right: 20%;
   padding-top: 5px;
@@ -30,7 +30,7 @@
   border-radius: 200px;
   height: 75px;
   width: 75px;
-  background: #5c7fbc;
+  background: $lightBlue;
   margin: auto;
   text-align: center;
   vertical-align: middle;
@@ -73,19 +73,19 @@ span.icon.linkedin {
 }
 
 .login-footer {
-  background: #153672;
+  background: $htcBlue;
   width: 100%;
   position: fixed;
   bottom: 0px;
   padding: 15px 0 15px 0;
-  color: #435C89;
+  color: $lightBlue;
 }
 .login-footer input {
   width: 90%;
   display: block;
   margin: 10px 5%;
   border: 0px;
-  border-bottom: 1px solid #435C89;
+  border-bottom: 1px solid $lightBlue;
   background: transparent;
   color: #fff;
 }
