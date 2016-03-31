@@ -4,50 +4,26 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: $lightBlue;
+  background: $htcBlue;
   margin: 0px;
+  color: $white;
 }
 .logo-header{
-  background: $htcBlue;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-top: 5px;
   text-align: center;
-}
-.logo-header img {
-  margin: auto;
-}
-.logo-header h2 {
-  color: #fff;
-  font-weight: normal;
-  margin-top: 5px;
-  padding-bottom: 5px;
-}
-.login-logo {
-  max-width: 30%;
-}
-.logo-header .logo {
-  border-radius: 200px;
-  height: 75px;
-  width: 75px;
-  background: $lightBlue;
-  margin: auto;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 75px;
-  color: #000;
-  font-weight: bold;
+  width: 80%;
+  margin-top: 20%;
+  margin-left: 10%;
 }
 
-.login-overlay button.clearButton {
-  background-color: transparent;
-  width: 90%;
-  margin: 10px auto;
-  border: 3px solid #fff;
+#allLoginForms button {
+  background-color: $lightBlue;
+  width: 80%;
+  margin: 20px auto;
   min-height: 32px;
   vertical-align: middle;
   line-height: 32px;
-
+  font-weight: normal;
+  border: 0px solid transparent;
 }
 
 .login-overlay button span.icon {
@@ -73,14 +49,17 @@ span.icon.linkedin {
 }
 
 .login-footer {
-  background: $htcBlue;
   width: 100%;
-  position: fixed;
-  bottom: 0px;
-  padding: 15px 0 15px 0;
-  color: $lightBlue;
+  position: absolute;
+  bottom: 0;
+  padding: 0;
 }
-.login-footer input {
+#allLoginForms {
+  border-top: 1px solid $darkenQuarter;
+  background: rgba(21, 54, 114, 0.7);
+}
+
+#allLoginForms input:not(#ageVerificationCheckbox) {
   width: 90%;
   display: block;
   margin: 10px 5%;
@@ -93,34 +72,52 @@ span.icon.linkedin {
   border: 0px;
   border-bottom: 1px solid #FFF;
 }
-.login-overlay .login-footer button {
-  border: 2px solid #fff;
-  margin: 3px 10px 3px 10px;
-}
-.login-footer button.slight {
+
+#allLoginForms button.slight {
   border: 0px;
   font-weight: 300;
   font-size: 0.8em;
   padding-top: 0px;
   padding-bottom: 0px;
 }
-#login-actions {
-  padding-top: 15px;
+#allLoginForms button.left {
+  width: 42.5%;
+  margin-left: 5%;
 }
-#signup-actions, #login-password-confirm, #reset-actions {
+#allLoginForms button.right {
+  width: 42.5%;
+  margin-right: 5%;
+}
+
+#allLoginForms>div:not(:first-child) {
   display: none;
 }
 
-.login-buttons {
-  padding-top: 20px;
-  width: 100%;
-  overflow-y: auto;
-  max-height: 50%;
+.terms, .privacy {
+  color: $errorRed;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/***[ CCC-155 Fix login overlap on small screens ]***/
-@media screen and (max-height: 550px) {
-  .login-buttons {
-    padding-bottom: 50px;
-  }
+#signupFooter {
+  clear: both;
+  margin-bottom: 10px;
+}
+#ageVerificationCheckbox {
+  display: inline;
+  border: 2px solid $white;
+  background-color: $htcBlue;
+  width: auto;
+}
+
+/** acknowledgement text **/
+.brought {
+  width: 100%;
+  border-top: 1px solid $darkenQuarter;
+  padding: 10px 0;
+  clear: both;
+}
+.brought img {
+  margin: 0px auto;
+  max-width: 50%;
 }
