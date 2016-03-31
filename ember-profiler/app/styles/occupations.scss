@@ -1,14 +1,3 @@
-.salaryInfo {
-    border: 2px solid #0071bc;
-    padding: 5px;
-    font-size: 11pt;
-}
-
-.salaryInfo h2 {
-    background: #0071bc;
-    width: 100%;
-}
-
 .salaryInfo ul {
     list-style: none;
     padding: 0px;
@@ -27,11 +16,6 @@
     float: right;
 }
 
-.OccupationDetail {
-    border: 3px solid #336ebf;
-    border-radius: 10px;
-    padding: 5px;
-}
 .OccupationDetail .OccupationTitle {
     font-size: .9em;
     font-weight: 600;
@@ -47,26 +31,22 @@
     white-space: nowrap;
     white-space-collapse: discard;
     text-align: center;
-    margin: 5px 0px;
+    margin: 5px;
+    padding: 5px;
 }
 .sortTypes .sortOption {
     border: 2px solid #000;
     background: #fff;
     padding: 4px 6px;
     font-size: .75em;
-    display: inline;
-    margin: 0px;
+    display: inline-block;
+    border-radius: 8px;
+    width: 30%;
+    margin: 0px 2.5%;
+    font-weight: bold;
 }
-.sortTypes .sortOption:first-of-type {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    border-right: none;
-}
-.sortTypes .sortOption:last-of-type {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-left: none;
-}
+
 .sortTypes .sortOption.active {
     background-color: #336ebf;
+    color: white;
 }

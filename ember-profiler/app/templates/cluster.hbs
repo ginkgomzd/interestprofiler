@@ -1,21 +1,20 @@
-<div class="full bluegray">
-  <div class="pageMessage full">
-    You're Exploring...
-    <div class="clusterName">{{model.name}}</div>
-  </div>
+<div class="full">
+    <p class="center lightBlueText smaller"><strong>You're Exploring...</strong></p>
+    <div class="center"><strong>{{model.name}}</strong></div>
 </div>
 
 <div class="sortTypes">
-  <div class="sortOption sortHighSalary" {{action "sortHighSalary"}}>High Salary</div><!--
+  <div class="sortOption sortHighSalary" {{action "sortHighSalary"}}>$$</div><!--
   --><!--<div class="sortOption sortHighSalaryChange" {{action "sortHighSalaryChange"}}>High Salary Change</div>//--><!--
   -->{{#if showSortScore}}<div class="sortOption sortScore" {{action "sortScore"}}>Relevance</div>{{/if}}<!--
-  --><div class="sortOption sortAlphabetical" {{action "sortAlphabetical"}}>Alphabetical</div>
+  --><div class="sortOption sortAlphabetical" {{action "sortAlphabetical"}}>A&lt;Z</div>
 </div>
-<div class="listView">
-  <ul>
+
+<div class="full">
+  <ul class="listView">
     {{#each occupation in occupations}}
       {{#if occupation.hasData}}
-        <li {{action "viewOccupation" occupation.first.id}}>
+        <li {{action "viewOccupation" occupation.first.id}} class="chevronRight">
           <div class="OccupationDetail">
             <span class="OccupationTitle">{{occupation.first.title}}</span>
             <table class="OccupationSalaryDataTable">

@@ -271,9 +271,6 @@ ul.listView {
 .listView li:first-child {
   border-top: 1px solid $darken66;
 }
-.listView li:nth-of-type(even) {
-  background: $darken15;
-}
 
 .alumni-img-detail .img-alumni {
   margin: auto;
@@ -284,4 +281,14 @@ ul.listView {
 }
 .section {
   border-bottom: 1px solid $darken75;
+}
+
+.chevronRight {
+  background-image: url(../img/right_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.lightBlueText {
+  color: $lightBlue;
 }
