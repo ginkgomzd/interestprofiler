@@ -46,7 +46,10 @@ div.menu-hidden #menuButton {
 }
 
 #title {
-  margin-left: 40px;
+  display: inline-block;
+  margin: auto;
+  width: 100%;
+  text-align: center;
 }
 
 ul.navbar-nav {
