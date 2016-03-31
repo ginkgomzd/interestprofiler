@@ -265,6 +265,7 @@ ul.listView {
   margin: 0px;
   border-bottom: 1px solid $darken66;
 }
+
 .listView.dim li {
   border-color: $darken33;
 }
@@ -275,6 +276,7 @@ ul.listView {
 .listView li:first-child {
   border-top: 1px solid $darken66;
 }
+
 .listView.dim li:first-child {
   border-color: $darken33;
 }
@@ -291,7 +293,6 @@ ul.listView {
   background-image: url(../img/right_arrow_dim.png);
   background-repeat: no-repeat;
   background-position: right center;
-}
 
 .alumni-img-detail .img-alumni {
   margin: auto;
