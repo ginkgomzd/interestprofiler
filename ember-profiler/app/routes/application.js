@@ -36,7 +36,8 @@ export default Ember.Route.extend({
         this.send("analytics", "pageLoad", this.controller.currentRouteName);
 
         //Handle hide/show or back button and hamburger icon
-        var mode =  this.controllerFor(this.controller.currentRouteName).get("showBackButton") || 'never';
+        var activeController = this.controllerFor(this.controller.currentRouteName);
+        var mode =  activeController.get("showBackButton") || 'never';
 
         var platformName = "web";
         //var platformName = "ios";
@@ -45,6 +46,7 @@ export default Ember.Route.extend({
         if (window.cordova) {
           platformName = cordova.platformId;
         }
+
         var showBB = (mode === "always" || mode === platformName);
         this.controller.set("showBackButton", showBB);
         if(platformName === "ios") {
@@ -54,6 +56,15 @@ export default Ember.Route.extend({
         } else {
           this.controller.set("showHamburger", true);
         }
+
+        //Handle Title changes
+        var appTitle = activeController.get("pageTitle") || "Here to Career";
+        this.controller.set("appTitle", appTitle);
+
+        //Handle color changes
+        var navClass = activeController.get("navbarClass") || "darkBlue";
+        this.controller.set("navbarClass", navClass);
+
       }, 5);
 
       //This is to hide the Splashscreen
