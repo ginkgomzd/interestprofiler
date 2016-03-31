@@ -2,12 +2,33 @@ div.about-section {
     border: 2px solid #000;
     margin-bottom: 15px;
     padding: 5px;
+    text-align: center;
+}
+div.about-section img {
+    margin: 0 auto;
 }
 
 div.YI, div.OnetInIt {
     background: #fff;
 }
 
+div.YI {
+    float: left;
+    padding-left: 7%;
+    padding-right: 7%;
+}
 div.Ginkgo {
     background: #a6b779;
+    float: right;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+div.OnetInIt {
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+div.YI, div.Ginkgo {
+    max-width: 47%;
 }
