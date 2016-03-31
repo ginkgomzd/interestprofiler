@@ -257,14 +257,22 @@ input {
   -webkit-user-select: auto !important;
 }
 
-.listView ul {
+ul.listView {
   list-style: none;
   margin: 0px;
   padding: 0px;
 }
 .listView li {
-  padding: 5px;
+  padding: 5px 15px;
   margin: 0px;
+  border-bottom: 1px solid $darken66;
+}
+
+.listView li:first-child {
+  border-top: 1px solid $darken66;
+}
+.listView li:nth-of-type(even) {
+  background: $darken15;
 }
 
 .alumni-img-detail .img-alumni {
@@ -273,4 +281,7 @@ input {
 
 .clickable {
   cursor: pointer;
+}
+.section {
+  border-bottom: 1px solid $darken75;
 }
