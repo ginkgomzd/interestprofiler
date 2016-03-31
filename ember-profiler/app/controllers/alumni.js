@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  pageTitle: "Alumni Network",
+  navbarClass: "yellow",
   actions: {
     /**
      * Action to record user preferences.

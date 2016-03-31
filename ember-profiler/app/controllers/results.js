@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  pageTitle: "Results",
+  navbarClass: "yellow",
   fetching: function() {return false;}.property(),
   fetchingWatcher:function () {
     if (!this.fetching) {

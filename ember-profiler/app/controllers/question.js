@@ -5,6 +5,8 @@ export default Ember.Controller.extend({
   sortingDesc: ['value:desc'],
   showBackButton: "ios",
   backButtonText: "Undo",
+  pageTitle: "Quiz",
+  navbarClass: "yellow",
   progress: function() {
     //This hides the loading spinner.
     this.get("status").loadingComplete();
