@@ -1,5 +1,5 @@
 {{#if showHamburger}}
-  <span {{action "toggleDrawer"}} class="navbar-brand material-icons" id="menuButton">&#xE5D2;</span>
+  <span {{action "toggleDrawer"}} class="navbar-brand material-icons {{currentRouteName}}" id="menuButton">&#xE5D2;</span>
 {{/if}}
 {{#if showBackButton}}
   <div {{action "registerBackButtonClick"}} id="backButton" class="backButton">
