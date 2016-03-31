@@ -37,15 +37,18 @@ export default Ember.Route.extend({
     },
     loginWithFacebook: function(saveVerification) {
       var that = this;
+      this.get("status").loading();
       this.parseAuth.authenticate_fb(function() {
         that.registerLoginLocationAnalytics("facebook");
         if(saveVerification) {
           that.saveTosAndAgeVerification();
         }
+        that.get("status").loadingComplete();
         that.transitionTo("welcome");
       },
       function(user, error) {
         that.status.warn(error.message);
+        that.get("status").loadingComplete();
       });
 
     },
@@ -66,16 +69,19 @@ export default Ember.Route.extend({
         email: Ember.$("#login-email").val(),
         password: Ember.$("#login-password").val()
       };
+      this.get("status").loading();
       this.parseAuth.authenticate(user,
         function() {
           //success
           that.get("setupUtils").handleLogin().then(function() {
             that.registerLoginLocationAnalytics("email");
+            that.get("status").loadingComplete();
             that.transitionTo("welcome");
           });
         },
         function(user, error) {
           that.status.warn(error.message);
+          that.get("status").loadingComplete();
         });
     },
     doEmailSignup: function() {
@@ -86,17 +92,20 @@ export default Ember.Route.extend({
         };
         if (Ember.$("#signup-password-confirm").val() === user.password) {
           var that = this;
+          this.get("status").loading();
           this.parseAuth.register(user,
             function () {
               //success
               that.get("setupUtils").handleLogin().then(function () {
                 that.registerLoginLocationAnalytics("email-signup");
                 that.saveTosAndAgeVerification();
+                that.get("status").loadingComplete();
                 that.transitionTo("welcome");
               });
             },
             function (user, error) {
               that.status.warn(error.message);
+              that.get("status").loadingComplete();
             });
         } else {
           this.status.warn("Passwords don't match");
@@ -107,13 +116,16 @@ export default Ember.Route.extend({
       if (Ember.$("#reset-email").val()) {
 
         var that = this;
+        this.get("status").loading();
         this.parseAuth.passwordReset(Ember.$("#reset-email").val(), {
           success: function () {
             that.status.success("An email with reset instructions has been sent to '" + Ember.$("#reset-email").val() + "'");
             that.controller.send("showLoginEmail");
+            that.get("status").loadingComplete();
           },
           error: function (error) {
             that.status.error(error.message);
+            that.get("status").loadingComplete();
           }
         });
       } else {
