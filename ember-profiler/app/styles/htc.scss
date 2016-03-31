@@ -275,18 +275,13 @@ ul.listView {
 .listView li:first-child {
   border-top: 1px solid $darken66;
 }
-
-.alumni-img-detail .img-alumni {
-  margin: auto;
+.listView.dim li:first-child {
+  border-color: $darken33;
 }
 
-.clickable {
-  cursor: pointer;
+.listView li.chevronRight, .listView li.chevronRightDim {
+  padding-right: 30px;
 }
-.section {
-  border-bottom: 1px solid $darken75;
-}
-
 .chevronRight {
   background-image: url(../img/right_arrow.png);
   background-repeat: no-repeat;
@@ -298,6 +293,22 @@ ul.listView {
   background-position: right center;
 }
 
+.alumni-img-detail .img-alumni {
+  margin: auto;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.section {
+  border-bottom: 1px solid $darken75;
+}
+
 .lightBlueText {
   color: $lightBlue;
+}
+
+.noMargin {
+  margin: 0;
 }
