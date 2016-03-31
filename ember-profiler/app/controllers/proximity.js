@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   showBackButton: "ios",
+  pageTitle: "Degrees and Colleges",
   searchRadius: function() { return 25;}.property(),
   deferredUpdate: function() {this.send("findInProximity");},
   liveUpdateProximity: function() {

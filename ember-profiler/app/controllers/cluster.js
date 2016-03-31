@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  pageTitle: "Wages and Salaries",
+  navbarClass: "lightBlue",
   sortProperties: [""],
   occupations: Ember.computed.sort("model.occupations", 'sortProperties'),
   showBackButton: "ios",
