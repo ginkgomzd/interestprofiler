@@ -38,8 +38,8 @@ module.exports = function(environment) {
       },
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25",
-      tosURL: "",
-      privacyURL: ""
+      tosURL: "http://yidata.org/terms.html",
+      privacyURL: "http://yidata.org/htcprivacy.html"
     },
 
     APP: {
