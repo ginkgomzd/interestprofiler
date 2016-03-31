@@ -1,33 +1,69 @@
 <div class="login-overlay full">
   <div class="logo-header">
     <img src="img/logo.png" class="login-logo img-responsive" />
-    <h2>Here to Career</h2>
   </div>
 
-  <div class="login-buttons">
-    <button {{action "loginWithFacebook"}} class="clearButton"><span class="icon facebook">&nbsp;</span>Login with Facebook</button>
-    <!--//<button {{action "loginWithLinkedIn"}} class="clearButton"><span class="icon linkedin">&nbsp;</span>Login with LinkedIn</button>//-->
-    <!--//<button {{action "loginWithTwitter"}} class="clearButton"><span class="icon twitter">&nbsp;</span>Login with Twitter</button>//-->
-    <!--//<button {{action "loginWithGoogle"}} class="clearButton"><span class="icon google">&nbsp;</span>Login with Google</button>//-->
-  </div>
 
   <div class="login-footer">
-    <input type="email" id="login-email" placeholder="Email" />
-    <input type="password" id="login-password" placeholder="Password" />
-    <input type="password" id="login-password-confirm" placeholder="Confirm Password" />
-    <div id="login-actions">
-      <button class="right" {{action "doLogin"}}>Login</button>
-      <button class="left slight" {{action "showSignup"}}>Create an Account</button>
-      <br />
-      <button class="left slight" {{action "showReset"}}>Forgot Password</button>
+    <div id="allLoginForms">
+      <div id="loginOrCreate">
+        <button {{action "showSignupActions"}} class="clearButton">Create an Account</button>
+        <button {{action "showLoginActions"}} class="clearButton">Log in</button>
+      </div>
+      <div id="loginActions">
+        <button class="slight" {{action "showLoginOrCreate"}}>Back</button>
+        <button {{action "showLoginEmail"}} class="clearButton">Log in using your email</button>
+        <button {{action "loginWithFacebook"}} class="clearButton"><span class="icon facebook">&nbsp;</span>Login with Facebook</button>
+        <!--//<button {{action "loginWithLinkedIn"}} class="clearButton"><span class="icon linkedin">&nbsp;</span>Login with LinkedIn</button>//-->
+        <!--//<button {{action "loginWithTwitter"}} class="clearButton"><span class="icon twitter">&nbsp;</span>Login with Twitter</button>//-->
+        <!--//<button {{action "loginWithGoogle"}} class="clearButton"><span class="icon google">&nbsp;</span>Login with Google</button>//-->
+      </div>
+      <div id="loginEmail">
+        <input type="email" id="login-email" placeholder="Email" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button class="left" {{action "showLoginActions"}}>Cancel</button>
+        <button class="right" {{action "doEmailLogin"}}>Login</button>
+        <button class="left slight" {{action "showEmailReset"}}>Forgot Password</button>
+      </div>
+      <div id="emailReset">
+        <input type="email" id="reset-email" placeholder="Email" />
+        <button class="left" {{action "showLoginEmail"}}>Cancel</button>
+        <button class="right" {{action "doEmailReset"}}>Reset Password</button>
+      </div>
+
+
+      <div id="signupActions">
+        <button class="slight" {{action "showLoginOrCreate"}}>Back</button>
+        <button {{action "showSignupEmail"}} class="clearButton">Sign up using your email</button>
+        <button {{action "signupWithFacebook"}} class="clearButton"><span class="icon facebook">&nbsp;</span>Signup with Facebook</button>
+      </div>
+
+      <div id="signupEmail">
+        <input type="email" id="signup-email" placeholder="Email" />
+        <input type="password" id="signup-password" placeholder="Password" />
+        <input type="password" id="signup-password-confirm" placeholder="Confirm Password" />
+        <button class="right" {{action "doEmailSignup"}}>Login</button>
+        <button class="left" {{action "showSignupActions"}}>Cancel</button>
+      </div>
+
+      <div id="signupFooter">
+        <div class="ageVerification smaller center">
+          <input type="checkbox" id="ageVerificationCheckbox" /> <label for="ageVerificationCheckbox" >I certify that I am at least 13 years of age.</label>
+        </div>
+        <div class="signupTerms smaller center">By Signing up, I agree to Here to Career's
+          <span {{action "showTerms"}} class="terms">Terms of Service</span>
+          and
+          <span {{action "showPrivacyPolicy"}} class="privacy">Privacy Policy</span>
+        </div>
+      </div>
+
+
+
+
     </div>
-    <div id="signup-actions">
-      <button class="left" {{action "cancelSignup"}}>Cancel</button>
-      <button class="right" {{action "doSignup"}}>Signup</button>
-    </div>
-    <div id="reset-actions">
-      <button class="left" {{action "cancelReset"}}>Cancel</button>
-      <button class="right" {{action "doReset"}}>Reset Password</button>
+
+    <div class="brought">
+      <img src="img/brought-by.png" class="img-responsive" />
     </div>
   </div>
 </div>

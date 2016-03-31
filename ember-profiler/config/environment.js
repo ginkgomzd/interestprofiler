@@ -37,7 +37,9 @@ module.exports = function(environment) {
         collegeIndex: {modelName: "collegeIndex", apiPath: "", emberDataNamespace: "H2CCollegeIndex"}
       },
       databaseVersion: 1.001,
-      staticDataUpdatedDate: "2015-11-25"
+      staticDataUpdatedDate: "2015-11-25",
+      tosURL: "http://yidata.org/terms.html",
+      privacyURL: "http://yidata.org/htcprivacy.html"
     },
 
     APP: {
