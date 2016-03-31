@@ -6,12 +6,16 @@
 }
 
 .salaryInfo ul li {
-    padding: 5px 10px;
+    padding: 5px 10px 5px 30px;
 }
 .salaryInfo ul li:nth-child(odd){
     background: #eee;
 }
 
+.salaryInfo .awardType {
+    padding: 0 15px;
+    font-weight: bold;
+}
 .salaryInfo .money {
     float: right;
 }
