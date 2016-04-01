@@ -1,5 +1,14 @@
 import Ember from 'ember';
 
+
+/**
+ *
+ * This Initializer attaches an event handler to the window
+ * and wathes for any-outgoing links (http* and not pointing to localhost)
+ * and routes them to cordova.InAppBrowser so that they open in the native browser
+ * application rather than hijacking our WebView.
+ *
+ */
 export function initialize(registry, application) {
 
   function findParent(tagname,el){
