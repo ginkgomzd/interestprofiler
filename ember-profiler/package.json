@@ -34,7 +34,7 @@
     "ember-cli-parse": "git://github.com/ginkgostreet/ember-cli-parse.git",
     "ember-cli-qunit": "0.3.13",
     "ember-cli-sass": "5.3.0",
-    "ember-cli-slick": "1.0.13",
+    "ember-cli-slick": "^1.0.14",
     "ember-cli-uglify": "^1.0.1",
     "ember-cli-x2js": "git://github.com/tobiaslounsbury/ember-cli-x2js.git",
     "ember-data": "1.0.0-beta.19",
