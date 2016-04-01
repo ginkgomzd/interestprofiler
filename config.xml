@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="160304001" id="org.younginvincibles.here2career" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="160304001" id="org.younginvincibles.here2career" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Here to Career</name>
     <description>
         This app provides resources on California Community Colleges.
@@ -7,7 +7,7 @@
     <author email="dev@ginkgostreet.com" href="http://www.ginkgostreet.com">
         Ginkgo Street Labs
     </author>
-    <content src="http://localhost:4200" />
+    <content src="index.html#/welcome" />
     <access origin="*" />
     <icon src="res/icon-72@2x.png" />
     <preference name="SplashScreen" value="screen" />
@@ -52,11 +52,11 @@
         <icon height="58" src="res/icon-small@2x.png" width="58" />
         <icon height="50" src="res/icon-50.png" width="50" />
         <icon height="100" src="res/icon-50@2x.png" width="100" />
-        <splash height="640" width="3200" src="res/Default.png" />
-        <splash height="960" width="640" src="res/Default@2x.png" />
-        <splash height="1136" width="640" src="res/Default-568h@2x.png" />
-        <splash height="1334" width="750" src="res/Default-667h@2x.png" />
-        <splash height="2208" width="1242" src="res/Default-736@2x.png" />
+        <splash height="640" src="res/Default.png" width="3200" />
+        <splash height="960" src="res/Default@2x.png" width="640" />
+        <splash height="1136" src="res/Default-568h@2x.png" width="640" />
+        <splash height="1334" src="res/Default-667h@2x.png" width="750" />
+        <splash height="2208" src="res/Default-736@2x.png" width="1242" />
         <preference name="FadeSplashScreenDuration" value="1000" />
     </platform>
     <platform name="android">
