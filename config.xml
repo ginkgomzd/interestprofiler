@@ -52,16 +52,11 @@
         <icon height="58" src="res/icon-small@2x.png" width="58" />
         <icon height="50" src="res/icon-50.png" width="50" />
         <icon height="100" src="res/icon-50@2x.png" width="100" />
-        <splash height="480" idth="320" src="res/screen.png" />
-        <splash height="960" idth="640" src="res/screen.png" />
-        <splash height="1024" idth="768" src="res/screen.png" />
-        <splash height="2048" idth="1536" src="res/screen.png" />
-        <splash height="768" idth="1024" src="res/screen.png" />
-        <splash height="1536" idth="2048" src="res/screen.png" />
-        <splash height="1136" idth="640" src="res/screen.png" />
-        <splash height="1334" idth="750" src="res/screen.png" />
-        <splash height="2208" idth="1242" src="res/screen.png" />
-        <splash height="1242" idth="2208" src="res/screen.png" />
+        <splash height="640" width="3200" src="res/Default.png" />
+        <splash height="960" width="640" src="res/Default@2x.png" />
+        <splash height="1136" width="640" src="res/Default-568h@2x.png" />
+        <splash height="1334" width="750" src="res/Default-667h@2x.png" />
+        <splash height="2208" width="1242" src="res/Default-736@2x.png" />
         <preference name="FadeSplashScreenDuration" value="1000" />
     </platform>
     <platform name="android">
