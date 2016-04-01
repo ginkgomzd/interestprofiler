@@ -4,7 +4,6 @@
     margin: 0px;
     background: #6480ab;
     padding: 15px;
-    margin-bottom: 15px;
 }
 .proximity-main input {
   -webkit-user-select: auto !important;
@@ -14,10 +13,9 @@
 }
 .collegeProximityList li  {
     list-style:  none;
-    border: 2px solid #6480ab;
-    margin-bottom: 5px;
+    border-bottom: 2px solid $darken15;
     width: 100%;
-    padding: 6px;
+    padding: 10px;
 }
 .collegeProximityList li i, .collegeProximityList .distance {
     float: right;

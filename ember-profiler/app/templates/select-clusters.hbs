@@ -1,10 +1,10 @@
-<div class="pageMessage full bluegray center">
+<div class="pageMessage full lightBlueText center">
   Tap a program to explore degrees & salaries
 </div>
-<div class="full padded">
-  <div class="clusters">
-    <ul>{{#each cluster in arrangedContent}}
+<div class="full" id="clusterList">
+  <ul class="listView dim taller">
+    {{#each cluster in arrangedContent}}
       {{view "cluster-button" cluster=cluster}}
-    {{/each}}</ul>
-  </div>
+    {{/each}}
+  </ul>
 </div>

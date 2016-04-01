@@ -1,33 +1,33 @@
 <div class="full">
-  <div class="pageMessage gray full">
-    You're Exploring...
-    <div class="clusterName">{{model.title}}</div>
+  <div class="full">
+    <p class="center lightBlueText smaller noMargin"><strong>You're Exploring...</strong></p>
+    <div class="center"><strong>{{model.title}}</strong></div>
   </div>
+  <br />
 
-  <div class="padded">
-    <div class="salaryInfo">
-      <p><strong>Salary Information:</strong></p>
-      {{#each occupation in model.occupations}}
-        {{occupation.awardDescription}}
+
+  <div class="salaryInfo">
+    <p><strong>Salary Information:</strong></p>
+    {{#each occupation in model.occupations}}
+      <span class="awardType">{{occupation.awardDescription}}</span>
       <ul>
         <li>2 years before: <span class="money">{{currency-format-na occupation.medianPre2}}</span></li>
         <li>2 years after: <span class="money">{{currency-format-na occupation.medianPost2}}</span></li>
         <li>5 years after: <span class="money">{{currency-format-na occupation.medianPost5}}</span></li>
       </ul>
-      {{/each}}
-    </div>
-  </div>
-
-  <div class="padded">
-    {{#each program in model.programs}}
-      <div class="programDesc">
-        <div><strong>{{program.college.collegeName}}</strong></div>
-        {{#each programRow in program.programs}}
-          <div>{{programRow.awardDescription}}: {{programRow.title}}</div>
-        {{/each}}
-        <div class="collegeUrl" {{action "openExternalLink" program.college.collegeURL}}>{{program.college.collegeURL}}</div>
-      </div>
-      <div {{action "viewCollege" program.college.id}} class="programLearnMore">Tap to learn more and connect with this school.</div>
     {{/each}}
   </div>
+
+  <br />
+
+  <ul class="listView dim">
+    {{#each program in model.programs}}
+      <li {{action "viewCollege" program.college.id}} class="clickable chevronRightDim">
+          <div><strong>{{program.college.collegeName}}</strong></div>
+          {{#each programRow in program.programs}}
+            <div class="smaller">{{programRow.awardDescription}}: {{programRow.title}}</div>
+          {{/each}}
+      </li>
+    {{/each}}
+  </ul>
 </div>

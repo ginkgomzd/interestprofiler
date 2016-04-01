@@ -123,18 +123,16 @@ button.rightArrow:after {
 }
 
 /* Misc Multi-screen classes */
-i.salaryGrowth {
+i.salaryGrowth, i.jobGrowth {
   float: right;
-  color: $brightGreen;
+  color: $htcYellow;
   font-weight: bold;
   vertical-align: middle;
-}
-
-i.jobGrowth {
-  float: right;
-  color: $brightGreen;
-  font-weight: bold;
-  vertical-align: middle;
+  border: 2px solid $htcYellow;
+  border-radius: 100%;
+  padding: 1px;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .ribbon-container {
@@ -257,14 +255,42 @@ input {
   -webkit-user-select: auto !important;
 }
 
-.listView ul {
+ul.listView {
   list-style: none;
   margin: 0px;
   padding: 0px;
 }
 .listView li {
-  padding: 5px;
+  padding: 5px 15px;
   margin: 0px;
+  border-bottom: 1px solid $darken66;
+}
+.listView.dim li {
+  border-color: $darken33;
+}
+.listView.taller li {
+  padding: 10px 15px;
+}
+
+.listView li:first-child {
+  border-top: 1px solid $darken66;
+}
+.listView.dim li:first-child {
+  border-color: $darken33;
+}
+
+.listView li.chevronRight, .listView li.chevronRightDim {
+  padding-right: 30px;
+}
+.chevronRight {
+  background-image: url(../img/right_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.chevronRightDim {
+  background-image: url(../img/right_arrow_dim.png);
+  background-repeat: no-repeat;
+  background-position: right center;
 }
 
 .alumni-img-detail .img-alumni {
@@ -273,4 +299,16 @@ input {
 
 .clickable {
   cursor: pointer;
+}
+
+.section {
+  border-bottom: 1px solid $darken75;
+}
+
+.lightBlueText {
+  color: $lightBlue;
+}
+
+.noMargin {
+  margin: 0;
 }
