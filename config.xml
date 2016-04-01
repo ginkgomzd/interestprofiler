@@ -44,7 +44,7 @@
         <icon height="152" src="res/icon-76@2x.png" width="152" />
         <icon height="40" src="res/icon-40.png" width="40" />
         <icon height="80" src="res/icon-40@2x.png" width="80" />
-        <icon height="57" src="res/icon.png" width="57" />
+        <icon height="57" src="res/icon@1x.png" width="57" />
         <icon height="114" src="res/icon@2x.png" width="114" />
         <icon height="72" src="res/icon-72.png" width="72" />
         <icon height="144" src="res/icon-72@2x.png" width="144" />
@@ -66,6 +66,7 @@
     </platform>
     <platform name="android">
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon-mdpi.png" />
         <icon density="hdpi" src="res/icon-hdpi.png" />
@@ -88,6 +89,8 @@
         <preference name="SplashMaintainAspectRatio" value="true" />
     </platform>
     <platform name="amazon-fireos">
+        <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon-mdpi.png" />
         <icon density="hdpi" src="res/icon-hdpi.png" />
@@ -107,4 +110,5 @@
         <splash density="port-xxhdpi" src="res/screen.png" />
         <splash density="port-xxxhdpi" src="res/screen.png" />
     </platform>
+    <preference name="AlternateContentSrc" value="http://localhost:0" />
 </widget>
