@@ -3,14 +3,27 @@
     <img src="img/logo.png" class="img-responsive" />
   </div>
 
-  <div class="welcome-header">
-    <h1>Here to Career</h1>
-    <span>I want to explore...</span>
-  </div>
+  <div class="welcome-header">I want to explore...</div>
+
   <div class="clear"></div>
-  <div class="full welcomeActions">
-    <button {{action "salaries"}} class="clearButton"><i class="material-icons">&#xE227;</i><span>Wages & Salaries</span></button>
-    <button {{action "takeQuiz"}} class="clearButton"><i class="material-icons">&#xE30A;</i><span>Jobs & Careers</span></button>
-    <button {{action "proximity"}} class="clearButton"><i class="material-icons">&#xE55F;</i><span>Degrees & Colleges</span></button>
+
+  <div class="welcomeActions">
+    <div class="welcomeAction">
+      <div {{action "salaries"}} class="welcomeActionIcon salaryIcon clickable"></div>
+      <span {{action "salaries"}} class="clickable">Wages & Salaries</span>
+    </div>
+    <div class="welcomeAction">
+      <div {{action "takeQuiz"}} class="welcomeActionIcon careerIcon clickable"></div>
+      <span {{action "takeQuiz"}} class="clickable">Jobs & Careers</span>
+    </div>
+    <div class="welcomeAction">
+      <div {{action "proximity"}} class="welcomeActionIcon collegeIcon clickable"></div>
+      <span {{action "proximity"}} class="clickable">Degrees & Colleges</span>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="brought attach">
+    <img src="img/brought-by.png" class="img-responsive" />
   </div>
 </div>
