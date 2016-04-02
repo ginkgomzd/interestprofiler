@@ -71,3 +71,13 @@ div.welcome-overlay div.logo-header {
 #menuButton.welcome {
   color: $lightenHalf;
 }
+
+@media all and (max-height: 545px) {
+  .logo-header {
+    margin-top: 10%;
+  }
+  .welcome-header {
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+}
