@@ -15,10 +15,10 @@
     <preference name="SplashScreenDelay" value="30000" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-splashscreen" spec="cordova-plugin-splashscreen" />
-    <plugin name="cordova-plugin-inappbrowser" spec="cordova-plugin-inappbrowser" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.3.0" />
     <plugin name="cordova-plugin-geolocation" spec="~1.0.1" />
-    <plugin name="cordova-plugin-statusbar" spec="cordova-plugin-statusbar" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
     <plugin name="cordova-plugin-spinner-dialog" spec="https://github.com/Paldom/SpinnerDialog.git" />
     <plugin name="nl.x-services.plugins.socialsharing" spec="https://github.com/Telerik-Verified-Plugins/SocialSharing" />
     <plugin name="cordova-plugin-facebook4" spec="https://github.com/jeduan/cordova-plugin-facebook4">
@@ -30,13 +30,15 @@
         <variable name="CLIENT_KEY" value="YwRrf7cxtwGoEHSJR5SPLXTuyBHEh1hdaRJUFxIo" />
     </plugin>
     <plugin name="cordova-labs-wkwebview-engine-localhost" spec="https://github.com/apache/cordova-plugins.git#master:wkwebview-engine-localhost" />
+    <preference name="AlternateContentSrc" value="http://localhost:4200" />
     <hook src="scripts/before_prepare/build_ember_app.sh" type="before_prepare" />
     <hook src="scripts/before_build/030_configure_parse.js" type="before_build" />
     <platform name="ios">
         <preference name="BackupWebStorage" value="none" />
-        <plugin name="cordova-plugin-geolocation" spec="~1.0.1" />
+        <preference name="StatusBarOverlaysWebView" value="false" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <allow-navigation href="*" />
         <icon height="180" src="res/icon-60@3x.png" width="180" />
         <icon height="60" src="res/icon-60.png" width="60" />
         <icon height="120" src="res/icon-60@2x.png" width="120" />
@@ -48,10 +50,13 @@
         <icon height="114" src="res/icon-@2x.png" width="114" />
         <icon height="72" src="res/icon-72.png" width="72" />
         <icon height="144" src="res/icon-72@2x.png" width="144" />
+        <icon height="167" src="res/icon-83.5@2x.png" width="167" />
         <icon height="29" src="res/icon-small.png" width="29" />
         <icon height="58" src="res/icon-small@2x.png" width="58" />
+        <icon height="87" src="res/icon-small@3x.png" width="87" />
         <icon height="50" src="res/icon-50.png" width="50" />
         <icon height="100" src="res/icon-50@2x.png" width="100" />
+        <splash height="480" src="res/iphone4.png" width="320" />
         <splash height="640" src="res/Default.png" width="320" />
         <splash height="960" src="res/Default@2x.png" width="640" />
         <splash height="1136" src="res/Default-568h@2x.png" width="640" />
@@ -105,5 +110,4 @@
         <splash density="port-xxhdpi" src="res/screen.png" />
         <splash density="port-xxxhdpi" src="res/screen.png" />
     </platform>
-    <preference name="AlternateContentSrc" value="http://localhost:0" />
 </widget>
