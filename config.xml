@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="160304001" id="org.younginvincibles.here2career" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="160401001" id="org.younginvincibles.here2career" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Here to Career</name>
     <description>
         This app provides resources on California Community Colleges.
@@ -7,7 +7,7 @@
     <author email="dev@ginkgostreet.com" href="http://www.ginkgostreet.com">
         Ginkgo Street Labs
     </author>
-    <content src="index.html#/welcome" />
+    <content src="http://localhost:4200" />
     <access origin="*" />
     <icon src="res/icon-72@2x.png" />
     <preference name="SplashScreen" value="screen" />
@@ -44,15 +44,15 @@
         <icon height="152" src="res/icon-76@2x.png" width="152" />
         <icon height="40" src="res/icon-40.png" width="40" />
         <icon height="80" src="res/icon-40@2x.png" width="80" />
-        <icon height="57" src="res/icon.png" width="57" />
-        <icon height="114" src="res/icon@2x.png" width="114" />
+        <icon height="57" src="res/icon-@1x.png" width="57" />
+        <icon height="114" src="res/icon-@2x.png" width="114" />
         <icon height="72" src="res/icon-72.png" width="72" />
         <icon height="144" src="res/icon-72@2x.png" width="144" />
         <icon height="29" src="res/icon-small.png" width="29" />
         <icon height="58" src="res/icon-small@2x.png" width="58" />
         <icon height="50" src="res/icon-50.png" width="50" />
         <icon height="100" src="res/icon-50@2x.png" width="100" />
-        <splash height="640" src="res/Default.png" width="3200" />
+        <splash height="640" src="res/Default.png" width="320" />
         <splash height="960" src="res/Default@2x.png" width="640" />
         <splash height="1136" src="res/Default-568h@2x.png" width="640" />
         <splash height="1334" src="res/Default-667h@2x.png" width="750" />
@@ -61,6 +61,7 @@
     </platform>
     <platform name="android">
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon-mdpi.png" />
         <icon density="hdpi" src="res/icon-hdpi.png" />
@@ -83,6 +84,8 @@
         <preference name="SplashMaintainAspectRatio" value="true" />
     </platform>
     <platform name="amazon-fireos">
+        <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon-mdpi.png" />
         <icon density="hdpi" src="res/icon-hdpi.png" />
@@ -102,4 +105,5 @@
         <splash density="port-xxhdpi" src="res/screen.png" />
         <splash density="port-xxxhdpi" src="res/screen.png" />
     </platform>
+    <preference name="AlternateContentSrc" value="http://localhost:0" />
 </widget>
