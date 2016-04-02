@@ -20,6 +20,8 @@ export default Ember.Route.extend({
         this.set("demoSeen", true);
         this.transitionTo("demo");
       }
+    } else {
+      this.transitionTo("welcome");
     }
   },
   actions: {
