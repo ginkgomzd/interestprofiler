@@ -1,5 +1,5 @@
 .welcome-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -74,7 +74,7 @@ div.welcome-overlay div.logo-header {
 
 @media all and (max-height: 545px) {
   .logo-header {
-    margin-top: 10%;
+    margin-top: 8%;
   }
   .welcome-header {
     margin-top: 4%;
