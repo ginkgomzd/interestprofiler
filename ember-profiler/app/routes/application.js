@@ -20,6 +20,8 @@ export default Ember.Route.extend({
         this.set("demoSeen", true);
         this.transitionTo("demo");
       }
+    } else {
+      this.transitionTo("welcome");
     }
   },
   actions: {
@@ -64,6 +66,20 @@ export default Ember.Route.extend({
         //Handle color changes
         var navClass = activeController.get("navbarClass") || "darkBlue";
         this.controller.set("navbarClass", navClass);
+        if (platformName === "ios" && window.hasOwnProperty("StatusBar")) {
+          var statusColors = {
+            "yellow": "#f2b328",
+            "lightBlue": "#5c7fbe",
+            "darkBlue": "#153672"
+          };
+          if(this.controller.currentRouteName === "welcome") {
+            StatusBar.styleBlackTranslucent();
+          } else if(statusColors.hasOwnProperty(navClass)) {
+            StatusBar.backgroundColorByHexString(statusColors[navClass]);
+          } else {
+            StatusBar.backgroundColorByHexString("#000");
+          }
+        }
 
       }, 5);
 

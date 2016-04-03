@@ -8,7 +8,8 @@
     "EmberENV",
     "cordova",
     "Parse",
-    "parsePlugin"
+    "parsePlugin",
+    "StatusBar"
   ],
   "browser": true,
   "boss": true,

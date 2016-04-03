@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.younginvincibles.here2career" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode = "160304001">
+<widget android-versionCode="160401001" id="org.younginvincibles.here2career" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Here to Career</name>
     <description>
         This app provides resources on California Community Colleges.
@@ -7,101 +7,107 @@
     <author email="dev@ginkgostreet.com" href="http://www.ginkgostreet.com">
         Ginkgo Street Labs
     </author>
-    <content src="index.html#/welcome" />
+    <content src="http://localhost:4200" />
     <access origin="*" />
     <icon src="res/icon-72@2x.png" />
     <preference name="SplashScreen" value="screen" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashScreenDelay" value="30000" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.3.0" />
+    <plugin name="cordova-plugin-geolocation" spec="~1.0.1" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
+    <plugin name="cordova-plugin-spinner-dialog" spec="https://github.com/Paldom/SpinnerDialog.git" />
+    <plugin name="nl.x-services.plugins.socialsharing" spec="https://github.com/Telerik-Verified-Plugins/SocialSharing" />
+    <plugin name="cordova-plugin-facebook4" spec="https://github.com/jeduan/cordova-plugin-facebook4">
+        <variable name="APP_ID" value="699449926827946" />
+        <variable name="APP_NAME" value="here-career" />
+    </plugin>
+    <plugin name="com.parse.cordova.core.pushplugin" spec="https://github.com/ginkgostreet/phonegap-parse-plugin.git#healthyi-1.1">
+        <variable name="APP_ID" value="hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3" />
+        <variable name="CLIENT_KEY" value="YwRrf7cxtwGoEHSJR5SPLXTuyBHEh1hdaRJUFxIo" />
+    </plugin>
+    <plugin name="cordova-labs-wkwebview-engine-localhost" spec="https://github.com/apache/cordova-plugins.git#master:wkwebview-engine-localhost" />
+    <preference name="AlternateContentSrc" value="http://localhost:4200" />
+    <hook src="scripts/before_prepare/build_ember_app.sh" type="before_prepare" />
+    <hook src="scripts/before_build/030_configure_parse.js" type="before_build" />
     <platform name="ios">
-        <preference name="BackupWebStorage" value="none"/>
-        <!-- iOS 8.0+ -->
-        <!-- iPhone 6 Plus  -->
-        <icon src="res/icon-60@3x.png" width="180" height="180" />
-        <!-- iOS 7.0+ -->
-        <!-- iPhone / iPod Touch  -->
-        <icon src="res/icon-60.png" width="60" height="60" />
-        <icon src="res/icon-60@2x.png" width="120" height="120" />
-        <!-- iPad -->
-        <icon src="res/icon-76.png" width="76" height="76" />
-        <icon src="res/icon-76@2x.png" width="152" height="152" />
-        <!-- iOS 6.1 -->
-        <!-- Spotlight Icon -->
-        <icon src="res/icon-40.png" width="40" height="40" />
-        <icon src="res/icon-40@2x.png" width="80" height="80" />
-        <!-- iPhone / iPod Touch -->
-        <icon src="res/icon.png" width="57" height="57" />
-        <icon src="res/icon@2x.png" width="114" height="114" />
-        <!-- iPad -->
-        <icon src="res/icon-72.png" width="72" height="72" />
-        <icon src="res/icon-72@2x.png" width="144" height="144" />
-        <!-- iPhone Spotlight and Settings Icon -->
-        <icon src="res/icon-small.png" width="29" height="29" />
-        <icon src="res/icon-small@2x.png" width="58" height="58" />
-        <!-- iPad Spotlight and Settings Icon -->
-        <icon src="res/icon-50.png" width="50" height="50" />
-        <icon src="res/icon-50@2x.png" width="100" height="100" />
-
-        <!-- images are determined by width and height. The following are supported -->
-        <splash src="res/screen.png" idth="320" height="480"/>
-        <splash src="res/screen.png" idth="640" height="960"/>
-        <splash src="res/screen.png" idth="768" height="1024"/>
-        <splash src="res/screen.png" idth="1536" height="2048"/>
-        
-        <splash src="res/screen.png" idth="1024" height="768"/>
-        <splash src="res/screen.png" idth="2048" height="1536"/>
-        <splash src="res/screen.png" idth="640" height="1136"/>
-        <splash src="res/screen.png" idth="750" height="1334"/>
-        <splash src="res/screen.png" idth="1242" height="2208"/>
-        <splash src="res/screen.png" idth="2208" height="1242"/>
-
-        <preference name="FadeSplashScreenDuration" value="1000"/>
+        <preference name="BackupWebStorage" value="none" />
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <allow-navigation href="*" />
+        <icon height="180" src="res/icon-60@3x.png" width="180" />
+        <icon height="60" src="res/icon-60.png" width="60" />
+        <icon height="120" src="res/icon-60@2x.png" width="120" />
+        <icon height="76" src="res/icon-76.png" width="76" />
+        <icon height="152" src="res/icon-76@2x.png" width="152" />
+        <icon height="40" src="res/icon-40.png" width="40" />
+        <icon height="80" src="res/icon-40@2x.png" width="80" />
+        <icon height="57" src="res/icon-@1x.png" width="57" />
+        <icon height="114" src="res/icon-@2x.png" width="114" />
+        <icon height="72" src="res/icon-72.png" width="72" />
+        <icon height="144" src="res/icon-72@2x.png" width="144" />
+        <icon height="167" src="res/icon-83.5@2x.png" width="167" />
+        <icon height="29" src="res/icon-small.png" width="29" />
+        <icon height="58" src="res/icon-small@2x.png" width="58" />
+        <icon height="87" src="res/icon-small@3x.png" width="87" />
+        <icon height="50" src="res/icon-50.png" width="50" />
+        <icon height="100" src="res/icon-50@2x.png" width="100" />
+        <splash height="480" src="res/iphone4.png" width="320" />
+        <splash height="640" src="res/Default.png" width="320" />
+        <splash height="960" src="res/Default@2x.png" width="640" />
+        <splash height="1136" src="res/Default-568h@2x.png" width="640" />
+        <splash height="1334" src="res/Default-667h@2x.png" width="750" />
+        <splash height="2208" src="res/Default-736@2x.png" width="1242" />
+        <preference name="FadeSplashScreenDuration" value="1000" />
     </platform>
     <platform name="android">
-        <icon src="res/icon-ldpi.png" density="ldpi" />
-        <icon src="res/icon-mdpi.png" density="mdpi" />
-        <icon src="res/icon-hdpi.png" density="hdpi" />
-        <icon src="res/icon-xhdpi.png" density="xhdpi" />
-        <icon src="res/icon-xxhdpi.png" density="xxhdpi" />
-        <icon src="res/icon-xxxhdpi.png" density="xxxhdpi" />
-
-        <splash src="res/screen.png" density="land-hdpi"/>
-        <splash src="res/screen.png" density="land-ldpi"/>
-        <splash src="res/screen.png" density="land-mdpi"/>
-        <splash src="res/screen.png" density="land-xhdpi"/>
-        <splash src="res/screen.png" density="land-xxhdpi"/>
-        <splash src="res/screen.png" density="land-xxxhdpi"/>
-
-        <splash src="res/screen.png" density="port-hdpi"/>
-        <splash src="res/screen.png" density="port-ldpi"/>
-        <splash src="res/screen.png" density="port-mdpi"/>
-        <splash src="res/screen.png" density="port-xhdpi"/>
-        <splash src="res/screen.png" density="port-xxhdpi"/>
-        <splash src="res/screen.png" density="port-xxxhdpi"/>
-        
+        <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        <icon density="ldpi" src="res/icon-ldpi.png" />
+        <icon density="mdpi" src="res/icon-mdpi.png" />
+        <icon density="hdpi" src="res/icon-hdpi.png" />
+        <icon density="xhdpi" src="res/icon-xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon-xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon-xxxhdpi.png" />
+        <splash density="land-hdpi" src="res/screen.png" />
+        <splash density="land-ldpi" src="res/screen.png" />
+        <splash density="land-mdpi" src="res/screen.png" />
+        <splash density="land-xhdpi" src="res/screen.png" />
+        <splash density="land-xxhdpi" src="res/screen.png" />
+        <splash density="land-xxxhdpi" src="res/screen.png" />
+        <splash density="port-hdpi" src="res/screen.png" />
+        <splash density="port-ldpi" src="res/screen.png" />
+        <splash density="port-mdpi" src="res/screen.png" />
+        <splash density="port-xhdpi" src="res/screen.png" />
+        <splash density="port-xxhdpi" src="res/screen.png" />
+        <splash density="port-xxxhdpi" src="res/screen.png" />
         <preference name="SplashScreenDelay" value="30000" />
         <preference name="SplashMaintainAspectRatio" value="true" />
     </platform>
     <platform name="amazon-fireos">
-        <icon src="res/icon-ldpi.png" density="ldpi" />
-        <icon src="res/icon-mdpi.png" density="mdpi" />
-        <icon src="res/icon-hdpi.png" density="hdpi" />
-        <icon src="res/icon-xhdpi.png" density="xhdpi" />
-        <icon src="res/icon-xxhdpi.png" density="xxhdpi" />
-        <icon src="res/icon-xxxhdpi.png" density="xxxhdpi" />
-
-        <splash src="res/screen.png" density="land-hdpi"/>
-        <splash src="res/screen.png" density="land-ldpi"/>
-        <splash src="res/screen.png" density="land-mdpi"/>
-        <splash src="res/screen.png" density="land-xhdpi"/>
-        <splash src="res/screen.png" density="land-xxhdpi"/>
-        <splash src="res/screen.png" density="land-xxxhdpi"/>
-
-        <splash src="res/screen.png" density="port-hdpi"/>
-        <splash src="res/screen.png" density="port-ldpi"/>
-        <splash src="res/screen.png" density="port-mdpi"/>
-        <splash src="res/screen.png" density="port-xhdpi"/>
-        <splash src="res/screen.png" density="port-xxhdpi"/>
-        <splash src="res/screen.png" density="port-xxxhdpi"/>
+        <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        <icon density="ldpi" src="res/icon-ldpi.png" />
+        <icon density="mdpi" src="res/icon-mdpi.png" />
+        <icon density="hdpi" src="res/icon-hdpi.png" />
+        <icon density="xhdpi" src="res/icon-xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon-xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon-xxxhdpi.png" />
+        <splash density="land-hdpi" src="res/screen.png" />
+        <splash density="land-ldpi" src="res/screen.png" />
+        <splash density="land-mdpi" src="res/screen.png" />
+        <splash density="land-xhdpi" src="res/screen.png" />
+        <splash density="land-xxhdpi" src="res/screen.png" />
+        <splash density="land-xxxhdpi" src="res/screen.png" />
+        <splash density="port-hdpi" src="res/screen.png" />
+        <splash density="port-ldpi" src="res/screen.png" />
+        <splash density="port-mdpi" src="res/screen.png" />
+        <splash density="port-xhdpi" src="res/screen.png" />
+        <splash density="port-xxhdpi" src="res/screen.png" />
+        <splash density="port-xxxhdpi" src="res/screen.png" />
     </platform>
 </widget>

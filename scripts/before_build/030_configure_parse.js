@@ -27,9 +27,10 @@ function find_in_file(filename, to_find) {
   }
 }
 
-console.log('CONFIGURE PARSE');
+
 //this is necessary for android only
 if (rootdir && platform === 'android') {
+  console.log('CONFIGURE PARSE');
   var manifest = path.join(rootdir, 'platforms/android/AndroidManifest.xml');
   if(find_in_file(manifest, "<application.*android:name") === -1) {
     replace_in_file(manifest, '<application', '<application android:name="org.younginvincibles.parse.App"');

@@ -1,26 +1,3 @@
-.platform-ios {
-  border-top: 20px solid #fff;
-}
-
-.platform-ios .navbar-flat {
-  top: 20px;
-}
-
-.platform-ios #menuButton {
-  top: 20px;
-}
-
-.platform-ios #title {
-  margin-left: 60px;
-}
-
-.platform-ios .login-overlay {
-  padding-top: 20px;
-}
-
-.platform-ios .oc-drawer {
-  border-top: 20px solid #fff;
-}
 .statusbar-helper {
   position: fixed;
   width: 100%;
@@ -30,9 +7,6 @@
   height: 20px;
   background-color: #fff;
   display: none;
-}
-.platform-ios .statusbar-helper {
-  display: block;
 }
 
 .platform-ios #backButton {
@@ -48,7 +22,6 @@
   line-height: 50px;
   left: 3px;
   font-size: 12px;
-  top: 20px;
 }
 
 .platform-ios #backButton p {
