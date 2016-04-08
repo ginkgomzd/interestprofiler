@@ -6,7 +6,7 @@ export default Ember.View.extend({
   templateName: 'hot-or-not',
   transitioning: false,
 
-  /**
+    /**
    * This function runs every time the model changes and
    * animates the "bounce in" of the enxt profile image.
    */
@@ -31,7 +31,7 @@ export default Ember.View.extend({
       }});
 
     //Make this function run every time the model changes
-  }.observes("controller.model"),
+  }.observes('controller.model.getImgPath').on('didInsertElement'),
 
   /**
    * This function returns the profile image to center
