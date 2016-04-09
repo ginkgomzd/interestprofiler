@@ -1,17 +1,17 @@
-<br /><br />
+<br />
+<p class="yellow center">Explore saved Alumni</p>
+<br />
 {{#if model}}
-<div class="clusters">
-  <ul>
+  <ul class="listView">
     {{#each alumni in model}}
-      <li {{action "viewAlumni" alumni.id}}>{{alumni.title}}</li>
+      <li {{action "viewAlumni" alumni.id}} class="chevronRightDim">{{alumni.title}}</li>
     {{/each}}
   </ul>
-</div>
 
 {{else}}
-<div class="center">
-  <strong>You have no saved alumni profiles.</strong><br />
-  Please visit {{#link-to "alumni" 0}}Alumni Network{{/link-to}} first
-</div>
+  <div class="center">
+    <strong>You have no saved alumni profiles.</strong><br />
+    Please visit {{#link-to "alumni" 0}}Alumni Network{{/link-to}} first
+  </div>
 
 {{/if}}
