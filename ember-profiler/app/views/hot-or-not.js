@@ -6,32 +6,46 @@ export default Ember.View.extend({
   templateName: 'hot-or-not',
   transitioning: false,
 
-    /**
+  setupImageLoad: function() {
+    var that = this;
+    //Using a javascript image object allows us to trap the on-load event
+    //and take certain action after.
+    var img = new Image();
+    img.src = this.get("controller").get("model").get("getImgPath");
+    img.onload = function() {
+      //Set protrait or landscape
+      if(img.height > img.width) {
+        that.$().find("img").removeClass("landscape").addClass("portrait");
+      } else {
+        that.$().find("img").removeClass("portrait").addClass("landscape");
+      }
+      //Call the animation function that fades the image in.
+      that.fadeImageIn(img);
+    };
+  }.on('didInsertElement'),
+
+  /**
    * This function runs every time the model changes and
    * animates the "bounce in" of the enxt profile image.
    */
-  bounceImageIn: function() {
+  fadeImageIn: function(img) {
+    var that = this;
     var alumniImg = this.$('.img-alumni');
 
     //reset the profile image to centered, and scaled to 0,0
-    alumniImg.css({transform: "matrix(0, 0, 0, 0, 0, 0)", textIndent: 0});
+    alumniImg.css({transform: "matrix(1, 0, 0, 1, 0, 0)"}).hide();
 
     //reset the color to "white" (transparent so the background under shows)
     this.$().css("background-color", "transparent");
 
-    var that = this;
-    //Now animate it to normal size
-    alumniImg.animate({textIndent: 100 }, {
-      step: function(now) {
-        var s = now / 100;
-        alumniImg.css('transform','scale('+s+', '+s+')');
-      },
-      duration:'fast', complete: function() {
-        that.set("transitioning", false);
-      }});
+    //Set the image source
+    this.$().find("img").attr("src", img.src);
 
-    //Make this function run every time the model changes
-  }.observes('controller.model.getImgPath').on('didInsertElement'),
+    //Fade in
+    alumniImg.fadeIn("fast", function() {
+        that.set("transitioning", false);
+    });
+  },
 
   /**
    * This function returns the profile image to center
@@ -41,10 +55,10 @@ export default Ember.View.extend({
   returnToStart: function(start) {
     var alumniImg = this.$('.img-alumni');
     this.$().css("background-color", "transparent");
-    alumniImg.css({textIndent: start }).animate({textIndent: 0 }, {
-        step: function(now) {
-          alumniImg.css('transform','translateX('+now+'px)');
-        }, duration:100});
+    Ember.$({foo: start }).animate({foo: 0 }, {
+      step: function(now) {
+        alumniImg.css('transform','translateX('+now+'px)');
+      }, duration:100});
   },
 
   /**
@@ -69,7 +83,7 @@ export default Ember.View.extend({
     if (speed > 500) {
       speed = 500;
     }
-    alumniImg.css({textIndent: start }).animate({textIndent: target }, {
+    Ember.$({foo: start }).animate({foo: target }, {
       step: function(now) {
         alumniImg.css('transform','translateX('+now+'px)');
       },

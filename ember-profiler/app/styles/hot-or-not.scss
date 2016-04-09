@@ -7,11 +7,19 @@ div.hot-or-not {
   display: flex;
 }
 .img-swipe-container {
-  width: 100%;
-  height: 100%;
+  width: 70vw;
+  height: 60vw;
+  overflow: hidden;
+  text-align: center;
 }
-.img-swipe-container img {
-  width: 100%;
+.img-swipe-container img.landscape {
+  height: 60vw;
+  width: auto;
+  margin: auto;
+}
+.img-swipe-container img.portrait {
+  width: 70vw;
+  height: auto;
 }
 div.hotOrNotButtons {
   width: 150px;
@@ -30,7 +38,7 @@ div.hotOrNotButtons div.swipeIndicator {
   overflow: hidden;
   background: $white;
   border-radius: 100%;
-  box-shadow: 0 0 2px 2px $darken15;
+  box-shadow: 0 0 2px 1px $darken15;
   text-align: center;
   font-size: 50px;
 }
@@ -61,7 +69,7 @@ div.hotOrNotButtons .Save {
   border: 5vw solid $white;
   border-bottom: 1px;
   background: $white;
-  box-shadow: 0 0 2px 2px $darken15;
+  box-shadow: 0 0 2px 1px $darken15;
   margin-left: 10vw;
   float: left;
 }
