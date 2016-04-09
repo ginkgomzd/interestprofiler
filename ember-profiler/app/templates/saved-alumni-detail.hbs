@@ -1,20 +1,18 @@
-<br />
-<br />
-{{#if showGrowth}}
-  <div class="ribbon-container">
-    <h1 class="ribbon">
-      <strong class="ribbon-content">
-        {{#if jobGrowth}}<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i>{{/if}}
+<p class="smaller center yellow">Explore California Community College Alumni</p>
+<div class="poloroid-container">
+  <div class="poloroid">
+    <img class="poloroid-img img-responsive" src="{{model.getImgPath}}" />
+    <div class="poloroid-footer">
+      <h3>{{model.title}}</h3>
+      {{#if showGrowth}}
+        {{#if jobGrowth}}<span class="right highDemand yellow">HIGH DEMAND &nbsp;<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i></span>{{/if}}
         {{#if salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
-        HIGH DEMAND</strong>
-    </h1>
+      {{/if}}
+    </div>
   </div>
-{{/if}}
-<div class="alumni-img-detail">
-  <img src="{{model.getImgPath}}" class="img-alumni img-responsive" />
+  <div class="cards card1"></div>
+  <div class="cards card2"></div>
 </div>
-
-<div class="gray padded">
-  <h1>{{model.title}}</h1>
+<div class="padded">
   <p>{{{model.desc}}}</p>
 </div>
