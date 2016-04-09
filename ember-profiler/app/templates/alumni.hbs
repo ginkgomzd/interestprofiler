@@ -2,7 +2,7 @@
 <div class="poloroid-container">
   <div class="poloroid">
     {{view 'hotOrNot'}}
-    <div class="poloroid-footer">
+    <div {{action "toggleDescription"}} class="poloroid-footer">
       <h3 >{{model.title}}</h3>
       {{#if showGrowth}}
         {{#if jobGrowth}}<span class="right highDemand yellow">HIGH DEMAND &nbsp;<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i></span>{{/if}}
@@ -24,6 +24,6 @@
   <div class="clear"></div>
 </div>
 
-<div class="padded">
+<div class="alumniDescription">
   <p>{{{model.desc}}}</p>
 </div>

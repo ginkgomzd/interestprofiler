@@ -30,6 +30,9 @@ export default Ember.Controller.extend({
         record.save();
         that.send('navigateNext');
       });
+    },
+    toggleDescription: function() {
+      Ember.$(".hotOrNotButtons, .alumniDescription").slideToggle();
     }
   },
   jobGrowth: function() {
