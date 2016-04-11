@@ -1,20 +1,42 @@
-.carousel-slide img {
-  margin: auto;
-  width: auto;
-  height: 100%;
-  border: 1px solid #111;
+.demo .carousel-slide img {
+  width: 100%;
+  display: block;
+}
+
+.demo .carousel-slide {
+  text-align: center;
+  color: white;
+  background: $htcYellow;
+  font-weight: bold;
+}
+.demo .carousel-slide p:first-of-type {
+  padding-top: 25px;
+}
+
+.demo .carousel-slide hr {
+  width: 65%;
+  margin: 5px auto;
 }
 
 .slick-track, .slick-list {
   height: 100%;
 }
 div.slick-slider {
-  height: 93%;
+  height: 100%;
 }
 
 .slick-dots {
   bottom: 0px;
   margin-bottom: 2px;
+}
+
+.demo .slick-dots .slick-active button:before {
+  color: $black;
+  opacity: 0.5;
+}
+.demo .slick-dots button:before {
+  color: $white;
+  opacity: 1;
 }
 
 div.demo {
@@ -24,17 +46,34 @@ div.demo {
   left: 0px;
   top: 0px;
   z-index: 11000;
-  background: #fff;
+  background: $htcBlue;
   padding-top: 0px;
 }
 
-.demo-skip {
+
+.demo .demo-skip {
   position: absolute;
   bottom: 0px;
-  width: 100%;
+  right: 0px;
+  background: transparent;
+  padding: 3px 8px;
+  display: inline;
+  min-width: 10px;
+  font-weight: normal;
 }
 
 .button.Demo-Button {
   text-align: left;
   padding-left: 25px;
+}
+
+@media (max-height: 525px) {
+  .demo .carousel-slide p {
+    font-size: 0.9em;
+    line-height: 0.925em;
+    margin-bottom: 0;
+  }
+  .demo .carousel-slide p:first-of-type {
+    padding-top: 15px;
+  }
 }
