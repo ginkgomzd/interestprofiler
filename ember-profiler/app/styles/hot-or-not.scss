@@ -1,35 +1,115 @@
 div.hot-or-not {
   padding: 0px;
   clear: both;
-  overflow-x: hidden;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-  min-height: 200px;
+  overflow: hidden;
+  width: 70vw;
+  max-height: 60vw;
+  display: flex;
+}
+.img-swipe-container {
+  width: 70vw;
+  height: 60vw;
+  overflow: hidden;
+  text-align: center;
+}
+.img-swipe-container img.landscape {
+  height: 60vw;
+  width: auto;
+  margin: auto;
+}
+.img-swipe-container img.portrait {
+  width: 70vw;
+  height: auto;
 }
 div.hotOrNotButtons {
-  margin-top: 8px;
-  margin-bottom: 15px;
+  width: 150px;
+  margin: 0 auto;
+  padding-top: 10px;
+  clear: both;
 }
 
 div.hotOrNotButtons div.swipeIndicator {
-  height: 35px;
-  line-height: 35px;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  display: inline-block;
   vertical-align: middle;
+  line-height: 50px;
   overflow: hidden;
-  font-size: 18px;
+  background: $white;
+  border-radius: 100%;
+  box-shadow: 0 0 2px 1px $darken15;
+  text-align: center;
+  font-size: 50px;
 }
-
+div.hotOrNotButtons div.swipeIndicator i.material-icons {
+  font-size: 40px;
+  line-height: 50px;
+}
 div.hotOrNotButtons .Dismiss {
   color: #f00;
-  background: url(../img/dismiss.png) no-repeat 0% 50%;
-  padding-left: 65px;
 }
 
 div.hotOrNotButtons .Save {
   color: #2DCE06;
-  background: url(../img/save.png) no-repeat 100% 50%;
-  padding-right: 65px;
 }
-div.hot-or-not img.img-alumni {
-  margin: 0px auto;
+
+.yellow {
+  color: $htcYellow;
+}
+
+.mainContent .poloroid-container {
+  position: relative;
+  margin: 0;
+  width: 100%;
+}
+
+.mainContent .poloroid {
+  width: 80vw;
+  border: 5vw solid $white;
+  border-bottom: 1px;
+  background: $white;
+  box-shadow: 0 0 2px 1px $darken15;
+  margin-left: 10vw;
+  float: left;
+}
+.mainContent .poloroid-container .cards {
+  box-shadow: 0 0 1px 1px $darken15;
+  height: 3px;
+  background: $white;
+  clear: both;
+  float: left;
+  position: relative;
+  margin-top: 1px;
+}
+.mainContent .poloroid-container .card1 {
+  width: 76vw;
+  margin-left: 12vw;
+  z-index: -1;
+}
+.mainContent .poloroid-container .card2 {
+  width: 72vw;
+  margin-left: 14vw;
+  z-index: -2;
+}
+
+.mainContent .poloroid-footer {
+  padding: 6vw 0 6vw 0;
+}
+.mainContent .poloroid-footer .highDemand {
+  font-size: 0.92rem;
+  vertical-align: middle;
+  line-height: 22px;
+  font-weight: bold;
+}
+
+.poloroid h3 {
+  display: inline;
+  color: $grey7;
+}
+
+.alumniDescription {
+  clear: both;
+  display: none;
+  padding: 15px;
 }
