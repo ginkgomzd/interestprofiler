@@ -39,7 +39,9 @@ module.exports = function(environment) {
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25",
       tosURL: "http://yidata.org/terms.html",
-      privacyURL: "http://yidata.org/htcprivacy.html"
+      privacyURL: "http://yidata.org/htcprivacy.html",
+      onetUrl: "http://data.heretocareerca.org/api_proxy",
+      cmsUrl: "http://data.heretocareerca.org"
     },
 
     APP: {
