@@ -1,7 +1,7 @@
 // jshint ignore: start
 var expectedEntityCounts = {
-  alumni: 39,
-  cluster: 22,
+  alumni: 40,
+  cluster: 16,
   occupation: 643,
   "onet-career": 1085,
   pathway: 77,
