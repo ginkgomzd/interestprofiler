@@ -39,7 +39,9 @@ module.exports = function(environment) {
       databaseVersion: 1.001,
       staticDataUpdatedDate: "2015-11-25",
       tosURL: "http://yidata.org/terms.html",
-      privacyURL: "http://yidata.org/htcprivacy.html"
+      privacyURL: "http://yidata.org/htcprivacy.html",
+      onetUrl: "http://data.heretocareerca.org/api_proxy",
+      cmsUrl: "http://data.heretocareerca.org"
     },
 
     APP: {
@@ -48,11 +50,11 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'self'",
-      'script-src': "'self' https://services.onetcenter.org http://*.ginkgostreet.com https://*.ginkgostreet.com https://connect.facebook.net",
+      'script-src': "'self' https://services.onetcenter.org http://data.heretocareerca.org https://data.heretocareerca.org http://*.ginkgostreet.com https://*.ginkgostreet.com https://connect.facebook.net",
       'frame-src': "'self' https://*.facebook.com http://*.facebook.com",
       'font-src': "'self'",
-      'connect-src': "'self' blob: https://services.onetcenter.org https://*.ginkgostreet.com http://*.ginkgostreet.com https://connect.facebook.net https://api.parse.com http://api.parse.com",
-      'img-src': "'self' https://*.facebook.com http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
+      'connect-src': "'self' blob: https://services.onetcenter.org http://data.heretocareerca.org https://data.heretocareerca.org https://*.ginkgostreet.com http://*.ginkgostreet.com https://connect.facebook.net https://api.parse.com http://api.parse.com",
+      'img-src': "'self' https://*.facebook.com http://data.heretocareerca.org https://data.heretocareerca.org http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
       'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     },

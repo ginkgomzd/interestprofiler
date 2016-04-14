@@ -9,7 +9,7 @@ var cmsUtils = Ember.Object.extend({
     if (EmberENV.cmsUrl) {
       return EmberENV.cmsUrl;
     } else {
-      return 'http://here2career.beaker.ginkgostreet.com';
+      return 'http://data.heretocareerca.org';
     }
   },
 
