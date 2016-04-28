@@ -1,8 +1,8 @@
 <p class="smaller center yellow">Explore California Community College Alumni</p>
 <div class="poloroid-container">
-  <div class="poloroid">
+  <div {{action "toggleDescription"}} class="clickable poloroid">
     {{view 'hotOrNot'}}
-    <div {{action "toggleDescription"}} class="poloroid-footer">
+    <div class="poloroid-footer">
       <h3 >{{model.title}}</h3>
       {{#if showGrowth}}
         {{#if jobGrowth}}<span class="right highDemand yellow">HIGH DEMAND &nbsp;<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i></span>{{/if}}
