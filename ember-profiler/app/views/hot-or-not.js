@@ -13,12 +13,6 @@ export default Ember.View.extend({
     var img = new Image();
     img.src = this.get("controller").get("model").get("getImgPath");
     img.onload = function() {
-      //Set protrait or landscape
-      if(img.height > img.width) {
-        that.$().find("img").removeClass("landscape").addClass("portrait");
-      } else {
-        that.$().find("img").removeClass("portrait").addClass("landscape");
-      }
       //Call the animation function that fades the image in.
       that.fadeImageIn(img);
     };

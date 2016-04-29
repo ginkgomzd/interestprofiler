@@ -3,24 +3,18 @@ div.hot-or-not {
   clear: both;
   overflow: hidden;
   width: 70vw;
-  max-height: 60vw;
-  display: flex;
+  display: block;
 }
 .img-swipe-container {
   width: 70vw;
-  height: 60vw;
   overflow: hidden;
   text-align: center;
 }
-.img-swipe-container img.landscape {
-  height: 60vw;
-  width: auto;
-  margin: auto;
-}
-.img-swipe-container img.portrait {
+.img-swipe-container img {
   width: 70vw;
   height: auto;
 }
+
 div.hotOrNotButtons {
   width: 150px;
   margin: 0 auto;
