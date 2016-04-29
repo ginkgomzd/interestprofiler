@@ -51,12 +51,10 @@ export default Ember.Route.extend({
 
         var showBB = (mode === "always" || mode === platformName);
         this.controller.set("showBackButton", showBB);
+        this.controller.set("showHamburger", !showBB);
         if(platformName === "ios") {
           var BBText =  this.controllerFor(this.controller.currentRouteName).get("backButtonText") || 'Back';
           this.controller.set("backButtonText", BBText);
-          this.controller.set("showHamburger", !showBB);
-        } else {
-          this.controller.set("showHamburger", true);
         }
 
         //Handle Title changes
