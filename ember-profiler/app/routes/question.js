@@ -26,19 +26,22 @@ export default Ember.Route.extend({
         that.set("goingBack", false);
       });
     }
-
+    alert("Loading Question: " + params.index);
     return this.get("store").find('question', params.index);
   },
   actions: {
     makeSelection: function(selectedAnswer) {
       var that = this;
-      Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0.3 })}, 200, function() {
-          Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0 })}, 200, function() {
+      alert("Selection click registered");
+      Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0.3 })}, 150, function() {
+          Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0 })}, 150, function() {
+            alert("Animation Complete");
             that.send("saveSelection", selectedAnswer);
           });
       });
     },
     saveSelection: function(selectedAnswer) {
+      alert("entering selection");
       var answer = {
         id: this.controller.get('model').get('id'),
         question: this.controller.get('model'),
@@ -51,10 +54,13 @@ export default Ember.Route.extend({
         record.set("question", answer.question);
         record.set("selection", answer.selection);
       }
+      alert("answer saved");
       record.save();
 
+      alert("persist answer to cloud storage");
       this.get("profilerDataUtils").saveAnswerToParse(answer);
 
+      alert("Persist Complete");
       if(answer.id % 20 === 0) {
         this.send('sectionComplete');
       } else {
@@ -71,9 +77,13 @@ export default Ember.Route.extend({
       this.send('navigateNextQuestion');
     },
     navigateNextQuestion: function() {
+      alert("progress");
       var next = 1 + parseInt(this.controller.get('model').get('index'));
+      alert("Attempting to progress to question: " + next);
       if (next <= 60) {
+        alert("show spinner");
         this.get("status").loading();
+        alert("leaving page");
         this.transitionTo('question', next);
       } else {
         this.transitionTo('results');
