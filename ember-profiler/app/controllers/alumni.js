@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
   pageTitle: "Alumni Network",
   navbarClass: "yellow",
+  showBackButton: "ios",
   actions: {
     /**
      * Action to record user preferences.

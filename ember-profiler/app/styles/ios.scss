@@ -13,7 +13,6 @@
   position: fixed;
   float: left;
   margin-right: 30px;
-  margin-left: -5px;
   margin-top: 0px;
   padding: 0px;
   color: #fff;
@@ -21,10 +20,17 @@
   cursor: pointer;
   line-height: 50px;
   left: 3px;
-  font-size: 12px;
+  font-size: 1em;
+  margin-left: 0;
+  vertical-align: middle;
+}
+.platform-ios #backButton i {
+  font-size: 22pt;
+  line-height: 50px;
+  vertical-align: middle;
 }
 
-.platform-ios #backButton p {
+.platform-ios #backButton.oldStyle p {
   border: solid #008cdd;
   border-width: 1px 1px 1px 0;
   -moz-border-radius: 0 5px 5px 0;
@@ -40,7 +46,7 @@
   text-decoration: none;
   background: #235ABE;
 }
-.platform-ios #backButton p:before {
+.platform-ios #backButton.oldStyle p:before {
   background: #235ABE;
   border: solid #008cdd;
   border-width: 0 0 1px 1px;
@@ -58,7 +64,7 @@
   width: 20px;
 }
 
-.platform-ios #backButton p span {
+.platform-ios #backButton.oldStyle p span {
   color: #fff;
   font-weight: bold;
   position: relative;

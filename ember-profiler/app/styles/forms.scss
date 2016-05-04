@@ -58,4 +58,10 @@ button.search-icon {
   padding: 5px 9px !important;
   border-radius: 100px;
   min-width: 0px !important;
+  vertical-align: middle;
+  height: 42px;
+}
+
+button.search-icon i {
+  vertical-align: middle;
 }
