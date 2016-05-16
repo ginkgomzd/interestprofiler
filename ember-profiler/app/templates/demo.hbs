@@ -1,13 +1,37 @@
 <div class="demo full">
   {{#slick-slider autoplay=false arrows=false dots=true mobileFirst=true adaptiveHeight=false infinite=false}}
-    {{#each slide in model}}
       <div class="box carousel-slide">
-        <img src="img/demo/{{slide.img}}" />
-        <p>{{{slide.text1}}}</p>
-        <hr />
-        <p>{{{slide.text2}}}</p>
+          <img src="img/demo/Slide1.png">
+          <p>Welcome to Here to Career!</p>
+          <hr>
+          <p>Thanks, let's go!</p>
       </div>
-    {{/each}}
+      <div class="box carousel-slide">
+          <img src="img/demo/Slide2.png">
+          <p>Check Wages &amp; Salaries<br>for local careers.</p>
+          <hr>
+          <p><!----></p>
+      </div>
+      <div class="box carousel-slide">
+          <img src="img/demo/Slide3.png">
+          <p>Take the Jobs &amp;Careers<br>quiz to find out which<br>career is right for you.</p>
+          <hr>
+          <p><!----></p>
+      </div>
+      <div class="box carousel-slide">
+          <img src="img/demo/Slide4.png">
+          <p>Match with<br>California Community<br>College Alumni.</p>
+          <hr>
+          <p><!----></p>
+      </div>
+      <div class="box carousel-slide">
+          <img src="img/demo/Slide5.png">
+          <p>Search for nearby<br>Degrees &amp; Colleges.</p>
+          <hr>
+          <p><!----></p>
+      </div>
   {{/slick-slider}}
+
+
   <button {{action "navigateAway"}} class="demo-skip">Skip >></button>
 </div>
