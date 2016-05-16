@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   }.observes('fetching'),
   takeScreenshotAndShare: function() {
     if (window.plugins && window.plugins.socialsharing) {
-      html2canvas(Ember.$(".results")[0], {
+      html2canvas(Ember.$("#results")[0], {
         onrendered: function (canvas) {
           window.plugins.socialsharing.share(
             'Checkout My Results', //message
