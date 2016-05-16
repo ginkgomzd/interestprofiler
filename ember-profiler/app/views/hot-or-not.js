@@ -11,12 +11,16 @@ export default Ember.View.extend({
     //Using a javascript image object allows us to trap the on-load event
     //and take certain action after.
     var img = new Image();
-    img.src = this.get("controller").get("model").get("getImgPath");
     img.onload = function() {
       //Call the animation function that fades the image in.
       that.fadeImageIn(img);
     };
+    img.src = this.get("controller").get("model").get("getImgPath");
   }.on('didInsertElement'),
+
+  handleGoingBack: function() {
+    this.setupImageLoad();
+  }.observes("controller.model"),
 
   /**
    * This function runs every time the model changes and
