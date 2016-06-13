@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var statusService = Ember.Object.extend({
+var statusService = Ember.Service.extend({
   messages: Ember.ArrayController.create(),
   loadingTitle: function(){return "";}.property(),
   loadingMessage: function(){return "";}.property(),

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var indexService = Ember.Object.extend({
+var indexService = Ember.Service.extend({
   rawData: Ember.inject.service('raw-data'),
   find: function(modelName, indexMapping, id, store) {
     var rawData = this.get("rawData");

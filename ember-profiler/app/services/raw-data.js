@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var rawData = Ember.Object.extend({
+var rawData = Ember.Service.extend({
   fetch: function(namespace, model) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       localforage.getItem(namespace, function (err, value) {

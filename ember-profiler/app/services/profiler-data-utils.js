@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import onet from 'onet';
 
-var profilerDataUtils = Ember.Object.extend({
+var profilerDataUtils = Ember.Service.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   status: Ember.inject.service('status'),

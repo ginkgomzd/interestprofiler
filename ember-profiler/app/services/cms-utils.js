@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ajax from 'ic-ajax';
 
-var cmsUtils = Ember.Object.extend({
+var cmsUtils = Ember.Service.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   indexes: {},
