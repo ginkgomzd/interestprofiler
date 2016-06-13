@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  status: Ember.inject.service('status'),
   showBackButton: "ios",
   pageTitle: "Degrees and Colleges",
   searchRadius: function() { return 25;}.property(),
@@ -50,7 +51,7 @@ export default Ember.Controller.extend({
         );
 
       } else {
-        this.status.warn("We could not find your current location");
+        this.get("status").warn("We could not find your current location");
       }
     },
     viewCollege: function(collegeId) {

@@ -1,9 +1,9 @@
-{{view "main-menu"}}
+{{partial "_main-menu"}}
 <div class="mainContent {{settings.ProgressStyle}}">
     {{outlet}}
 </div>
 {{view "modal"}}
-{{view "status"}}
+{{partial "_status"}}
 {{view "loading"}}
 <div class="clear"></div>
 <div class="statusbar-helper"></div>

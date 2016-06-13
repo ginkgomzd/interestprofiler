@@ -47,14 +47,14 @@ export default Ember.Route.extend({
         that.transitionTo("welcome");
       },
       function(user, error) {
-        that.status.warn(error.message);
+        that.get("status").warn(error.message);
         that.get("status").loadingComplete();
       });
 
     },
-    loginWithLinkedIn: function() {this.status.warn("This hasn't been implemented yet");},
-    loginWithTwitter: function() {this.status.warn("This hasn't been implemented yet");},
-    loginWithGoogle: function() {this.status.warn("This hasn't been implemented yet");},
+    loginWithLinkedIn: function() {this.get("status").warn("This hasn't been implemented yet");},
+    loginWithTwitter: function() {this.get("status").warn("This hasn't been implemented yet");},
+    loginWithGoogle: function() {this.get("status").warn("This hasn't been implemented yet");},
 
     /**
      * Function for age validation
@@ -80,7 +80,7 @@ export default Ember.Route.extend({
           });
         },
         function(user, error) {
-          that.status.warn(error.message);
+          that.get("status").warn(error.message);
           that.get("status").loadingComplete();
         });
     },
@@ -104,11 +104,11 @@ export default Ember.Route.extend({
               });
             },
             function (user, error) {
-              that.status.warn(error.message);
+              that.get("status").warn(error.message);
               that.get("status").loadingComplete();
             });
         } else {
-          this.status.warn("Passwords don't match");
+          this.get("status").warn("Passwords don't match");
         }
       }
     },
@@ -119,17 +119,17 @@ export default Ember.Route.extend({
         this.get("status").loading();
         this.parseAuth.passwordReset(Ember.$("#reset-email").val(), {
           success: function () {
-            that.status.success("An email with reset instructions has been sent to '" + Ember.$("#reset-email").val() + "'");
+            that.get("status").success("An email with reset instructions has been sent to '" + Ember.$("#reset-email").val() + "'");
             that.controller.send("showLoginEmail");
             that.get("status").loadingComplete();
           },
           error: function (error) {
-            that.status.error(error.message);
+            that.get("status").error(error.message);
             that.get("status").loadingComplete();
           }
         });
       } else {
-        this.status.warn("You must supply your email address to reset your password.");
+        this.get("status").warn("You must supply your email address to reset your password.");
       }
     }
   }

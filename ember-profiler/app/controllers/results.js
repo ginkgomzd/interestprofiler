@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  status: Ember.inject.service('status'),
   pageTitle: "Results",
   navbarClass: "yellow",
   fetching: function() {return false;}.property(),
@@ -21,7 +22,7 @@ export default Ember.Controller.extend({
         }
       });
     } else {
-      this.status.warn("There was an error loading the sharing dialog");
+      this.get("status").warn("There was an error loading the sharing dialog");
     }
   },
   shareWithoutDescriptions: function () {
