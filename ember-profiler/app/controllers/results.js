@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   status: Ember.inject.service('status'),
+  modal: Ember.inject.service('modal'),
   pageTitle: "Results",
   navbarClass: "yellow",
   fetching: function() {return false;}.property(),
@@ -57,7 +58,7 @@ export default Ember.Controller.extend({
     },
     shareResults: function() {
       var that = this;
-      this.modal.confirm("Would you like to include the descriptions?", {
+      this.get("modal").confirm("Would you like to include the descriptions?", {
         left: {
           text: "No",
           action: function() {that.shareWithoutDescriptions();}

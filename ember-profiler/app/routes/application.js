@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  modal: Ember.inject.service('modal'),
   showHamburger: true,
   backButtonText: false,
   stillLoading: true,
@@ -111,10 +112,10 @@ export default Ember.Route.extend({
       this.controller.set('drawerSwipeEnabled', true);
     },
     explainJobGrowth: function() {
-      this.modal.alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
+      this.get("modal").alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
     },
     explainSalaryGrowth: function() {
-      this.modal.alert("Students with this degree have the highest percent change in salary.");
+      this.get("modal").alert("Students with this degree have the highest percent change in salary.");
     },
     registerBackButtonClick: function() {
       this.controllerFor(this.controllerFor("application").get("currentRouteName")).send("executeBackAction");
