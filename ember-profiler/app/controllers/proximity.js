@@ -4,6 +4,13 @@ export default Ember.Controller.extend({
   status: Ember.inject.service('status'),
   showBackButton: "ios",
   pageTitle: "Degrees and Colleges",
+
+  init: function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      var propStop = function(event) {event.stopPropagation();};
+      Ember.$("#ProximitySlider").on("touchstart", propStop).on("panstart", propStop).on("panright", propStop).on("touchmove", propStop).on("pan", propStop);
+    });
+  },
   searchRadius: function() { return 25;}.property(),
   deferredUpdate: function() {this.send("findInProximity");},
   liveUpdateProximity: function() {
