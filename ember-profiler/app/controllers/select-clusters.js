@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend(Ember.SortableMixin, {
+export default Ember.Controller.extend({
   pageTitle: "Wages and Salaries",
   navbarClass: "lightBlue",
   showBackButton: "ios",
-  sortProperties: ['score', 'jobGrowth', 'salaryGrowth'],
-  sortAscending: false,
+  sortBy: ['score:desc', 'jobGrowth:desc', 'salaryGrowth:desc'],
+  clusters: Ember.computed.sort("model", "sortBy"),
   actions: {
     forwardToClusterDetail: function(clusterId) {
       this.transitionToRoute("cluster", clusterId);
