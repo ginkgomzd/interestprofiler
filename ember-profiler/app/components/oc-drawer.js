@@ -11,24 +11,20 @@ export default Ember.Component.extend({
       this.get("settings").save("answers", this.parseAuth.user.get("answers"));
     }
 
-    if (this.get("settings").answers && this.settings.answers.length === 60) {
+    if (this.get("settings").answers && this.get("settings").answers.length === 60) {
       return "Retake ";
     }
 
-    if (this.get("settings").answers && this.settings.answers.length < 60) {
+    if (this.get("settings").answers && this.get("settings").answers.length < 60) {
       return "Resume ";
     }
 
 
     return "Take ";
   }.property("settings.answers"),
-  open: false,
   tap: function() {
     this.set('open', false);
     return true;
-  },
-  panLeft: function() {
-    this.hideDrawer();
   },
   hideDrawer: function () {
     this.set("open", false);
@@ -39,18 +35,14 @@ export default Ember.Component.extend({
     return false;
   },
   toggleDrawer: function () {
-    if (this.get("open")) {
-      this.hideDrawer();
-    } else {
-      this.showDrawer();
-    }
+    this.toggleProperty("open");
   },
   actions: {
     logout: function() {
       this.sendAction("logout");
     }
   },
-  
+
   regHandler: function() {
     this.set('register-as', this); // register-as is a new property
   }.on('init'),
@@ -65,19 +57,38 @@ export default Ember.Component.extend({
       }, false);
     }
   }.on("init"),
-  
+
   setupSwipeToOpen: function() {
     var that = this;
-      Ember.$("body").on("touchmove", function(e) {
-        if (!Ember.$(e.target).hasClass("disableDrawerSwipe")) {
-          if (e.gesture.deltaX > 100) {
-            if (e.gesture.pointers[0].pageX < 150) {
-              that.showDrawer();
-              return e.preventDefault();
-            }
-          }
+
+    Ember.$("body").on("touchstart", function(e) {
+      if (!Ember.$(e.target).hasClass("disableDrawerSwipe")) {
+        that.originX = e.originalEvent.touches[0].clientX;
+      } else {
+        that.originX = false;
+      }
+    });
+
+    Ember.$("body").on("touchend", function(e) {
+      that.originX = false;
+    });
+
+    Ember.$("body").on("touchmove", function(e) {
+      if (!Ember.$(e.target).hasClass("disableDrawerSwipe") && that.originX) {
+
+        var deltaX = e.originalEvent.touches[0].clientX - that.originX;
+
+        if (deltaX > 100 && e.originalEvent.touches[0].clientX < 150) {
+          that.showDrawer();
+          return e.preventDefault();
         }
 
-      });
+        if (deltaX < -150) {
+          that.hideDrawer();
+          return e.preventDefault();
+        }
+
+      }
+    });
   }.on("init")
 });

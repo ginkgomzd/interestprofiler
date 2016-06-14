@@ -97,13 +97,13 @@ export default Ember.Route.extend({
       this.transitionTo("login");
     },
     hideDrawer: function() {
-      this.controller.get('drawer').hideDrawer();
+      this.controller.set('drawerOpen', false);
     },
     showDrawer: function() {
-      this.controller.get('drawer').showDrawer();
+      this.controller.set('drawerOpen', true);
     },
     toggleDrawer: function() {
-      this.controller.get('drawer').toggleDrawer();
+      this.controller.toggleProperty('drawerOpen');
     },
     explainJobGrowth: function() {
       this.get("modal").alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
