@@ -1,4 +1,4 @@
-<div>
+<div class="fulll">
   <div class="results" id="results">
     <div class="padded">
       <h2 class="congrats">Congratulations!</h2>
@@ -6,7 +6,7 @@
     </div>
     <dl>
       {{#each scoreArea in model}}
-        {{view 'scoreArea' scoreArea}}
+        {{score-area scoreArea=scoreArea}}
       {{/each}}
     </dl>
   </div>
