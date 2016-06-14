@@ -9,7 +9,7 @@ import Ember from 'ember';
  * application rather than hijacking our WebView.
  *
  */
-export function initialize(registry, application) {
+export function initialize(App) {
 
   function findParent(tagname,el){
     if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){

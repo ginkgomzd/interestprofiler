@@ -1,20 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  settings: Ember.inject.service('settings'),
   tagName: 'ul',
   classNames: ['oc-drawer'],
   classNameBindings: ['open:oc-drawer-open:oc-drawer-closed'],
   quizPrefix: function() {
 
-    if ((this.settings.answers === undefined || this.settings.answers === null) && this.parseAuth.user !== null) {
-      this.settings.save("answers", this.parseAuth.user.get("answers"));
+    if ((this.get("settings").answers === undefined || this.settings.answers === null) && this.parseAuth.user !== null) {
+      this.get("settings").save("answers", this.parseAuth.user.get("answers"));
     }
 
-    if (this.settings.answers && this.settings.answers.length === 60) {
+    if (this.get("settings").answers && this.settings.answers.length === 60) {
       return "Retake ";
     }
 
-    if (this.settings.answers && this.settings.answers.length < 60) {
+    if (this.get("settings").answers && this.settings.answers.length < 60) {
       return "Resume ";
     }
 

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  settings: Ember.inject.service('settings'),
   goingBack: false,
   model: function(params, transition) {
     if (params.index == 0) { // jshint ignore:line
@@ -55,7 +56,7 @@ export default Ember.Route.extend({
     },
     sectionComplete: function() {
       var section = parseInt(this.controller.get('model').get('index')) / 20;
-      this.settings.save("ProgressQuiz" + section, "complete");
+      this.get("settings").save("ProgressQuiz" + section, "complete");
       Ember.$(".sectionComplete").slideDown();
     },
     acknowledgeSectionComplete: function() {

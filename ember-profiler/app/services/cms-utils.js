@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
 
 var cmsUtils = Ember.Service.extend({
   store: Ember.inject.service('store'),
+  ajax: Ember.inject.service(),
   settings: Ember.inject.service('settings'),
   indexes: {},
   baseUrl: function() {
@@ -96,7 +96,7 @@ var cmsUtils = Ember.Service.extend({
     var thisService = this;
     var url = this.baseUrl() + "/api/" + modelMapping.apiPath + "?updated=" + lastUpdated;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      ajax(url).then(function (results) {
+      thisService.get("ajax").request(url).then(function (results) {
         if(results.length > 0) {
           localforage.getItem(modelMapping.emberDataNamespace, function (err, value) {
 
