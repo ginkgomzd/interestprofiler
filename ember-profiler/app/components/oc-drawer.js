@@ -49,7 +49,34 @@ export default Ember.Component.extend({
       this.sendAction("logout");
     }
   },
+  
   regHandler: function() {
     this.set('register-as', this); // register-as is a new property
-  }.on('init')
+  }.on('init'),
+
+  captureHardwareMenuButton: function() {
+    if(window.cordova && cordova.platformId === "android" && navigator && navigator.app) {
+      var that = this;
+      //React to the Android Menu button
+      navigator.app.overrideButton("menubutton", true);
+      document.addEventListener("menubutton", function () {
+        that.toggleDrawer();
+      }, false);
+    }
+  }.on("init"),
+  
+  setupSwipeToOpen: function() {
+    var that = this;
+      Ember.$("body").on("touchmove", function(e) {
+        if (!Ember.$(e.target).hasClass("disableDrawerSwipe")) {
+          if (e.gesture.deltaX > 100) {
+            if (e.gesture.pointers[0].pageX < 150) {
+              that.showDrawer();
+              return e.preventDefault();
+            }
+          }
+        }
+
+      });
+  }.on("init")
 });

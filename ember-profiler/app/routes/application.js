@@ -105,12 +105,6 @@ export default Ember.Route.extend({
     toggleDrawer: function() {
       this.controller.get('drawer').toggleDrawer();
     },
-    disableDrawerSwipe: function() {
-      this.controller.set('drawerSwipeEnabled', false);
-    },
-    enableDrawerSwipe: function() {
-      this.controller.set('drawerSwipeEnabled', true);
-    },
     explainJobGrowth: function() {
       this.get("modal").alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
     },
