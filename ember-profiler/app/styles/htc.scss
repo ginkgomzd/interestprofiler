@@ -320,3 +320,11 @@ ul.listView {
 .noMargin {
   margin: 0;
 }
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
