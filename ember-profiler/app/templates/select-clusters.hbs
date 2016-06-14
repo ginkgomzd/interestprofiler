@@ -9,7 +9,6 @@
         {{#if cluster.salaryGrowth}}<i {{action "explainSalaryGrowth" preventDefault=true bubbles=false}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
         <span>{{cluster.name}}</span>
       </li>
-      {{view "cluster-button" cluster=cluster}}
     {{/each}}
   </ul>
 </div>
