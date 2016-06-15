@@ -18,7 +18,7 @@
       <p><strong>Occupations</strong></p>
       <p class="italic smaller">Tap to learn more about these occupations</p>
       <ul>
-        {{#each occ in model.occupations}}
+        {{#each model.occupations as |occ|}}
         <li {{action "exploreOccupation" occ.id}}>
           <strong>{{occ.title}}</strong> - {{occ.awardDescription}}
           <i class="material-icons right exploreOccupation">&#xE409;</i>

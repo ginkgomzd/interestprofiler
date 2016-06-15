@@ -1,15 +1,15 @@
 import Ember from 'ember';
-import onet from 'onet';
 
-var profilerDataUtils = Ember.Object.extend({
+var profilerDataUtils = Ember.Service.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   status: Ember.inject.service('status'),
   parseAuth: Ember.inject.service('parse-auth'),
   rawData: Ember.inject.service('raw-data'),
+  onet: Ember.inject.service('onet'),
   answerString: function () {
     var answerString = "";
-    this.get("store").all('answer').forEach(function (item) {
+    this.get("store").peekAll('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
 
@@ -27,12 +27,13 @@ var profilerDataUtils = Ember.Object.extend({
 
   updateProfilerResults: function (answerString) {
     var store = this.get("store");
+    var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      onet.interestProfiler.results(answerString).then(function (data) {
+      that.get("onet").interestProfilerResults(answerString).then(function (data) {
           var results = [];
           data.forEach(function (item) {
 
-            var r = store.getById('scoreArea', item.id);
+            var r = store.peekRecord('scoreArea', item.id);
             if (r === null) {
               r = store.createRecord('scoreArea', item);
             }
@@ -52,10 +53,11 @@ var profilerDataUtils = Ember.Object.extend({
   updateCareerResults: function(answerString) {
     //This section fetches the career scores.
     var store = this.get("store");
+    var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      onet.interestProfiler.careers(answerString).then(function (data) {
+      that.get("onet").interestProfilerCareers(answerString).then(function (data) {
           data.forEach(function (item) {
-            var record = store.getById("onet-career", item.code);
+            var record = store.peekRecord("onet-career", item.code);
             if (record !== null) {
               var score;
               switch (item._fit) {
@@ -128,9 +130,9 @@ var profilerDataUtils = Ember.Object.extend({
     var i = 0;
     while (i <= answers.length - 1) {
       var index = i + 1;
-      var record = store.getById("answer", index);
+      var record = store.peekRecord("answer", index);
       if (record === null) {
-        record = store.createRecord("answer", {id: index, question: store.getById("question", index), selection: answers[i]});
+        record = store.createRecord("answer", {id: index, question: store.peekRecord("question", index), selection: answers[i]});
       } else {
         record.set("question", index);
         record.set("selection", answers[i]);
@@ -316,7 +318,7 @@ var profilerDataUtils = Ember.Object.extend({
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
     var answerString = this.onetApiFormattedAnswerString();
-    var scores = this.get("store").all('scoreArea');
+    var scores = this.get("store").peekAll('scoreArea');
 
     return (scores.get("length") === 0 ||
     !oldAnswerString ||

@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
         this.get("profilerDataUtils").removeItemFromParseUserDataArray("hotAlumni", item.id);
         this.get("profilerDataUtils").addItemToParseUserDataArray("notAlumni", item.id);
       }
-      this.store.find('hotOrNot', item.id).then(function(record) {
+      this.store.findRecord('hotOrNot', item.id).then(function(record) {
         record.set("hot", hotFlag);
         record.save();
         that.send('navigateNext');

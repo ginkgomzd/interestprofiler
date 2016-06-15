@@ -3,8 +3,12 @@
 </div>
 <div class="full" id="clusterList">
   <ul class="listView dim taller">
-    {{#each cluster in arrangedContent}}
-      {{view "cluster-button" cluster=cluster}}
+    {{#each clusters as |cluster|}}
+      <li {{action "forwardToClusterDetail" cluster.id}} class="chevronRightDim">
+        {{#if cluster.jobGrowth}}<i {{action "explainJobGrowth" preventDefault=true bubbles=false}} class="jobGrowth material-icons">&#xE8E5;</i>{{/if}}
+        {{#if cluster.salaryGrowth}}<i {{action "explainSalaryGrowth" preventDefault=true bubbles=false}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
+        <span>{{cluster.name}}</span>
+      </li>
     {{/each}}
   </ul>
 </div>

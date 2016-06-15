@@ -1,11 +1,9 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  tagName: 'div',
-  classNameBindings: ["parseAuth.loggedIn:menu-shown:menu-hidden"],
-  templateName: 'application',
-  didInsertElement: function() {
-    this.get("controller").set("drawerSwipeEnabled", true);
+export default Ember.Controller.extend({
+  settings: Ember.inject.service('settings'),
+  drawerOpen: function() { return false;}.property(),
+  init: function() {
     if (window.cordova) {
       Ember.$("body").addClass("platform-" + cordova.platformId);
     } else {
@@ -15,8 +13,6 @@ export default Ember.View.extend({
       //This is for testing ios Specific styles and should be commented out for production
       //Ember.$("body").addClass("platform-ios");
     }
-
-
 
     if(window.cordova && cordova.platformId === "android" && navigator && navigator.app) {
       //Capture android back-button
@@ -31,23 +27,8 @@ export default Ember.View.extend({
           navigator.app.exitApp();
         }
       }, false);
-
-      //React to the Android Menu button
-      navigator.app.overrideButton("menubutton", true);
-      document.addEventListener("menubutton", function () {
-        that.get("controller").send("toggleDrawer");
-      }, false);
     }
-  },
-  panRight: function(e) {
-    if (this.get("controller").get("drawerSwipeEnabled")) {
-      if (e.originalEvent.gesture.deltaX > 100) {
-        if (e.originalEvent.gesture.pointers[0].pageX < 150) {
-          this.get("controller").send("showDrawer");
-          return e.preventDefault();
-        }
-      }
-    }
+    
+    this._super();
   }
 });
-

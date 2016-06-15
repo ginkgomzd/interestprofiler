@@ -1,7 +1,7 @@
 <div class="Resources">
   {{#if model}}
   <ul>
-    {{#each resource in model}}
+    {{#each model as |resource|}}
       <li {{action "openExternalLink" resource.linkURL}}>{{resource.title}}</li>
     {{/each}}
   </ul>

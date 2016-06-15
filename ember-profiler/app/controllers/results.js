@@ -1,14 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  status: Ember.inject.service('status'),
+  modal: Ember.inject.service('modal'),
   pageTitle: "Results",
   navbarClass: "yellow",
   fetching: function() {return false;}.property(),
-  fetchingWatcher:function () {
-    if (!this.fetching) {
-      this.send("updateWidths");
-    }
-  }.observes('fetching'),
   takeScreenshotAndShare: function() {
     if (window.plugins && window.plugins.socialsharing) {
       html2canvas(Ember.$("#results")[0], {
@@ -21,7 +18,7 @@ export default Ember.Controller.extend({
         }
       });
     } else {
-      this.status.warn("There was an error loading the sharing dialog");
+      this.get("status").warn("There was an error loading the sharing dialog");
     }
   },
   shareWithoutDescriptions: function () {
@@ -39,24 +36,9 @@ export default Ember.Controller.extend({
     });
   },
   actions: {
-    updateWidths: function() {
-      Ember.$(".results .score").each(function() {
-        var scoreWidget = Ember.$(this);
-        var newScore = scoreWidget.data('score');
-
-        var newWidth = (newScore / 40 * 100) + '%';
-
-        var R = Math.round(202 - (newScore / 40 * 66));
-        var G = Math.round(233 - (newScore / 40 * 28));
-        var B = Math.round(180 - (newScore / 40 * 94));
-        var bgColor = "rgb(" + R + "," + G + "," + B + ")";
-
-        scoreWidget.find(".fill").css({width: newWidth, backgroundColor: bgColor});
-      });
-    },
     shareResults: function() {
       var that = this;
-      this.modal.confirm("Would you like to include the descriptions?", {
+      this.get("modal").confirm("Would you like to include the descriptions?", {
         left: {
           text: "No",
           action: function() {that.shareWithoutDescriptions();}

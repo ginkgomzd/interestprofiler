@@ -18,10 +18,12 @@ App = Ember.Application.extend({
  * primary nav links that they auto-close the menu
  * when they are clicked.
  */
+
+/* Removed in 2.0
 Ember.LinkView.reopen({
     attributeBindings: ['data-toggle', 'data-target']
 });
-
+*/
 //This is to init the parse library
 document.addEventListener('deviceready', function() {
     if(parsePlugin) {

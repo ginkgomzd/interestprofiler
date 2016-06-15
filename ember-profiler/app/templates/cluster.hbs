@@ -12,7 +12,7 @@
 
 <div class="full">
   <ul class="listView">
-    {{#each occupation in occupations}}
+    {{#each occupations as |occupation|}}
       {{#if occupation.hasData}}
         <li {{action "viewOccupation" occupation.first.id}} class="chevronRight">
           <div class="OccupationDetail">

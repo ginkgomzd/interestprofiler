@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
+  settings: Ember.inject.service('settings'),
+  status: Ember.inject.service('status'),
   goingBack: false,
   model: function(params, transition) {
     if (params.index == 0) { // jshint ignore:line
@@ -17,7 +19,7 @@ export default Ember.Route.extend({
       return this.transitionTo('question', 1);
     } else if (this.get("goingBack")) {
       var that = this;
-      this.get("store").find('answer', params.index).then(function(answer) {
+      this.get("store").findRecord('answer', params.index).then(function(answer) {
         answer.destroyRecord().finally(function() {
           that.get("profilerDataUtils").saveUserAnswers();
         });
@@ -27,24 +29,16 @@ export default Ember.Route.extend({
       });
     }
 
-    return this.get("store").find('question', params.index);
+    return this.get("store").findRecord('question', params.index);
   },
   actions: {
-    makeSelection: function(selectedAnswer) {
-      var that = this;
-      Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0.3 })}, 200, function() {
-          Ember.$(".answers .answer" + selectedAnswer).animate({backgroundColor: Ember.$.Color({ alpha: 0 })}, 200, function() {
-            that.send("saveSelection", selectedAnswer);
-          });
-      });
-    },
     saveSelection: function(selectedAnswer) {
       var answer = {
         id: this.controller.get('model').get('id'),
         question: this.controller.get('model'),
         selection: selectedAnswer
       };
-      var record = this.store.getById("answer", answer.id);
+      var record = this.store.peekRecord("answer", answer.id);
       if (record === null) {
         record = this.store.createRecord("answer", answer);
       } else {
@@ -63,7 +57,7 @@ export default Ember.Route.extend({
     },
     sectionComplete: function() {
       var section = parseInt(this.controller.get('model').get('index')) / 20;
-      this.settings.save("ProgressQuiz" + section, "complete");
+      this.get("settings").save("ProgressQuiz" + section, "complete");
       Ember.$(".sectionComplete").slideDown();
     },
     acknowledgeSectionComplete: function() {

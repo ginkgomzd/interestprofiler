@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  status: Ember.inject.service('status'),
   attributes: ["email", "firstName", "lastName", "age", "location", "education"],
   user: function() {
     var user = {};
@@ -18,10 +19,10 @@ export default Ember.Controller.extend({
       var that = this;
       this.parseAuth.user.save(null, {
         success: function() {
-          that.status.success("Changes Saved");
+          that.get("status").success("Changes Saved");
         },
         error: function(error) {
-          that.status.error(error.message);
+          that.get("status").error(error.message);
         }
       });
     }

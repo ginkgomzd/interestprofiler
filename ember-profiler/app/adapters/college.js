@@ -2,7 +2,7 @@ import appAdapter from './application';
 
 export default appAdapter.extend({
   namespace: EmberENV.modelPaths.college.emberDataNamespace,
-  query: function (records, query) {
+  _query: function (records, query, singleMatch) {
     if(typeof(query) === "object" && query.hasOwnProperty("proximity")) {
       var results = [], id, push, proximity;
 
@@ -27,7 +27,7 @@ export default appAdapter.extend({
       }
       return results;
     } else {
-      return this._super(records, query);
+      return this._super(records, query, singleMatch);
     }
   },
   //This uses the ‘haversine’ formula to calculate the great-circle distance between two

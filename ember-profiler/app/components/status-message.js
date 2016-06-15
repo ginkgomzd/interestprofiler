@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
+export default Ember.Component.extend({
+  status: Ember.inject.service('status'),
   tagName: 'div',
   classNames: ["message"],
   classNameBindings: ["message.messageClass"],
@@ -19,12 +20,15 @@ export default Ember.View.extend({
       var that = this;
       this.$().animate({opacity: 0}, speed, "linear", function () {
         that.$().slideUp("slow", function() {
-          that.status.messages.removeAt(that.status.messages.indexOf(that.message));
+          that.get("status").dismissMessage(that.message);
         });
       });
     }
   },
   tap: function() {
+    this.dismiss("fast");
+  },
+  click: function() {
     this.dismiss("fast");
   }
 });

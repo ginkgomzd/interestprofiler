@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  modal: Ember.inject.service('modal'),
   showHamburger: true,
   backButtonText: false,
   stillLoading: true,
@@ -27,6 +28,7 @@ export default Ember.Route.extend({
   actions: {
     willTransition: function(transition) {
       this.get("status").loading();
+      this.send("hideDrawer");
     },
     didTransition: function(transition) {
       this.get("status").loadingComplete();
@@ -96,25 +98,19 @@ export default Ember.Route.extend({
       this.transitionTo("login");
     },
     hideDrawer: function() {
-      this.controller.get('drawer').hideDrawer();
+      this.controller.set('drawerOpen', false);
     },
     showDrawer: function() {
-      this.controller.get('drawer').showDrawer();
+      this.controller.set('drawerOpen', true);
     },
     toggleDrawer: function() {
-      this.controller.get('drawer').toggleDrawer();
-    },
-    disableDrawerSwipe: function() {
-      this.controller.set('drawerSwipeEnabled', false);
-    },
-    enableDrawerSwipe: function() {
-      this.controller.set('drawerSwipeEnabled', true);
+      this.controller.toggleProperty('drawerOpen');
     },
     explainJobGrowth: function() {
-      this.modal.alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
+      this.get("modal").alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
     },
     explainSalaryGrowth: function() {
-      this.modal.alert("Students with this degree have the highest percent change in salary.");
+      this.get("modal").alert("Students with this degree have the highest percent change in salary.");
     },
     registerBackButtonClick: function() {
       this.controllerFor(this.controllerFor("application").get("currentRouteName")).send("executeBackAction");

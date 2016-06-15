@@ -1,9 +1,20 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  status: Ember.inject.service('status'),
   showBackButton: "ios",
   pageTitle: "Degrees and Colleges",
+
+  init: function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      var propStop = function(event) {event.stopPropagation();};
+      Ember.$("#ProximitySlider").on("touchstart", propStop).on("panstart", propStop).on("panright", propStop).on("touchmove", propStop).on("pan", propStop);
+    });
+  },
   searchRadius: function() { return 25;}.property(),
+  sortProperties: ['distance:asc'],
+  results: function() {return [];}.property(),
+  proximityResults: Ember.computed.sort("results", "sortProperties"),
   deferredUpdate: function() {this.send("findInProximity");},
   liveUpdateProximity: function() {
     Ember.run.debounce(this, this.deferredUpdate, 150);
@@ -14,14 +25,17 @@ export default Ember.Controller.extend({
   },
   updateLocationFromZip: function() {
     var that = this;
-    if (this.get("zipCodeSelected").length  > 4) {
+    var zipCodeSelected = this.get("zipCodeSelected");
+    if (zipCodeSelected.length  > 4) {
       Ember.run.debounce(that, that.hideKeyboard, 10000);
     }
-    this.get("store").find("zipcode", this.get("zipCodeSelected")).then(function(zipcode) {
-      Ember.run.debounce(that, that.hideKeyboard, 2000);
-      that.set("locationType", "zip");
-      that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
-    });
+    if (zipCodeSelected) {
+      this.get("store").findRecord("zipcode", zipCodeSelected).then(function (zipcode) {
+        Ember.run.debounce(that, that.hideKeyboard, 2000);
+        that.set("locationType", "zip");
+        that.set("location", {lat: zipcode.get("lat"), long: zipcode.get("long")});
+      });
+    }
   }.observes("zipCodeSelected"),
   registerLocationAnalytics: function() {
     var thisLocation = this.get("location");
@@ -39,18 +53,14 @@ export default Ember.Controller.extend({
       if (this.get("location")) {
 
         var that = this;
-        this.store.find("college", {proximity: this.get("searchRadius"), location: this.get("location")}).then(function(results) {
-            var resultsController = Ember.ArrayController.create({
-              content: results,
-              sortProperties: ['distance'],
-              sortAscending: true
-            });
-            that.set("proximityResults", resultsController);
+        var query = {proximity: this.get("searchRadius"), location: this.get("location")};
+        this.store.query("college", query).then(function(results) {
+          that.set("results", results);
           }
         );
 
       } else {
-        this.status.warn("We could not find your current location");
+        this.get("status").warn("We could not find your current location");
       }
     },
     viewCollege: function(collegeId) {

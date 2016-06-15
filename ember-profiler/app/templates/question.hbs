@@ -3,8 +3,8 @@
     <h1>{{model.text}}</h1>
 
     <div class="answers">
-        {{#each opt in questionOptions}}
-          {{view "answer" opt=opt}}
+        {{#each questionOptions as |opt|}}
+          {{answer-button opt=opt onClick="saveSelection"}}
         {{/each}}
     </div>
 </div>

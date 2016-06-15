@@ -4,13 +4,13 @@ export default Ember.Route.extend({
   model: function(params) {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      that.get("store").find('cluster', params.index).then(function(cluster) {
+      that.get("store").findRecord('cluster', params.index).then(function(cluster) {
         cluster.get("pathways").then(function(pathways) {
           var promises = [];
           var occupationList = [];
 
           pathways.forEach( function(item) {
-            promises.push(that.store.find("occupation", {"pathway": item.id}).then(function(occupations) {
+            promises.push(that.store.query("occupation", {"pathway": item.id}).then(function(occupations) {
               occupations = occupations.toArray();
               var i = 0;
               while(i < occupations.length) {

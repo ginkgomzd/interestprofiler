@@ -15,7 +15,7 @@ import staticProgramCollegeIndex from '../data/programCollegeIndex';
 import staticProgramOccupationIndex from '../data/programOccupationIndex';
 
 
-var setupService = Ember.Object.extend({
+var setupService = Ember.Service.extend({
   store: Ember.inject.service('store'),
   settings: Ember.inject.service('settings'),
   profilerDataUtils: Ember.inject.service('profilerDataUtils'),
