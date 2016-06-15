@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  modal: Ember.inject.service('modal'),
+  showHelp: function() {
+    this.get("modal").alert("Input your zip code or use your location to find colleges near you.");
+  }.on("init"),
   model: function () {
     return {
       location: this.getLocation()
