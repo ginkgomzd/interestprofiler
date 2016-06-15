@@ -2,7 +2,7 @@ import LFAdapter from 'ember-localforage-adapter/adapters/localforage';
 
 export default LFAdapter.extend({
   namespace: 'H2CMain',
-  query: function (records, query) {
+  _query: function (records, query, singleMatch) {
     var results = [], objId;
     if(typeof(query) === "object" && query.hasOwnProperty("in")) {
       
@@ -14,7 +14,7 @@ export default LFAdapter.extend({
 
       return results;
     } else {
-      return this._super(records, query);
+      return this._super(records, query, singleMatch);
     }
   },
 
