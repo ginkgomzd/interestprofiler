@@ -28,6 +28,7 @@ export default Ember.Route.extend({
   actions: {
     willTransition: function(transition) {
       this.get("status").loading();
+      this.send("hideDrawer");
     },
     didTransition: function(transition) {
       this.get("status").loadingComplete();
