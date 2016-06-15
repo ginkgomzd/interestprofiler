@@ -1,11 +1,7 @@
 <p class="smaller center yellow">Explore California Community College Alumni</p>
 <div class="poloroid-container">
   <div {{action "toggleDescription"}} class="clickable poloroid">
-
-    <div class="img-alumni img-swipe-container">
-      <img src="{{getImgPath}}" />
-    </div>
-
+    <img class="poloroid-img img-responsive" src="{{model.getImgPath}}" />
     <div class="poloroid-footer">
       <h3 >{{model.title}}</h3>
       {{#if showGrowth}}
