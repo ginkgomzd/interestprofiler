@@ -29,11 +29,11 @@ var profilerDataUtils = Ember.Service.extend({
     var store = this.get("store");
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      that.get("onet").interestProfiler.results(answerString).then(function (data) {
+      that.get("onet").interestProfilerResults(answerString).then(function (data) {
           var results = [];
           data.forEach(function (item) {
 
-            var r = store.getById('scoreArea', item.id);
+            var r = store.peekRecord('scoreArea', item.id);
             if (r === null) {
               r = store.createRecord('scoreArea', item);
             }
@@ -55,9 +55,9 @@ var profilerDataUtils = Ember.Service.extend({
     var store = this.get("store");
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      that.get("onet").interestProfiler.careers(answerString).then(function (data) {
+      that.get("onet").interestProfilerCareers(answerString).then(function (data) {
           data.forEach(function (item) {
-            var record = store.getById("onet-career", item.code);
+            var record = store.peekRecord("onet-career", item.code);
             if (record !== null) {
               var score;
               switch (item._fit) {
@@ -130,7 +130,7 @@ var profilerDataUtils = Ember.Service.extend({
     var i = 0;
     while (i <= answers.length - 1) {
       var index = i + 1;
-      var record = store.getById("answer", index);
+      var record = store.peekRecord("answer", index);
       if (record === null) {
         record = store.createRecord("answer", {id: index, question: store.peekRecord("question", index), selection: answers[i]});
       } else {

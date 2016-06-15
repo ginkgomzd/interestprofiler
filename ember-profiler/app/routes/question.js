@@ -37,7 +37,7 @@ export default Ember.Route.extend({
         question: this.controller.get('model'),
         selection: selectedAnswer
       };
-      var record = this.store.getById("answer", answer.id);
+      var record = this.store.peekRecord("answer", answer.id);
       if (record === null) {
         record = this.store.createRecord("answer", answer);
       } else {
