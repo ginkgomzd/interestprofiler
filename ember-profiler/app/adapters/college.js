@@ -25,7 +25,6 @@ export default appAdapter.extend({
         }
 
       }
-      console.log("Results Found: ", results.length);
       return results;
     } else {
       return this._super(records, query, singleMatch);
