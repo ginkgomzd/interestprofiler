@@ -6,10 +6,13 @@ div.statusMessages {
   width: 100%;
   z-index: 9999;
   overflow-y: visible;
+  padding-top: 105px;
 }
-div.statusMessages .message:first-of-type {
-  margin: 105px auto 5px auto;
+
+div.statusMessages:empty {
+  padding-top: 0px;
 }
+
 div.statusMessages .message {
   width: 85%;
   padding: 5px 15px 5px 15px;

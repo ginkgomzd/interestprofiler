@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 var statusService = Ember.Service.extend({
-  messages: Ember.ArrayProxy.create(),
+  messages: Ember.ArrayProxy.create({content: []}),
   loadingTitle: function(){return "";}.property(),
   loadingMessage: function(){return "";}.property(),
   isLoading: function(){return false;}.property(),
