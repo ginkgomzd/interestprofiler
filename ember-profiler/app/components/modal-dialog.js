@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   modal: Ember.inject.service('modal'),
   tagName: 'div',
-  classNames: ["modalWindow"],
+  classNames: ["modalWrapper"],
   classNameBindings: ["modal.modalOpen:modalOpen:modalClosed"],
   templateName: 'modal-dialog',
   actions: {

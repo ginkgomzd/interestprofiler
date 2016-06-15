@@ -21,14 +21,24 @@ div.modalWindow .modalMessage {
   overflow-y: auto;
 }
 
-div.modalWindow.modalOpen {
+
+div.modalWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9998;
+}
+
+div.modalWrapper.modalOpen, div.modalWrapper.modalOpen div.modalWindow {
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
 }
-div.modalWindow.modalClosed {
+div.modalWrapper.modalClosed, div.modalWrapper.modalClosed div.modalWindow {
   -webkit-transform: translate(0, 100%);
   -moz-transform: translate(0, 100%);
   -ms-transform: translate(0, 100%);
