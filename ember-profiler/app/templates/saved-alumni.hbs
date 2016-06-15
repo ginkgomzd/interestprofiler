@@ -3,7 +3,7 @@
 <br />
 {{#if model}}
   <ul class="listView">
-    {{#each alumni in model}}
+    {{#each model as |alumni|}}
       <li {{action "viewAlumni" alumni.id}} class="chevronRightDim">{{alumni.title}}</li>
     {{/each}}
   </ul>

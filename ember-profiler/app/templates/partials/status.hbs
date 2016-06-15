@@ -1,5 +1,5 @@
 <div class="statusMessages">
-  {{#each message in status.messages}}
+  {{#each status.messages as |message|}}
     {{status-message message=message}}
   {{/each}}
 </div>

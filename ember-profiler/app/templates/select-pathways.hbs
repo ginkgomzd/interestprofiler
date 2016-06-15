@@ -3,7 +3,7 @@
 <div class="full gray pageMessage">
   You're Exploring...
   <div class="pathways-selected-clusters">
-    {{#each cluster in model.clusters }}
+    {{#each model.clusters as |cluster|}}
       <li>{{cluster.name}}</li>
     {{/each}}
   </div>
@@ -14,7 +14,7 @@
     Check-off to bookmark for later.
   </p>
   <ul>
-    {{#each pathway in pathways}}
+    {{#each pathways as |pathway|}}
       {{#if pathway.hasOccupations}}
         <li>
           {{#if pathway.jobGrowth}}<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i>{{/if}}

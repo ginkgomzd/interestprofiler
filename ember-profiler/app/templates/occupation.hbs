@@ -8,7 +8,7 @@
 
   <div class="salaryInfo">
     <p><strong>Salary Information:</strong></p>
-    {{#each occupation in model.occupations}}
+    {{#each model.occupations as |occupation|}}
       <span class="awardType">{{occupation.awardDescription}}</span>
       <ul>
         <li>2 years before: <span class="money">{{currency-format-na occupation.medianPre2}}</span></li>
@@ -21,10 +21,10 @@
   <br />
 
   <ul class="listView dim">
-    {{#each program in model.programs}}
+    {{#each model.programs as |program|}}
       <li {{action "viewCollege" program.college.id}} class="clickable chevronRightDim">
           <div><strong>{{program.college.collegeName}}</strong></div>
-          {{#each programRow in program.programs}}
+          {{#each program.programs as |programRow|}}
             <div class="smaller">{{programRow.awardDescription}}: {{programRow.title}}</div>
           {{/each}}
       </li>

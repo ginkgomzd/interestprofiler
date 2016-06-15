@@ -19,7 +19,7 @@
 
   <div class="padded"><strong>Programs</strong></div>
   <ul class="listView">
-    {{#each program in model.programs}}
+    {{#each model.programs as |program|}}
       <li class="padded">
         {{{program.title}}} - {{program.awardDescription}}
       </li>
