@@ -5,12 +5,12 @@ export default Ember.Route.extend({
   model: function (params) {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      that.get("store").find("hotOrNot", {hot: true}).then(function(savedAlumni) {
+      that.get("store").query("hotOrNot", {hot: true}).then(function(savedAlumni) {
         var savedAlumniIds = [];
         savedAlumni.forEach(function(item) {
           savedAlumniIds.push(item.get("id"));
         });
-        that.get("store").find("alumni", {in: savedAlumniIds}).then(function(alumni) {
+        that.get("store").query("alumni", {in: savedAlumniIds}).then(function(alumni) {
           resolve(alumni);
         });
       });

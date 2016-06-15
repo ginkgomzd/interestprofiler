@@ -5,7 +5,7 @@ export default Ember.Route.extend({
   indexService: Ember.inject.service('index'),
   model: function(params) {
     return Ember.RSVP.hash({
-      "college": this.store.find('college', params.index),
+      "college": this.store.findRecord('college', params.index),
       "programs": this.get("indexService").find('program', EmberENV.modelPaths.collegeIndex, params.index, this.store)
     });
   }

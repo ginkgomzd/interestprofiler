@@ -17,7 +17,7 @@ export default Ember.Route.extend({
         that.getSuggestedAlumni().then(function(alumniIds) {
           that.set("suggestedAlumni", alumniIds);
           if(params.index == 0) { // jshint ignore:line
-            that.store.find('alumni', alumniIds[0]).then(function(alumniModel) {
+            that.store.findRecord('alumni', alumniIds[0]).then(function(alumniModel) {
               resolve(alumniModel);
             });
           } else {
@@ -27,7 +27,7 @@ export default Ember.Route.extend({
         });
       });
     } else {
-      return this.store.find('alumni', this.get("suggestedAlumni")[params.index]);
+      return this.store.findRecord('alumni', this.get("suggestedAlumni")[params.index]);
     }
   },
   getSuggestedAlumni: function() {
@@ -58,7 +58,7 @@ export default Ember.Route.extend({
         //Set the index back one.
         this.set("index", prev);
         //Unset what we last selected
-        this.store.find('hotOrNot', this.suggestedAlumni[prev]).then(function(hotOrNotModel) {
+        this.store.findRecord('hotOrNot', this.suggestedAlumni[prev]).then(function(hotOrNotModel) {
           hotOrNotModel.destroyRecord();
           //Transition Backwards.
           //We are using history here rather than transition to prev,

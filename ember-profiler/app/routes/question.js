@@ -18,7 +18,7 @@ export default Ember.Route.extend({
       return this.transitionTo('question', 1);
     } else if (this.get("goingBack")) {
       var that = this;
-      this.get("store").find('answer', params.index).then(function(answer) {
+      this.get("store").findRecord('answer', params.index).then(function(answer) {
         answer.destroyRecord().finally(function() {
           that.get("profilerDataUtils").saveUserAnswers();
         });
@@ -28,7 +28,7 @@ export default Ember.Route.extend({
       });
     }
 
-    return this.get("store").find('question', params.index);
+    return this.get("store").findRecord('question', params.index);
   },
   actions: {
     saveSelection: function(selectedAnswer) {

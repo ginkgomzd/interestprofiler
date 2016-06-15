@@ -10,11 +10,11 @@ export default Ember.Route.extend({
       "colleges": this.get("rawData").fetch("H2CColleges", 'college')
     });
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      that.store.find('occupation', params.index).then(function(occupation) {
+      that.store.findRecord('occupation', params.index).then(function(occupation) {
         var occupationTitle = occupation.get("title");
         //Now find the other occupation
         //We are casting to string because the adaptor does an === and there is a conflict otherwise
-        that.store.find('occupation', {topCode: String(occupation.get("topCode"))}).then(function(occupations) {
+        that.store.query('occupation', {topCode: String(occupation.get("topCode"))}).then(function(occupations) {
           if (occupations.get("length") < 2) {
             occupations = [occupation];
           }
