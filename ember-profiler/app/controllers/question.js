@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
   status: Ember.inject.service('status'),
   sortingDesc: ['value:desc'],
-  showBackButton: "ios",
+  showBackButton: "never",
   backButtonText: "Back",
   pageTitle: "Quiz",
   navbarClass: "yellow",
