@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  tagName: '',
+export default Ember.Component.extend({
+  tagName: 'div',
   templateName: 'scoreArea',
   didInsertElement: function() {
     Ember.run.scheduleOnce('afterRender', this, function () {
