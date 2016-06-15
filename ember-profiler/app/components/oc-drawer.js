@@ -22,10 +22,6 @@ export default Ember.Component.extend({
 
     return "Take ";
   }.property("settings.answers"),
-  tap: function() {
-    this.set('open', false);
-    return true;
-  },
   hideDrawer: function () {
     this.set("open", false);
     return false;
