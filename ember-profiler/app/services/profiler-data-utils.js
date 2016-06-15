@@ -9,7 +9,7 @@ var profilerDataUtils = Ember.Service.extend({
   onet: Ember.inject.service('onet'),
   answerString: function () {
     var answerString = "";
-    this.get("store").all('answer').forEach(function (item) {
+    this.get("store").peekAll('answer').forEach(function (item) {
       answerString += item.get('selection');
     });
 
@@ -318,7 +318,7 @@ var profilerDataUtils = Ember.Service.extend({
   dirtyAnswers: function() {
     var oldAnswerString = this.get("settings").CalculatedAnswers;
     var answerString = this.onetApiFormattedAnswerString();
-    var scores = this.get("store").all('scoreArea');
+    var scores = this.get("store").peekAll('scoreArea');
 
     return (scores.get("length") === 0 ||
     !oldAnswerString ||
