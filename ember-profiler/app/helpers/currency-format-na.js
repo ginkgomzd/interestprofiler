@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Handlebars.makeBoundHelper( function(amount) {
+export default Ember.Helper.helper( function(amount) {
   if (amount == 0 || !amount) {
     return "N/A";
   } else {
