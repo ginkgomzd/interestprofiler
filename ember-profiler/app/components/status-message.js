@@ -27,5 +27,8 @@ export default Ember.Component.extend({
   },
   tap: function() {
     this.dismiss("fast");
+  },
+  click: function() {
+    this.dismiss("fast");
   }
 });
