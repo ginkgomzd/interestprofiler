@@ -81,12 +81,12 @@
         <splash density="land-xhdpi" src="res/screen.png" />
         <splash density="land-xxhdpi" src="res/screen.png" />
         <splash density="land-xxxhdpi" src="res/screen.png" />
-        <splash density="port-hdpi" src="res/screen.png" />
-        <splash density="port-ldpi" src="res/screen.png" />
-        <splash density="port-mdpi" src="res/screen.png" />
-        <splash density="port-xhdpi" src="res/screen.png" />
-        <splash density="port-xxhdpi" src="res/screen.png" />
-        <splash density="port-xxxhdpi" src="res/screen.png" />
+        <splash density="port-hdpi" src="res/screen-port.png" />
+        <splash density="port-ldpi" src="res/screen-port.png" />
+        <splash density="port-mdpi" src="res/screen-port.png" />
+        <splash density="port-xhdpi" src="res/screen-port.png" />
+        <splash density="port-xxhdpi" src="res/screen-port.png" />
+        <splash density="port-xxxhdpi" src="res/screen-port.png" />
         <preference name="SplashScreenDelay" value="30000" />
         <preference name="SplashMaintainAspectRatio" value="true" />
     </platform>
@@ -105,11 +105,11 @@
         <splash density="land-xhdpi" src="res/screen.png" />
         <splash density="land-xxhdpi" src="res/screen.png" />
         <splash density="land-xxxhdpi" src="res/screen.png" />
-        <splash density="port-hdpi" src="res/screen.png" />
-        <splash density="port-ldpi" src="res/screen.png" />
-        <splash density="port-mdpi" src="res/screen.png" />
-        <splash density="port-xhdpi" src="res/screen.png" />
-        <splash density="port-xxhdpi" src="res/screen.png" />
-        <splash density="port-xxxhdpi" src="res/screen.png" />
+        <splash density="port-hdpi" src="res/screen-port.png" />
+        <splash density="port-ldpi" src="res/screen-port.png" />
+        <splash density="port-mdpi" src="res/screen-port.png" />
+        <splash density="port-xhdpi" src="res/screen-port.png" />
+        <splash density="port-xxhdpi" src="res/screen-port.png" />
+        <splash density="port-xxxhdpi" src="res/screen-port.png" />
     </platform>
 </widget>
