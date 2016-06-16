@@ -3,7 +3,7 @@ div.modalWindow {
   bottom: 0px;
   left: 0px;
   width: 100%;
-  zindex: 200;
+  z-index: 9999;
   margin: 0px;
   color: #fff;
   font-weight: bold;
@@ -16,14 +16,29 @@ div.modalWindow {
   transition: transform 0.2s ease;
 }
 
-div.modalWindow.modalOpen {
+div.modalWindow .modalMessage {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+
+div.modalWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9998;
+}
+
+div.modalWrapper.modalOpen, div.modalWrapper.modalOpen div.modalWindow {
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
 }
-div.modalWindow.modalClosed {
+div.modalWrapper.modalClosed, div.modalWrapper.modalClosed div.modalWindow {
   -webkit-transform: translate(0, 100%);
   -moz-transform: translate(0, 100%);
   -ms-transform: translate(0, 100%);
