@@ -81,3 +81,24 @@ div.welcome-overlay div.logo-header {
     margin-bottom: 4%;
   }
 }
+
+/** Settings for when the welcome screen is in landscape **/
+@media screen and (orientation:landscape) {
+  .logo-header {
+    width: 25%;
+    margin: 0 auto;
+  }
+
+  .welcome-header {
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  .welcomeActionIcon {
+    height: 10vw;
+    width: 10vw;
+    margin: 5px auto;
+  }
+  .brought.attach  img {
+    width: 50%;
+  }
+}
