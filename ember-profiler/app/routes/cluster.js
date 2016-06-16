@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  modal: Ember.inject.service('modal'),
+  showHelp: function() {
+    this.get("modal").alert("Use the buttons on the top to sort by wages, your quiz results, or alphabetically. Wages show what you can expect to earn two years before, two years after, and five years after getting a degree.");
+  }.on("init"),
   model: function(params) {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
