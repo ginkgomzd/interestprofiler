@@ -1,5 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  hideBackButton: true
+  hideBackButton: true,
+  actions: {
+    reachedEdge: function(slick, direction) {
+      if (direction === "left") {
+        this.transitionToRoute("welcome");
+      }
+    }
+  }
 });
