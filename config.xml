@@ -64,6 +64,8 @@
         <splash height="2208" src="res/Default-736@2x.png" width="1242" />
         <splash height="1024" src="res/ipad/Default-Portrait.png" width="768" />
         <splash height="2048" src="res/ipad/Default-Portrait@2x.png" width="1536" />
+        <splash height="768" src="res/ipad/Default-Landscape.png" width="1024" />
+        <splash height="1536" src="res/ipad/Default-Landscape@2x.png" width="2048" />
         <preference name="FadeSplashScreenDuration" value="1000" />
     </platform>
     <platform name="android">
