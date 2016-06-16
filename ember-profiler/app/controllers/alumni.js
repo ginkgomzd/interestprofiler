@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
       });
     },
     toggleDescription: function() {
-      Ember.$(".hotOrNotButtons, .alumniDescription").slideToggle();
+      Ember.$(".alumniDescription").slideToggle();
     }
   },
   jobGrowth: function() {
