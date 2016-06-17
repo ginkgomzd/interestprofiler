@@ -30,7 +30,6 @@
     </plugin>
     <plugin name="cordova-labs-wkwebview-engine-localhost" spec="https://github.com/apache/cordova-plugins.git#master:wkwebview-engine-localhost" />
     <hook src="scripts/before_prepare/build_ember_app.sh" type="before_prepare" />
-    <hook src="scripts/before_build/030_configure_parse.js" type="before_build" />
     <platform name="ios">
         <content src="http://localhost:4200" />
         <preference name="AlternateContentSrc" value="http://localhost:0" />
@@ -74,8 +73,9 @@
     </platform>
     <platform name="android">
         <content src="index.html" />
-        <preference name="FadeSplashScreenDuration" value="1000" />
+        <hook src="scripts/before_build/030_configure_parse.js" type="before_build" />
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
+        <preference name="FadeSplashScreenDuration" value="1000" />
         <preference name="AndroidPersistentFileLocation" value="Internal" />
         <icon density="ldpi" src="res/icon/android/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon/android/icon-mdpi.png" />
