@@ -36,7 +36,7 @@ var settingsService = Ember.Service.extend({
 
     //Load directly from Parse
     if (!val) {
-      if(this.get("parseAuth").user !== null) {
+      if (this.get("parseAuth").loggedIn) {
         var settings = this.get("parseAuth").user.get("settings");
         if(settings && settings.hasOwnProperty(name)) {
           val = settings[name];
@@ -60,7 +60,9 @@ var settingsService = Ember.Service.extend({
     setting.save();
 
     //Save to Parse
-    this.get("profilerDataUtils").addItemToParseUserDataObject("settings", name, value);
+    if (this.get("parseAuth").loggedIn) {
+      this.get("profilerDataUtils").addItemToParseUserDataObject("settings", name, value);
+    }
 
     //This is to trigger observable changes, otherwise they aren't triggered
     this.set(name, null);
