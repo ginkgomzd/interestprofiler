@@ -106,9 +106,6 @@ export default Ember.Route.extend({
     toggleDrawer: function() {
       this.controller.toggleProperty('drawerOpen');
     },
-    explainJobGrowth: function() {
-      this.get("modal").alert("This indicates industry sectors that are a priority focus in the region; these sectors have training program investments.");
-    },
     explainSalaryGrowth: function() {
       this.get("modal").alert("Students with this degree have the highest percent change in salary.");
     },
