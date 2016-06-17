@@ -17,7 +17,7 @@
     {{#each pathways as |pathway|}}
       {{#if pathway.hasOccupations}}
         <li>
-          {{#if pathway.jobGrowth}}<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i>{{/if}}
+          {{job-growth value=pathway.jobGrowth includeText=false}}
           {{#if pathway.salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
           {{#link-to 'pathway' pathway.id}}{{pathway.name}}{{/link-to}}
           <div class="clear"></div>

@@ -5,7 +5,7 @@
     <div class="poloroid-footer">
       <h3>{{model.title}}</h3>
       {{#if showGrowth}}
-        {{#if jobGrowth}}<span class="right highDemand yellow">HIGH DEMAND &nbsp;<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i></span>{{/if}}
+        {{job-growth value=jobGrowth includeText=true float="right"}}
         {{#if salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
       {{/if}}
     </div>
