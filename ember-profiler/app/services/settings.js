@@ -50,7 +50,7 @@ var settingsService = Ember.Service.extend({
 
     return val;
   },
-  save: function(name, value) {
+  save: function(name, value, localOnly) {
     var setting = this.get("store").peekRecord("setting", name);
     if (setting === null) {
       setting = this.get("store").createRecord("setting", {id: name, 'value': value});
@@ -60,7 +60,7 @@ var settingsService = Ember.Service.extend({
     setting.save();
 
     //Save to Parse
-    if (this.get("parseAuth").loggedIn) {
+    if (this.get("parseAuth").loggedIn && !localOnly) {
       this.get("profilerDataUtils").addItemToParseUserDataObject("settings", name, value);
     }
 
