@@ -24,7 +24,7 @@
         <variable name="APP_ID" value="699449926827946" />
         <variable name="APP_NAME" value="here-career" />
     </plugin>
-    <plugin name="com.parse.cordova.core.pushplugin" spec="https://github.com/ginkgostreet/phonegap-parse-plugin.git#healthyi-1.1">
+    <plugin name="com.parse.cordova.core.pushplugin" spec="https://github.com/ginkgostreet/phonegap-parse-plugin.git#htc">
         <variable name="APP_ID" value="hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3" />
         <variable name="CLIENT_KEY" value="YwRrf7cxtwGoEHSJR5SPLXTuyBHEh1hdaRJUFxIo" />
     </plugin>
