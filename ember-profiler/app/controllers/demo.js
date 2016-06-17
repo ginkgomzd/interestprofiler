@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   actions: {
     reachedEdge: function(slick, direction) {
       if (direction === "left") {
-        this.transitionToRoute("welcome");
+        this.send("navigateAway");
       }
     }
   }

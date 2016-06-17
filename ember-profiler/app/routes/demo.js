@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  settings: Ember.inject.service('settings'),
   model: function(params) {
     return [
       {img: "Slide1.png", text1: "Welcome to Here to Career!", text2: "Thanks, let's go!"},
@@ -12,6 +13,7 @@ export default Ember.Route.extend({
   },
   actions: {
     navigateAway: function() {
+      this.get("settings").save("demoSeen", true, true);
       this.transitionTo("welcome");
     }
   }
