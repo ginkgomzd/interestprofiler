@@ -6,7 +6,7 @@
     {{#each clusters as |cluster|}}
       <li {{action "forwardToClusterDetail" cluster.id}} class="chevronRightDim">
         {{job-growth value=cluster.jobGrowth includeText=false float="right"}}
-        {{#if cluster.salaryGrowth}}<i {{action "explainSalaryGrowth" preventDefault=true bubbles=false}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
+        {{salary-growth value=cluster.salaryGrowth includeText=false float="right"}}
         <span>{{cluster.name}}</span>
       </li>
     {{/each}}

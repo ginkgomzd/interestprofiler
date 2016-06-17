@@ -8,7 +8,7 @@
     <div class="pathwayTitle">
       {{model.name}}
       {{job-growth value=model.jobGrowth}}
-      {{#if model.salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
+      {{salary-growth value=model.salaryGrowth}}
     </div>
     <div class="pathwayDesc">
       {{{model.description}}}
