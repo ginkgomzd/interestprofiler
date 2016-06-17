@@ -346,22 +346,30 @@ var profilerDataUtils = Ember.Service.extend({
     !oldAnswerString ||
     oldAnswerString !== answerString);
   },
-  saveAnswerToParse: function(answer) {
+  saveQuizAnswerToSettingsAndParse: function(answer) {
+    var answerString = "";
+
     if (this.get("parseAuth").loggedIn) {
-      var answerString = this.get("parseAuth").user.get("answers");
-      if (answerString.length > answer.id) {
-        answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
-      } else if (answerString.length === answer.id - 1) {
-        answerString = answerString + answer.selection;
-      } else {
-        answerString = this.answerString();
-      }
+      answerString = this.get("parseAuth").user.get("answers");
+    }
+
+    if (answerString.length > answer.id) {
+      answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+    } else if (answerString.length === answer.id - 1) {
+      answerString = answerString + answer.selection;
+    } else {
+      answerString = this.answerString();
+    }
+
+    //Save the answers to local settings
+    this.get("settings").save("answers", answerString);
+
+    //Save the new answer string to Parse
+    if (this.get("parseAuth").loggedIn) {
       this.get("parseAuth").user.set("answers", answerString);
-      this.get("settings").save("answers", answerString);
       this.get("parseAuth").user.save();
     }
   }
-
 });
 
 export default profilerDataUtils;
