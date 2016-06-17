@@ -31,7 +31,12 @@ export default Ember.Route.extend({
       this.send("hideDrawer");
     },
     didTransition: function(transition) {
-      this.get("status").loadingComplete();
+
+      Ember.run.scheduleOnce('afterRender', this, function () {
+        this.get("status").loadingComplete();
+      });
+
+
 
       Ember.run.later(this, function() {
         //This will run MANY times and could cause performance issues
@@ -88,7 +93,14 @@ export default Ember.Route.extend({
         if (navigator && navigator.splashscreen) {
           setTimeout(function () {
             navigator.splashscreen.hide();
+
+            //Delay the welcome animation until after the splash screen has faded out.
+            setTimeout(function () {
+              Ember.$("body").removeClass("body-loading");
+            }, 1000);
           }, 700);
+        } else {
+          Ember.$("body").removeClass("body-loading");
         }
         this.stillLoading = false;
       }
