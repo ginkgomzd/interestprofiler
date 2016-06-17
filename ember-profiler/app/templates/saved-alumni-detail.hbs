@@ -4,10 +4,8 @@
     <img class="poloroid-img img-responsive" src="{{model.getImgPath}}" />
     <div class="poloroid-footer">
       <h3>{{model.title}}</h3>
-      {{#if showGrowth}}
-        {{#if jobGrowth}}<span class="right highDemand yellow">HIGH DEMAND &nbsp;<i {{action "explainJobGrowth"}} class="jobGrowth material-icons">&#xE8E5;</i></span>{{/if}}
-        {{#if salaryGrowth}}<i {{action "explainSalaryGrowth"}} class="salaryGrowth material-icons">&#xE227;</i>{{/if}}
-      {{/if}}
+      {{job-growth value=jobGrowth includeText=true float="right"}}
+      {{salary-growth value=salaryGrowth includeText=true float="right"}}
     </div>
   </div>
   <div class="cards card1"></div>

@@ -1,0 +1,15 @@
+.highDemand {
+  font-size: 0.92rem;
+  vertical-align: middle;
+  line-height: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.highDemand.textVisible img.trending {
+  margin-top: -3px;
+}
+
+.salaryGrowth {
+  color: $brightGreen;
+}
