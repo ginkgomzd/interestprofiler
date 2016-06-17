@@ -27,7 +27,13 @@ Ember.LinkView.reopen({
 //This is to init the parse library
 document.addEventListener('deviceready', function() {
     if(parsePlugin) {
-        parsePlugin.initialize(config.parse.appId, config.parse.clientKey);
+        parsePlugin.initialize(config.parse.appId, config.parse.clientKey, function() {
+          if (config.environment == "development") {
+            parsePlugin.subscribe('AppDevelopers', function () {
+              console.log('Subscribed to AppDevelopers');
+            });
+          }
+        });
     }
 }, false);
 
