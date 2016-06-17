@@ -102,3 +102,28 @@ div.welcome-overlay div.logo-header {
     width: 50%;
   }
 }
+
+
+/**Loading screen transitions**/
+
+.welcome-overlay.blur {
+  transition: 1s -webkit-filter linear, 1s filter linear;
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+}
+
+.body-loading .welcome-overlay.blur {
+  -webkit-filter: blur(50px);
+  filter: blur(50px);
+}
+
+.welcome-overlay.whiteout {
+  transition: 1s -webkit-filter linear, 1s filter linear;
+  -webkit-filter: grayscale(0%) brightness(100%);
+  filter: grayscale(0%) brightness(100%);
+}
+
+.body-loading .welcome-overlay.whiteout {
+  -webkit-filter: grayscale(100%) brightness(1000%);
+  filter: grayscale(100%) brightness(1000%);
+}
