@@ -12,11 +12,7 @@ export default Ember.Route.extend({
   },
   actions: {
     navigateAway: function() {
-      if(this.parseAuth.loggedIn) {
-        this.transitionTo("welcome");
-      } else {
-        this.transitionTo("login");
-      }
+      this.transitionTo("welcome");
     }
   }
 });
