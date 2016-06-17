@@ -73,6 +73,7 @@
         <preference name="FadeSplashScreenDuration" value="1000" />
     </platform>
     <platform name="android">
+        <preference name="FadeSplashScreenDuration" value="1000" />
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon/android/icon-ldpi.png" />
@@ -97,6 +98,7 @@
         <preference name="SplashMaintainAspectRatio" value="true" />
     </platform>
     <platform name="amazon-fireos">
+        <preference name="FadeSplashScreenDuration" value="1000" />
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <icon density="ldpi" src="res/icon/android/icon-ldpi.png" />
