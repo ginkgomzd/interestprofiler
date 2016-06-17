@@ -106,9 +106,6 @@ export default Ember.Route.extend({
     toggleDrawer: function() {
       this.controller.toggleProperty('drawerOpen');
     },
-    explainSalaryGrowth: function() {
-      this.get("modal").alert("Students with this degree have the highest percent change in salary.");
-    },
     registerBackButtonClick: function() {
       this.controllerFor(this.controllerFor("application").get("currentRouteName")).send("executeBackAction");
     },
