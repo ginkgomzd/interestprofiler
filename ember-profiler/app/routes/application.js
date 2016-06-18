@@ -33,7 +33,14 @@ export default Ember.Route.extend({
   },
   actions: {
     willTransition: function(transition) {
-      this.get("status").loading();
+      if (!this.get("settings").load("ageVerified")) {
+        if (transition.targetName !== "welcome" && transition.targetName !== "demo" && transition.targetName !== "login") {
+          transition.abort();
+        }
+      } else {
+        this.get("status").loading();
+      }
+      
       this.send("hideDrawer");
     },
     didTransition: function(transition) {
