@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
+  settings: Ember.inject.service('settings'),
   status: Ember.inject.service('status'),
   sortingDesc: ['value:desc'],
   showBackButton: "never",
