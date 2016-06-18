@@ -15,14 +15,6 @@ var settingsService = Ember.Service.extend({
       });
     });
   },
-  reloadAllSettings: function(data) {
-    var settings = this;
-    for(var i in data) {
-      if(data.hasOwnProperty(i)) {
-        this.set(i, data[i]);
-      }
-    }
-  },
   load: function(name) {
     var localVal, val;
     localVal = this.get(name);
@@ -34,15 +26,14 @@ var settingsService = Ember.Service.extend({
       }
     }
 
-    //Load directly from Parse
-    if (!val) {
-      if (this.get("parseAuth").loggedIn) {
-        var settings = this.get("parseAuth").user.get("settings");
-        if(settings && settings.hasOwnProperty(name)) {
-          val = settings[name];
-        }
+    //Load from Parse
+    if (this.get("parseAuth").loggedIn) {
+      var settings = this.get("parseAuth").user.get("settings");
+      if(settings && settings.hasOwnProperty(name)) {
+        val = settings[name];
       }
     }
+
 
     if(localVal !== val) {
       this.set(name, val);
