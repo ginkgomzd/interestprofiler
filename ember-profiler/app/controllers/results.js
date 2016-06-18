@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   status: Ember.inject.service('status'),
+  parseAuth: Ember.inject.service('parseAuth'),
   modal: Ember.inject.service('modal'),
   pageTitle: "Results",
   navbarClass: "yellow",
@@ -35,6 +36,17 @@ export default Ember.Controller.extend({
       that.takeScreenshotAndShare();
     });
   },
+  askToLogin: function() {
+    if(!this.get("parseAuth").loggedIn) {
+      var that = this;
+      Ember.run.scheduleOnce('afterRender', this, function () {
+        that.get("modal").confirm("Would you like log in to save your results?", {
+          "left": {"text": "No"},
+          "right": {"text": "Yes", "action": function() {that.transitionToRoute('login');}}
+        });
+      });
+    }
+  }.on("init"),
   actions: {
     shareResults: function() {
       var that = this;
