@@ -156,8 +156,7 @@ var profilerDataUtils = Ember.Service.extend({
         that.get("store").findAll("answer").then(function (data) {
           var parseAnswerString = that.get("parseAuth").user.get("answers") || "";
           var localAnswerString = that.answerString();
-
-          console.log("parse: ", parseAnswerString);
+          
           if (localAnswerString.length < parseAnswerString.length) {
             that.populateLocalAnswers(parseAnswerString);
             return resolve(true);
