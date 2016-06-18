@@ -3,26 +3,32 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  settings: Ember.inject.service('settings'),
   modal: Ember.inject.service('modal'),
+  parseAuth: Ember.inject.service('parse-auth'),
   showHamburger: true,
   backButtonText: false,
   stillLoading: true,
-  demoSeen: false,
-  model: function () {
-    return this.get("setupUtils").appStartup();
-  },
+  isSetup: false,
   //This may need to be updated in the future depending on what we do
   //in regards to pre-loading data
-  beforeModel: function(transition) {
-    if(!this.parseAuth.loggedIn) {
-      if(this.get("demoSeen") && transition.targetName !== "demo") {
-        this.transitionTo("login");
-      } else {
-        this.set("demoSeen", true);
-        this.transitionTo("demo");
-      }
+  model: function() {
+    if(!this.isSetup) {
+      var that = this;
+      return this.get("setupUtils").appStartup().then(function() {
+        that.isSetup = true;
+        that.gotoFirstScreen();
+      });
     } else {
+      this.gotoFirstScreen();
+    }
+  },
+  gotoFirstScreen: function() {
+    var demoSeen = this.get("settings").load("demoSeen");
+    if(demoSeen) {
       this.transitionTo("welcome");
+    } else {
+      this.transitionTo("demo");
     }
   },
   actions: {
@@ -42,7 +48,9 @@ export default Ember.Route.extend({
         //This will run MANY times and could cause performance issues
         //Or lead to a lot of bandwidth being used.
         //The client has asked for it, so we are implementing it.
-        this.send("analytics", "pageLoad", this.controller.currentRouteName);
+        if (this.controller) {
+          this.send("analytics", "pageLoad", this.controller.currentRouteName);
+        }
 
         //Handle hide/show or back button and hamburger icon
         var activeController = this.controllerFor(this.controller.currentRouteName);
@@ -106,7 +114,7 @@ export default Ember.Route.extend({
       }
     },
     logout: function() {
-      this.parseAuth.logout();
+      this.get("parseAuth").logout();
       this.transitionTo("login");
     },
     hideDrawer: function() {
