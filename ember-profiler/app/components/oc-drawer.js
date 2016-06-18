@@ -11,7 +11,7 @@ export default Ember.Component.extend({
       this.get("settings").save("answers", this.parseAuth.user.get("answers"));
     }
 
-    var answers = this.get("settings").answers || [];
+    var answers = this.get("settings").answers || "";
 
     if (answers.length === 60) {
       return "Retake ";
