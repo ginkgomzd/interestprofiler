@@ -3,9 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  parseAuth: Ember.inject.service('parse-auth'),
   dateHelper: Ember.inject.service('date-functions'),
   beforeModel: function() {
-    if (this.parseAuth.loggedIn) {
+    if (this.get("parseAuth").loggedIn) {
       this.transitionTo("welcome");
     }
   },
@@ -38,7 +39,7 @@ export default Ember.Route.extend({
     loginWithFacebook: function(saveVerification) {
       var that = this;
       this.get("status").loading();
-      this.parseAuth.authenticate_fb(function() {
+      this.get("parseAuth").authenticate_fb(function() {
         that.registerLoginLocationAnalytics("facebook");
         if(saveVerification) {
           that.saveTosAndAgeVerification();
@@ -70,7 +71,7 @@ export default Ember.Route.extend({
         password: Ember.$("#login-password").val()
       };
       this.get("status").loading();
-      this.parseAuth.authenticate(user,
+      this.get("parseAuth").authenticate(user,
         function() {
           //success
           that.get("setupUtils").handleLogin().then(function() {
@@ -93,7 +94,7 @@ export default Ember.Route.extend({
         if (Ember.$("#signup-password-confirm").val() === user.password) {
           var that = this;
           this.get("status").loading();
-          this.parseAuth.register(user,
+          this.get("parseAuth").register(user,
             function () {
               //success
               that.get("setupUtils").handleLogin().then(function () {
@@ -117,7 +118,7 @@ export default Ember.Route.extend({
 
         var that = this;
         this.get("status").loading();
-        this.parseAuth.passwordReset(Ember.$("#reset-email").val(), {
+        this.get("parseAuth").passwordReset(Ember.$("#reset-email").val(), {
           success: function () {
             that.get("status").success("An email with reset instructions has been sent to '" + Ember.$("#reset-email").val() + "'");
             that.controller.send("showLoginEmail");
