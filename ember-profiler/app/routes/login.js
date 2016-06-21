@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  settings: Ember.inject.service('settings'),
   parseAuth: Ember.inject.service('parse-auth'),
   dateHelper: Ember.inject.service('date-functions'),
   beforeModel: function() {
