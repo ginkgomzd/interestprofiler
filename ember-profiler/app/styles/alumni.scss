@@ -1,20 +1,3 @@
-div.hot-or-not {
-  padding: 0px;
-  clear: both;
-  overflow: hidden;
-  width: 70vw;
-  display: block;
-}
-.img-swipe-container {
-  width: 70vw;
-  overflow: hidden;
-  text-align: center;
-}
-.img-swipe-container img {
-  width: 70vw;
-  height: auto;
-}
-
 div.hotOrNotButtons {
   width: 150px;
   margin: 0 auto;
@@ -52,6 +35,16 @@ div.hotOrNotButtons .Save {
   color: $htcYellow;
 }
 
+.alumniDescription {
+  clear: both;
+  display: none;
+  padding: 15px;
+}
+
+
+
+/**[  CSS Rules for the Poloroid widget ]**/
+
 .mainContent .poloroid-container {
   position: relative;
   margin: 0;
@@ -67,6 +60,21 @@ div.hotOrNotButtons .Save {
   margin-left: 10vw;
   float: left;
 }
+
+.mainContent .poloroid .poloroid-img-container {
+  width: 70vw;
+  height: 60vw;
+  overflow: hidden;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.mainContent .poloroid .poloroid-img {
+  width: 100%;
+  height: auto;
+}
+
 .mainContent .poloroid-container .cards {
   box-shadow: 0 0 1px 1px $darken15;
   height: 3px;
@@ -98,10 +106,4 @@ div.hotOrNotButtons .Save {
 .poloroid h3 {
   display: inline;
   color: $grey7;
-}
-
-.alumniDescription {
-  clear: both;
-  display: none;
-  padding: 15px;
 }
