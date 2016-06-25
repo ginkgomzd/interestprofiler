@@ -10,5 +10,6 @@ export default DS.Model.extend({
   lat: DS.attr('number'),
   long: DS.attr('number'),
   distance: DS.attr('number'),
-  description: DS.attr('string')
+  description: DS.attr('string'),
+  importantDates: DS.attr()
 });
