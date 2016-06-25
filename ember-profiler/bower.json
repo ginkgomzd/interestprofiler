@@ -10,6 +10,8 @@
     "localforage": "~1.4.0",
     "jquery-color": "~2.1.2",
     "slick-carousel": "~1.5.9",
-    "hammer-time": "1.0.0"
+    "hammer-time": "1.0.0",
+    "ember-cli-moment-shim": "0.0.3",
+    "moment": "^2.13.0"
   }
 }
