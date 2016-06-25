@@ -9,7 +9,8 @@
     "cordova",
     "Parse",
     "parsePlugin",
-    "StatusBar"
+    "StatusBar",
+    "moment"
   ],
   "browser": true,
   "boss": true,
