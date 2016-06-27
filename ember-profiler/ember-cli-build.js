@@ -31,6 +31,8 @@ module.exports = function(defaults) {
   app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
   //Include the color animation library
   app.import('bower_components/jquery-color/jquery.color.js');
+  //Include the Moment date formatting library
+  app.import('bower_components/moment/min/moment.min.js');
   //Include the screenshot library
   app.import('vendor/html2canvas.js');
 

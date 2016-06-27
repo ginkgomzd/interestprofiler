@@ -20,6 +20,7 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
     <plugin name="nl.x-services.plugins.socialsharing" spec="https://github.com/Telerik-Verified-Plugins/SocialSharing" />
     <plugin name="cordova-plugin-spinner-dialog" spec="https://github.com/Paldom/SpinnerDialog.git" />
+    <plugin name="cordova-plugin-calendar" spec="~4.5.0" />
     <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
         <variable name="APP_ID" value="699449926827946" />
         <variable name="APP_NAME" value="here-career" />

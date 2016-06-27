@@ -4,18 +4,33 @@
     <p {{action "openExternalLink" model.college.collegeURL}} class="clickable"><strong>{{model.college.collegeURL}}</strong></p>
   </div>
   <div class="padded section">
-    <p>{{model.college.address1}}<br />
+    <p>
+      {{model.college.address1}}<br />
       {{#if model.college.address2}}
         {{model.college.address2}}<br />
       {{/if}}
-      {{model.college.city}}, CA, {{model.college.zip}}</p>
+      {{model.college.city}}, CA, {{model.college.zip}}
+    </p>
+
     {{#if model.college.description}}
       <hr />
       <p>{{{model.college.description}}}</p>
     {{/if}}
+
+    {{#if model.college.importantDates}}
+      <hr />
+      <p><strong>Important Dates:</strong></p>
+      {{#each model.college.importantDates as |date|}}
+        <div class="importantDate">
+          <span class="importantDateTitle">{{date.title}}:</span>
+          <span class="importantDateDate">{{format-date date.date.value}}</span>
+          <span {{action "addToCalendar" date}} class="importantDateAdd" ><i class="material-icons">&#xE24F;</i></span>
+        </div>
+      {{/each}}
+    {{/if}}
   </div>
 
-<br />
+  <br />
 
   <div class="padded"><strong>Programs</strong></div>
   <ul class="listView">
