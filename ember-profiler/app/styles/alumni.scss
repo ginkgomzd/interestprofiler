@@ -46,23 +46,21 @@ div.hotOrNotButtons .Save {
 /**[  CSS Rules for the Poloroid widget ]**/
 
 .mainContent .poloroid-container {
-  position: relative;
   margin: 0;
   width: 100%;
 }
 
 .mainContent .poloroid {
-  width: 80vw;
-  border: 5vw solid $white;
+  width: 80%;
+  padding: 5% 5% 0 5%;
   border-bottom: 1px;
   background: $white;
   box-shadow: 0 0 2px 1px $darken15;
-  margin-left: 10vw;
-  float: left;
+  margin: 0 auto;
 }
 
 .mainContent .poloroid .poloroid-img-container {
-  width: 70vw;
+  width: 100%;
   height: 60vw;
   overflow: hidden;
   text-align: center;
@@ -76,27 +74,21 @@ div.hotOrNotButtons .Save {
 }
 
 .mainContent .poloroid-container .cards {
-  box-shadow: 0 0 1px 1px $darken15;
+  box-shadow: 2px 1px 1px 0 $darken15, -2px 1px 1px 0 $darken15;
   height: 3px;
   background: $white;
   clear: both;
-  float: left;
-  position: relative;
-  margin-top: 1px;
+  margin: 1px auto;
 }
 .mainContent .poloroid-container .card1 {
-  width: 76vw;
-  margin-left: 12vw;
-  z-index: -1;
+  width: 76%;
 }
 .mainContent .poloroid-container .card2 {
-  width: 72vw;
-  margin-left: 14vw;
-  z-index: -2;
+  width: 72%;
 }
 
 .mainContent .poloroid-footer {
-  padding: 6vw 0 6vw 0;
+  padding: 10% 0;
 }
 
 .poloroid-img {
@@ -106,4 +98,53 @@ div.hotOrNotButtons .Save {
 .poloroid h3 {
   display: inline;
   color: $grey7;
+}
+
+/** Landscape Rules **/
+@media screen and (orientation:landscape) {
+
+  .mainContent .poloroid-container {
+    width: 45%;
+    float: left;
+    margin: 5px;
+    margin-left: 2.5%;
+  }
+  .mainContent .poloroid {
+    width: 100%;
+  }
+  .mainContent .poloroid .poloroid-img-container {
+    width: 40vw;
+    height: 34vw;
+  }
+
+  .mainContent .poloroid-footer {
+    padding: 6% 0;
+  }
+
+  .alumni-header {
+    float: right;
+    width: 50%;
+    text-align: center;
+  }
+
+  div.hotOrNotButtons {
+    width: 50%;
+    height: 10vh;
+    padding: 5px 10%;
+    float: right;
+    clear: none;
+  }
+
+  .mainContent .poloroid-container .cards {
+    display: none;
+  }
+
+  div.alumniDescription {
+    width: 50%;
+    float: right;
+    height: 55vh;
+    overflow-y: auto;
+    clear: right;
+    margin: 8vh 0 0 0;
+  }
 }
