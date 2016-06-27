@@ -47,7 +47,7 @@ export default Ember.Route.extend({
       }
       record.save();
 
-      this.get("profilerDataUtils").saveAnswerToParse(answer);
+      this.get("profilerDataUtils").saveQuizAnswerToSettingsAndParse(answer);
 
       if(answer.id % 20 === 0) {
         this.send('sectionComplete');

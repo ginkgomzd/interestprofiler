@@ -3,9 +3,11 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  settings: Ember.inject.service('settings'),
+  parseAuth: Ember.inject.service('parse-auth'),
   dateHelper: Ember.inject.service('date-functions'),
   beforeModel: function() {
-    if (this.parseAuth.loggedIn) {
+    if (this.get("parseAuth").loggedIn) {
       this.transitionTo("welcome");
     }
   },
@@ -29,6 +31,23 @@ export default Ember.Route.extend({
     this.get("settings").save("ageVerified", today);
     this.get("settings").save("tosVerified", today);
   },
+
+  onLoginSuccess: function(src, saveVerification) {
+    var that = this;
+    this.get("setupUtils").handleLogin().then(function () {
+      that.registerLoginLocationAnalytics(src);
+      if(saveVerification) {
+        that.saveTosAndAgeVerification();
+      }
+      that.get("status").loadingComplete();
+      var dest = that.get("settings").load("loginDestination") || "welcome";
+      //Put this back to the default, so that on the next login it takes
+      //the user to welcome.
+      that.get("settings").save("loginDestination", "welcome", true);
+      that.transitionTo(dest);
+    });
+  },
+
   actions: {
     signupWithFacebook: function() {
       if (this.verifyAge()) {
@@ -38,13 +57,8 @@ export default Ember.Route.extend({
     loginWithFacebook: function(saveVerification) {
       var that = this;
       this.get("status").loading();
-      this.parseAuth.authenticate_fb(function() {
-        that.registerLoginLocationAnalytics("facebook");
-        if(saveVerification) {
-          that.saveTosAndAgeVerification();
-        }
-        that.get("status").loadingComplete();
-        that.transitionTo("welcome");
+      this.get("parseAuth").authenticate_fb(function() {
+        that.onLoginSuccess("facebook", saveVerification);
       },
       function(user, error) {
         that.get("status").warn(error.message);
@@ -70,13 +84,11 @@ export default Ember.Route.extend({
         password: Ember.$("#login-password").val()
       };
       this.get("status").loading();
-      this.parseAuth.authenticate(user,
+      this.get("parseAuth").authenticate(user,
         function() {
           //success
           that.get("setupUtils").handleLogin().then(function() {
-            that.registerLoginLocationAnalytics("email");
-            that.get("status").loadingComplete();
-            that.transitionTo("welcome");
+            that.onLoginSuccess("email", false);
           });
         },
         function(user, error) {
@@ -93,15 +105,10 @@ export default Ember.Route.extend({
         if (Ember.$("#signup-password-confirm").val() === user.password) {
           var that = this;
           this.get("status").loading();
-          this.parseAuth.register(user,
+          this.get("parseAuth").register(user,
             function () {
               //success
-              that.get("setupUtils").handleLogin().then(function () {
-                that.registerLoginLocationAnalytics("email-signup");
-                that.saveTosAndAgeVerification();
-                that.get("status").loadingComplete();
-                that.transitionTo("welcome");
-              });
+              that.onLoginSuccess("email-signup", true);
             },
             function (user, error) {
               that.get("status").warn(error.message);
@@ -117,7 +124,7 @@ export default Ember.Route.extend({
 
         var that = this;
         this.get("status").loading();
-        this.parseAuth.passwordReset(Ember.$("#reset-email").val(), {
+        this.get("parseAuth").passwordReset(Ember.$("#reset-email").val(), {
           success: function () {
             that.get("status").success("An email with reset instructions has been sent to '" + Ember.$("#reset-email").val() + "'");
             that.controller.send("showLoginEmail");

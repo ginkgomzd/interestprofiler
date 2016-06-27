@@ -126,9 +126,8 @@ var profilerDataUtils = Ember.Service.extend({
     this.get("settings").save("ProgressQuiz2", null);
     this.get("settings").save("ProgressQuiz3", null);
   },
-  populatePreviousAnswers: function() {
+  populateLocalAnswers: function(answers) {
     if (this.get("parseAuth").loggedIn) {
-      var answers = this.get("parseAuth").user.get("answers");
       var store = this.get("store");
       var i = 0;
       while (i <= answers.length - 1) {
@@ -150,22 +149,31 @@ var profilerDataUtils = Ember.Service.extend({
       this.get("settings").save("answers", answers);
     }
   },
-  marshalSavedAnswers: function() {
+  syncParseAnswers: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (that.get("parseAuth").user !== null) {
         that.get("store").findAll("answer").then(function (data) {
-          var parseAnswerString = that.get("parseAuth").user.get("answers");
-          if(parseAnswerString === undefined) {
-            that.get("parseAuth").user.set("answers", "");
-            return resolve(false);
-          }
+          var parseAnswerString = that.get("parseAuth").user.get("answers") || "";
           var localAnswerString = that.answerString();
-
-          if (localAnswerString.length === 0 && parseAnswerString.length > 0) {
-            that.populatePreviousAnswers();
-            resolve(true);
+          
+          if (localAnswerString.length < parseAnswerString.length) {
+            that.populateLocalAnswers(parseAnswerString);
+            return resolve(true);
           }
+
+          if (localAnswerString.length > parseAnswerString.length) {
+            that.get("parseAuth").user.set("answers", localAnswerString);
+            that.get("parseAuth").user.save();
+            return resolve(true);
+          }
+
+          //If lengths are the same, but contents is different
+          if(localAnswerString !== parseAnswerString) {
+            //todo: decide what to do here
+            return resolve(true);
+          }
+
           resolve(false);
         });
       } else {
@@ -228,35 +236,44 @@ var profilerDataUtils = Ember.Service.extend({
   },
   populateSettingsFromParse: function() {
     var that = this;
+    //Skip importing these, either because they are handled with extra logic elsewhere
+    //or because we don't want to sync them.
+    var doNotImport = ["answers", "lastUpdatedDate", "demoSeen", "CalculatedAnswers"];
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (that.get("parseAuth").loggedIn) {
         var settings = that.get("parseAuth").user.get("settings") || {};
         if (settings.hasOwnProperty("lastUpdatedDate")) {
           delete settings.lastUpdatedDate;
         }
-        var data = {};
-        data[EmberENV.modelPaths.setting.modelName] = {};
-        data[EmberENV.modelPaths.setting.modelName].records = {};
-        for (var id in settings) {
-          if (settings.hasOwnProperty(id)) {
-            data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
+        localforage.getItem(EmberENV.modelPaths.setting.emberDataNamespace, function (err, data) {
+
+          data = data || {};
+          data[EmberENV.modelPaths.setting.modelName] = data[EmberENV.modelPaths.setting.modelName] || {};
+          data[EmberENV.modelPaths.setting.modelName].records = data[EmberENV.modelPaths.setting.modelName].records || {};
+
+          for (var id in settings) {
+            if (settings.hasOwnProperty(id) && doNotImport.indexOf(id) === -1) {
+              data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
+            }
           }
-        }
-        localforage.setItem(EmberENV.modelPaths.setting.emberDataNamespace, data).then(function () {
-          that.get("settings").reloadAllSettings(settings);
-          resolve();
+          localforage.setItem(EmberENV.modelPaths.setting.emberDataNamespace, data).then(function () {
+            that.get("settings").setup().then(function() {
+              resolve();
+            });
+          });
         });
+
       } else {
         reject();
       }
     });
   },
-  loadAllUserDataFromParse: function() {
+  syncParseUserData: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (that.get("parseAuth").loggedIn) {
         var promises = {
-          savedAnswerString: that.marshalSavedAnswers(),
+          savedAnswerString: that.syncParseAnswers(),
           bookmarkedPathways: that.popuateBookmarkedPathwaysFromParse(),
           hotOrNot: that.populateHotOrNotFromParse(),
           settings: that.populateSettingsFromParse()
@@ -346,22 +363,30 @@ var profilerDataUtils = Ember.Service.extend({
     !oldAnswerString ||
     oldAnswerString !== answerString);
   },
-  saveAnswerToParse: function(answer) {
+  saveQuizAnswerToSettingsAndParse: function(answer) {
+    var answerString = "";
+
     if (this.get("parseAuth").loggedIn) {
-      var answerString = this.get("parseAuth").user.get("answers");
-      if (answerString.length > answer.id) {
-        answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
-      } else if (answerString.length === answer.id - 1) {
-        answerString = answerString + answer.selection;
-      } else {
-        answerString = this.answerString();
-      }
+      answerString = this.get("parseAuth").user.get("answers");
+    }
+
+    if (answerString.length > answer.id) {
+      answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+    } else if (answerString.length === answer.id - 1) {
+      answerString = answerString + answer.selection;
+    } else {
+      answerString = this.answerString();
+    }
+
+    //Save the answers to local settings
+    this.get("settings").save("answers", answerString);
+
+    //Save the new answer string to Parse
+    if (this.get("parseAuth").loggedIn) {
       this.get("parseAuth").user.set("answers", answerString);
-      this.get("settings").save("answers", answerString);
       this.get("parseAuth").user.save();
     }
   }
-
 });
 
 export default profilerDataUtils;

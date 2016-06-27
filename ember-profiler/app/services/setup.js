@@ -31,7 +31,7 @@ var setupService = Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       setup.get("cmsUtils").updateAll(lastUpdated).then(function(updated) {
         var today = new Date();
-        setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
+        setup.get("settings").save("lastUpdatedDate", today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(), true);
         resolve(true);
       }, function() {
         resolve(false);
@@ -115,7 +115,7 @@ var setupService = Ember.Service.extend({
   handleLogin: function() {
     var setup = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function (userData) {
+      setup.get("profilerDataUtils").syncParseUserData().then(function (userData) {
         setup.preloadModels().then(function() {
           resolve();
         });
@@ -135,7 +135,8 @@ var setupService = Ember.Service.extend({
       var promises = [
         setup.get("store").findAll("onet-career"),
         setup.get("store").findAll("cluster"),
-        setup.get("store").findAll("pathway")
+        setup.get("store").findAll("pathway"),
+        setup.get("store").findAll("answer")
       ];
 
       Ember.RSVP.all(promises).then(function() {
@@ -167,17 +168,11 @@ var setupService = Ember.Service.extend({
 
         Ember.RSVP.hash(staticPromises).then(function() {
           setup.checkForUpdates().then(function() {
-            if(fetchUserData) {
-              setup.get("profilerDataUtils").loadAllUserDataFromParse().then(function(userData) {
-                setup.preloadModels().then(function() {
-                  resolve();
-                });
-              });
-            } else {
+            setup.get("profilerDataUtils").syncParseUserData().then(function(userData) {
               setup.preloadModels().then(function() {
                 resolve();
               });
-            }
+            });
           });
         });
       });

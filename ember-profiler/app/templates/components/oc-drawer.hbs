@@ -10,7 +10,8 @@
 <li>{{#link-to 'about'}}About{{/link-to}}</li>
 <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
 
-
-<li {{action "logout"}} class="logout">LogOut</li>
+{{#if parseAuth.loggedIn}}
+  <li {{action "logout"}} class="logout">LogOut</li>
+{{/if}}
 
 {{yield}}
