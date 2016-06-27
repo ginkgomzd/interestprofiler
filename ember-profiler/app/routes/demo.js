@@ -2,11 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   settings: Ember.inject.service('settings'),
+  orientation: Ember.inject.service('orientation'),
   model: function(params) {
-    //Lock screen orientation into portrait.
-    try {
-      window.screen.lockOrientation("portrait");
-    } catch(e) {}
+    this.get("orientation").lockOrientation("portrait");
 
     //Return the data for the Demo
     return [
@@ -20,10 +18,7 @@ export default Ember.Route.extend({
 
   actions: {
     navigateAway: function() {
-      try {
-        window.screen.unlockOrientation();
-      } catch(e) {}
-
+      this.get("orientation").unlockOrientation();
       this.get("settings").save("demoSeen", true, true);
       this.transitionTo("welcome");
     }
