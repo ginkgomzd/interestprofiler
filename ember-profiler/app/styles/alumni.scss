@@ -147,4 +147,13 @@ div.hotOrNotButtons .Save {
     clear: right;
     margin: 8vh 0 0 0;
   }
+
+  div.savedAlumniDescription {
+    width: 50%;
+    float: right;
+    height: 73vh;
+    overflow-y: auto;
+    clear: right;
+    margin: 2vh 5px 0 0;
+  }
 }
