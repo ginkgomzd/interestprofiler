@@ -146,6 +146,7 @@ var cmsUtils = Ember.Service.extend({
       Ember.RSVP.hash(indexes).then(function(updated) {
         var promises = {
           alumni: that.fetchUpdatedContent(EmberENV.modelPaths.alumni, lastUpdated),
+          image: that.fetchUpdatedContent(EmberENV.modelPaths.image, lastUpdated),
           cluster: that.fetchUpdatedContent(EmberENV.modelPaths.cluster, lastUpdated),
           pathway: that.fetchUpdatedContent(EmberENV.modelPaths.pathway, lastUpdated),
           occupation: that.fetchUpdatedContent(EmberENV.modelPaths.occupation, lastUpdated),
