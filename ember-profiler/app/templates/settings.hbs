@@ -1,4 +1,4 @@
-
+{{#if parseAuth.loggedIn}}
 <div class="inputWrapper">
   <p><i class="material-icons">&#xE87C;</i></p>
   {{input type="text" value=user.firstName required=true placeholder="First Name" }}
@@ -32,3 +32,5 @@
 <hr class="formHR" />
 
 <button class="formButton" {{action "saveUser"}}>Save Settings</button>
+{{/if}}
+<button class="formButton" {{action "gotoLogin"}}>Login</button>

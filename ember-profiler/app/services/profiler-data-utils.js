@@ -108,9 +108,11 @@ var profilerDataUtils = Ember.Service.extend({
   },
 
   saveUserAnswers: function() {
-    var answerString = this.answerString();
-    this.get("parseAuth").user.set("answers", answerString);
-    this.get("parseAuth").user.save();
+    if (this.get("parseAuth").loggedIn) {
+      var answerString = this.answerString();
+      this.get("parseAuth").user.set("answers", answerString);
+      this.get("parseAuth").user.save();
+    }
   },
   retakeQuiz: function() {
     //Erase old answers
@@ -125,22 +127,28 @@ var profilerDataUtils = Ember.Service.extend({
     this.get("settings").save("ProgressQuiz3", null);
   },
   populatePreviousAnswers: function() {
-    var answers = this.get("parseAuth").user.get("answers");
-    var store = this.get("store");
-    var i = 0;
-    while (i <= answers.length - 1) {
-      var index = i + 1;
-      var record = store.peekRecord("answer", index);
-      if (record === null) {
-        record = store.createRecord("answer", {id: index, question: store.peekRecord("question", index), selection: answers[i]});
-      } else {
-        record.set("question", index);
-        record.set("selection", answers[i]);
+    if (this.get("parseAuth").loggedIn) {
+      var answers = this.get("parseAuth").user.get("answers");
+      var store = this.get("store");
+      var i = 0;
+      while (i <= answers.length - 1) {
+        var index = i + 1;
+        var record = store.peekRecord("answer", index);
+        if (record === null) {
+          record = store.createRecord("answer", {
+            id: index,
+            question: store.peekRecord("question", index),
+            selection: answers[i]
+          });
+        } else {
+          record.set("question", index);
+          record.set("selection", answers[i]);
+        }
+        record.save();
+        i++;
       }
-      record.save();
-      i++;
+      this.get("settings").save("answers", answers);
     }
-    this.get("settings").save("answers", answers);
   },
   marshalSavedAnswers: function() {
     var that = this;
@@ -168,73 +176,85 @@ var profilerDataUtils = Ember.Service.extend({
   populateHotOrNotFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var hotAlumni = that.get("parseAuth").user.get("hotAlumni");
-      var notAlumni = that.get("parseAuth").user.get("notAlumni");
-      var hotOrNot = {};
-      var id;
+      if (that.get("parseAuth").loggedIn) {
+        var hotAlumni = that.get("parseAuth").user.get("hotAlumni");
+        var notAlumni = that.get("parseAuth").user.get("notAlumni");
+        var hotOrNot = {};
+        var id;
 
 
-      for (id in hotAlumni) {
-        if (hotAlumni.hasOwnProperty(id)) {
-          hotOrNot[hotAlumni[id]] = {hot: true, "id": hotAlumni[id]};
+        for (id in hotAlumni) {
+          if (hotAlumni.hasOwnProperty(id)) {
+            hotOrNot[hotAlumni[id]] = {hot: true, "id": hotAlumni[id]};
+          }
         }
-      }
 
-      for (id in notAlumni) {
-        if (notAlumni.hasOwnProperty(id)) {
-          hotOrNot[notAlumni[id]] = {hot: false, "id": notAlumni[id]};
+        for (id in notAlumni) {
+          if (notAlumni.hasOwnProperty(id)) {
+            hotOrNot[notAlumni[id]] = {hot: false, "id": notAlumni[id]};
+          }
         }
-      }
 
-      var data = {};
-      data[EmberENV.modelPaths.hotOrNot.modelName] = {};
-      data[EmberENV.modelPaths.hotOrNot.modelName].records = hotOrNot;
-      localforage.setItem(EmberENV.modelPaths.hotOrNot.emberDataNamespace, data).then(function() {
-        resolve(hotOrNot);
-      });
+        var data = {};
+        data[EmberENV.modelPaths.hotOrNot.modelName] = {};
+        data[EmberENV.modelPaths.hotOrNot.modelName].records = hotOrNot;
+        localforage.setItem(EmberENV.modelPaths.hotOrNot.emberDataNamespace, data).then(function () {
+          resolve(hotOrNot);
+        });
+      } else {
+        reject();
+      }
     });
   },
   popuateBookmarkedPathwaysFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
-      localforage.getItem(EmberENV.modelPaths.pathway.emberDataNamespace, function (err, data) {
-        for (var i in Ids) {
-          if (Ids.hasOwnProperty(i) && data[EmberENV.modelPaths.pathway.modelName].records.hasOwnProperty(Ids[i])) {
-            data[EmberENV.modelPaths.pathway.modelName].records[Ids[i]]["bookmarked"] = true;
+      if (that.get("parseAuth").loggedIn) {
+        var Ids = that.get("parseAuth").user.get("bookmarkedPathways");
+        localforage.getItem(EmberENV.modelPaths.pathway.emberDataNamespace, function (err, data) {
+          for (var i in Ids) {
+            if (Ids.hasOwnProperty(i) && data[EmberENV.modelPaths.pathway.modelName].records.hasOwnProperty(Ids[i])) {
+              data[EmberENV.modelPaths.pathway.modelName].records[Ids[i]]["bookmarked"] = true;
+            }
           }
-        }
-        localforage.setItem(EmberENV.modelPaths.pathway.emberDataNamespace, data).then(function() {
-          resolve();
+          localforage.setItem(EmberENV.modelPaths.pathway.emberDataNamespace, data).then(function () {
+            resolve();
+          });
         });
-      });
+      } else {
+        reject();
+      }
     });
   },
   populateSettingsFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      var settings = that.get("parseAuth").user.get("settings") || {};
-      if(settings.hasOwnProperty("lastUpdatedDate")) {
-        delete settings.lastUpdatedDate;
-      }
-      var data = {};
-      data[EmberENV.modelPaths.setting.modelName] = {};
-      data[EmberENV.modelPaths.setting.modelName].records = {};
-      for(var id in settings) {
-        if(settings.hasOwnProperty(id)) {
-          data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
+      if (that.get("parseAuth").loggedIn) {
+        var settings = that.get("parseAuth").user.get("settings") || {};
+        if (settings.hasOwnProperty("lastUpdatedDate")) {
+          delete settings.lastUpdatedDate;
         }
+        var data = {};
+        data[EmberENV.modelPaths.setting.modelName] = {};
+        data[EmberENV.modelPaths.setting.modelName].records = {};
+        for (var id in settings) {
+          if (settings.hasOwnProperty(id)) {
+            data[EmberENV.modelPaths.setting.modelName].records[id] = {"id": id, "value": settings[id]};
+          }
+        }
+        localforage.setItem(EmberENV.modelPaths.setting.emberDataNamespace, data).then(function () {
+          that.get("settings").reloadAllSettings(settings);
+          resolve();
+        });
+      } else {
+        reject();
       }
-      localforage.setItem(EmberENV.modelPaths.setting.emberDataNamespace, data).then(function() {
-        that.get("settings").reloadAllSettings(settings);
-        resolve();
-      });
     });
   },
   loadAllUserDataFromParse: function() {
     var that = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (that.get("parseAuth").user !== null) {
+      if (that.get("parseAuth").loggedIn) {
         var promises = {
           savedAnswerString: that.marshalSavedAnswers(),
           bookmarkedPathways: that.popuateBookmarkedPathwaysFromParse(),
@@ -244,6 +264,8 @@ var profilerDataUtils = Ember.Service.extend({
 
         Ember.RSVP.hash(promises).then(function(updates) {
           resolve(updates);
+        }, function() {
+          resolve(false);
         });
       } else {
         resolve(false);
@@ -251,7 +273,7 @@ var profilerDataUtils = Ember.Service.extend({
     });
   },
   addItemToParseUserDataArray: function(arrayName, dataItem) {
-    if (this.get("parseAuth").user !== null) {
+    if (this.get("parseAuth").loggedIn) {
       var parseArray = this.get("parseAuth").user.get(arrayName);
       if(!parseArray) {
         parseArray = [];
@@ -267,7 +289,7 @@ var profilerDataUtils = Ember.Service.extend({
     return false;
   },
   removeItemFromParseUserDataArray: function(arrayName, dataItem) {
-    if (this.get("parseAuth").user !== null) {
+    if (this.get("parseAuth").loggedIn) {
       var parseArray = this.get("parseAuth").user.get(arrayName);
       if(!parseArray) {
         parseArray = [];
@@ -284,7 +306,7 @@ var profilerDataUtils = Ember.Service.extend({
     return false;
   },
   removeItemFromParseUserDataObject: function(objName, id) {
-    if (this.get("parseAuth").user !== null) {
+    if (this.get("parseAuth").loggedIn) {
       var obj = this.get("parseAuth").user.get(objName);
 
       if(!obj) {
@@ -300,7 +322,7 @@ var profilerDataUtils = Ember.Service.extend({
     return false;
   },
   addItemToParseUserDataObject: function(objName, id, data) {
-    if (this.get("parseAuth").user !== null) {
+    if (this.get("parseAuth").loggedIn) {
       var obj = this.get("parseAuth").user.get(objName);
 
       if(!obj) {
@@ -325,17 +347,19 @@ var profilerDataUtils = Ember.Service.extend({
     oldAnswerString !== answerString);
   },
   saveAnswerToParse: function(answer) {
-    var answerString = this.get("parseAuth").user.get("answers");
-    if (answerString.length > answer.id) {
-      answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
-    } else if (answerString.length === answer.id - 1) {
-      answerString = answerString + answer.selection;
-    } else {
-      answerString = this.answerString();
+    if (this.get("parseAuth").loggedIn) {
+      var answerString = this.get("parseAuth").user.get("answers");
+      if (answerString.length > answer.id) {
+        answerString = answerString.substr(0, answer.id - 1) + answer.selection + answerString.substr(answer.id);
+      } else if (answerString.length === answer.id - 1) {
+        answerString = answerString + answer.selection;
+      } else {
+        answerString = this.answerString();
+      }
+      this.get("parseAuth").user.set("answers", answerString);
+      this.get("settings").save("answers", answerString);
+      this.get("parseAuth").user.save();
     }
-    this.get("parseAuth").user.set("answers", answerString);
-    this.get("settings").save("answers", answerString);
-    this.get("parseAuth").user.save();
   }
 
 });
