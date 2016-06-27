@@ -2,7 +2,7 @@
 <div class="poloroid-container">
   <div {{action "toggleDescription"}} class="clickable poloroid">
     <div class="poloroid-img-container">
-      <img class="poloroid-img" src="{{model.getImgPath}}" />
+      {{cached-image image=model.image class="poloroid-img"}}
     </div>
     <div class="poloroid-footer">
       <h3 >{{model.title}}</h3>
