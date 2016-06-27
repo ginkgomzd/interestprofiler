@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   setupUtils: Ember.inject.service('setup'),
   status: Ember.inject.service('status'),
+  settings: Ember.inject.service('settings'),
   parseAuth: Ember.inject.service('parse-auth'),
   dateHelper: Ember.inject.service('date-functions'),
   beforeModel: function() {
@@ -30,6 +31,23 @@ export default Ember.Route.extend({
     this.get("settings").save("ageVerified", today);
     this.get("settings").save("tosVerified", today);
   },
+
+  onLoginSuccess: function(src, saveVerification) {
+    var that = this;
+    this.get("setupUtils").handleLogin().then(function () {
+      that.registerLoginLocationAnalytics(src);
+      if(saveVerification) {
+        that.saveTosAndAgeVerification();
+      }
+      that.get("status").loadingComplete();
+      var dest = that.get("settings").load("loginDestination") || "welcome";
+      //Put this back to the default, so that on the next login it takes
+      //the user to welcome.
+      that.get("settings").save("loginDestination", "welcome", true);
+      that.transitionTo(dest);
+    });
+  },
+
   actions: {
     signupWithFacebook: function() {
       if (this.verifyAge()) {
@@ -40,12 +58,7 @@ export default Ember.Route.extend({
       var that = this;
       this.get("status").loading();
       this.get("parseAuth").authenticate_fb(function() {
-        that.registerLoginLocationAnalytics("facebook");
-        if(saveVerification) {
-          that.saveTosAndAgeVerification();
-        }
-        that.get("status").loadingComplete();
-        that.transitionTo("welcome");
+        that.onLoginSuccess("facebook", saveVerification);
       },
       function(user, error) {
         that.get("status").warn(error.message);
@@ -75,9 +88,7 @@ export default Ember.Route.extend({
         function() {
           //success
           that.get("setupUtils").handleLogin().then(function() {
-            that.registerLoginLocationAnalytics("email");
-            that.get("status").loadingComplete();
-            that.transitionTo("welcome");
+            that.onLoginSuccess("email", false);
           });
         },
         function(user, error) {
@@ -97,12 +108,7 @@ export default Ember.Route.extend({
           this.get("parseAuth").register(user,
             function () {
               //success
-              that.get("setupUtils").handleLogin().then(function () {
-                that.registerLoginLocationAnalytics("email-signup");
-                that.saveTosAndAgeVerification();
-                that.get("status").loadingComplete();
-                that.transitionTo("welcome");
-              });
+              that.onLoginSuccess("email-signup", true);
             },
             function (user, error) {
               that.get("status").warn(error.message);

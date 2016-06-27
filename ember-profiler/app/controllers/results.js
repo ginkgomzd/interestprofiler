@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   status: Ember.inject.service('status'),
+  settings: Ember.inject.service('settings'),
   parseAuth: Ember.inject.service('parseAuth'),
   modal: Ember.inject.service('modal'),
   pageTitle: "Results",
@@ -42,7 +43,10 @@ export default Ember.Controller.extend({
       Ember.run.scheduleOnce('afterRender', this, function () {
         that.get("modal").confirm("Would you like log in to save your results?", {
           "left": {"text": "No"},
-          "right": {"text": "Yes", "action": function() {that.transitionToRoute('login');}}
+          "right": {"text": "Yes", "action": function() {
+            that.get("settings").save("loginDestination", "results", true);
+            that.transitionToRoute('login');
+          }}
         });
       });
     }
