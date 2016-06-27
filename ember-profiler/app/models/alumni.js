@@ -3,13 +3,8 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   title: DS.attr('string'),
   desc: DS.attr('string'),
-  img: DS.attr('string'),
+  //Old image field
+  //img: DS.attr('string'),
+  image: DS.belongsTo("image", { async: true }),
   pathway: DS.belongsTo('pathway', { async: true }),
-  getImgPath: function() {
-    if(this.get("img").search("http:") !== -1) {
-      return this.get('img');
-    } else {
-      return 'img/alumni/' + this.get('img');
-    }
-  }.property('img')
 });
