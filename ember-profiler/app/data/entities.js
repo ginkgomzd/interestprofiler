@@ -9,6 +9,7 @@ var expectedEntityCounts = {
   question: 60,
   "question-option": 5,
   zipcode: 2796,
-  college: 113
+  college: 113,
+  image: 40
 };
 export default expectedEntityCounts;
