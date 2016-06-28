@@ -16,7 +16,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.3.0" />
-    <plugin name="cordova-plugin-geolocation" spec="~1.0.1" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.2.0" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
     <plugin name="nl.x-services.plugins.socialsharing" spec="https://github.com/Telerik-Verified-Plugins/SocialSharing" />
     <plugin name="cordova-plugin-spinner-dialog" spec="https://github.com/Paldom/SpinnerDialog.git" />
@@ -124,4 +124,5 @@
         <splash density="port-xxhdpi" src="res/screen-port.png" />
         <splash density="port-xxxhdpi" src="res/screen-port.png" />
     </platform>
+    <preference name="AlternateContentSrc" value="undefined" />
 </widget>
