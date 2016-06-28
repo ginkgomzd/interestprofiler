@@ -8,11 +8,12 @@ import staticPathwayData from '../data/pathways';
 import staticProgramData from '../data/programs';
 import staticQuestionData from '../data/questions';
 import staticQuestionOptionData from '../data/questionOptions';
-import expectedEntityCounts from '../data/entities';
 import staticCollegeData from '../data/colleges';
 import staticZipData from '../data/zipcodes';
+import staticImageData from '../data/images';
 import staticProgramCollegeIndex from '../data/programCollegeIndex';
 import staticProgramOccupationIndex from '../data/programOccupationIndex';
+import expectedEntityCounts from '../data/entities';
 
 
 var setupService = Ember.Service.extend({
@@ -158,6 +159,7 @@ var setupService = Ember.Service.extend({
           onetCareer: setup.loadStaticDataForModel(EmberENV.modelPaths["onet-career"], staticOnetCareerData),
           occupation: setup.loadStaticDataForModel(EmberENV.modelPaths.occupation, staticOccupationData),
           alumni: setup.loadStaticDataForModel(EmberENV.modelPaths.alumni, staticAlumniData),
+          image: setup.loadStaticDataForModel(EmberENV.modelPaths.image, staticImageData),
           college: setup.loadStaticDataForModel(EmberENV.modelPaths.college, staticCollegeData),
           program: setup.loadStaticDataForModel(EmberENV.modelPaths.program, staticProgramData),
           zipcode: setup.loadStaticDataForModel(EmberENV.modelPaths.zipcode, staticZipData),

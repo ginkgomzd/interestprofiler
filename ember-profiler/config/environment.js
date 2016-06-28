@@ -12,6 +12,7 @@ module.exports = function(environment) {
       },
       modelPaths: {
         alumni: {modelName: "alumni", apiPath: "alumni", emberDataNamespace: "H2CAlumni"},
+        image: {modelName: "image", apiPath: "images", emberDataNamespace: "H2CImage"},
         cluster: {modelName: "cluster", apiPath: "clusters", emberDataNamespace: "H2CCluster"},
         pathway: {modelName: "pathway", apiPath: "pathways", emberDataNamespace: "H2CPathway"},
         occupation: {modelName: "occupation", apiPath: "occupations", emberDataNamespace: "H2COccupation"},
@@ -36,12 +37,13 @@ module.exports = function(environment) {
         occupationIndex: {modelName: "occupationIndex", apiPath: "", emberDataNamespace: "H2COccupationIndex"},
         collegeIndex: {modelName: "collegeIndex", apiPath: "", emberDataNamespace: "H2CCollegeIndex"}
       },
-      databaseVersion: 1.001,
+      databaseVersion: 1.002,
       staticDataUpdatedDate: "2015-11-25",
       tosURL: "http://yidata.org/terms.html",
       privacyURL: "http://yidata.org/htcprivacy.html",
       onetUrl: "http://data.heretocareerca.org/api_proxy",
       cmsUrl: "http://data.heretocareerca.org"
+      //cmsUrl: "http://here2career.beaker.ginkgostreet.com"
     },
 
     APP: {
