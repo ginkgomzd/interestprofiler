@@ -34,7 +34,7 @@ var cmsUtils = Ember.Service.extend({
     }
 
     //only update if the values are different
-    if(oldValues != newValues) {
+    if(oldValues != newValues) { // jshint ignore:line
       if(this.indexes.hasOwnProperty[indexName]) {
         this.indexes[indexName].modified = true;
 

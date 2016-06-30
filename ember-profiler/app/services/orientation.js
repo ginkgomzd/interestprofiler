@@ -2,14 +2,14 @@ import Ember from 'ember';
 
 var orientationServices = Ember.Service.extend({
   callbacksToFire: [],
-  init: function() {
+  onLoad: function() {
     var that = this;
     var handler = function(event) {
       that.updateOrientation(event);
     };
     window.addEventListener("orientationchange", handler);
     window.addEventListener("resize", handler);
-  },
+  }.on("init"),
 
   /**
    * Function to Lock Screen Orientation

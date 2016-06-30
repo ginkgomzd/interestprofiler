@@ -5,12 +5,12 @@ export default Ember.Controller.extend({
   showBackButton: "ios",
   pageTitle: "Degrees and Colleges",
 
-  init: function() {
+  onLoad: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       var propStop = function(event) {event.stopPropagation();};
       Ember.$("#ProximitySlider").on("touchstart", propStop).on("panstart", propStop).on("panright", propStop).on("touchmove", propStop).on("pan", propStop);
     });
-  },
+  }.on("init"),
   searchRadius: function() { return 25;}.property(),
   sortProperties: ['distance:asc'],
   results: function() {return [];}.property(),

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   settings: Ember.inject.service('settings'),
   drawerOpen: function() { return false;}.property(),
-  init: function() {
+  onLoad: function() {
     if (window.cordova) {
       Ember.$("body").addClass("platform-" + cordova.platformId);
     } else {
@@ -28,7 +28,5 @@ export default Ember.Controller.extend({
         }
       }, false);
     }
-    
-    this._super();
-  }
+  }.on("init")
 });

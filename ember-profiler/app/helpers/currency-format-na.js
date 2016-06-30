@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Helper.helper( function(amount) {
-  if (amount == 0 || !amount) {
+  if (amount == 0 || !amount) { // jshint ignore:line
     return "N/A";
   } else {
     //Turns out this doesn't work properly in all instances of mobile safari
