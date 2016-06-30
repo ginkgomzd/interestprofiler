@@ -18,7 +18,7 @@ export default Ember.Route.extend({
       return this.get("setupUtils").appStartup().then(function() {
         that.isSetup = true;
         that.gotoFirstScreen();
-      });
+      }, function(error) {console.log(error);});
     } else {
       this.gotoFirstScreen();
     }
@@ -112,8 +112,8 @@ export default Ember.Route.extend({
             //Delay the welcome animation until after the splash screen has faded out.
             setTimeout(function () {
               Ember.$("body").removeClass("body-loading");
-            }, 1000);
-          }, 700);
+            }, 500);
+          }, 500);
         } else {
           Ember.$("body").removeClass("body-loading");
         }

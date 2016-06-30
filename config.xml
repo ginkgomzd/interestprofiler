@@ -72,13 +72,13 @@
         <splash height="2048" src="res/splash/ipad/Default-Portrait@2x.png" width="1536" />
         <splash height="768" src="res/splash/ipad/Default-Landscape.png" width="1024" />
         <splash height="1536" src="res/splash/ipad/Default-Landscape@2x.png" width="2048" />
-        <preference name="FadeSplashScreenDuration" value="1000" />
+        <preference name="FadeSplashScreenDuration" value="500" />
     </platform>
     <platform name="android">
         <content src="index.html" />
         <hook src="scripts/before_build/030_configure_parse.js" type="before_build" />
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
-        <preference name="FadeSplashScreenDuration" value="1000" />
+        <preference name="FadeSplashScreenDuration" value="500" />
         <preference name="AndroidPersistentFileLocation" value="Internal" />
         <icon density="ldpi" src="res/icon/android/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon/android/icon-mdpi.png" />
@@ -104,7 +104,7 @@
     <platform name="amazon-fireos">
         <content src="index.html" />
         <hook src="scripts/after_platform_add/40_fix_android_menu.js" type="after_platform_add" />
-        <preference name="FadeSplashScreenDuration" value="1000" />
+        <preference name="FadeSplashScreenDuration" value="500" />
         <preference name="AndroidPersistentFileLocation" value="Internal" />
         <icon density="ldpi" src="res/icon/android/icon-ldpi.png" />
         <icon density="mdpi" src="res/icon/android/icon-mdpi.png" />

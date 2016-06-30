@@ -107,7 +107,7 @@ div.welcome-overlay div.logo-header {
 /**Loading screen transitions**/
 
 .welcome-overlay.blur {
-  transition: 1s -webkit-filter linear, 1s filter linear;
+  transition: 500ms -webkit-filter linear, 1s filter linear;
   -webkit-filter: blur(0px);
   filter: blur(0px);
 }
@@ -118,7 +118,7 @@ div.welcome-overlay div.logo-header {
 }
 
 .welcome-overlay.whiteout {
-  transition: 1s -webkit-filter linear, 1s filter linear;
+  transition: 500ms -webkit-filter linear, 1s filter linear;
   -webkit-filter: grayscale(0%) brightness(100%);
   filter: grayscale(0%) brightness(100%);
 }
