@@ -16,6 +16,10 @@ div.welcome-overlay div.logo-header {
   margin-bottom: 0px;
 }
 
+.welcome-overlay .logo-header img.landscape {
+  display: none;
+}
+
 .welcome-header {
   font-size: 1.4em;
   margin: 10% 15px;
@@ -82,24 +86,64 @@ div.welcome-overlay div.logo-header {
   }
 }
 
+// iPad/Tablet Specific
+@media screen and (orientation:portrait) and (device-aspect-ratio: 3/4) {
+  .logo-header {
+    margin-top: 12%;
+  }
+  .welcome-header {
+    margin: 7% auto;
+  }
+}
+
 /** Settings for when the welcome screen is in landscape **/
 @media screen and (orientation:landscape) {
   .logo-header {
-    width: 25%;
-    margin: 0 auto;
+    width: 75%;
+    margin: 50px auto 0 auto;
   }
 
   .welcome-header {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+  .welcome-overlay .logo-header img.portrait {
+    display: none;
+  }
+  .welcome-overlay .logo-header img.landscape {
+    display: block;
+  }
   .welcomeActionIcon {
     height: 10vw;
     width: 10vw;
     margin: 5px auto;
   }
+  .brought.attach {
+    padding: 10px 25%;
+  }
   .brought.attach  img {
-    width: 50%;
+    max-width: 60%;
+  }
+
+  //To keep Smaller screens from collapsing the icon labels
+  @media (max-width: 579px) {
+    .welcomeAction {
+      margin: 0 1.5%;
+      width: 28%;
+    }
+    .welcomeAction:first-child {
+      margin-left: 4%;
+    }
+  }
+
+  // iPad/Tablet
+  @media (device-aspect-ratio: 4/3) {
+    .logo-header {
+      margin-top: 15%;
+    }
+    .welcome-header {
+      margin: 15% auto 3% auto;
+    }
   }
 }
 
