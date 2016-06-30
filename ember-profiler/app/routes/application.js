@@ -18,7 +18,7 @@ export default Ember.Route.extend({
       return this.get("setupUtils").appStartup().then(function() {
         that.isSetup = true;
         that.gotoFirstScreen();
-      });
+      }, function(error) {console.log(error);});
     } else {
       this.gotoFirstScreen();
     }
@@ -113,7 +113,7 @@ export default Ember.Route.extend({
             setTimeout(function () {
               Ember.$("body").removeClass("body-loading");
             }, 500);
-          }, 700);
+          }, 500);
         } else {
           Ember.$("body").removeClass("body-loading");
         }
