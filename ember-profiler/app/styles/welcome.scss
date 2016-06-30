@@ -98,8 +98,11 @@ div.welcome-overlay div.logo-header {
     width: 10vw;
     margin: 5px auto;
   }
+  .brought.attach {
+    padding: 10px 25%;
+  }
   .brought.attach  img {
-    width: 50%;
+    max-width: 60%;
   }
 }
 
