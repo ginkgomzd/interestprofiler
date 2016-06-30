@@ -112,7 +112,7 @@ export default Ember.Route.extend({
             //Delay the welcome animation until after the splash screen has faded out.
             setTimeout(function () {
               Ember.$("body").removeClass("body-loading");
-            }, 1000);
+            }, 500);
           }, 700);
         } else {
           Ember.$("body").removeClass("body-loading");
