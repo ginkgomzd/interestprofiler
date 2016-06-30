@@ -7,11 +7,11 @@ export default Ember.Route.extend({
   index: 0,
   model: function (params) {
     this.set("index", params.index);
+    var that = this;
 
     if(params.index == -1 || // jshint ignore:line
       this.get("suggestedAlumni").length === 0 ||
       params.index > this.get("suggestedAlumni").length) {
-      var that = this;
       return new Ember.RSVP.Promise(function(resolve, reject) {
 
         that.getSuggestedAlumni().then(function(alumniIds) {
@@ -27,6 +27,14 @@ export default Ember.Route.extend({
         });
       });
     } else {
+      if (params.index > 0 && params.index % 10 === 0) {
+        this.get("modal").confirm("Do you want to keep going? You can continue viewing profiles or choose to explore other parts of the app.",
+          {"left": {"text": "Explore", "action": function() {
+            that.transitionTo("select-clusters");
+          }},
+          "right": {"text": "Continue"}}
+        );
+      }
       return this.store.findRecord('alumni', this.get("suggestedAlumni")[params.index]);
     }
   },
