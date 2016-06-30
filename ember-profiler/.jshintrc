@@ -10,7 +10,9 @@
     "Parse",
     "parsePlugin",
     "StatusBar",
-    "moment"
+    "moment",
+    "LocalFileSystem",
+    "FileTransfer"
   ],
   "browser": true,
   "boss": true,
