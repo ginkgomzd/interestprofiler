@@ -15,6 +15,10 @@
   margin-left: 10%;
 }
 
+.login-overlay .logo-header img.landscape {
+  display: none;
+}
+
 #allLoginForms button {
   background-color: $lightBlue;
   width: 80%;
@@ -125,4 +129,14 @@ span.icon.linkedin {
 .brought.attach {
   position: absolute;
   bottom: 0;
+}
+
+/** Settings for when the login screen is in landscape **/
+@media screen and (orientation:landscape) {
+  .login-overlay .logo-header img.portrait {
+    display: none;
+  }
+  .login-overlay .logo-header img.landscape {
+    display: block;
+  }
 }

@@ -86,6 +86,16 @@ div.welcome-overlay div.logo-header {
   }
 }
 
+@media all and (min-height: 546px) and (max-height: 600px) {
+  .logo-header {
+    margin-top: 13%;
+  }
+  .welcome-header {
+    margin-top: 6%;
+    margin-bottom: 5%;
+  }
+}
+
 // iPad/Tablet Specific
 @media screen and (orientation:portrait) and (device-aspect-ratio: 3/4) {
   .logo-header {
@@ -118,10 +128,10 @@ div.welcome-overlay div.logo-header {
     width: 10vw;
     margin: 5px auto;
   }
-  .brought.attach {
+  .brought {
     padding: 10px 25%;
   }
-  .brought.attach  img {
+  .brought  img {
     max-width: 60%;
   }
 
