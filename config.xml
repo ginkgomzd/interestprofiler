@@ -30,10 +30,9 @@
         <variable name="APP_ID" value="hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3" />
         <variable name="CLIENT_KEY" value="YwRrf7cxtwGoEHSJR5SPLXTuyBHEh1hdaRJUFxIo" />
     </plugin>
-    <plugin name="cordova-labs-wkwebview-engine-localhost" spec="https://github.com/apache/cordova-plugins.git#master:wkwebview-engine-localhost" />
     <hook src="scripts/before_prepare/build_ember_app.sh" type="before_prepare" />
     <platform name="ios">
-        <content src="http://localhost:4200" />
+        <content src="index.html" />
         <preference name="AlternateContentSrc" value="http://localhost:0" />
         <preference name="BackupWebStorage" value="none" />
         <preference name="StatusBarOverlaysWebView" value="false" />
