@@ -79,6 +79,12 @@ div.demo {
 }
 
 
+@media (device-aspect-ratio: 3/4) {
+  .demo .carousel-slide img {
+    margin-top: -5%;
+  }
+}
+
 .hidden {
 
 }
