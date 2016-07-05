@@ -171,6 +171,16 @@ div.welcome-overlay div.logo-header {
   filter: blur(50px);
 }
 
+
+.welcome-overlay.blueout  .welcome-wrapper{
+  transition: 500ms opacity linear;
+  opacity: 1;
+}
+
+.body-loading .welcome-overlay.blueout .welcome-wrapper {
+  opacity: 0;
+}
+
 .welcome-overlay.whiteout {
   transition: 500ms -webkit-filter linear, 1s filter linear;
   -webkit-filter: grayscale(0%) brightness(100%);
