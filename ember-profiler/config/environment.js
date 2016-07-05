@@ -50,15 +50,16 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    contentSecurityPolicyMeta: true,
     contentSecurityPolicy: {
-      'default-src': "'self'",
+      'default-src': "'self' http://data.heretocareerca.org https://data.heretocareerca.org",
       'script-src': "'self' https://services.onetcenter.org http://data.heretocareerca.org https://data.heretocareerca.org http://*.ginkgostreet.com https://*.ginkgostreet.com https://connect.facebook.net",
-      'frame-src': "'self' https://*.facebook.com http://*.facebook.com",
+      'frame-src': "'self' https://*.facebook.com http://*.facebook.com gap://ready",
       'font-src': "'self'",
       'connect-src': "'self' blob: https://services.onetcenter.org http://data.heretocareerca.org https://data.heretocareerca.org https://*.ginkgostreet.com http://*.ginkgostreet.com https://connect.facebook.net https://api.parse.com http://api.parse.com",
       'img-src': "'self' https://*.facebook.com http://data.heretocareerca.org https://data.heretocareerca.org http://*.ginkgostreet.com https://*.ginkgostreet.com data:",
       'style-src': "'self' 'unsafe-inline'",
-      'media-src': "'self'"
+      'media-src': "'self' http://data.heretocareerca.org https://data.heretocareerca.org"
     },
     parse: {
       appId: "hKy3FnB8M27jIHBXZNfX1Lk2QmwoyGOeDon9EPZ3",

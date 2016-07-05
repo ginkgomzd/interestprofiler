@@ -8,7 +8,7 @@ var expectedEntityCounts = {
   program: 13798,
   question: 60,
   "question-option": 5,
-  zipcode: 2796,
+  zipcode: 2792,
   college: 113,
   image: 40
 };
