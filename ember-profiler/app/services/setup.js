@@ -68,6 +68,11 @@ var setupService = Ember.Service.extend({
           });
           localforage.setItem(modelInfo.emberDataNamespace, value).then(function() {
             resolve(true);
+          }, function(error) {
+            //This happens when the app runs out of IndexedDB storage space.
+            //todo: Handle this a bit better.
+            console.log("Static Data Error: ", error);
+            resolve(false);
           });
         } else {
           resolve(false);
