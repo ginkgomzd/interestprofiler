@@ -11,35 +11,45 @@ var imageService = Ember.Service.extend({
       }
 
       var localFilename = that.makeLocalFilename(image);
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+      try {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+            // Parameters passed to getFile create a new file or return the file if it already exists.
+            fs.root.getFile(localFilename, {create: false, exclusive: false}, function (fileEntry) {
+                //console.log("Resolved with existing Local File", fileEntry);
+                resolve(fileEntry.toURL());
+              },
+              //File Does not already exist.
+              function (error) {
+                //var localPath = fs.root.fullPath + localFilename;
+                var localPath = fs.root.nativeURL + localFilename;
+                that.fetchImage(url, localPath).then(
+                  function (imgUrl) {
+                    //console.log("Resolved with Local File", imgUrl);
+                    resolve(imgUrl);
+                  },
+                  function (error) {
+                    //console.log("Error: ", error);
+                    resolve(url);
+                  }
+                );
+              }
+            );
 
-          // Parameters passed to getFile create a new file or return the file if it already exists.
-          fs.root.getFile(localFilename, {create: false, exclusive: false}, function (fileEntry) {
-              resolve(fileEntry.toURL());
-            },
-            //File Does not already exist.
-            function(error) {
-              //var localPath = fs.root.fullPath + localFilename;
-              var localPath = fs.root.nativeURL + localFilename;
-              that.fetchImage(url, localPath).then(
-                function(imgUrl) {
-                  resolve(imgUrl);
-                },
-                function(error) {
-                  //console.log("Error: ", error);
-                  resolve(url);
-                }
-              );
-            }
-          );
+          },
+          //Load the FileSystem Error Callback
+          function (error) {
+            //console.log("Error:", error);
+            //Fall back on remote load
+            resolve(url);
+          }
+        );
+      } catch(e) {
+        //Fall back on remote load
+        //console.log("try/catch", e);
+        resolve(url);
+      }
 
-        },
-        //Load the FileSystem Error Callback
-        function() {
-          //Fall back on remote load
-          resolve(url);
-        }
-      );
+
     });
   },
   makeLocalFilename: function(image) {
