@@ -46,6 +46,7 @@ export default Ember.Component.extend({
   // of this attribute to cause an initial lookup.
   getCachedImageSrc: function() {
     if(this.$()) {
+      this.$().hide();
       this.set("src", "");
     }
     if (this.image.get("remotePath")) {
