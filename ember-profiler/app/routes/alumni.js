@@ -42,7 +42,7 @@ export default Ember.Route.extend({
         this.transitionTo('alumni', next);
       } else {
         var that = this;
-        this.get("modal").confirm("you've reached the end of your reccomended alumni profiles. Continue to view careers that match your interestes.",
+        this.get("modal").confirm("You've reached the end of your recommended alumni profiles. Continue to view careers that match your interests.",
           {right: {text: "Continue", action: function() {
             that.transitionTo('select-clusters');
           }}});
