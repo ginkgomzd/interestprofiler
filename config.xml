@@ -76,7 +76,7 @@
         <splash height="750" src="res/splash/iphone/landscape/Default-667h@2x.png" width="1334" />
         <splash height="1242" src="res/splash/iphone/landscape/Default-736@2x.png" width="2208" />
         <splash height="1920" src="res/screen.png" width="1080" />
-        <splash height="1080" src="res/screen-port.png" width="1920" />
+        <splash height="1080" src="res/screen-land.png" width="1920" />
         <splash height="1024" src="res/splash/ipad/Default-Portrait.png" width="768" />
         <splash height="2048" src="res/splash/ipad/Default-Portrait@2x.png" width="1536" />
         <splash height="768" src="res/splash/ipad/Default-Landscape.png" width="1024" />
@@ -124,18 +124,19 @@
         <icon density="xhdpi" src="res/icon/android/icon-xhdpi.png" />
         <icon density="xxhdpi" src="res/icon/android/icon-xxhdpi.png" />
         <icon density="xxxhdpi" src="res/icon/android/icon-xxxhdpi.png" />
-        <splash density="land-hdpi" src="res/screen.png" />
-        <splash density="land-ldpi" src="res/screen.png" />
-        <splash density="land-mdpi" src="res/screen.png" />
-        <splash density="land-xhdpi" src="res/screen.png" />
-        <splash density="land-xxhdpi" src="res/screen.png" />
-        <splash density="land-xxxhdpi" src="res/screen.png" />
-        <splash density="port-hdpi" src="res/screen-port.png" />
-        <splash density="port-ldpi" src="res/screen-port.png" />
-        <splash density="port-mdpi" src="res/screen-port.png" />
-        <splash density="port-xhdpi" src="res/screen-port.png" />
-        <splash density="port-xxhdpi" src="res/screen-port.png" />
-        <splash density="port-xxxhdpi" src="res/screen-port.png" />
+        <splash density="land-hdpi" src="res/screen-land.png" />
+        <splash density="land-ldpi" src="res/screen-land.png" />
+        <splash density="land-mdpi" src="res/screen-land.png" />
+        <splash density="land-xhdpi" src="res/screen-land.png" />
+        <splash density="land-xxhdpi" src="res/screen-land.png" />
+        <splash density="land-xxxhdpi" src="res/screen-land.png" />
+
+        <splash density="port-hdpi" src="res/screen.9.png" />
+        <splash density="port-ldpi" src="res/screen.9.png" />
+        <splash density="port-mdpi" src="res/screen.9.png" />
+        <splash density="port-xhdpi" src="res/screen.9.png" />
+        <splash density="port-xxhdpi" src="res/screen.9.png" />
+        <splash density="port-xxxhdpi" src="res/screen.9.png" />
     </platform>
     <preference name="AlternateContentSrc" value="index.html" />
 </widget>
