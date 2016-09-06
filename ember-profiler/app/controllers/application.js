@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
         //When history is 1 we have no place left to go back, so don't act on it
         //instead call exit.
         if (window.history.length > 1) {
-          that.get("controller").send("registerBackButtonClick");
+          that.send("registerBackButtonClick");
           e.preventDefault();
         } else {
           navigator.app.exitApp();
