@@ -155,6 +155,18 @@ div.welcome-overlay div.logo-header {
       margin: 15% auto 3% auto;
     }
   }
+
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .logo-header {
+      margin-top: 15%;
+    }
+    .welcome-header {
+      margin: 15% auto 3% auto;
+    }
+  }
 }
 
 
